@@ -1,4 +1,7 @@
 {
+  "name": "joshuapease/craft-starter",
+  "license": "0BSD",
+  "type": "project",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
