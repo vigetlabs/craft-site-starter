@@ -1,6 +1,7 @@
 {
   "name": "viget/craft-site-starter",
   "type": "project",
+  "license": "0BSD",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
