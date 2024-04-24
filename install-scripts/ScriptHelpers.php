@@ -66,11 +66,11 @@ class ScriptHelpers
 
     public static function kebabCase(string $string)
     {
+        // Remove special characters and replace them with spaces
+        $string = preg_replace('/[^a-zA-Z0-9\s]/', ' ', $string);
+
         // Trim whitespace
         $string = trim($string);
-
-        // Remove special characters and replace them with spaces
-        $string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
 
         // Split the string into words
         $words = preg_split('/\s+/', $string);
