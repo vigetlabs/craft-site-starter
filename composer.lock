@@ -331,16 +331,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "5.0.4",
+            "version": "5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "40f8258f13047e9f65122738921083294fd53846"
+                "reference": "2074552c49fa2c5903f95878cc179b359fb2eba9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/40f8258f13047e9f65122738921083294fd53846",
-                "reference": "40f8258f13047e9f65122738921083294fd53846",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/2074552c49fa2c5903f95878cc179b359fb2eba9",
+                "reference": "2074552c49fa2c5903f95878cc179b359fb2eba9",
                 "shasum": ""
             },
             "require": {
@@ -453,7 +453,7 @@
                 "rss": "https://github.com/craftcms/cms/releases.atom",
                 "source": "https://github.com/craftcms/cms"
             },
-            "time": "2024-04-10T22:43:51+00:00"
+            "time": "2024-04-23T17:54:43+00:00"
         },
         {
             "name": "craftcms/plugin-installer",
@@ -1527,7 +1527,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v10.48.8",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1582,7 +1582,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v10.48.8",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -1628,7 +1628,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.48.8",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1676,7 +1676,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v10.48.8",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
