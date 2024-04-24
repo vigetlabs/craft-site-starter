@@ -31,15 +31,15 @@
   "scripts": {
     "post-create-project-cmd": [
       "@php -r \"file_exists('.env') || copy('.env.example.dev', '.env');\"",
-      "echo 'Renaming ddev project to prevent conflicts'",
       "@php install-scripts/rename-ddev.php",
       "echo 'Cleaning composer.json'",
       "@composer config --unset scripts.post-create-project-cmd",
       "@composer config --unset name",
       "@composer config --unset license",
       "@composer config --unset type",
-      "@composer update",
-      "@composer dump-autoload -o"
+      "@composer update --ignore-platform-reqs",
+      "@composer dump-autoload -o",
+      "rm -rf install-scripts "
     ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example.dev', '.env');\""
