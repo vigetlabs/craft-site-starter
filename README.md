@@ -1,5 +1,5 @@
 # Getting Started
-This repo is a Composer "project" intended for use with the `composer create-project` command. 
+This repo is a Composer "project" intended for use with the `composer create-project` command.
 
 Our starter uses DDEV for local development. Install it before doing any of the following steps. 
 
@@ -28,3 +28,12 @@ Our starter uses DDEV for local development. Install it before doing any of the 
     ddev craft install
     ```
 5. Run `ddev launch` to open the project in your browser
+
+# Contribute to this starter
+
+## Local Dev
+Ideally, you should be able to clone this repo and make modifications to plugin & build tool configs with minimal fuss.
+
+Run `ddev start` and make edits in a feature branch.
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for details on technical goals & decisions.
