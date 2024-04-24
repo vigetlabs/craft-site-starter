@@ -1,6 +1,5 @@
 {
-  "name": "joshuapease/craft-starter",
-  "license": "0BSD",
+  "name": "viget/craft-site-starter",
   "type": "project",
   "minimum-stability": "dev",
   "prefer-stable": true,
