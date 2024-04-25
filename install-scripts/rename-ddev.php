@@ -20,6 +20,4 @@ $file_content = ScriptHelpers::replaceText(
 
 file_put_contents($file_path, $file_content);
 
-ScriptHelpers::output("Your DDEV project is now named $projectName!");
 ScriptHelpers::success("Your DDEV project is now named $projectName!");
-ScriptHelpers::error("Your DDEV project is now named $projectName!");
