@@ -13,6 +13,17 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 nodejs_version: "18"
+web_extra_exposed_ports:
+  # Expose ports for vite
+  - name: vite
+    container_port: 3000
+    http_port: 3000
+    https_port: 3001
+web_extra_daemons:
+  # Run vite in a separate process
+  - name: 'vite'
+    command: 'npm install && npm run dev'
+    directory: /var/www/html
 
 # Key features of ddev's config.yaml:
 
