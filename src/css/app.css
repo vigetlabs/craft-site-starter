@@ -1,0 +1,41 @@
+@font-face {
+    font-display: swap;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/sourcesanspro-light-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/sourcesanspro-semibold-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/sourcesanspro-bold-webfont.woff2') format('woff2');
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: black;
+    color: white;
+}
+
+strong {
+    font-weight: 700;
+}
