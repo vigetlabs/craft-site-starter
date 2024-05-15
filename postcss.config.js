@@ -31,6 +31,7 @@ export default {
             mediaQuery: true,
             minPixelValue: 0,
             exclude: /node_modules/i,
-        }
+        },
+        ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
     }
 }
