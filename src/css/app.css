@@ -34,14 +34,14 @@
         font-weight: 700;
         src: url('../fonts/sourcesanspro-bold-webfont.woff2') format('woff2');
     }
-}
 
-body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background: black;
-    color: white;
-}
+    body {
+        font-family: 'Source Sans Pro', sans-serif;
+        background: black;
+        color: white;
+    }
 
-strong {
-    font-weight: 700;
+    strong {
+        font-weight: 700;
+    }
 }
