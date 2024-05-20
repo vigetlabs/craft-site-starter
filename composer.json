@@ -12,6 +12,7 @@
   "require-dev": {
     "craftcms/ecs": "dev-main",
     "craftcms/generator": "^2.0.0",
+    "craftcms/phpstan": "dev-main",
     "yiisoft/yii2-shell": "^2.0.3"
   },
   "autoload": {
@@ -47,6 +48,7 @@
       "@php -r \"file_exists('.env') || copy('.env.example.dev', '.env');\""
     ],
     "ecs-check": "ecs check --ansi",
-    "ecs-fix": "ecs check --ansi --fix"
+    "ecs-fix": "ecs check --ansi --fix",
+    "phpstan": "phpstan --memory-limit=1G"
   }
 }
