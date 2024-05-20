@@ -1,11 +1,7 @@
 {
-  "Attr.AllowedFrameTargets": [
-    "_blank"
-  ],
+  "Attr.AllowedFrameTargets": ["_blank"],
   "Attr.EnableID": true,
-  "HTML.AllowedComments": [
-    "pagebreak"
-  ],
+  "HTML.AllowedComments": ["pagebreak"],
   "HTML.SafeIframe": true,
   "URI.SafeIframeRegexp": "%^(https?:)?//(www.youtube.com/|player.vimeo.com/)%"
 }

@@ -1,2 +1,8 @@
-node_modules/**
+node_modules
+.vscode
 composer.lock
+composer.json
+vendor
+config/project
+storage
+web
