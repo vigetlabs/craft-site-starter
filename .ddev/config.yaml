@@ -1,4 +1,4 @@
-name: craft-starter
+name: viget-craft-starter
 type: craftcms
 docroot: web
 php_version: "8.2"
