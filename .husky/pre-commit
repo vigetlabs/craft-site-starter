@@ -1,1 +1,1 @@
-npm run format
+ddev exec npx lint-staged
