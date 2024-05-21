@@ -13,6 +13,13 @@ use_dns_when_possible: true
 composer_version: '2'
 web_environment: []
 nodejs_version: '18'
+hooks:
+  post-start:
+    - composer: install
+    # Sets up husky
+    - exec: npm run prepare
+    # Ensures that lint-staged runs properly in ddev container
+    - exec: git config --global --add safe.directory /var/www/html
 web_extra_exposed_ports:
   # Expose ports for vite
   - name: vite

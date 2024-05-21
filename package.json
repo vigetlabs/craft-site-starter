@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --fix src",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
@@ -16,6 +17,7 @@
     "cssnano": "^7.0.1",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.3.0",
+    "husky": "^9.0.11",
     "postcss": "^8.4.38",
     "postcss-pxtorem": "^6.1.0",
     "prettier": "3.2.5",
