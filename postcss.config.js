@@ -10,8 +10,8 @@ export default {
       replace: true,
       mediaQuery: true,
       minPixelValue: 1,
-      exclude: /node_modules/i
+      exclude: /node_modules/i,
     },
-    ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
-  }
+    ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}),
+  },
 }

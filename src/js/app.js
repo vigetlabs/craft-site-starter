@@ -1,3 +1,3 @@
 import '../css/app.css'
 
-console.log('Hello Craft CMS Starter')
+console.warn('Hello Craft CMS Starter')

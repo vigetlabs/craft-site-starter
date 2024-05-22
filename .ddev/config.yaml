@@ -1,18 +1,23 @@
 name: craft-starter
 type: craftcms
 docroot: web
-php_version: "8.2"
+php_version: '8.2'
 webserver_type: nginx-fpm
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-    type: mysql
-    version: "8.0"
+  type: mysql
+  version: '8.0'
 use_dns_when_possible: true
-composer_version: "2"
+composer_version: '2'
 web_environment: []
-nodejs_version: "18"
+nodejs_version: '18'
+hooks:
+  post-start:
+    - composer: install
+    # Ensures that lint-staged runs properly in ddev container
+    - exec: git config --global --add safe.directory /var/www/html
 web_extra_exposed_ports:
   # Expose ports for vite
   - name: vite
@@ -24,7 +29,6 @@ web_extra_daemons:
   - name: 'vite'
     command: 'npm install && npm run dev'
     directory: /var/www/html
-
 # Key features of ddev's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
@@ -61,7 +65,7 @@ web_extra_daemons:
 # "ddev xhprof" to enable xhprof and "ddev xhprof off" to disable it work better,
 # as leaving xhprof enabled all the time is a big performance hit.
 
-# webserver_type: nginx-fpm, apache-fpm, or nginx-gunicorn 
+# webserver_type: nginx-fpm, apache-fpm, or nginx-gunicorn
 
 # timezone: Europe/Berlin
 # This is the timezone used in the containers and by PHP;
@@ -103,7 +107,7 @@ web_extra_daemons:
 # Please take care with this because it can cause great confusion.
 
 # upload_dirs: "custom/upload/dir"
-#    
+#
 # upload_dirs:
 #   - custom/upload/dir
 #   - ../private
