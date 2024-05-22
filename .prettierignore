@@ -6,3 +6,4 @@ vendor
 config/project
 storage
 web
+package-lock.json
