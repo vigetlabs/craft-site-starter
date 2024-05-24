@@ -1,0 +1,68 @@
+dateModified: 1716567262
+email:
+  fromEmail: joshua.pease@viget.com
+  fromName: 'Viget Craft Starter'
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
+    805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
+    b7e66782-af96-4012-9e17-914134073ced: Simple # Simple
+plugins:
+  aws-s3:
+    edition: standard
+    enabled: true
+    schemaVersion: '2.0'
+  ckeditor:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0.0
+  classnames:
+    edition: standard
+    enabled: true
+    schemaVersion: 3.0.0
+  cp-field-inspect:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  empty-coalesce:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+  imager-x:
+    edition: lite
+    enabled: true
+    licenseKey: EYY9QQALYS4PXKM10T0D9N67
+    schemaVersion: 4.0.0
+  navigation:
+    edition: standard
+    enabled: true
+    licenseKey: ZT0EJAAM7CJWOFKJ45G3LIYY
+    schemaVersion: 2.1.0
+  retour:
+    edition: standard
+    enabled: true
+    licenseKey: GZCRRQCSW4G1B3MCWWB9L6K1
+    schemaVersion: 3.0.12
+  seomatic:
+    edition: standard
+    enabled: true
+    licenseKey: 19RIJ06TIUTR4H8RSPARFML0
+    schemaVersion: 3.0.12
+  vite:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+system:
+  edition: solo
+  live: true
+  name: 'Viget Craft Starter'
+  schemaVersion: 5.0.0.20
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

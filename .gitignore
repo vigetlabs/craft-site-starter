@@ -6,3 +6,7 @@ node_modules
 /web/dist
 /.vite
 php-cs-fixer.cache
+
+# BEGIN-STARTER-ONLY
+config/license.key
+# END-STARTER-ONLY
