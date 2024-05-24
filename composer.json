@@ -5,14 +5,24 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
+    "craftcms/aws-s3": "2.2.1",
+    "craftcms/ckeditor": "4.0.6",
     "craftcms/cms": "^5.0.0",
+    "mmikkel/cp-field-inspect": "2.0.1",
+    "nystudio107/craft-emptycoalesce": "5.0.0",
+    "nystudio107/craft-retour": "5.0.0",
+    "nystudio107/craft-seomatic": "5.0.3",
     "nystudio107/craft-vite": "^5.0.0",
+    "spacecatninja/imager-x": "5.0.0",
+    "verbb/navigation": "3.0.0",
+    "viget/craft-classnames": "3.0.0",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {
     "craftcms/ecs": "dev-main",
     "craftcms/generator": "^2.0.0",
     "craftcms/phpstan": "dev-main",
+    "nystudio107/craft-autocomplete": "^1.12",
     "yiisoft/yii2-shell": "^2.0.3"
   },
   "autoload": {
