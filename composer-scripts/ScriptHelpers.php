@@ -59,9 +59,11 @@ class ScriptHelpers
         return fwrite(STDERR, self::ANSI_RED . $message . self::ANSI_CLOSE . PHP_EOL);
     }
 
-    public static function replaceText(string $subject, string $pattern, string $replacement): string
+    public static function replaceFileText(string $filePath, string $pattern, string $replacement): void
     {
-        return preg_replace($pattern, $replacement, $subject);
+        $fileContent = file_get_contents($filePath);
+        $fileContent = preg_replace($pattern, $replacement, $fileContent);
+        file_put_contents($filePath, $fileContent);
     }
 
     public static function kebabCase(string $string)

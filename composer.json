@@ -44,7 +44,7 @@
   "scripts": {
     "post-create-project-cmd": [
       "@php -r \"file_exists('.env') || copy('.env.example.dev', '.env');\"",
-      "@php install-scripts/rename-ddev.php",
+      "@php composer-scripts/post-create-project.php",
       "echo 'Cleaning composer.json'",
       "@composer config --unset scripts.post-create-project-cmd",
       "@composer config --unset name",
