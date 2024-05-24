@@ -1,8 +1,24 @@
-# Getting Started
+# Viget's Craft CMS Starter
 
 This repo is a Composer "project" intended for use with the `composer create-project` command.
 
 Our starter uses DDEV for local development. Install it before doing any of the following steps.
+
+# Features
+
+- Local development [powered by DDEV](https://ddev.com/)
+- [Vite](https://vitejs.dev/) based front-end build tooling.
+- Automatic linting, formatting and typechecking
+  - Runs on git pre-commit hook with [Husky](https://typicode.github.io/husky/)
+  - Only processes staged files using [lint-staged](https://github.com/lint-staged/lint-staged)
+  - [Prettier](https://prettier.io/), [eslint](https://eslint.org/), [PHPStan](https://github.com/craftcms/phpstan), [PHP
+    Easy Coding Standard](https://github.com/craftcms/ecs)
+- Common plugins come pre-installed
+- Local email is routed
+  through [Mailpit](https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit) (
+  never worry about emailing a client or user)
+
+# Getting Started
 
 ## Create Project
 

@@ -1,8 +1,16 @@
-dateModified: 1716567262
+dateModified: 1716568939
 email:
-  fromEmail: joshua.pease@viget.com
+  fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
-  transportType: craft\mail\transportadapters\Sendmail
+  replyToEmail: null
+  template: null
+  transportSettings:
+    host: $SYSTEM_EMAIL_HOSTNAME
+    password: $SYSTEM_EMAIL_PASSWORD
+    port: $SYSTEM_EMAIL_PORT
+    useAuthentication: '1'
+    username: $SYSTEM_EMAIL_USERNAME
+  transportType: craft\mail\transportadapters\Smtp
 meta:
   __names__:
     35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
