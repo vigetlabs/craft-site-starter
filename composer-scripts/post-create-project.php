@@ -2,7 +2,7 @@
 
 use craft\helpers\Console;
 
-require_once './ScriptHelpers.php';
+require_once 'ScriptHelpers.php';
 require_once 'vendor/autoload.php';
 
 $cwd = getcwd();
@@ -34,6 +34,22 @@ ScriptHelpers::replaceFileText(
     filePath: "$cwd/.ddev/config.yaml",
     pattern: "/name:\s+viget-craft-starter/",
     replacement: "name: $projectSlug",
+);
+
+/**
+ * Update package.json
+ */
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/package.json",
+    pattern: "/\"name\": \"viget-craft-starter\"/",
+    replacement: "\"name\": \"$projectSlug\"",
+);
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/package-lock.json",
+    pattern: "/\"name\": \"viget-craft-starter\"/",
+    replacement: "\"name\": \"$projectSlug\"",
 );
 
 /**
