@@ -1,6 +1,7 @@
 <?php
 
 use craft\helpers\Console;
+use craft\helpers\StringHelper;
 
 require_once 'ScriptHelpers.php';
 require_once 'vendor/autoload.php';
@@ -16,15 +17,15 @@ $projectName = Console::prompt('What is the name of your project (Example: My Cl
 
 Console::output("Great! We'll use the name: $projectName");
 
-$suggestedProjectSlug = ScriptHelpers::kebabCase($projectName);
+$suggestedProjectSlug = StringHelper::toKebabCase($projectName);
 
 $projectSlugPrompt = Console::prompt("Customize the project slug? This controls the DDEV URL, etc.", [
     'default' => $suggestedProjectSlug,
 ]);
 
-$projectSlug = !empty(trim($projectSlugPrompt)) ? ScriptHelpers::kebabCase($projectSlugPrompt) : $suggestedProjectSlug;
+$projectSlug = !empty(trim($projectSlugPrompt)) ? StringHelper::toKebabCase($projectSlugPrompt) : $suggestedProjectSlug;
 
-ScriptHelpers::success("Great! We'll use $projectSlug");
+Console::output("Great! We'll use $projectSlug");
 
 /**
  * Update DDEV config
