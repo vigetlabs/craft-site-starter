@@ -40,22 +40,22 @@ plugins:
   imager-x:
     edition: lite
     enabled: true
-    licenseKey: EYY9QQALYS4PXKM10T0D9N67
+    licenseKey: REPLACE
     schemaVersion: 4.0.0
   navigation:
     edition: standard
     enabled: true
-    licenseKey: ZT0EJAAM7CJWOFKJ45G3LIYY
+    licenseKey: REPLACE
     schemaVersion: 2.1.0
   retour:
     edition: standard
     enabled: true
-    licenseKey: GZCRRQCSW4G1B3MCWWB9L6K1
+    licenseKey: REPLACE
     schemaVersion: 3.0.12
   seomatic:
     edition: standard
     enabled: true
-    licenseKey: 19RIJ06TIUTR4H8RSPARFML0
+    licenseKey: REPLACE
     schemaVersion: 3.0.12
   vite:
     edition: standard

@@ -62,6 +62,14 @@ ScriptHelpers::replaceFileText(
     replacement: "$projectName",
 );
 
+// Replace plugin license keys.
+// These are regenerated when viewing the Control Panel
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/config/project/project.yaml",
+    pattern: "/    licenseKey: REPLACE[\r\n|\r|\n]/", // Make sure to remove new line too
+    replacement: "",
+);
+
 ScriptHelpers::replaceFileText(
     filePath: "$cwd/config/project/siteGroups/805d8826-faed-4186-9b88-f509eb9b07e6.yaml",
     pattern: "/Viget Craft Starter/",
@@ -73,3 +81,7 @@ ScriptHelpers::replaceFileText(
     pattern: "/Viget Craft Starter/",
     replacement: "$projectName",
 );
+
+/**
+ * Licence keys
+ */

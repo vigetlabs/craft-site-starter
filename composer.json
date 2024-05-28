@@ -52,7 +52,7 @@
       "@composer config --unset type",
       "@composer update --ignore-platform-reqs",
       "@composer dump-autoload -o",
-      "rm -rf install-scripts "
+      "rm -rf composer-scripts"
     ],
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example.dev', '.env');\""
