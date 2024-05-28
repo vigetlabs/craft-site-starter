@@ -2,7 +2,7 @@
 
 use craft\helpers\Console;
 
-require_once 'ScriptHelpers.php';
+require_once './ScriptHelpers.php';
 require_once 'vendor/autoload.php';
 
 $cwd = getcwd();
@@ -32,7 +32,7 @@ ScriptHelpers::success("Great! We'll use $projectSlug");
 
 ScriptHelpers::replaceFileText(
     filePath: "$cwd/.ddev/config.yaml",
-    pattern: "/name:\s+craft-starter/",
+    pattern: "/name:\s+viget-craft-starter/",
     replacement: "name: $projectSlug",
 );
 
