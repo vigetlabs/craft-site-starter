@@ -83,5 +83,11 @@ ScriptHelpers::replaceFileText(
 );
 
 /**
- * Licence keys
+ * .gitignore
  */
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/.gitignore",
+    pattern: "/# BEGIN-STARTER-ONLY\X*# END-STARTER-ONLY/m",
+    replacement: '',
+);
