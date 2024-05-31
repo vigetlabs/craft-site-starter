@@ -11,7 +11,12 @@ database:
   version: '8.0'
 use_dns_when_possible: true
 composer_version: '2'
-web_environment: []
+web_environment:
+  # Use Mailpit
+  - SYSTEM_EMAIL_HOSTNAME=localhost
+  - SYSTEM_EMAIL_PORT=1025
+  - SYSTEM_EMAIL_USERNAME=abc
+  - SYSTEM_EMAIL_PASSWORD=123
 nodejs_version: '18'
 hooks:
   post-start:
