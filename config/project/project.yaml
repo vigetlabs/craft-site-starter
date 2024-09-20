@@ -1,4 +1,4 @@
-dateModified: 1716932096
+dateModified: 1726872373
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -65,7 +65,7 @@ system:
   edition: solo
   live: true
   name: 'Viget Craft Starter'
-  schemaVersion: 5.0.0.20
+  schemaVersion: 5.3.0.2
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
