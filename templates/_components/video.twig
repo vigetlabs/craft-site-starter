@@ -1,0 +1,45 @@
+{#
+  TODO possible improvements
+  - rework to parse the video provider & id from any type of URL.
+  - lazy load the iframe
+  - customizable thumbnail / play button
+#}
+
+{#
+  The source of the video. E.g. 'https://www.youtube.com/embed/lJIrF4YjHfQ'
+  @var string source
+#}
+{% set source = source ?? '' %}
+
+{#
+  Additional attributes to pass to the iframe element.
+  @var array iframeAttrs
+#}
+{% set iframeAttrs = iframeAttrs ?? {} %}
+
+{#
+  Additional classes for the wrapper div
+  @var string|null class
+#}
+{% set class = class ?? null %}
+
+{# Generate a unique ID for the video element #}
+{% set id = 'video-' ~ random() %}
+
+<div class="{{ classNames('relative', class) }}">
+  {{ include('_components/button.twig', {
+    href: '#' ~ id,
+    variant: 'text',
+    class: 'sr-only focus-visible:not-sr-only',
+    text: 'Skip past video'
+  }) }}
+
+  <iframe
+    src="{{ source }}"
+    class="aspect-video size-full"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen="true"
+  ></iframe>
+</div>
+
+<div id="{{ id }}"></div>
