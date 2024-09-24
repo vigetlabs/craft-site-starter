@@ -1,0 +1,61 @@
+{% from '_macros/icon.twig' import icon %}
+
+{# @var string|null as #}
+{% set as = as ?? null %}
+
+{# @var string variant #}
+{% set variant = variant ?? 'contained' %}
+
+{# @var string size #}
+{% set size = size ?? 'md' %}
+
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null icon The name of the icon to use #}
+{% set icon = icon ?? null %}
+
+{# @var boolean iconOnly #}
+{% set iconOnly = iconOnly ?? false %}
+
+{# @var string|null href #}
+{% set href = href ?? null %}
+
+{# @var string type #}
+{% set type = type ?? 'button' %}
+
+{# @var boolean disabled #}
+{% set disabled = disabled ?? false %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var string|null text #}
+{% set text = text ?? null %}
+
+{# Determine element type #}
+{% set el = as ?? (href and not disabled ? 'a' : 'button') %}
+
+{% tag el with {
+  href: not disabled ? href : null,
+  disabled: disabled ? true : null,
+  type: el == 'button' ? type : null,
+  title: title,
+  class: classNames({
+    'btn-contained': variant == 'contained',
+    'btn-outlined': variant == 'outlined',
+    'btn-subtle': variant == 'subtle',
+    'btn-text': variant == 'text',
+    'btn-icon': iconOnly,
+    'btn-sm': size == 'sm',
+    'btn-lg': size == 'lg',
+  }, class),
+} %}
+
+  {{ icon ? icon({
+    name: icon,
+    size: size,
+  }) }}
+
+  {{ text }}
+{% endtag %}
