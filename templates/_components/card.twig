@@ -1,0 +1,47 @@
+{% from '_macros/icon.twig' import icon %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var string|null href #}
+{% set href = href ?? null %}
+
+{# @var string align #}
+{% set align = align ?? 'left' %}
+
+{# @var string|null icon #}
+{% set icon = icon ?? null %}
+
+{# TODO could add an image prop and use an image instead of an icon in this case #}
+
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null description #}
+{% set description = description ?? null %}
+
+
+<article class="{{ cx('flex flex-col gap-24', {
+  'items-start': align == 'left',
+  'items-center text-center': align == 'center',
+}, class) }}">
+
+  {% if icon %}
+    <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black">
+      {{ icon({
+        name: icon,
+      }) }}
+    </div>
+  {% endif %}
+
+  {% if title or description %}
+    <div class="flex flex-col gap-8">
+      {% if title %}
+        <h2 class="text-xl font-bold">{{ title }}</h2>
+      {% endif %}
+      {% if description %}
+        <p class="text-sm">{{ description }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+</article>
