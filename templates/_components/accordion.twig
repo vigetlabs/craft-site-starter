@@ -1,0 +1,48 @@
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null content #}
+{% set content = content ?? null %}
+
+{# @var string|null name #}
+{% set name = name ?? null %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 2 %}
+
+{% set headingTag = 'h' ~ headingLevel %}
+
+<details
+  class="{{ cx('group/details flex flex-col border-t last-of-type:border-b', class) }}"
+  {{ attr({
+    name,
+  }) }}
+>
+  <summary
+    class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+  >
+    {{ tag(headingTag, {
+      class: 'text-lg font-bold',
+      text: title,
+    }) }}
+
+    {# Animated toggle icon #}
+    <span
+      class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+    >
+      <span
+        class="absolute inset-0 m-auto h-4 w-20 bg-neutral-600 transition-transform duration-500 group-open/details:rotate-[360deg]"
+      ></span>
+      <span
+        class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-neutral-600 transition-transform duration-500 group-open/details:rotate-[360deg]"
+      ></span>
+    </span>
+  </summary>
+
+  <div class="pb-24">
+    {{ content }}
+  </div>
+</details>
