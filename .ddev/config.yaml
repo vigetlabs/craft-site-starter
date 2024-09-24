@@ -32,7 +32,7 @@ web_extra_exposed_ports:
 web_extra_daemons:
   # Run vite in a separate process
   - name: 'vite'
-    command: 'npm install && npm run dev'
+    command: 'npm install && npm run build && npm run dev'
     directory: /var/www/html
 # Key features of ddev's config.yaml:
 

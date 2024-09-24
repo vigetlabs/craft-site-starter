@@ -1,4 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+import process from 'node:process'
 
 // Match ports in .ddev/config.yaml -> web_extra_exposed_ports
 const HTTP_PORT = 3000
@@ -27,5 +29,10 @@ export default defineConfig(({ command, mode }) => {
       port: HTTP_PORT,
       origin: env.PRIMARY_SITE_URL + ':' + originPort,
     },
+    plugins: [
+      viteStaticCopy({
+        targets: [{ src: 'src/icons/**/*', dest: './assets/icons' }],
+      }),
+    ],
   }
 })

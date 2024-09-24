@@ -1,0 +1,20 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% from '_macros/icon.twig' import icon %}
+
+{% set icons = ['arrow-left', 'arrow-right', 'clock', 'close'] %}
+
+{% block main %}
+
+  <div class="grid grid-cols-8 gap-16">
+    {% for icon in icons %}
+      <div class="flex flex-col items-center gap-8">
+        {{ icon({
+          name: icon,
+        }) }}
+        <span class="text-sm text-gray-500">{{ icon }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
