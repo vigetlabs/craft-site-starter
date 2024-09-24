@@ -1,0 +1,17 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  {{ include('_components/alert-banner.twig', {
+    title: 'Dismissible Alert Banner',
+    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    dismissible: true,
+  }) }}
+
+  <hr class="my-48" />
+
+  {{ include('_components/alert-banner.twig', {
+    title: 'Non-Dismissible Alert Banner',
+    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    dismissible: false,
+  }) }}
+{% endblock %}
