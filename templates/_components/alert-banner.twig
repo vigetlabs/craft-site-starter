@@ -1,0 +1,38 @@
+
+{# @var string title #}
+{% set title = title ?? null %}
+
+{# @var string description #}
+{% set description = description ?? null %}
+
+{# @var bool dismissible #}
+{% set dismissible = dismissible ?? false %}
+
+<div
+  role="alert"
+  data-component="AlertBanner"
+  aria-live="assertive"
+  aria-atomic="true"
+  class="relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48"
+  x-data="{ dismiss() { this.$root.remove() } }"
+>
+  {% if title %}
+    <h2 class="text-md font-bold">{{ title }}</h2>
+  {% endif %}
+
+  {% if description %}
+    <p>{{ description }}</p>
+  {% endif %}
+
+  {{ dismissible ? include('_components/button.twig', {
+    variant: 'subtle',
+    size: 'sm',
+    icon: 'close',
+    iconOnly: true,
+    class: 'absolute right-24 top-24',
+    text: 'Close',
+    attrs: {
+      'x-on:click': 'dismiss()',
+    },
+  }) }}
+</div>

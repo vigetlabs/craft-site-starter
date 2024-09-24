@@ -36,7 +36,10 @@
 {# Determine element type #}
 {% set el = as ?? (href and not disabled ? 'a' : 'button') %}
 
-{% tag el with {
+{# @var array attrs #}
+{% set attrs = attrs ?? {} %}
+
+{% tag el with attrs | merge({
   href: not disabled ? href : null,
   disabled: disabled ? true : null,
   type: el == 'button' ? type : null,
@@ -50,7 +53,7 @@
     'btn-sm': size == 'sm',
     'btn-lg': size == 'lg',
   }, class),
-} %}
+}) %}
 
   {{ icon ? icon({
     name: icon,
