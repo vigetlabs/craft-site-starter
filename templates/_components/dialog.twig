@@ -1,0 +1,78 @@
+{% from '_macros/icon.twig' import icon %}
+
+{# @var string id #}
+{% set id = id ?? null %}
+
+{# @var boolean hideClose #}
+{% set hideClose = hideClose ?? false %}
+
+{# @var array triggerProps #}
+{% set triggerProps = triggerProps ?? {} %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var string|null content #}
+{% set content = content ?? null %}
+
+<div
+  id="{{ id }}"
+  @dialog:open.window="handleOpenEvent"
+  x-data="{
+    open: false,
+
+    // Close the dialog when the user clicks backdrop
+    handleDialogClick(event) {
+      (event.target === $refs.dialogRef) && this.handleDialogClose()
+    },
+
+    handleOpenEvent(event) {
+      // Only open if we're targeting this dialog
+      console.log(event)
+      if (event.detail.id !== this.$root.id) {
+        return
+      }
+
+      this.open = true
+      $refs.dialogRef.showModal()
+    },
+
+    // Delay close to allow for animation
+    handleDialogClose() {
+      if (!this.open) return
+
+      this.open = false
+      $refs.dialogRef.dataset.dialogStatus = 'closing'
+
+      setTimeout(() => {
+        delete $refs.dialogRef.dataset.dialogStatus
+        $refs.dialogRef.close()
+      }, 300);
+    }
+  }"
+>
+  <dialog
+    x-ref="dialogRef"
+    x-trap.noscroll="open"
+    @keydown.escape.prevent="handleDialogClose()"
+    @click="handleDialogClick($event)"
+    class="{{ classNames('dialog', class) }}"
+  >
+    {% if not hideClose %}
+      {{ include('_components/button.twig', {
+        icon: 'close',
+        iconOnly: true,
+        size: 'sm',
+        title: 'Close',
+        variant: 'subtle',
+        class: 'absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12',
+        attrs: {
+          '@click': 'handleDialogClose()'
+        }
+      }) }}
+    {% endif %}
+
+    {{ content }}
+
+  </dialog>
+</div>
