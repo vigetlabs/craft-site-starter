@@ -1,0 +1,19 @@
+{% macro icon(props = {}) %}
+  {% set props = props | merge({
+    name: props.name ?? null,
+    size: props.size ?? 'md',
+    class: props.class ?? null,
+  }) %}
+
+  {% set sizeConfig = {
+    'sm': 'size-16',
+    'md': 'size-24',
+    'lg': 'size-32',
+  } %}
+
+  {% set sizeClass = sizeConfig[props.size] ?? sizeConfig.md %}
+
+  {{ svg('@webroot/dist/assets/icons/' ~ props.name ~ '.svg') | attr({
+    class: cx(sizeClass, props.class),
+  }) }}
+{% endmacro %}
