@@ -1,0 +1,16 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  <div class="max-w-prose mx-auto">
+
+
+    {{ include('_components/video.twig', {
+      source: 'https://www.youtube.com/embed/lJIrF4YjHfQ',
+      class: 'mb-24',
+    }) }}
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. <a href="#">Focusable Content After Video</a>
+    </p>
+  </div>
+{% endblock %}
