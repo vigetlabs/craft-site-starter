@@ -1,4 +1,5 @@
 import buttons from './config/tailwind/buttons'
+import dialog from './config/tailwind/dialog'
 
 /**
  Helper function to pair key and value together
@@ -42,5 +43,5 @@ export default {
     },
     extend: {},
   },
-  plugins: [buttons],
+  plugins: [buttons, dialog],
 }

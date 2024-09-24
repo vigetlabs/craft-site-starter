@@ -27,6 +27,7 @@
     "vite-plugin-static-copy": "^1.0.6"
   },
   "dependencies": {
+    "@alpinejs/focus": "^3.14.1",
     "alpinejs": "^3.14.1"
   }
 }
