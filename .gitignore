@@ -4,6 +4,8 @@
 .DS_Store
 node_modules
 /web/dist
+/web/assets
+/web/imager
 /.vite
 php-cs-fixer.cache
 
