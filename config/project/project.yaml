@@ -1,4 +1,4 @@
-dateModified: 1727299637
+dateModified: 1727307125
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -11,10 +11,19 @@ email:
     useAuthentication: '1'
     username: $SYSTEM_EMAIL_USERNAME
   transportType: craft\mail\transportadapters\Smtp
+fs:
+  local:
+    hasUrls: true
+    name: Local
+    settings:
+      path: '@webroot/assets'
+    type: craft\fs\Local
+    url: /assets/
 meta:
   __names__:
     35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
+    853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
     b7e66782-af96-4012-9e17-914134073ced: Simple # Simple
 plugins:
   aws-s3:
