@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "035cf688bedd716ba5e903e5da169556",
+    "content-hash": "94d0d574def15612b21ae6fff97646d7",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4413,6 +4413,65 @@
             "time": "2024-08-08T11:34:30+00:00"
         },
         {
+            "name": "spacecatninja/imager-x-power-pack",
+            "version": "1.0.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spacecatninja/craft-imager-x-power-pack/zipball/55829251555c23b640b1e2d9419394a031a002ce",
+                "reference": "55829251555c23b640b1e2d9419394a031a002ce",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^4.5.0|^5.0.0",
+                "ext-imagick": "*",
+                "php": "^8.0.2",
+                "spacecatninja/imager-x": "^4.3.0|^5.0.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Imager X Power Pack",
+                "handle": "imager-x-power-pack",
+                "schemaVersion": "1.0.0",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "changelogUrl": "https://raw.githubusercontent.com/spacecatninja/craft-imager-x-power-pack/master/CHANGELOG.md",
+                "components": [],
+                "class": "spacecatninja\\imagerxpowerpack\\PowerPack"
+            },
+            "autoload": {
+                "psr-4": {
+                    "spacecatninja\\imagerxpowerpack\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SPACECATNINJA",
+                    "homepage": "https://www.spacecat.ninja"
+                }
+            ],
+            "description": "Unlocks a stash of hidden weapons in your quest to optimize images, while simultaniously saving time and cognitive load.",
+            "keywords": [
+                "cms",
+                "craft",
+                "craft-plugin",
+                "craftcms",
+                "imager",
+                "lazyload",
+                "picture",
+                "responsive-images",
+                "sizes",
+                "srcset"
+            ],
+            "support": {
+                "docs": "https://github.com/spacecatninja/craft-imager-x-power-pack/blob/master/README.md",
+                "issues": "https://github.com/spacecatninja/craft-imager-x-power-pack/issues"
+            },
+            "time": "2024-09-24T11:31:39+00:00"
+        },
+        {
             "name": "spomky-labs/cbor-php",
             "version": "3.1.0",
             "dist": {
@@ -8134,7 +8193,9 @@
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-imagick": "*"
+    },
     "platform-dev": [],
     "platform-overrides": {
         "php": "8.2"
