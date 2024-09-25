@@ -1,4 +1,4 @@
-dateModified: 1727298555
+dateModified: 1727299637
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -61,6 +61,10 @@ plugins:
     enabled: true
     licenseKey: REPLACE
     schemaVersion: 3.0.12
+  viget-parts-kit:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   vite:
     edition: standard
     enabled: true
