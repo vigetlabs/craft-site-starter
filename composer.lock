@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d0d574def15612b21ae6fff97646d7",
+    "content-hash": "65e438b528fa3f92f3b5ea981d28d2b7",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -6430,6 +6430,62 @@
                 "source": "https://github.com/vigetlabs/craft-classnames/tree/3.0.0"
             },
             "time": "2024-03-29T15:14:53+00:00"
+        },
+        {
+            "name": "viget/craft-parts-kit",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vigetlabs/craft-parts-kit.git",
+                "reference": "853b0d0fa94fae0a78164f539218c9fb05817762"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vigetlabs/craft-parts-kit/zipball/853b0d0fa94fae0a78164f539218c9fb05817762",
+                "reference": "853b0d0fa94fae0a78164f539218c9fb05817762",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^5.0.0",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "craftcms/ecs": "dev-main",
+                "craftcms/phpstan": "dev-main"
+            },
+            "default-branch": true,
+            "type": "craft-plugin",
+            "extra": {
+                "handle": "viget-parts-kit",
+                "name": "Viget Parts Kit",
+                "developer": "Viget",
+                "documentationUrl": ""
+            },
+            "autoload": {
+                "psr-4": {
+                    "viget\\partskit\\": "src/"
+                }
+            },
+            "scripts": {
+                "check-cs": [
+                    "ecs check --ansi"
+                ],
+                "fix-cs": [
+                    "ecs check --ansi --fix"
+                ],
+                "phpstan": [
+                    "phpstan --memory-limit=1G"
+                ]
+            },
+            "license": [
+                "mit"
+            ],
+            "support": {
+                "email": "craft@viget.com",
+                "source": "https://github.com/vigetlabs/craft-parts-kit/tree/main",
+                "issues": "https://github.com/vigetlabs/craft-parts-kit/issues"
+            },
+            "time": "2024-09-25T23:27:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

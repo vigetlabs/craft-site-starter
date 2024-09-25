@@ -18,6 +18,7 @@
     "spacecatninja/imager-x-power-pack": "1.0.5",
     "verbb/navigation": "3.0.4",
     "viget/craft-classnames": "3.0.0",
+    "viget/craft-parts-kit": "dev-main",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {
@@ -68,6 +69,10 @@
       "type": "composer",
       "url": "https://composer.craftcms.com",
       "canonical": false
+    },
+    {
+        "type": "github",
+        "url": "https://github.com/vigetlabs/craft-parts-kit.git"
     }
   ]
 }
