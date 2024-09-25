@@ -1,0 +1,31 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  <div class="grid grid-cols-3 gap-16 mb-48">
+    {% for i in 1..3 %}
+      {{ include('_components/card-image.twig', {
+        image: craft.assets.one(),
+        sizes: {
+          default: '33vw',
+        },
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+      }) }}
+    {% endfor %}
+  </div>
+
+  <div class="grid grid-cols-3 gap-16 mb-48">
+    {% for i in 1..3 %}
+      {{ include('_components/card-image.twig', {
+        align: 'center',
+        image: craft.assets.one(),
+        ratio: 1/1,
+        sizes: {
+          default: '33vw',
+        },
+        title: 'Lorem ipsum dolor sit amet',
+        description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+      }) }}
+    {% endfor %}
+  </div>
+{% endblock %}

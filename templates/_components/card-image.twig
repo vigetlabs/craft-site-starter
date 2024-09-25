@@ -1,0 +1,50 @@
+{% from '_macros/icon.twig' import icon %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var string|null href #}
+{% set href = href ?? null %}
+
+{# @var craft\elements\Asset|null image #}
+{% set image = image ?? null %}
+
+{# @var float|null ratio #}
+{% set ratio = ratio ?? null %}
+
+{# @var array|null sizes #}
+{% set sizes = sizes ?? null %}
+
+{# @var string align #}
+{% set align = align ?? 'left' %}
+
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null description #}
+{% set description = description ?? null %}
+
+<article class="{{ cx('flex flex-col gap-24', {
+  'items-start': align == 'left',
+  'items-center text-center': align == 'center',
+}, class) }}">
+
+  {% if image %}
+    {{ include('_components/image.twig', {
+      image: image,
+      sizes: sizes,
+      ratio: ratio,
+    }) }}
+  {% endif %}
+
+  {% if title or description %}
+    <div class="flex flex-col gap-8">
+      {% if title %}
+        <h2 class="text-xl font-bold">{{ title }}</h2>
+      {% endif %}
+      {% if description %}
+        <p class="text-sm">{{ description }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+</article>

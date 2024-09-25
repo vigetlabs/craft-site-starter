@@ -1,0 +1,14 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  <div class="flex flex-col gap-16">
+    <h2 class="text-2xl font-bold">Basic Image</h2>
+
+    {{ include('_components/image-caption.twig', {
+      content: include('_components/image.twig', {
+        image: craft.assets().one(),
+      }),
+      caption: 'Image caption',
+    }) }}
+  </div>
+{% endblock %}
