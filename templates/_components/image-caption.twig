@@ -1,0 +1,24 @@
+{#
+  @var string|null content
+
+  Example:
+
+  {{ include('_components/image-caption.twig', {
+    content: include('_components/image.twig', {
+      image: craft.assets().filename('image.jpg').one(),
+    }),
+    caption: 'Image caption',
+  }) }}
+#}
+{% set content = content ?? null %}
+
+{# @var string|null caption #}
+{% set caption = caption ?? null %}
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+<figure class="{{ class }}">
+  {{ content|raw }}
+  <figcaption>{{ caption }}</figcaption>
+</figure>

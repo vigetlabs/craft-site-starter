@@ -1,0 +1,44 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  <div class="flex flex-col gap-16">
+    <h2 class="text-2xl font-bold">Basic Image</h2>
+    {{ include('_components/image.twig', {
+      image: craft.assets.one(),
+    }) }}
+
+    <h2 class="text-2xl font-bold">Image with Aspect Ratio</h2>
+    {{ include('_components/image.twig', {
+      image: craft.assets.one(),
+      ratio: 1/1,
+    }) }}
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3">
+      <div>
+        <h2 class="text-2xl font-bold">Image with Custom Sizes</h2>
+
+        {{ include('_components/image.twig', {
+          image: craft.assets.one(),
+          sizes: {
+            default: '50vw',
+            sm: '25vw',
+            md: '33vw',
+          },
+        }) }}
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold">Image with Custom Sizes and Aspect Ratio</h2>
+        {{ include('_components/image.twig', {
+          image: craft.assets.one(),
+          sizes: {
+            default: '50vw',
+            sm: '25vw',
+            md: '33vw',
+          },
+          ratio: 3/4,
+        }) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block main %}
   <div class="grid grid-cols-3 gap-16 mb-48">
     {% for i in 1..3 %}
-      {{ include('_components/card.twig', {
+      {{ include('_components/card-icon.twig', {
         icon: 'clock',
         title: 'Lorem ipsum dolor sit amet',
         description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
@@ -13,7 +13,7 @@
 
   <div class="grid grid-cols-3 gap-16 mb-48">
     {% for i in 1..3 %}
-      {{ include('_components/card.twig', {
+      {{ include('_components/card-icon.twig', {
         align: 'center',
         icon: 'clock',
         title: 'Lorem ipsum dolor sit amet',
