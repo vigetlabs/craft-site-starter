@@ -2,7 +2,7 @@
 
 {% block main %}
 
-{% set content %}
+  {% set content %}
     <p>Hello World</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
   {% endset %}
@@ -12,7 +12,7 @@
     text: 'Open Dialog',
     attrs: {
       'x-data': '',
-      '@click': "$dispatch('dialog:open', { id: 'my-dialog'})"
+      '@click': "$dispatch('dialog:open', { id: 'my-dialog' })"
     },
   }) }}
 

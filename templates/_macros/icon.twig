@@ -1,3 +1,11 @@
+{#
+Inlines the SVG markup directly into the page.
+
+Provides icon size props so you don't have to remember to pass
+`.size-xyz` every time you want to use your icon system.
+
+By setting size to `none` you can add arbitrary sizes to the icon.
+#}
 {% macro icon(props = {}) %}
   {% set props = props | merge({
     name: props.name ?? null,
