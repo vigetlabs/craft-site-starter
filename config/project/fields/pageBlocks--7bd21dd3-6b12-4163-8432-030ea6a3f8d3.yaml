@@ -1,0 +1,20 @@
+columnSuffix: null
+handle: pageBlocks
+instructions: null
+name: 'Page Blocks'
+searchable: false
+settings:
+  createButtonLabel: 'New Block'
+  entryTypes:
+    - 896b8f2a-ed0c-42c9-b5fd-ba8668fc6784 # Rich Text
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
