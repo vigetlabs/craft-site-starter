@@ -1,0 +1,51 @@
+columnSuffix: null
+handle: primaryLink
+instructions: null
+name: Link
+searchable: false
+settings:
+  maxLength: 255
+  typeSettings:
+    __assoc__:
+      -
+        - url
+        -
+          __assoc__:
+            -
+              - allowRootRelativeUrls
+              - '1'
+            -
+              - allowAnchors
+              - '1'
+      -
+        - asset
+        -
+          __assoc__:
+            -
+              - sources
+              - '*'
+            -
+              - allowedKinds
+              - '*'
+            -
+              - showUnpermittedVolumes
+              - ''
+            -
+              - showUnpermittedFiles
+              - ''
+      -
+        - entry
+        -
+          __assoc__:
+            -
+              - sources
+              - '*'
+  types:
+    - url
+    - asset
+    - email
+    - entry
+    - tel
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Link

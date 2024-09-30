@@ -1,21 +1,21 @@
 columnSuffix: null
-handle: pageBlocks
+handle: cardGrid
 instructions: null
-name: 'Page Blocks'
+name: 'Card Grid'
 searchable: false
 settings:
-  createButtonLabel: 'New Block'
+  createButtonLabel: 'New card'
   entryTypes:
-    - 896b8f2a-ed0c-42c9-b5fd-ba8668fc6784 # Rich Text
-    - 7ced3e9d-9b54-47f6-8103-e5c3a4fbaf9c # Card Grid
+    - 7d418368-91eb-4c64-8f5b-94c62cd62359 # Image Card
+    - 3f1dc0c5-f091-469a-858a-4cbd3596bab7 # Icon Card
   includeTableView: false
   maxEntries: null
   minEntries: null
-  pageSize: null
+  pageSize: 50
   propagationKeyFormat: null
   propagationMethod: all
-  showCardsInGrid: false
-  viewMode: blocks
+  showCardsInGrid: true
+  viewMode: cards
 translationKeyFormat: null
 translationMethod: site
 type: craft\fields\Matrix

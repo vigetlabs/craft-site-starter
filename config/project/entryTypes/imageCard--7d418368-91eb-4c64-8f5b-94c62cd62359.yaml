@@ -1,0 +1,99 @@
+color: null
+fieldLayouts:
+  35c4a5cf-04f0-400e-a3bd-107187ab73ee:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2024-09-30T23:29:23+00:00'
+            elementCondition: null
+            fieldUid: 570fb481-ad97-46db-8bad-f7b0fd90e831 # Image
+            handle: null
+            includeInCards: true
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 137a7e8f-bd2a-46c9-972b-365f2ea8a1b7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-09-30T23:29:23+00:00'
+            elementCondition: null
+            fieldUid: 69fe4c18-21c9-4a3d-8fce-9988d3f741e4 # Link
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c76db590-6bba-4a59-9353-adbf9eeb9cf6
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-09-30T23:24:56+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 860a8146-8741-437e-95e0-b4e2bf886d5f
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-09-30T23:29:23+00:00'
+            elementCondition: null
+            fieldUid: a99edea2-f8ae-44e5-a12f-89cb9aa66738 # Description
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 14a7db31-c0d3-47d5-a03a-24b0bba82130
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 2d299e0f-b490-4172-874c-983cf1b2cd4f
+        userCondition: null
+handle: imageCard
+hasTitleField: true
+icon: image-polaroid
+name: 'Image Card'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: ''
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
