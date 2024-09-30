@@ -1,0 +1,65 @@
+columnSuffix: null
+handle: icon
+instructions: null
+name: Icon
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - None
+        -
+          - value
+          - ''
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Arrow Left'
+        -
+          - value
+          - arrow-left
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Arrow Right'
+        -
+          - value
+          - arrowRight
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Clock
+        -
+          - value
+          - clock
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - Close
+        -
+          - value
+          - close
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown
