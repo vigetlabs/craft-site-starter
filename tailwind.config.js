@@ -41,7 +41,11 @@ export default {
       ...pxPair(112),
       ...pxPair(128),
     },
-    extend: {},
+    extend: {
+      maxWidth: {
+        content: '1440px',
+      },
+    },
   },
   plugins: [buttons, dialog],
 }

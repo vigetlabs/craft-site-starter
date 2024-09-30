@@ -1,6 +1,6 @@
 color: null
 fieldLayouts:
-  1ba4cf8b-7fa5-48a1-bedc-228107cc529a:
+  e33f8044-cf16-4605-bc3d-09679348a498:
     tabs:
       -
         elementCondition: null
@@ -10,7 +10,7 @@ fieldLayouts:
             autocomplete: false
             autocorrect: true
             class: null
-            dateAdded: '2024-09-30T22:56:28+00:00'
+            dateAdded: '2024-09-30T22:58:38+00:00'
             disabled: false
             elementCondition: null
             id: null
@@ -31,14 +31,14 @@ fieldLayouts:
             tip: null
             title: null
             type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: ea0cb902-1247-4433-bd52-2cccebaa964c
+            uid: 205c8050-85f3-478e-b411-c7e6073f9b3e
             userCondition: null
             warning: null
             width: 100
           -
-            dateAdded: '2024-09-30T23:01:15+00:00'
+            dateAdded: '2024-09-30T23:04:32+00:00'
             elementCondition: null
-            fieldUid: 7bd21dd3-6b12-4163-8432-030ea6a3f8d3 # Page Blocks
+            fieldUid: cd489d3c-f914-475c-a270-ab926e4e7485 # Rich Text
             handle: null
             includeInCards: false
             instructions: null
@@ -47,21 +47,21 @@ fieldLayouts:
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
-            uid: c2b7fef9-1532-475d-88ab-66770a63c552
+            uid: 0fc08c7a-1dfa-40d0-b234-5540eae14b50
             userCondition: null
             warning: null
             width: 100
         name: Content
-        uid: a5f66f1f-782a-4b31-978c-9c9f79c9af26
+        uid: b1d8412f-75ff-4e81-896b-ef3b9e203f18
         userCondition: null
-handle: home
+handle: richText
 hasTitleField: false
-icon: house
-name: Home
+icon: font-case
+name: 'Rich Text'
 showSlugField: false
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: Home
+titleFormat: ''
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
