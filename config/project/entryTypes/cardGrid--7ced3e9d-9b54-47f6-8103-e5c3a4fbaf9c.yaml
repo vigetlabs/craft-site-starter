@@ -1,0 +1,67 @@
+color: null
+fieldLayouts:
+  20f64bfb-c1fa-4afa-9631-7660c7cdeb37:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-09-30T23:24:00+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 7a16feb6-d7c0-4a94-8bd4-07a2e30e67a7
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-09-30T23:33:26+00:00'
+            elementCondition: null
+            fieldUid: 5e84b0b7-6851-47ed-962e-76498ac9476f # Card Grid
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 34ece3df-7fa2-439f-985c-2cd74abfd1e3
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: be2ae502-0ddb-4540-a73b-eecc45b4753a
+        userCondition: null
+handle: cardGrid
+hasTitleField: false
+icon: grid
+name: 'Card Grid'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: ''
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
