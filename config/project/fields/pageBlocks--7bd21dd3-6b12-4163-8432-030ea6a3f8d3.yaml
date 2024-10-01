@@ -9,6 +9,7 @@ settings:
     - 896b8f2a-ed0c-42c9-b5fd-ba8668fc6784 # Rich Text
     - 7ced3e9d-9b54-47f6-8103-e5c3a4fbaf9c # Card Grid
     - 3bcf7ddb-71e7-4115-868c-815b3611b34c # Text With Media
+    - 534ccdd8-7abd-4300-a102-71885b21c126 # Call To Action
   includeTableView: false
   maxEntries: null
   minEntries: null
