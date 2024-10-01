@@ -6,6 +6,9 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
+{# @var bool newWindow #}
+{% set newWindow = newWindow ?? false %}
+
 {# @var craft\elements\Asset|null image #}
 {% set image = image ?? null %}
 
@@ -24,11 +27,16 @@
 {# @var string|null description #}
 {% set description = description ?? null %}
 
-<article class="{{ cx('flex flex-col gap-24', {
-  'items-start': align == 'left',
-  'items-center text-center': align == 'center',
-}, class) }}">
+{% set element = href ? 'a' : 'article' %}
 
+{% tag element with {
+  class: cx(class, 'flex flex-col gap-24', {
+    'items-start': align == 'left',
+    'items-center text-center': align == 'center',
+  }),
+  href: href,
+  target: href and newWindow ? '_blank' : null,
+} %}
   {% if image %}
     {{ include('_components/image.twig', {
       image: image,
@@ -47,4 +55,4 @@
       {% endif %}
     </div>
   {% endif %}
-</article>
+{% endtag %}

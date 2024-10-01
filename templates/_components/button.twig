@@ -21,6 +21,9 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
+{# @var boolean newWindow #}
+{% set newWindow = newWindow ?? false %}
+
 {# @var string type #}
 {% set type = type ?? 'button' %}
 
@@ -41,6 +44,7 @@
 
 {% tag el with attrs | merge({
   href: not disabled ? href : null,
+  target: newWindow ? '_blank' : null,
   disabled: disabled ? true : null,
   type: el == 'button' ? type : null,
   title: title,

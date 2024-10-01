@@ -6,6 +6,9 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
+{# @var string|null newWindow #}
+{% set newWindow = newWindow ?? null %}
+
 {# @var string align #}
 {% set align = align ?? 'left' %}
 
@@ -18,12 +21,16 @@
 {# @var string|null description #}
 {% set description = description ?? null %}
 
+{% set element = href ? 'a' : 'article' %}
 
-<article class="{{ cx('flex flex-col gap-24', {
-  'items-start': align == 'left',
-  'items-center text-center': align == 'center',
-}, class) }}">
-
+{% tag element with {
+  class: cx(class, 'flex flex-col gap-24', {
+    'items-start': align == 'left',
+    'items-center text-center': align == 'center',
+  }),
+  href: href,
+  target: href and newWindow ? '_blank' : null,
+} %}
   {% if icon %}
     <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black">
       {{ icon({
@@ -42,4 +49,4 @@
       {% endif %}
     </div>
   {% endif %}
-</article>
+{% endtag %}
