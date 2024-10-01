@@ -1,4 +1,4 @@
-dateModified: 1727789465
+dateModified: 1727796858
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -47,6 +47,7 @@ meta:
     c52a9170-652b-4d92-a226-69894b1822ed: 'Rich Text: Simple' # Rich Text: Simple
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text
     d7f9c488-b14d-48c2-b6fc-d616b7a9f49f: 'Show Media On' # Show Media On
+    d39724b0-dd22-4c74-aa0b-87a022555cf2: Advanced # Advanced
 plugins:
   aws-s3:
     edition: standard

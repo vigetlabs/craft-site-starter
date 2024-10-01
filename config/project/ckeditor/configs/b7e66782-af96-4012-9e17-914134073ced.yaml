@@ -7,8 +7,7 @@ headingLevels:
   - 6
 name: Simple
 toolbar:
-  - heading
-  - '|'
   - bold
   - italic
+  - underline
   - link
