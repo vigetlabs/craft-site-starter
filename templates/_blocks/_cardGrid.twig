@@ -7,13 +7,15 @@
       {% case 'imageCard' %}
         {{ include('_components/card-image.twig', {
           image: card.image.eagerly().one(),
-          href: card.primaryLink,
+          href: card.href,
+          newWindow: card.newWindow,
           title: card.title,
           description: card.description,
         }) }}
       {% case 'iconCard' %}
         {{ include('_components/card-icon.twig', {
-          href: card.primaryLink,
+          href: card.href,
+          newWindow: card.newWindow,
           icon: card.icon.value,
           title: card.title,
           description: card.description,
