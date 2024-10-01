@@ -36,10 +36,12 @@ meta:
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
     896b8f2a-ed0c-42c9-b5fd-ba8668fc6784: 'Rich Text' # Rich Text
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
+    167784f4-27c4-45bc-bcf4-eee051e54bd6: 'Open Link In New Window' # Open Link In New Window
     853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
     a99edea2-f8ae-44e5-a12f-89cb9aa66738: Description # Description
     ac3b0590-d417-429e-aa1f-96be3c79a5b0: 'Media Type' # Media Type
     b7e66782-af96-4012-9e17-914134073ced: Simple # Simple
+    b80d8ac7-5039-4535-afa5-82ec086e2f61: 'Link Text' # Link Text
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text
     d7f9c488-b14d-48c2-b6fc-d616b7a9f49f: 'Show Media On' # Show Media On
 plugins:
