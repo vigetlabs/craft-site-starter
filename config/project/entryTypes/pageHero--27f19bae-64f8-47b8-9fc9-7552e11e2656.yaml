@@ -1,0 +1,83 @@
+color: null
+fieldLayouts:
+  4fea0032-240b-4dbe-b1b6-a467326f5323:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            autocapitalize: true
+            autocomplete: false
+            autocorrect: true
+            class: null
+            dateAdded: '2024-10-01T13:27:07+00:00'
+            disabled: false
+            elementCondition: null
+            id: null
+            includeInCards: false
+            inputType: null
+            instructions: null
+            label: null
+            max: null
+            min: null
+            name: null
+            orientation: null
+            placeholder: null
+            providesThumbs: false
+            readonly: false
+            requirable: false
+            size: null
+            step: null
+            tip: null
+            title: null
+            type: craft\fieldlayoutelements\entries\EntryTitleField
+            uid: 77b77d44-0b65-428f-ba8f-f078760a3ff8
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-10-01T13:31:02+00:00'
+            elementCondition: null
+            fieldUid: c52a9170-652b-4d92-a226-69894b1822ed # Rich Text: Simple
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: Description
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dcf0db81-9675-40bc-ae62-5f69274da598
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2024-10-01T13:31:02+00:00'
+            elementCondition: null
+            fieldUid: 570fb481-ad97-46db-8bad-f7b0fd90e831 # Image
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 252b484d-2307-4e74-b167-a3c63074ae10
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 232fbbf7-98ae-45f0-992d-e4597db12aad
+        userCondition: null
+handle: pageHero
+hasTitleField: true
+icon: subtitles
+name: 'Page Hero'
+showSlugField: false
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: ''
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

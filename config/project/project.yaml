@@ -1,4 +1,4 @@
-dateModified: 1727788818
+dateModified: 1727789465
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -29,6 +29,7 @@ meta:
     7ced3e9d-9b54-47f6-8103-e5c3a4fbaf9c: 'Card Grid' # Card Grid
     7d418368-91eb-4c64-8f5b-94c62cd62359: 'Image Card' # Image Card
     0011a64a-91b6-4aa3-98e6-be048394a2cf: Icon # Icon
+    27f19bae-64f8-47b8-9fc9-7552e11e2656: 'Page Hero' # Page Hero
     35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
     55cc26b6-8b49-47de-bbe7-5908da6f4545: 'Video Url' # Video Url
     69fe4c18-21c9-4a3d-8fce-9988d3f741e4: Link # Link

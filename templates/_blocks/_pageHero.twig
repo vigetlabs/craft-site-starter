@@ -1,0 +1,8 @@
+{# @var \craft\elements\Entry|null block #}
+{% set block = block ?? null %}
+
+{{ include('_components/page-hero.twig', {
+  image: block.image.eagerly().one(),
+  title: block.title,
+  description: block.richTextSimple,
+}) }}
