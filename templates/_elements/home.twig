@@ -1,8 +1,6 @@
 {% extends '_layouts/base.twig' %}
 
 {% block content %}
-  <h1 class="text-xl">Home</h1>
-
   {{ include("_blocks/index.twig", {
     blocks: entry.pageBlocks,
   }) }}
@@ -12,5 +10,4 @@
       block,
     }) }}
   {% endfor %}
-
 {% endblock %}
