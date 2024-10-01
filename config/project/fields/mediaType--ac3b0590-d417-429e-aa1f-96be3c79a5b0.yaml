@@ -1,0 +1,32 @@
+columnSuffix: null
+handle: mediaType
+instructions: null
+name: 'Media Type'
+searchable: false
+settings:
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - Image
+        -
+          - value
+          - image
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - Video
+        -
+          - value
+          - video
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\RadioButtons

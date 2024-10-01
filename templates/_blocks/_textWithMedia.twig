@@ -1,0 +1,39 @@
+{# @var \craft\elements\Entry block #}
+{% set block = block ?? null %}
+
+{% set textContent %}
+  <div>
+    {{ block.richText }}
+  </div>
+{% endset %}
+
+{% set mediaContent %}
+  <div>
+    {% switch block.mediaType %}
+      {% case 'image' %}
+        {{ include('_components/image.twig', {
+          image: block.image.eagerly().one(),
+          sizes: {
+            sm: '50vw',
+            default: '100vw',
+          },
+        }) }}
+      {% case 'video' %}
+        {{ include('_components/video.twig', {
+          source: block.videoUrl,
+        }) }}
+    {% endswitch %}
+  </div>
+{% endset %}
+
+<div class="max-w-content px-16 mx-auto grid gap-24 sm:grid-cols-2 lg:gap-48">
+  {# Resolves any tab ordering issues #}
+  {% switch block.side %}
+    {% case 'left' %}
+      {{ mediaContent }}
+      {{ textContent }}
+    {% case 'right' %}
+      {{ textContent }}
+      {{ mediaContent }}
+  {% endswitch %}
+</div>
