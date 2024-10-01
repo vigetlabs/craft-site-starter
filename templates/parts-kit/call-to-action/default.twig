@@ -1,0 +1,11 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+  {{ include('_components/call-to-action.twig', {
+    title: 'Lorem ipsum dolor sit amet',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing e lit. Nulla facilisi. Nulla facilisi. Nulla facilisi.',
+    href: '#TEST',
+    linkText: 'Button',
+    newWindow: true,
+  }) }}
+{% endblock %}

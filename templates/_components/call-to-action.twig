@@ -1,0 +1,35 @@
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null text #}
+{% set text = text ?? null %}
+
+{# @var string|null href #}
+{% set href = href ?? null %}
+
+{# @var string|null linkText #}
+{% set linkText = linkText ?? null %}
+
+{# @var boolean|null newWindow #}
+{% set newWindow = newWindow ?? null %}
+
+<div class="bg-neutral-100 py-48">
+  <div class="flex flex-col items-center gap-24 max-w-content px-16 mx-auto ">
+    {% if title %}
+      <h2 class="text-xl">{{ title }}</h2>
+    {% endif %}
+
+    {% if text %}
+      <div class="max-w-[640px]">{{ text }}</div>
+    {% endif %}
+
+    {% if href and linkText %}
+      {{ include('_components/button.twig', {
+        href,
+        newWindow,
+        text: linkText,
+        newWindow,
+      }) }}
+    {% endif %}
+  </div>
+</div>
