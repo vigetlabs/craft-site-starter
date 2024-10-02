@@ -1,7 +1,45 @@
-{% set blocks = blocks ?? [] %}
+{# @var \Illuminate\Support\Collection<\craft\elements\Entry> blocks #}
+{% set blocks = blocks is defined ? blocks.collect() : collect([]) %}
 
-{% for block in blocks %}
-  {{ include("_blocks/_#{block.type.handle}.twig", {
-    block,
-  }) }}
-{% endfor %}
+{% if blocks.count() %}
+  <div class="{{ cx({
+    'pt-64': blocks.first().type.handle not in ['pageHero', 'callToAction'],
+    'pb-64': blocks.last().type.handle not in ['callToAction'],
+  }) }}">
+  {% for block in blocks %}
+    {% set nextBlock = blocks.get(loop.index0 + 1) %}
+    {% set previousBlocks = blocks.take(loop.index0) %}
+
+    {% set marginBottomConfig = {
+      default: 'mb-64',
+      'heading + richText': 'mb-32',
+    } %}
+
+    {#
+    Pull margins from the config. First checking the current block handle,
+    and then a combination of the current and next block handles.
+    If none of those exist, fall back to the default.
+
+    We use the `|filter` to remove any null values. and then `|first`
+    to get the first matching config value.
+    #}
+    {% set marginBottom = [
+      block.type.handle ?? null,
+      block.type.handle ~ ' + ' ~ nextBlock.type.handle ?? null,
+      'default',
+    ]
+      |map(item => marginBottomConfig[item] ?? null)
+      |filter
+      |first %}
+
+    <div class="{{ cx({
+      (marginBottom): not loop.last
+    }) }}">
+
+      {{ include("_blocks/_#{block.type.handle}.twig", {
+        block,
+      }) }}
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
