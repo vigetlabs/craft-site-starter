@@ -1,7 +1,7 @@
 {# @var \craft\elements\Entry block #}
 {% set block = block ?? null %}
 
-<div class="max-w-content px-16 mx-auto grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
+<div class="container grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
   {% for card in block.cardGrid.eagerly().all() %}
     {% switch card.type.handle %}
       {% case 'imageCard' %}

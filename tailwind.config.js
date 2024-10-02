@@ -1,6 +1,7 @@
 import buttons from './config/tailwind/buttons'
 import dialog from './config/tailwind/dialog'
 import richText from './config/tailwind/rich-text'
+import container from './config/tailwind/container'
 
 /**
  Helper function to pair key and value together
@@ -14,6 +15,9 @@ function pxPair(value) {
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./templates/**/*.{twig,html}', './src/**/*.{js,jsx,ts,tsx,svg}'],
+  corePlugins: {
+    container: false,
+  },
   theme: {
     spacing: {
       ...pxPair(0),
@@ -42,11 +46,6 @@ export default {
       ...pxPair(112),
       ...pxPair(128),
     },
-    extend: {
-      maxWidth: {
-        content: '1440px',
-      },
-    },
   },
-  plugins: [buttons, dialog, richText],
+  plugins: [buttons, dialog, richText, container],
 }
