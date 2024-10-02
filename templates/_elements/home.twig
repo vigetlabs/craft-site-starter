@@ -4,10 +4,4 @@
   {{ include("_blocks/index.twig", {
     blocks: entry.pageBlocks,
   }) }}
-
-  {% for block in entry.pageBlocks %}
-    {{ include("_blocks/_#{block.type.handle}.twig", {
-      block,
-    }) }}
-  {% endfor %}
 {% endblock %}
