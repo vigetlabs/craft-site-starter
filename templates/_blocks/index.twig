@@ -1,0 +1,7 @@
+{% set blocks = blocks ?? [] %}
+
+{% for block in blocks %}
+  {{ include("_blocks/_#{block.type.handle}.twig", {
+    block,
+  }) }}
+{% endfor %}
