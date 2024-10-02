@@ -10,6 +10,16 @@
     {% set nextBlock = blocks.get(loop.index0 + 1) %}
     {% set previousBlocks = blocks.take(loop.index0) %}
 
+    {#
+    Check if there are previous blocks that have a heading level of 1. This is used
+    to determine if the current block should use an h1 or h2 as its root heading level.
+    #}
+    {% set hasPreviousBlocksWithH1 = previousBlocks
+      |map(block => block.type.handle)
+      |intersect(['pageHero', 'heading'])
+      |length
+    %}
+
     {% set marginBottomConfig = {
       default: 'mb-64',
       'heading + richText': 'mb-32',
@@ -32,12 +42,13 @@
       |filter
       |first %}
 
+    {# Block wrapper #}
     <div class="{{ cx({
       (marginBottom): not loop.last
     }) }}">
-
       {{ include("_blocks/_#{block.type.handle}.twig", {
         block,
+        hasPreviousBlocksWithH1,
       }) }}
     </div>
     {% endfor %}

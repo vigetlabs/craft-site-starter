@@ -1,6 +1,16 @@
 {# @var \craft\elements\Entry|null block #}
 {% set block = block ?? null %}
 
-<div class="container">
-  <h2 class="text-4xl font-bold">{{ block.heading }}</h2>
-</div>
+{# @var bool hasPreviousBlocksWithH1 #}
+{% set hasPreviousBlocksWithH1 = hasPreviousBlocksWithH1 ?? false %}
+
+{% set element = hasPreviousBlocksWithH1 ? 'h2' : 'h1' %}
+
+{% tag element with {
+  class: cx('container font-bold', {
+    'text-4xl': not hasPreviousBlocksWithH1,
+    'text-3xl': hasPreviousBlocksWithH1,
+  }),
+} %}
+  {{ block.heading }}
+{% endtag %}
