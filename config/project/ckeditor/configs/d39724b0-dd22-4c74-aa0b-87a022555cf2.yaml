@@ -1,15 +1,10 @@
-headingLevels:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
+css: "/* Hides style buttons that don't apply to selection */\r\n.ck-style-grid__button.ck-disabled { display: none!important; }\r\n\r\n.ck.ck-content .rich-text-size-xlarge {\r\n  font-size: 32px;\r\n  line-height: 1.2;\r\n}\r\n\r\n.ck.ck-content .rich-text-size-large {\r\n  font-size: 24px;\r\n  line-height: 1.2;\r\n}\r\n\r\n.ck.ck-content .rich-text-size-medium {\r\n  font-size: 18px;\r\n  line-height: 1.2;\r\n}\r\n\r\n.ck.ck-content .rich-text-size-small {\r\n  font-size: 12px;\r\n  line-height: 1.2;\r\n}"
+headingLevels: false
+js: "return {\r\n  list: {\r\n    properties: {\r\n      styles: false,\r\n    },\r\n  },\r\n  style: {\r\n    definitions: [\r\n      {\r\n        element: 'p',\r\n        classes: [\r\n          'rich-text-size-xlarge',\r\n        ],\r\n        name: 'Size: Extra Large',\r\n      },\r\n      {\r\n        element: 'p',\r\n        classes: [\r\n          'rich-text-size-large',\r\n        ],\r\n        name: 'Size: Large',\r\n      },\r\n      {\r\n        element: 'p',\r\n        classes: [\r\n          'rich-text-size-medium',\r\n        ],\r\n        name: 'Size: Medium',\r\n      },\r\n      {\r\n        element: 'p',\r\n        classes: [\r\n          'rich-text-size-small',\r\n        ],\r\n        name: 'Size: Small',\r\n      },\r\n    ],\r\n  },\r\n}"
 name: Advanced
 toolbar:
   - undo
   - redo
-  - heading
   - style
   - '|'
   - bold
