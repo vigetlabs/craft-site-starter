@@ -1,8 +1,12 @@
 {# @var \craft\elements\Entry|null block #}
 {% set block = block ?? null %}
 
+{# @var bool hasPreviousBlocksWithH1 #}
+{% set hasPreviousBlocksWithH1 = hasPreviousBlocksWithH1 ?? false %}
+
 {{ include('_components/page-hero.twig', {
   image: block.image.eagerly().one(),
   title: block.title,
   description: block.richTextSimple,
+  headingLevel: hasPreviousBlocksWithH1 ? 2 : 1,
 }) }}
