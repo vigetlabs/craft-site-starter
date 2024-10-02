@@ -1,5 +1,6 @@
 import buttons from './config/tailwind/buttons'
 import dialog from './config/tailwind/dialog'
+import richText from './config/tailwind/rich-text'
 
 /**
  Helper function to pair key and value together
@@ -47,5 +48,5 @@ export default {
       },
     },
   },
-  plugins: [buttons, dialog],
+  plugins: [buttons, dialog, richText],
 }
