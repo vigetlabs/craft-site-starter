@@ -1,4 +1,4 @@
-dateModified: 1727904602
+dateModified: 1727908021
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -38,6 +38,7 @@ meta:
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
     896b8f2a-ed0c-42c9-b5fd-ba8668fc6784: 'Rich Text' # Rich Text
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
+    4382f55f-01a1-4b67-84c8-ebbc89b238d2: Heading # Heading
     167784f4-27c4-45bc-bcf4-eee051e54bd6: 'Open Link In New Window' # Open Link In New Window
     853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
     a99edea2-f8ae-44e5-a12f-89cb9aa66738: Description # Description
@@ -48,6 +49,7 @@ meta:
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text
     d7f9c488-b14d-48c2-b6fc-d616b7a9f49f: 'Show Media On' # Show Media On
     d39724b0-dd22-4c74-aa0b-87a022555cf2: Advanced # Advanced
+    e445a3b9-5827-422a-8328-6b10449fa891: Heading # Heading
 plugins:
   aws-s3:
     edition: standard
