@@ -15,13 +15,18 @@
 {# @var string|null icon #}
 {% set icon = icon ?? null %}
 
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 3 %}
+
 {# @var string|null title #}
 {% set title = title ?? null %}
 
 {# @var string|null description #}
 {% set description = description ?? null %}
 
+{# Computed values #}
 {% set element = href ? 'a' : 'article' %}
+{% set headingElement = "h#{headingLevel}" %}
 
 {% tag element with {
   class: cx(class, 'flex flex-col gap-24', {
@@ -42,7 +47,11 @@
   {% if title or description %}
     <div class="flex flex-col gap-8">
       {% if title %}
-        <h2 class="text-xl font-bold">{{ title }}</h2>
+        {% tag headingElement with {
+          class: 'text-xl font-bold',
+        } %}
+          {{ title }}
+        {% endtag %}
       {% endif %}
       {% if description %}
         <p class="text-sm">{{ description }}</p>
