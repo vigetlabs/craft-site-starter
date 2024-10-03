@@ -42,4 +42,8 @@
   strong {
     font-weight: 700;
   }
+
+  [x-cloak] {
+    display: none !important;
+  }
 }
