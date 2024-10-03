@@ -3,7 +3,15 @@
 
 {% set textContent %}
   <div>
-    {{ block.richText }}
+    {% if block.heading %}
+      <h2 class="text-2xl font-bold mb-32">{{ block.heading }}</h2>
+    {% endif %}
+
+    {% if block.richText %}
+      <div class="rich-text">
+        {{ block.richText }}
+      </div>
+    {% endif %}
   </div>
 {% endset %}
 

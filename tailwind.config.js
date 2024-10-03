@@ -16,7 +16,7 @@ function pxPair(value) {
 export default {
   content: ['./templates/**/*.{twig,html}', './src/**/*.{js,jsx,ts,tsx,svg}'],
   corePlugins: {
-    container: false,
+    container: false, // Replaced with a custom container class
   },
   theme: {
     spacing: {
@@ -46,6 +46,7 @@ export default {
       ...pxPair(112),
       ...pxPair(128),
     },
+    extend: {},
   },
   plugins: [buttons, dialog, richText, container],
 }
