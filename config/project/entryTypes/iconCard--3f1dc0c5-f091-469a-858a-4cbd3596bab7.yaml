@@ -10,7 +10,7 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 0011a64a-91b6-4aa3-98e6-be048394a2cf # Icon
             handle: null
-            includeInCards: false
+            includeInCards: true
             instructions: null
             label: null
             providesThumbs: false
@@ -88,7 +88,7 @@ fieldLayouts:
             elementCondition: null
             fieldUid: a99edea2-f8ae-44e5-a12f-89cb9aa66738 # Description
             handle: null
-            includeInCards: false
+            includeInCards: true
             instructions: null
             label: null
             providesThumbs: false
@@ -106,8 +106,8 @@ handle: iconCard
 hasTitleField: true
 icon: icons
 name: 'Icon Card'
-showSlugField: true
-showStatusField: true
+showSlugField: false
+showStatusField: false
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
 titleFormat: ''

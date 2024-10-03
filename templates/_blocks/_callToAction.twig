@@ -5,6 +5,6 @@
   title: block.title,
   text: block.richTextSimple,
   href: block.href,
-  linkText: block.linkText,
+  linkText:  block.linkText ?? block.href.label ?? null,
   newWindow: block.newWindow,
 }) }}

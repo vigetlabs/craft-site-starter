@@ -10,7 +10,7 @@
     </h2>
   {% endif %}
   <div class="grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
-    {% for card in block.cardGrid.eagerly().all() %}
+    {% for card in block.cardGrid.eagerly().collect() %}
       {% switch card.type.handle %}
         {% case 'imageCard' %}
           {{ include('_components/card-image.twig', {
