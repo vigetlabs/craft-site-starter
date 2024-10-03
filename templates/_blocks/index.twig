@@ -26,21 +26,30 @@
     } %}
 
     {#
-    Pull margins from the config. First checking the current block handle,
-    and then a combination of the current and next block handles.
-    If none of those exist, fall back to the default.
+    Pull margins from the config. The order of the array is important.
+
+    First we check the most unique case, the current block combined with the next block.
+
+    Such as heading + richText. Those cases are typically where we deviate from the default margin.
+
+    Next we check just the current block handle, which is useful for when we have a
+    unique case for a specific block type. Since we first check for currentBlock + nextBlock,
+    those cases will win out over the more generic ones.
+
+    Lastly we fall back to the default margin.
 
     We use the `|filter` to remove any null values. and then `|first`
     to get the first matching config value.
     #}
     {% set marginBottom = [
-      block.type.handle ?? null,
-      block.type.handle ~ ' + ' ~ nextBlock.type.handle ?? null,
+      nextBlock ? "#{block.type.handle} + #{nextBlock.type.handle}" : null,
+      block.type.handle,
       'default',
     ]
       |map(item => marginBottomConfig[item] ?? null)
       |filter
-      |first %}
+      |first
+    %}
 
     {# Block wrapper #}
     <div class="{{ cx({

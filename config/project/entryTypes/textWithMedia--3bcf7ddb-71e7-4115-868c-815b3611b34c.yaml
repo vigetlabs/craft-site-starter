@@ -130,6 +130,22 @@ fieldLayouts:
             uid: 602eb9ae-644d-4291-b03b-be4e28f4652a
             userCondition: null
           -
+            dateAdded: '2024-10-03T15:42:44+00:00'
+            elementCondition: null
+            fieldUid: 4382f55f-01a1-4b67-84c8-ebbc89b238d2 # Heading
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 629fffa1-b57d-4d22-8abb-d7d37080174b
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2024-09-30T23:52:58+00:00'
             elementCondition: null
             fieldUid: cd489d3c-f914-475c-a270-ab926e4e7485 # Rich Text
