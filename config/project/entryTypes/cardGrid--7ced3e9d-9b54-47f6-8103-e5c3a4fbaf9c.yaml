@@ -36,6 +36,22 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: '2024-10-02T23:56:36+00:00'
+            elementCondition: null
+            fieldUid: 4382f55f-01a1-4b67-84c8-ebbc89b238d2 # Heading
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: dbdfb37c-efcb-4c7f-a367-c9bf274977ed
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2024-09-30T23:33:26+00:00'
             elementCondition: null
             fieldUid: 5e84b0b7-6851-47ed-962e-76498ac9476f # Card Grid
