@@ -1,0 +1,130 @@
+{% from "_macros/icon.twig" import icon %}
+
+
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var \Illuminate\Support\Collection<verbb\navigation\elements\Node> nodes #}
+{% set nodes = nodes ?? collect([]) %}
+
+{% set totalNodes = nodes.count() %}
+
+{% macro navToggle(props = {}) %}
+  {% set node = props.node %}
+  {% set textClass = props.textClass ?? null %}
+  {% set verticalPaddingClass = props.verticalPaddingClass ?? 'py-16' %}
+  {% set iconTransitionClass = props.iconTransitionClass ?? 'transition-transform group-aria-expanded:rotate-180' %}
+  {% set hasChildren = props.hasChildren ?? false %}
+  {% set element = hasChildren ? 'button' : 'a' %}
+
+  {% tag element with {
+    href: hasChildren ? null : node.url,
+    class: cx(verticalPaddingClass, textClass, 'group flex w-full items-center justify-between gap-4 pl-8', {
+      'pr-16': not hasChildren,
+      'pr-8': hasChildren,
+    }),
+    ':aria-expanded': hasChildren ? "isInStack($refs.subnav)" : null,
+    ':aria-controls': hasChildren ? "$id('subnav')" : null,
+    '@click': "toggle($refs.subnav)"
+  } %}
+    {{ node.title }}
+
+    {{ hasChildren ? icon({
+      name: 'chevron-down',
+      size: 'sm',
+      class: iconTransitionClass,
+    }) }}
+  {% endtag %}
+{% endmacro %}
+
+<nav
+    class="{{ class }}"
+    x-data="nav"
+    @keyup.escape.window="popStack(1)"
+  >
+    <ul class="inline-flex gap-8" @click.outside="resetStack()">
+      <!-- Creating a scope for refs -->
+      {% for node in nodes %}
+        {% set children = node.children.collect() %}
+        {% set hasChildren = children.count() %}
+        {% set reverseNavAnchoring = totalNodes - loop.index0 <= 2 %}
+
+        <li class="relative" x-data x-id="['subnav']">
+          {{ _self.navToggle({
+            node,
+            hasChildren,
+          }) }}
+
+          {% if hasChildren %}
+            <ul
+              class="{{ cx('absolute top-full bg-neutral-200 text-nowrap w-[200px] border border-neutral-300', {
+                'left-0': not reverseNavAnchoring,
+                'right-0': reverseNavAnchoring,
+              }) }}"
+              :id="$id('subnav')"
+              x-cloak
+              x-trap="shouldTrap($refs.subnav)"
+              x-ref="subnav"
+              x-show="isInStack($refs.subnav)"
+              x-transition
+              data-level="{{ node.level }}"
+            >
+
+              {#
+              If the root node has a url, render it as a link since the top level element is a <button>
+              Use the passive node type to prevent this behavior
+              #}
+              {% if node.url %}
+                <li>
+                  {{ _self.navToggle({
+                    node: node,
+                    hasChildren: false,
+                    verticalPaddingClass: 'py-8',
+                  }) }}
+                </li>
+              {% endif %}
+
+              {% for child in children %}
+                {% set grandchildren = child.children.collect() %}
+                <li class="relative" x-data x-id="['subnav']">
+
+                  {{ _self.navToggle({
+                    node: child,
+                    hasChildren: grandchildren.count(),
+                    iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
+                    verticalPaddingClass: 'py-8',
+                  }) }}
+
+                  {% if grandchildren.count() %}
+                    <ul
+                      class="{{ cx('absolute -top-1 bg-neutral-500 border border-neutral-600 text-nowrap p-3', {
+                        'left-full': not reverseNavAnchoring,
+                        'right-full': reverseNavAnchoring,
+                      }) }}"
+                      :id="$id('subnav')"
+                      x-cloak
+                      x-trap="shouldTrap($refs.subnav)"
+                      x-ref="subnav"
+                      x-show="isInStack($refs.subnav)"
+                      x-transition
+                      data-level="{{ child.level }}"
+                    >
+                      {% for grandchild in grandchildren %}
+                        <li>
+                          {{ _self.navToggle({
+                            node: grandchild,
+                            textClass: 'text-neutral-100',
+                            verticalPaddingClass: 'py-8',
+                          }) }}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
