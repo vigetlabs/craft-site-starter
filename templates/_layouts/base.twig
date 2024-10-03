@@ -20,6 +20,9 @@
     {{ craft.vite.script('src/js/app.js', false) }}
 </head>
 <body>
+
+    {% include "_partials/header.twig" %}
+
     <main>
         {% block content %}{% endblock %}
     </main>

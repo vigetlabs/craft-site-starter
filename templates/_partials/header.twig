@@ -1,0 +1,24 @@
+{% from "_macros/icon.twig" import icon %}
+
+{# The primary nav has a max depth of 3 levels. This simplifies our code since it doesn't have to be truly recursive #}
+{% set primaryNavigation = craft.navigation.nodes()
+    .handle('primaryNavigation')
+    .level(1)
+    .with(['children.children'])
+    .collect() %}
+
+<header class="border-b border-neutral-200 bg-neutral-100">
+  <div class="container flex items-center justify-between">
+    <a href="/">
+      {{ icon({
+        name: 'logo-primary',
+        size: 'none',
+        class: 'w-[186px] h-32',
+      }) }}
+    </a>
+
+    {{ include('_partials/nav-desktop.twig', {
+      nodes: primaryNavigation,
+    }) }}
+  </div>
+</header>
