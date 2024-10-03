@@ -1,25 +1,36 @@
 {# @var \craft\elements\Entry block #}
 {% set block = block ?? null %}
 
-<div class="container grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
-  {% for card in block.cardGrid.eagerly().all() %}
-    {% switch card.type.handle %}
-      {% case 'imageCard' %}
-        {{ include('_components/card-image.twig', {
-          image: card.image.eagerly().one(),
-          href: card.href,
-          newWindow: card.newWindow,
-          title: card.title,
-          description: card.description,
-        }) }}
-      {% case 'iconCard' %}
-        {{ include('_components/card-icon.twig', {
-          href: card.href,
-          newWindow: card.newWindow,
-          icon: card.icon.value,
-          title: card.title,
-          description: card.description,
-        }) }}
-    {% endswitch %}
-  {% endfor %}
+{% set cardHeadingLevel = block.heading is not empty ? 3 : 2 %}
+
+<div class="container">
+  {% if block.heading %}
+    <h2 class="text-3xl font-bold mb-48">
+      {{ block.heading }}
+    </h2>
+  {% endif %}
+  <div class="grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
+    {% for card in block.cardGrid.eagerly().all() %}
+      {% switch card.type.handle %}
+        {% case 'imageCard' %}
+          {{ include('_components/card-image.twig', {
+            image: card.image.eagerly().one(),
+            href: card.href,
+            newWindow: card.newWindow,
+            title: card.title,
+            description: card.description,
+            headingLevel: cardHeadingLevel,
+          }) }}
+        {% case 'iconCard' %}
+          {{ include('_components/card-icon.twig', {
+            href: card.href,
+            newWindow: card.newWindow,
+            icon: card.icon.value,
+            title: card.title,
+            description: card.description,
+            headingLevel: cardHeadingLevel,
+          }) }}
+      {% endswitch %}
+    {% endfor %}
+  </div>
 </div>
