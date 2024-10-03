@@ -5,6 +5,10 @@ import plugin from 'tailwindcss/plugin'
  * Could optionally expand this to use CSS grid for advanced layouts & breakouts.
  *
  * @see https://www.viget.com/articles/fluid-breakout-layout-css-grid/
+ *
+ * This replaces the default Tailwind container class, which isn't as flexible to style.
+ *
+ * @see https://tailwindcss.com/docs/container
  */
 export default plugin(({ addComponents }) => {
   const container = {
