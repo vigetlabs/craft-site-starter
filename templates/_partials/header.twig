@@ -7,14 +7,25 @@
     .with(['children.children'])
     .collect() %}
 
-<header class="border-b border-neutral-200 bg-neutral-100">
-  <div class="container flex items-center justify-between">
-    <a href="/">
+{{ include('_components/button.twig', {
+  text: 'Skip to main content',
+  href: '#content',
+  class: 'sr-only focus:not-sr-only focus:absolute focus:top-16 focus:left-16 focus:z-50 focus:p-16',
+}) }}
+
+<header class="{{ cx(
+  'border-b border-neutral-200 bg-neutral-100',
+  'mdd:sticky mdd:top-0 mdd:z-50 mdd:bg-white mdd:shadow-md',
+) }}">
+  <div class="container flex items-center justify-between mdd:pr-0">
+    <a href="/" class="relative z-10">
       {{ icon({
         name: 'logo-primary',
         size: 'none',
         class: 'w-[186px] h-32',
       }) }}
+
+      <span class="sr-only">{{ currentSite.name }} - Home</span>
     </a>
 
     {{ include('_partials/nav-desktop.twig', {
