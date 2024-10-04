@@ -1,8 +1,23 @@
 export default () => ({
   /** @type {string[]} */
   stack: [],
-  popStack(popTimes = 1) {
+  popStack(popTimes = 1, focus = true) {
+    const idToFocus = this.stack.at(-1 * popTimes)
+
+    if (idToFocus && focus) {
+      const elementToFocus = document.querySelector(
+        `[aria-controls="${idToFocus}"]`,
+      )
+      this.$focus.focus(elementToFocus)
+    }
+
     this.stack = this.stack.slice(0, popTimes * -1)
+  },
+  pushStack(id) {
+    this.stack.push(id)
+
+    const elementToFocus = document.getElementById(id)
+    this.$focus.within(elementToFocus).first()
   },
   resetStack() {
     this.stack = []
@@ -22,7 +37,7 @@ export default () => ({
     }
     // If you clicked a toggle outside of the current stack, push it to the stack
     if (shouldPush) {
-      this.stack.push(subnav.id)
+      this.pushStack(subnav.id)
     }
   },
   shouldTrap(el) {
@@ -31,5 +46,18 @@ export default () => ({
   },
   isInStack(el) {
     return this.stack.includes(el.id)
+  },
+  handleTab() {
+    const el = document.getElementById(this.stack.at(-1))
+
+    if (!el) {
+      return
+    }
+
+    this.$nextTick(() => {
+      if (!el.contains(document.activeElement)) {
+        this.popStack(1, false)
+      }
+    })
   },
 })
