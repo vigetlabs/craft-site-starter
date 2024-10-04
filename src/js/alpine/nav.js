@@ -31,6 +31,7 @@ export default () => ({
     const level = parseInt(subnav.dataset.level, 10)
     const currentLevel = this.stack.length
     const shouldPush = !this.isInStack(subnav)
+
     if (level <= currentLevel) {
       // Remove everything down to the level you clicked.
       this.popStack(currentLevel - level + 1)
@@ -46,6 +47,18 @@ export default () => ({
   },
   isInStack(el) {
     return this.stack.includes(el.id)
+  },
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleEscape(event) {
+    if (this.stack.length === 0) {
+      return
+    }
+    // Prevent the event from bubbling up if we have nav to pop
+    event.stopPropagation()
+
+    this.popStack(1)
   },
   handleTab() {
     const el = document.getElementById(this.stack.at(-1))
