@@ -9,7 +9,7 @@
 
 {% set totalNodes = nodes.count() %}
 
-{% macro navToggle(props = {}) %}
+{% macro navIem(props = {}) %}
   {% set node = props.node %}
   {% set textClass = props.textClass ?? null %}
   {% set verticalPaddingClass = props.verticalPaddingClass ?? 'py-16' %}
@@ -50,7 +50,7 @@
         {% set reverseNavAnchoring = totalNodes - loop.index0 <= 2 %}
 
         <li class="relative" x-data x-id="['subnav']">
-          {{ _self.navToggle({
+          {{ _self.navIem({
             node,
             hasChildren,
           }) }}
@@ -76,7 +76,7 @@
               #}
               {% if node.url %}
                 <li>
-                  {{ _self.navToggle({
+                  {{ _self.navIem({
                     node: node,
                     hasChildren: false,
                     verticalPaddingClass: 'py-8',
@@ -88,7 +88,7 @@
                 {% set grandchildren = child.children.collect() %}
                 <li class="relative" x-data x-id="['subnav']">
 
-                  {{ _self.navToggle({
+                  {{ _self.navIem({
                     node: child,
                     hasChildren: grandchildren.count(),
                     iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
@@ -111,7 +111,7 @@
                     >
                       {% for grandchild in grandchildren %}
                         <li>
-                          {{ _self.navToggle({
+                          {{ _self.navIem({
                             node: grandchild,
                             textClass: 'text-neutral-100',
                             verticalPaddingClass: 'py-8',
