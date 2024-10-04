@@ -19,6 +19,22 @@ export default {
     container: false, // Replaced with a custom container class
   },
   theme: {
+    screens: {
+      smd: { max: '639.98px' },
+      sm: '640px',
+
+      mdd: { max: '749.98px' },
+      md: '768px',
+
+      lgd: { max: '1023.98px' },
+      lg: '1024px',
+
+      xld: { max: '1279.98px' },
+      xl: '1280px',
+
+      '2xld': { max: '1535.98px' },
+      '2xl': '1536px',
+    },
     spacing: {
       ...pxPair(0),
       ...pxPair(1),
@@ -46,7 +62,12 @@ export default {
       ...pxPair(112),
       ...pxPair(128),
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        header: '100',
+        max: '9999',
+      },
+    },
   },
   plugins: [buttons, dialog, richText, container],
 }

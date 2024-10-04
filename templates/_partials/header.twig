@@ -29,6 +29,12 @@
     </a>
 
     {{ include('_partials/nav-desktop.twig', {
+      class: 'hidden md:block',
+      nodes: primaryNavigation,
+    }) }}
+
+    {{ include('_partials/nav-mobile.twig', {
+      class: 'md:hidden',
       nodes: primaryNavigation,
     }) }}
   </div>
