@@ -21,7 +21,7 @@
 
     {# The logo changes when you open the mobile nav. Just because it's rad. #}
     <a
-      href="/"
+      href="{{ url('/') }}"
       class="relative z-10 transition-colors duration-700 text-neutral-500"
       :class="swapColor && '!text-amber-600'"
       x-data="{
