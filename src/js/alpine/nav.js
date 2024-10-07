@@ -61,16 +61,47 @@ export default () => ({
     this.popStack(1)
   },
   handleTab() {
-    const el = document.getElementById(this.stack.at(-1))
+    const activeSubnavId = this.stack.at(-1)
 
-    if (!el) {
+    if (!activeSubnavId) {
+      return
+    }
+
+    const activeSubnav = document.getElementById(activeSubnavId)
+
+    if (!activeSubnav) {
       return
     }
 
     this.$nextTick(() => {
-      if (!el.contains(document.activeElement)) {
-        this.popStack(1, false)
+      const activeElement = document.activeElement
+
+      // If document.activeElement is within activeSubnav, do nothing
+      if (!activeElement || activeSubnav.contains(activeElement)) {
+        return
       }
+
+      // If document.activeElement is not within $root, reset the stack
+      if (!this.$root.contains(activeElement)) {
+        this.resetStack()
+        return
+      }
+
+      // Focused toggle
+      const idOfFocusedSubnav = activeElement.getAttribute('aria-controls')
+      const focusedSubnavLevel = idOfFocusedSubnav
+        ? document.getElementById(idOfFocusedSubnav)?.dataset.level
+        : null
+
+      // Edge case, we're still in the nav component, but somehow what we're focused on doesn't have subnav or level
+      if (!focusedSubnavLevel) {
+        this.popStack(1, false)
+        return
+      }
+
+      // Pop everything down to the level of the focused subnav
+      const currentLevel = this.stack.length
+      this.popStack(currentLevel - parseInt(focusedSubnavLevel, 10) + 1, false)
     })
   },
 })
