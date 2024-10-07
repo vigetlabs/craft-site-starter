@@ -16,6 +16,8 @@
             name: 'logo-mark',
             size: 'lg',
           }) }}
+
+          <span class="sr-only">{{ currentSite.name }} - Home</span>
         </a>
       </div>
 
@@ -24,7 +26,7 @@
           {% for node in footerNavigation %}
             {% set children = node.children %}
             {% set element = node.url ? 'a' : 'span' %}
-            <li class="grid gap-8">
+            <li class="grid gap-16">
               {% tag element with {
                 href: node.url,
                 class: cx('text-neutral-200 font-semibold text-sm uppercase tracking-widest', {
@@ -35,7 +37,7 @@
               {% endtag %}
 
               {% if children.count() %}
-                <ul class="">
+                <ul class="grid gap-8">
                   {% for child in children %}
                     {% set childElement = child.url ? 'a' : 'span' %}
                     <li>
@@ -60,7 +62,7 @@
     {# Copyright and privacy policy #}
     <div class="border-t border-white/10 pt-32 mt-32 grid grid-cols-1 mdd:text-center md:grid-cols-[1fr_auto] text-sm gap-16 md:gap-0">
       <p class="text-neutral-400">
-        &copy; {{ now | date('Y') }} {{ currentSite.name }}. All rights reserved.
+        &copy; {{ now|date('Y') }} {{ currentSite.name }}. All rights reserved.
       </p>
 
       <a class="text-neutral-400 hover:text-white hover:underline" href="#TODO">Privacy Policy</a>

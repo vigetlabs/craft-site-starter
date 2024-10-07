@@ -1,9 +1,5 @@
 {% from "_macros/icon.twig" import icon %}
 
-
-{# @var string|null class #}
-{% set class = class ?? null %}
-
 {# @var \Illuminate\Support\Collection<verbb\navigation\elements\Node> nodes #}
 {% set nodes = nodes ?? collect([]) %}
 
@@ -38,92 +34,106 @@
 {% endmacro %}
 
 <nav
-    class="{{ class }}"
-    x-data="nav"
-    @keyup.escape.window="popStack(1)"
-    @keydown.tab="handleTab($refs.subnav)"
+  class="container flex flex-wrap items-center justify-between mdd:hidden"
+  aria-label="Site Navigation"
+  x-data="nav"
+  @keyup.escape.window="popStack(1)"
+  @keydown.tab="handleTab($refs.subnav)"
+>
+  <a
+    class="inline-flex py-4 text-neutral-500 transition-colors hover:text-amber-600"
+    href="{{ url('/') }}"
   >
-    <ul class="inline-flex gap-8" @click.outside="resetStack()">
-      <!-- Creating a scope for refs -->
-      {% for node in nodes %}
-        {% set children = node.children.collect() %}
-        {% set hasChildren = children.count() %}
-        {% set reverseNavAnchoring = totalNodes - loop.index0 <= 2 %}
+    {{ icon({
+      name: 'logo-primary',
+      size: 'none',
+      class: 'w-[186px] h-32',
+    }) }}
 
-        <li class="relative" x-data x-id="['subnav']">
-          {{ _self.navIem({
-            node,
-            hasChildren,
-          }) }}
+    <span class="sr-only">{{ currentSite.name }} - Home</span>
+  </a>
 
-          {% if hasChildren %}
-            <ul
-              class="{{ cx('absolute top-full bg-neutral-200 text-nowrap w-[200px] border border-neutral-300', {
-                'left-0': not reverseNavAnchoring,
-                'right-0': reverseNavAnchoring,
-              }) }}"
-              :id="$id('subnav')"
-              x-cloak
-              x-ref="subnav"
-              x-show="isInStack($refs.subnav)"
-              x-transition
-              data-level="{{ node.level }}"
-            >
+  <ul class="inline-flex flex-wrap gap-8" @click.outside="resetStack()">
+    <!-- Creating a scope for refs -->
+    {% for node in nodes %}
+      {% set children = node.children.collect() %}
+      {% set hasChildren = children.count() %}
+      {% set reverseNavAnchoring = totalNodes - loop.index0 <= 2 %}
 
-              {#
-              If the root node has a url, render it as a link since the top level element is a <button>
-              Use the passive node type to prevent this behavior
-              #}
-              {% if node.url %}
-                <li>
-                  {{ _self.navIem({
-                    node: node,
-                    hasChildren: false,
-                    verticalPaddingClass: 'py-8',
-                  }) }}
-                </li>
-              {% endif %}
+      <li class="relative" x-data x-id="['subnav']">
+        {{ _self.navIem({
+          node,
+          hasChildren,
+        }) }}
 
-              {% for child in children %}
-                {% set grandchildren = child.children.collect() %}
-                <li class="relative" x-data x-id="['subnav']">
+        {% if hasChildren %}
+          <ul
+            class="{{ cx('absolute top-full bg-neutral-200 text-nowrap w-[200px] border border-neutral-300', {
+              'left-0': not reverseNavAnchoring,
+              'right-0': reverseNavAnchoring,
+            }) }}"
+            :id="$id('subnav')"
+            x-cloak
+            x-ref="subnav"
+            x-show="isInStack($refs.subnav)"
+            x-transition
+            data-level="{{ node.level }}"
+          >
 
-                  {{ _self.navIem({
-                    node: child,
-                    hasChildren: grandchildren.count(),
-                    iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
-                    verticalPaddingClass: 'py-8',
-                  }) }}
+            {#
+            If the root node has a url, render it as a link since the top level element is a <button>
+            Use the passive node type to prevent this behavior
+            #}
+            {% if node.url %}
+              <li>
+                {{ _self.navIem({
+                  node: node,
+                  hasChildren: false,
+                  verticalPaddingClass: 'py-8',
+                }) }}
+              </li>
+            {% endif %}
 
-                  {% if grandchildren.count() %}
-                    <ul
-                      class="{{ cx('absolute -top-1 bg-neutral-500 border border-neutral-600 text-nowrap p-3', {
-                        'left-full': not reverseNavAnchoring,
-                        'right-full': reverseNavAnchoring,
-                      }) }}"
-                      :id="$id('subnav')"
-                      x-cloak
-                      x-ref="subnav"
-                      x-show="isInStack($refs.subnav)"
-                      x-transition
-                      data-level="{{ child.level }}"
-                    >
-                      {% for grandchild in grandchildren %}
-                        <li>
-                          {{ _self.navIem({
-                            node: grandchild,
-                            textClass: 'text-neutral-100',
-                            verticalPaddingClass: 'py-8',
-                          }) }}
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
+            {% for child in children %}
+              {% set grandchildren = child.children.collect() %}
+              <li class="relative" x-data x-id="['subnav']">
+
+                {{ _self.navIem({
+                  node: child,
+                  hasChildren: grandchildren.count(),
+                  iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
+                  verticalPaddingClass: 'py-8',
+                }) }}
+
+                {% if grandchildren.count() %}
+                  <ul
+                    class="{{ cx('absolute -top-1 bg-neutral-500 border border-neutral-600 text-nowrap p-3', {
+                      'left-full': not reverseNavAnchoring,
+                      'right-full': reverseNavAnchoring,
+                    }) }}"
+                    :id="$id('subnav')"
+                    x-cloak
+                    x-ref="subnav"
+                    x-show="isInStack($refs.subnav)"
+                    x-transition
+                    data-level="{{ child.level }}"
+                  >
+                    {% for grandchild in grandchildren %}
+                      <li>
+                        {{ _self.navIem({
+                          node: grandchild,
+                          textClass: 'text-neutral-100',
+                          verticalPaddingClass: 'py-8',
+                        }) }}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

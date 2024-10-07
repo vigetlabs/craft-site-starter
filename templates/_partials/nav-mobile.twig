@@ -1,9 +1,5 @@
 {% from "_macros/icon.twig" import icon %}
 
-
-{# @var string|null class #}
-{% set class = class ?? null %}
-
 {# @var \Illuminate\Support\Collection<verbb\navigation\elements\Node> nodes #}
 {% set nodes = nodes ?? collect([]) %}
 
@@ -34,7 +30,8 @@
 {% endmacro %}
 
 <nav
-  class="{{ class }}"
+  aria-label="Site Navigation"
+  class="md:hidden"
   :style="isOpen ? 'display: block' : ''" {# Keeps the mobile nav open even if the breakpoint changes #}
   x-id="['nav-mobile']"
   x-data="{
@@ -42,44 +39,70 @@
     toggle() {
       $nextTick(() => {
         this.isOpen = !this.isOpen;
-        // Emit an event that our header logo can listen for to change color
-        $dispatch('nav-mobile-toggle', { isOpen: this.isOpen })
       });
     },
   }"
   x-trap.noscroll.inert="isOpen"
   @keyup.escape.window="isOpen && toggle()"
 >
-  <button
-    class="flex py-16 px-8 -mr-8 group relative z-10"
-    @click="toggle()"
-    :aria-expanded="isOpen"
-    :aria-controls="$id('nav-mobile')"
-  >
-    <div class="flex flex-col justify-between group w-24 h-[18px]">
-      <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[8px]"></span>
-      <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
-      <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
-    </div>
-    <span class="sr-only">Open Menu</span>
-  </button>
 
+  {# Logo and nav toggle button lockup #}
+  <div
+    class="container flex items-center justify-between transition-colors duration-300"
+    :class="isOpen && '!bg-neutral-800'"
+  >
+    {# The logo changes when you open the mobile nav. Just because it's rad. #}
+    <a
+      href="{{ url('/') }}"
+      class="relative z-10 transition-colors duration-700 text-neutral-500"
+      :class="isOpen && '!text-amber-600'"
+    >
+      {{ icon({
+        name: 'logo-primary',
+        size: 'none',
+        class: 'w-[186px] h-32',
+      }) }}
+
+      <span class="sr-only">{{ currentSite.name }} - Home</span>
+    </a>
+
+    <button
+      class="flex py-16 px-8 -mr-8 group relative z-10"
+      @click="toggle()"
+      :aria-expanded="isOpen"
+      :aria-controls="$id('nav-mobile')"
+    >
+      <div class="flex flex-col justify-between group w-24 h-[18px]">
+        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[8px]"></span>
+        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
+        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
+      </div>
+      <span class="sr-only">Open Menu</span>
+    </button>
+  </div>
+
+  {# Nav Links #}
   <div
     :id="$id('nav-mobile')"
     x-cloak
     x-show="isOpen"
-    class="fixed top-0 left-0 w-full h-full bg-neutral-700"
+    class="absolute top-full left-0 w-full bottom-[calc(-100vh+100%)] bg-neutral-700 overflow-y-scroll -z-10"
     x-data="nav"
     @keyup.escape="handleEscape"
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="opacity-0 -translate-y-32"
-    x-transition:enter-end="opacity-100 translate-y-0"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="opacity-100 translate-y-0"
-    x-transition:leave-end="opacity-0 -translate-y-32"
+    x-transition.opacity.duration.300ms
   >
 
-    <ul class="flex flex-col py-64" @click.outside="resetStack()">
+    <ul
+      x-show="isOpen"
+      class="flex flex-col py-32"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="-translate-y-32"
+      x-transition:enter-end="translate-y-0"
+      x-transition:leave="transition ease-in duration-300"
+      x-transition:leave-start="translate-y-0"
+      x-transition:leave-end="-translate-y-32"
+      @click.outside="resetStack()"
+    >
       <!-- Creating a scope for refs -->
       {% for node in nodes %}
         {% set children = node.children.collect() %}

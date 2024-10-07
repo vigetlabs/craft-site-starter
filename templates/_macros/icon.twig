@@ -7,7 +7,7 @@ Provides icon size props so you don't have to remember to pass
 By setting size to `none` you can add arbitrary sizes to the icon.
 #}
 {% macro icon(props = {}) %}
-  {% set props = props | merge({
+  {% set props = props|merge({
     name: props.name ?? null,
     size: props.size ?? 'md',
     class: props.class ?? null,
@@ -22,7 +22,7 @@ By setting size to `none` you can add arbitrary sizes to the icon.
 
   {% set sizeClass = sizeConfig[props.size] ?? sizeConfig.md %}
 
-  {{ svg('@webroot/dist/assets/icons/' ~ props.name ~ '.svg') | attr({
+  {{ svg('@webroot/dist/assets/icons/' ~ props.name ~ '.svg')|attr({
     class: cx(sizeClass, props.class),
   }) }}
 {% endmacro %}

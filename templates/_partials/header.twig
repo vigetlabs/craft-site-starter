@@ -17,35 +17,11 @@
   'border-b border-neutral-200 bg-neutral-100',
   'mdd:sticky mdd:top-0 mdd:z-50 mdd:bg-white mdd:shadow-md',
 ) }}">
-  <div class="container flex items-center justify-between">
+  {{ include('_partials/nav-desktop.twig', {
+    nodes: primaryNavigation,
+  }) }}
 
-    {# The logo changes when you open the mobile nav. Just because it's rad. #}
-    <a
-      href="{{ url('/') }}"
-      class="relative z-10 transition-colors duration-700 text-neutral-500"
-      :class="swapColor && '!text-amber-600'"
-      x-data="{
-        swapColor: false,
-      }"
-      @nav-mobile-toggle.window="swapColor = $event.detail.isOpen"
-    >
-      {{ icon({
-        name: 'logo-primary',
-        size: 'none',
-        class: 'w-[186px] h-32',
-      }) }}
-
-      <span class="sr-only">{{ currentSite.name }} - Home</span>
-    </a>
-
-    {{ include('_partials/nav-desktop.twig', {
-      class: 'hidden md:block',
-      nodes: primaryNavigation,
-    }) }}
-
-    {{ include('_partials/nav-mobile.twig', {
-      class: 'md:hidden',
-      nodes: primaryNavigation,
-    }) }}
-  </div>
+  {{ include('_partials/nav-mobile.twig', {
+    nodes: primaryNavigation,
+  }) }}
 </header>

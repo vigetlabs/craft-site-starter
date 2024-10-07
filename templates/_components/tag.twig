@@ -30,7 +30,7 @@
 {# @var string|null icon #}
 {% set icon = icon ?? null %}
 
-{% tag el with attrs | merge({
+{% tag el with attrs|merge({
   href: href,
   type: clickable and el == 'button' ? 'button' : null,
   class: classNames('inline-flex items-center justify-center gap-4 rounded-sm text-center font-medium focus:outline-none focus-visible:ring-4', {
