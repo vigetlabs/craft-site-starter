@@ -41,7 +41,7 @@
     class="{{ class }}"
     x-data="nav"
     @keyup.escape.window="popStack(1)"
-    @keyup.tab="handleTab($refs.subnav)"
+    @keydown.tab="handleTab($refs.subnav)"
   >
     <ul class="inline-flex gap-8" @click.outside="resetStack()">
       <!-- Creating a scope for refs -->
