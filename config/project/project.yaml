@@ -1,4 +1,4 @@
-dateModified: 1727988586
+dateModified: 1728333216
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -33,6 +33,7 @@ meta:
     35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
     55cc26b6-8b49-47de-bbe7-5908da6f4545: 'Video Url' # Video Url
     69fe4c18-21c9-4a3d-8fce-9988d3f741e4: Link # Link
+    101b4db6-8914-45eb-a661-180b15f70894: 'Footer Navigation' # Footer Navigation
     534ccdd8-7abd-4300-a102-71885b21c126: 'Call To Action' # Call To Action
     570fb481-ad97-46db-8bad-f7b0fd90e831: Image # Image
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
