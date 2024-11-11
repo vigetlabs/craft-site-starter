@@ -1,0 +1,87 @@
+{% from '_macros/icon.twig' import icon %}
+
+{# @var fieldElement string #}
+{% set fieldElement = fieldElement ?? 'input' %}
+
+{# @var label string|null #}
+{% set label = label ?? null %}
+
+{# @var labelHidden bool #}
+{% set labelHidden = labelHidden ?? false %}
+
+{# @var required bool|string long is an option in addition to true #}
+{% set required = required ?? false %}
+
+{# @var subLabel string|null #}
+{% set subLabel = subLabel ?? null %}
+
+{# @var instructions string|null #}
+{% set instructions = instructions ?? null %}
+
+{# @var errorMessages string[] #}
+{% set errorMessages = errorMessages ?? [] %}
+
+{# This prop is inherited from field-* components #}
+
+{# @var fieldAttrs array #}
+{% set fieldAttrs = fieldAttrs ?? {} %}
+
+{# Generated vars #}
+{% set id = 'input-' ~ random() %}
+{% set idErrors = id ~ '-errors' %}
+{% set idInstructions = id ~ '-instructions' %}
+{% set hasError = errorMessages|length %}
+{% set dataRequired = required ? (required is same as 'long' ? 'long' : true) : null %}
+{% set describedByElements = [
+  instructions ? idInstructions,
+  hasError ? idErrors,
+]|filter|join(' ') %}
+
+<div {{ attr({
+  class: 'field-group',
+  'data-required': dataRequired,
+}) }}>
+  <label for="{{ id }}">
+    {% if label %}
+      <span {{ attr({
+        class: cx('field-label', {
+          'sr-only': labelHidden,
+        }),
+      }) }}>
+        {{ label }}
+      </span>
+    {% endif %}
+
+    {% if subLabel %}
+      <span class="field-sublabel">{{ subLabel }}</span>
+    {% endif %}
+  </label>
+
+  {{ tag(fieldElement, {
+    ...fieldAttrs,
+    id,
+    'aria-required': required ? 'true' : null,
+    'aria-describedby': describedByElements ? describedByElements : null,
+    'aria-invalid': hasError ? 'true' : null,
+  }) }}
+
+  {% if instructions %}
+    <span class="field-instructions" id="{{ idInstructions }}">
+      {{ instructions }}
+    </span>
+  {% endif %}
+
+  {% if hasError %}
+    <ul class="field-errors" id="{{ idErrors }}">
+      {{ icon({
+        name: 'error',
+        class: 'absolute left-0 top-2 shrink-0',
+        size: 'sm',
+      }) }}
+
+      {% for error in errorMessages %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
