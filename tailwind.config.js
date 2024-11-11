@@ -2,6 +2,7 @@ import buttons from './config/tailwind/buttons'
 import dialog from './config/tailwind/dialog'
 import richText from './config/tailwind/rich-text'
 import container from './config/tailwind/container'
+import forms from './config/tailwind/forms'
 
 /**
  Helper function to pair key and value together
@@ -69,5 +70,5 @@ export default {
       },
     },
   },
-  plugins: [buttons, dialog, richText, container],
+  plugins: [buttons, dialog, richText, container, forms],
 }

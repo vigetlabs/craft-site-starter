@@ -1,0 +1,56 @@
+{# These props mirror the props in field-group.twig #}
+
+{# @var fieldElement string #}
+{% set fieldElement = fieldElement ?? 'input' %}
+
+{# @var fieldAttrs array #}
+{% set fieldAttrs = fieldAttrs ?? {} %}
+
+{# @var label string|null #}
+{% set label = label ?? null %}
+
+{# @var labelHidden bool #}
+{% set labelHidden = labelHidden ?? false %}
+
+{# @var required bool #}
+{% set required = required ?? false %}
+
+{# @var subLabel string|null #}
+{% set subLabel = subLabel ?? null %}
+
+{# @var instructions string|null #}
+{% set instructions = instructions ?? null %}
+
+{# @var errorMessages string[] #}
+{% set errorMessages = errorMessages ?? [] %}
+
+{# These props are specific to this component #}
+
+{# @var placeholder string|null #}
+{% set placeholder = placeholder ?? null %}
+
+{# @var disabled bool #}
+{% set disabled = disabled ?? false %}
+
+{# @var type string|null #}
+{% set type = type ?? 'text' %}
+
+{# Allowed types #}
+{% set allowedTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
+{% set validatedType = type in allowedTypes ? type : 'text' %}
+
+
+{{ include('_components/field-group.twig', {
+  fieldElement: 'input',
+  fieldAttrs: {
+    type: validatedType,
+    placeholder,
+    disabled: disabled ? '' : null,
+  },
+  label,
+  labelHidden,
+  required,
+  subLabel,
+  instructions,
+  errorMessages,
+}) }}
