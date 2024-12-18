@@ -37,6 +37,10 @@ export default plugin(({ addComponents }) => {
             '@apply size-20 border-0 text-blue-500 checked:bg-blue-500 min-h-0':
               {},
           },
+          '&:is([aria-invalid="true"])': {
+            '@apply ring-red-600 hover:ring-red-700 focus:ring-red-600 dark:ring-red-300 dark:hover:ring-red-400 dark:focus:ring-red-300':
+              {},
+          },
         },
       // field specific styles
       '& select': {
@@ -61,12 +65,7 @@ export default plugin(({ addComponents }) => {
       '&[data-required="long"] label .field-label::after': {
         '@apply content-["*Required"]': {},
       },
-      // error field styles
-      '&[data-state="error"] input[type="text"], &[data-state="error"] input[type="password"], &[data-state="error"] input[type="email"], &[data-state="error"] input[type="number"], &[data-state="error"] input[type="tel"], &[data-state="error"] select, &[data-state="error"] textarea, &[data-state="error"] input[type="checkbox"]':
-        {
-          '@apply ring-red-600 hover:ring-red-700 focus:ring-red-600 dark:ring-red-300 dark:hover:ring-red-400 dark:focus:ring-red-300':
-            {},
-        },
+      // error message styles
       '.field-errors': {
         '@apply relative text-red-600 text-sm font-medium flex gap-10 flex-col pl-20 list-none dark:text-red-300':
           {},
