@@ -1,15 +1,29 @@
+{#
+The field group component is a wrapper for our field components.
+It provides consistent styling for labels, sublabels, instructions, and error messages.
+
+The {% tag fieldElement %} tag is used to render the field element. It can be
+configured as an input, select, textarea, or other field element.
+
+The field attrs hash is used to pass additional attributes to the field element.
+#}
+
 {% from '_macros/icon.twig' import icon %}
 
 {# @var id string #}
 {% set id = id ?? ('input-' ~ random()) %}
 
+{# @var class string|null #}
 {% set class = class ?? null %}
 
 {# @var fieldElement string - Required #}
 {% set fieldElement = fieldElement %}
 
-{# @var fieldAttrs array #}
+{# @var fieldAttrs array - Additional attributes to pass to the field element #}
 {% set fieldAttrs = fieldAttrs ?? {} %}
+
+{# @var fieldChildren array|null An array of elements to render inside the field element, used for select dropdowns #}
+{% set fieldChildren = fieldChildren ?? []%}
 
 {# @var label string|null #}
 {% set label = label ?? null %}
@@ -68,6 +82,9 @@
     'aria-invalid': hasError ? 'true' : null,
     required: required is same as false ? null : '',
   } -%}
+    {% for child in fieldChildren %}
+      {{ child }}
+    {% endfor %}
   {%- endtag %}
 
   {% if instructions %}

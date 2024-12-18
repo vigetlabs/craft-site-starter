@@ -1,0 +1,83 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{% block main %}
+
+  {% set options = [
+    { label: 'Option 1', value: 'option-1' },
+    { label: 'Option 2', value: 'option-2' },
+    { label: 'Option 3', value: 'option-3' },
+  ] %}
+
+  {% set fields %}
+    <div class="flex flex-col gap-48 p-32 max-w-lg">
+      {{ include('_components/field-select.twig', {
+        id: 'custom-id',
+        label: 'Select',
+        subLabel: 'This is a sublabel',
+        instructions: 'This is an instruction',
+        options,
+        name: 'select',
+      }) }}
+
+      {{ include('_components/field-select.twig', {
+        label: 'Selected options',
+        options: [
+          { label: 'Option 1', value: 'option-1' },
+          { label: 'Option 2 (selected)', value: 'option-2', selected: true },
+          { label: 'Option 3', value: 'option-3' },
+        ],
+        name: 'select-selected',
+      }) }}
+
+      <form class="flex flex-col gap-16 items-start">
+        {{ include('_components/field-select.twig', {
+          class: 'w-full',
+          label: 'Select (required)',
+          required: true,
+          instructions: 'This is an instruction',
+          useEmptyOption: true,
+          placeholder: 'Choose an option',
+          options,
+          name: 'select-required',
+        }) }}
+
+        <button class="dark:text-white" type="submit">Test Validation</button>
+      </form>
+
+      {{ include('_components/field-select.twig', {
+        label: 'Select (required long)',
+        required: 'long',
+        instructions: 'This is an instruction',
+        options,
+        name: 'select-required-long',
+      }) }}
+
+      {{ include('_components/field-select.twig', {
+        label: 'Select (required with error)',
+        required: true,
+        instructions: 'This is an instruction',
+        errorMessages: ['This is an error message', 'This is another error message'],
+        options,
+        name: 'select-required-with-error',
+      }) }}
+
+      {{ include('_components/field-select.twig', {
+        label: 'Select (disabled)',
+        disabled: true,
+        options,
+        name: 'select-disabled',
+      }) }}
+    </div>
+  {% endset %}
+
+  {# default colors #}
+  {{ fields }}
+
+  {# dark background #}
+  <div class="bg-black dark">
+    {% namespace 'dark' %}
+      {{ fields }}
+    {% endnamespace %}
+  </div>
+
+{% endblock %}
