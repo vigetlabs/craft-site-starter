@@ -1,5 +1,10 @@
 {% from '_macros/icon.twig' import icon %}
 
+{# @var id string #}
+{% set id = id ?? ('input-' ~ random()) %}
+
+{% set class = class ?? null %}
+
 {# @var fieldElement string - Required #}
 {% set fieldElement = fieldElement %}
 
@@ -26,7 +31,6 @@
 
 
 {# Generated vars #}
-{% set id = 'input-' ~ random() %}
 {% set idErrors = id ~ '-errors' %}
 {% set idInstructions = id ~ '-instructions' %}
 {% set hasError = errorMessages|length %}
@@ -37,7 +41,7 @@
 ]|filter|join(' ') %}
 
 <div {{ attr({
-  class: 'field-group',
+  class: cx('field-group', class),
   'data-required': dataRequired,
 }) }}>
   <label for="{{ id }}">
@@ -56,13 +60,15 @@
     {% endif %}
   </label>
 
-  {{ tag(fieldElement, {
+  {% tag fieldElement with {
     ...fieldAttrs,
     id,
     'aria-required': required ? 'true' : null,
     'aria-describedby': describedByElements ? describedByElements : null,
     'aria-invalid': hasError ? 'true' : null,
-  }) }}
+    required: required is same as false ? null : '',
+  } -%}
+  {%- endtag %}
 
   {% if instructions %}
     <span class="field-instructions" id="{{ idInstructions }}">

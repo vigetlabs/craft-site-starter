@@ -1,5 +1,11 @@
 {# These props mirror the props in field-group.twig #}
 
+{# @var id string #}
+{% set id = id ?? null %}
+
+{# @var class string|null #}
+{% set class = class ?? null %}
+
 {# @var fieldAttrs array #}
 {% set fieldAttrs = fieldAttrs ?? {} %}
 
@@ -53,6 +59,8 @@
     disabled: disabled ? '' : null,
     rows,
   },
+  id,
+  class,
   label,
   labelHidden,
   required,
