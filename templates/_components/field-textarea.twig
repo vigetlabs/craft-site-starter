@@ -21,7 +21,7 @@
 {# @var errorMessages string[] #}
 {% set errorMessages = errorMessages ?? [] %}
 
-{# These props are for the input element #}
+{# These props are for the textarea element #}
 
 {# @var name string|null #}
 {% set name = name ?? null %}
@@ -32,21 +32,26 @@
 {# @var disabled bool #}
 {% set disabled = disabled ?? false %}
 
-{# @var type string|null #}
-{% set type = type ?? 'text' %}
+{# @var rows int #}
+{% set rows = rows ?? 4 %}
 
-{# Allowed types #}
-{% set allowedTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
-{% set validatedType = type in allowedTypes ? type : 'text' %}
+{# @var resize bool #}
+{% set resize = resize ?? false %}
 
 {{ include('_components/field-group.twig', {
-  fieldElement: 'input',
+  fieldElement: 'textarea',
   fieldAttrs: {
     ...fieldAttrs,
+    class: cx(
+      fieldAttrs.class ?? null,
+      {
+        'resize-none': not resize,
+      },
+    ),
     name,
-    type: validatedType,
     placeholder,
     disabled: disabled ? '' : null,
+    rows,
   },
   label,
   labelHidden,
