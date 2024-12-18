@@ -1,7 +1,10 @@
 {
-	"recommendations": [
-		"EditorConfig.EditorConfig",
-		"bradlc.vscode-tailwindcss",
-		"bmewburn.vscode-intelephense-client"
-	]
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "bradlc.vscode-tailwindcss",
+    "DEVSENSE.phptools-vscode",
+    "biati.ddev-manager",
+    "xdebug.php-debug",
+    "moetelo.twiggy"
+  ]
 }
