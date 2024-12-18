@@ -21,7 +21,7 @@ export default plugin(({ addComponents }) => {
       '& input[type="text"], & input[type="password"], & input[type="email"], & input[type="number"], & input[type="tel"], & input[type="url"], & select, & textarea':
         {
           // base styles
-          '@apply h-40 rounded-sm border-0 bg-white ring-1 outline-none ring-black/50 px-8 dark:bg-white/10 dark:text-white dark:ring-white/50':
+          '@apply rounded-sm border-0 bg-white ring-1 outline-none ring-black/50 px-8 dark:bg-white/10 dark:text-white dark:ring-white/50':
             {},
           // placeholder styles
           '@apply placeholder:text-black/40 dark:placeholder:text-white/50': {},
@@ -33,6 +33,10 @@ export default plugin(({ addComponents }) => {
           // disabled styles
           '@apply disabled:bg-gray-500/10 disabled:ring-gray-500/20 disabled:text-black/75 disabled:cursor-not-allowed dark:disabled:ring-white/20 dark:disabled:bg-white/25 dark:disabled:text-white/50 dark:disabled:placeholder:text-white/35':
             {},
+          // Exclude textarea from fix height
+          '&:not(textarea)': {
+            '@apply h-40': {},
+          },
           '&:is(input[type="checkbox"])': {
             '@apply size-20 border-0 text-blue-500 checked:bg-blue-500 min-h-0':
               {},
@@ -43,6 +47,9 @@ export default plugin(({ addComponents }) => {
           },
         },
       // field specific styles
+      '& textarea': {
+        '@apply py-8': {},
+      },
       '& select': {
         backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000000' d='M12 5.83 15.17 9l1.41-1.41L12 3 7.41 7.59 8.83 9 12 5.83zm0 12.34L8.83 15l-1.41 1.41L12 21l4.59-4.59L15.17 15 12 18.17z'/%3E%3C/svg%3E")`,
         backgroundPosition: 'right .5rem center',

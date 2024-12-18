@@ -4,50 +4,52 @@
 
   {% set fields %}
     <div class="flex flex-col gap-48 p-32 max-w-lg">
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area',
         subLabel: 'This is a sublabel',
         instructions: 'This is an instruction',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area',
         placeholder: 'Placeholder (label hidden)',
         labelHidden: true,
         required: 'long',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input (required)',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (required)',
         required: true,
         instructions: 'This is an instruction',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input (required long)',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (required long)',
         required: 'long',
         instructions: 'This is an instruction',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input (required with error)',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (required with error)',
         required: true,
         instructions: 'This is an instruction',
         errorMessages: ['This is an error message', 'This is another error message'],
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
-        label: 'Text Input (disabled)',
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (disabled)',
         disabled: true,
       }) }}
 
-      {% set inputTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
-      {% for type in inputTypes %}
-        {{ include('_components/field-text-input.twig', {
-          label: 'Text Input (' ~ type ~ ')',
-          type,
-        }) }}
-      {% endfor %}
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (custom rows)',
+        rows: 10,
+      }) }}
+
+      {{ include('_components/field-textarea.twig', {
+        label: 'Text Area (resize)',
+        resize: true,
+      }) }}
     </div>
   {% endset %}
 

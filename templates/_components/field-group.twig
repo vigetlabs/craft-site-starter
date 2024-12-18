@@ -1,7 +1,10 @@
 {% from '_macros/icon.twig' import icon %}
 
-{# @var fieldElement string #}
-{% set fieldElement = fieldElement ?? 'input' %}
+{# @var fieldElement string - Required #}
+{% set fieldElement = fieldElement %}
+
+{# @var fieldAttrs array #}
+{% set fieldAttrs = fieldAttrs ?? {} %}
 
 {# @var label string|null #}
 {% set label = label ?? null %}
@@ -21,10 +24,6 @@
 {# @var errorMessages string[] #}
 {% set errorMessages = errorMessages ?? [] %}
 
-{# This prop is inherited from field-* components #}
-
-{# @var fieldAttrs array #}
-{% set fieldAttrs = fieldAttrs ?? {} %}
 
 {# Generated vars #}
 {% set id = 'input-' ~ random() %}
