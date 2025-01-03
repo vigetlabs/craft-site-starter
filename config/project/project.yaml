@@ -1,4 +1,4 @@
-dateModified: 1735924481
+dateModified: 1735926433
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -22,6 +22,7 @@ fs:
 meta:
   __names__:
     0e7762a5-2553-4c0d-b8af-9b43b59524bf: Home # Home
+    2ea51656-9b0c-4736-a6fe-c95dc805dc60: Button # Button
     3bcf7ddb-71e7-4115-868c-815b3611b34c: 'Text With Media' # Text With Media
     3f1dc0c5-f091-469a-858a-4cbd3596bab7: 'Icon Card' # Icon Card
     5e84b0b7-6851-47ed-962e-76498ac9476f: 'Card Grid' # Card Grid
@@ -40,13 +41,11 @@ meta:
     896b8f2a-ed0c-42c9-b5fd-ba8668fc6784: 'Rich Text' # Rich Text
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
     4382f55f-01a1-4b67-84c8-ebbc89b238d2: Heading # Heading
-    167784f4-27c4-45bc-bcf4-eee051e54bd6: 'Open Link In New Window' # Open Link In New Window
     853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
     a99edea2-f8ae-44e5-a12f-89cb9aa66738: Description # Description
     ac3b0590-d417-429e-aa1f-96be3c79a5b0: 'Media Type' # Media Type
     b3d7753a-c7ad-4f33-aca8-df63277e9b42: 'Primary Navigation' # Primary Navigation
     b7e66782-af96-4012-9e17-914134073ced: Simple # Simple
-    b80d8ac7-5039-4535-afa5-82ec086e2f61: 'Link Text' # Link Text
     c52a9170-652b-4d92-a226-69894b1822ed: 'Rich Text: Simple' # Rich Text: Simple
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text
     d7f9c488-b14d-48c2-b6fc-d616b7a9f49f: 'Show Media On' # Show Media On

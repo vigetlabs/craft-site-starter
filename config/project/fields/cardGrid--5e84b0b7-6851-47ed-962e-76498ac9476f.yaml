@@ -5,6 +5,7 @@ name: 'Card Grid'
 searchable: false
 settings:
   createButtonLabel: 'New card'
+  defaultIndexViewMode: cards
   entryTypes:
     - 7d418368-91eb-4c64-8f5b-94c62cd62359 # Image Card
     - 3f1dc0c5-f091-469a-858a-4cbd3596bab7 # Icon Card

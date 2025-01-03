@@ -7,11 +7,11 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
-{# @var string|null linkText #}
-{% set linkText = linkText ?? null %}
+{# @var string|null buttonText #}
+{% set buttonText = buttonText ?? null %}
 
-{# @var boolean|null newWindow #}
-{% set newWindow = newWindow ?? null %}
+{# @var boolean|null newTab #}
+{% set newTab = newTab ?? null %}
 
 <div class="bg-neutral-200 py-48">
   <div class="container flex flex-col items-center gap-24">
@@ -23,12 +23,11 @@
       <div class="max-w-[640px]">{{ text }}</div>
     {% endif %}
 
-    {% if href and linkText %}
+    {% if href and buttonText %}
       {{ include('_components/button.twig', {
         href,
-        newWindow,
-        text: linkText,
-        newWindow,
+        newTab,
+        text: buttonText,
       }) }}
     {% endif %}
   </div>

@@ -1,22 +1,31 @@
 columnSuffix: null
-handle: href
+handle: button
 instructions: null
-name: Link
+name: Button
 searchable: false
 settings:
   maxLength: 255
+  showLabelField: true
+  showTargetField: true
   typeSettings:
     __assoc__:
+      -
+        - entry
+        -
+          __assoc__:
+            -
+              - sources
+              - '*'
       -
         - url
         -
           __assoc__:
             -
               - allowRootRelativeUrls
-              - '1'
+              - ''
             -
               - allowAnchors
-              - '1'
+              - ''
       -
         - asset
         -
@@ -33,18 +42,11 @@ settings:
             -
               - showUnpermittedFiles
               - ''
-      -
-        - entry
-        -
-          __assoc__:
-            -
-              - sources
-              - '*'
   types:
+    - entry
     - url
     - asset
     - email
-    - entry
     - tel
 translationKeyFormat: null
 translationMethod: none
