@@ -1,6 +1,9 @@
 color: null
 fieldLayouts:
   35c4a5cf-04f0-400e-a3bd-107187ab73ee:
+    cardView:
+      - 'layoutElement:137a7e8f-bd2a-46c9-972b-365f2ea8a1b7'
+      - 'layoutElement:14a7db31-c0d3-47d5-a03a-24b0bba82130'
     tabs:
       -
         elementCondition: null
@@ -36,23 +39,7 @@ fieldLayouts:
             uid: c76db590-6bba-4a59-9353-adbf9eeb9cf6
             userCondition: null
             warning: null
-            width: 50
-          -
-            dateAdded: '2024-10-01T00:19:17+00:00'
-            elementCondition: null
-            fieldUid: 167784f4-27c4-45bc-bcf4-eee051e54bd6 # Open Link In New Window
-            handle: null
-            includeInCards: false
-            instructions: null
-            label: null
-            providesThumbs: false
-            required: false
-            tip: null
-            type: craft\fieldlayoutelements\CustomField
-            uid: 73d5013c-69e4-4909-9c20-b089063b4b8b
-            userCondition: null
-            warning: null
-            width: 50
+            width: 100
           -
             autocapitalize: true
             autocomplete: false
@@ -73,7 +60,7 @@ fieldLayouts:
             placeholder: null
             providesThumbs: false
             readonly: false
-            requirable: false
+            required: true
             size: null
             step: null
             tip: null
@@ -110,6 +97,6 @@ showSlugField: false
 showStatusField: false
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: ''
+titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site

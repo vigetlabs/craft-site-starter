@@ -6,8 +6,8 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
-{# @var string|null newWindow #}
-{% set newWindow = newWindow ?? null %}
+{# @var string|null newTab #}
+{% set newTab = newTab ?? null %}
 
 {# @var string align #}
 {% set align = align ?? 'left' %}
@@ -34,7 +34,7 @@
     'items-center text-center': align == 'center',
   }),
   href: href,
-  target: href and newWindow ? '_blank' : null,
+  target: href and newTab ? '_blank' : null,
 } %}
   {% if icon %}
     <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black">

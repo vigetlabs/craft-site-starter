@@ -6,8 +6,8 @@
 {# @var string|null href #}
 {% set href = href ?? null %}
 
-{# @var bool newWindow #}
-{% set newWindow = newWindow ?? false %}
+{# @var bool newTab #}
+{% set newTab = newTab ?? false %}
 
 {# @var craft\elements\Asset|null image #}
 {% set image = image ?? null %}
@@ -40,7 +40,7 @@
     'items-center text-center': align == 'center',
   }),
   href: href,
-  target: href and newWindow ? '_blank' : null,
+  target: href and newTab ? '_blank' : null,
 } %}
   {% if image %}
     {{ include('_components/image.twig', {

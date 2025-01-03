@@ -4,7 +4,7 @@
 {{ include('_components/call-to-action.twig', {
   title: block.title,
   text: block.richTextSimple,
-  href: block.href,
-  linkText:  block.linkText ?? block.href.label ?? null,
-  newWindow: block.newWindow,
+  href: block.button.value,
+  buttonText: block.button.label ?? null,
+  newTab: block.button.target ?? null,
 }) }}

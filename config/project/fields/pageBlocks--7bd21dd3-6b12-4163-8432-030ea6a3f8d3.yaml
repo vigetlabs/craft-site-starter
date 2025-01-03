@@ -5,6 +5,7 @@ name: 'Page Blocks'
 searchable: false
 settings:
   createButtonLabel: 'New Block'
+  defaultIndexViewMode: cards
   entryTypes:
     - 27f19bae-64f8-47b8-9fc9-7552e11e2656 # Page Hero
     - e445a3b9-5827-422a-8328-6b10449fa891 # Heading

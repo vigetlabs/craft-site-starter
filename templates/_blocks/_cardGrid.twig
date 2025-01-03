@@ -15,16 +15,16 @@
         {% case 'imageCard' %}
           {{ include('_components/card-image.twig', {
             image: card.image.eagerly().one(),
-            href: card.href,
-            newWindow: card.newWindow,
+            href: card.basicLink,
+            newTab: card.basicLink.target ?? null,
             title: card.title,
             description: card.description,
             headingLevel: cardHeadingLevel,
           }) }}
         {% case 'iconCard' %}
           {{ include('_components/card-icon.twig', {
-            href: card.href,
-            newWindow: card.newWindow,
+            href: card.basicLink,
+            newTab: card.basicLink.target ?? null,
             icon: card.icon.value,
             title: card.title,
             description: card.description,

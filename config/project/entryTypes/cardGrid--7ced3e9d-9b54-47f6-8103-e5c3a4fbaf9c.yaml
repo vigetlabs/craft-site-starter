@@ -6,36 +6,6 @@ fieldLayouts:
         elementCondition: null
         elements:
           -
-            autocapitalize: true
-            autocomplete: false
-            autocorrect: true
-            class: null
-            dateAdded: '2024-09-30T23:24:00+00:00'
-            disabled: false
-            elementCondition: null
-            id: null
-            includeInCards: false
-            inputType: null
-            instructions: null
-            label: null
-            max: null
-            min: null
-            name: null
-            orientation: null
-            placeholder: null
-            providesThumbs: false
-            readonly: false
-            requirable: false
-            size: null
-            step: null
-            tip: null
-            title: null
-            type: craft\fieldlayoutelements\entries\EntryTitleField
-            uid: 7a16feb6-d7c0-4a94-8bd4-07a2e30e67a7
-            userCondition: null
-            warning: null
-            width: 100
-          -
             dateAdded: '2024-10-02T23:56:36+00:00'
             elementCondition: null
             fieldUid: 4382f55f-01a1-4b67-84c8-ebbc89b238d2 # Heading
@@ -78,6 +48,6 @@ showSlugField: false
 showStatusField: true
 slugTranslationKeyFormat: null
 slugTranslationMethod: site
-titleFormat: ''
+titleFormat: null
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
