@@ -15,7 +15,7 @@ function pxPair(value) {
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
+  darkMode: 'selector',
   content: ['./templates/**/*.{twig,html}', './src/**/*.{js,jsx,ts,tsx,svg}'],
   corePlugins: {
     container: false, // Replaced with a custom container class
