@@ -77,6 +77,11 @@ replacing standard plugins with similar alternatives (unless absolutely necessar
 
 Ideally, you should be able to clone this repo and make modifications to plugin & build tool configs with minimal fuss.
 
-Run `ddev start` and make edits in a feature branch.
+Run the following and make edits in a feature branch:
+
+```shell
+ddev start
+ddev craft install
+```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for details on technical goals & decisions.
