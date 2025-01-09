@@ -15,6 +15,9 @@
 {# @var string|null icon The name of the icon to use #}
 {% set icon = icon ?? null %}
 
+{# @var bool iconLast #}
+{% set iconLast = iconLast ?? false %}
+
 {# @var boolean iconOnly #}
 {% set iconOnly = iconOnly ?? false %}
 
@@ -62,6 +65,7 @@
   {{ icon ? icon({
     name: icon,
     size: size,
+    class: iconLast ? 'order-last' : null,
   }) }}
 
   {{ text }}

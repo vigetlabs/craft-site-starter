@@ -4,7 +4,7 @@ export default plugin(({ addComponents }) => {
   // Base Styles
   const base = {
     // core
-    '@apply inline-flex items-center rounded font-bold transition text-base gap-12 cursor-pointer no-underline':
+    '@apply inline-flex items-center justify-center rounded font-bold transition text-base gap-12 cursor-pointer no-underline':
       {},
     // focus
     '@apply focus:outline-none focus-visible:ring-4': {},
@@ -100,6 +100,11 @@ export default plugin(({ addComponents }) => {
       fontSize: '0 !important',
       lineHeight: '0 !important',
       '@apply !p-0 !gap-0 aspect-square justify-center items-center': {},
+    },
+
+    // Coerce a button to be square
+    '.btn-square': {
+      '@apply aspect-square p-0': {},
     },
   }
 

@@ -1,0 +1,70 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{#
+
+The pagination component is designed to work well with Craft's pagination features
+
+https://craftcms.com/docs/5.x/development/element-queries.html#pagination
+
+However, if you need to manually building up props for the component is relatively easy.
+
+Example:
+
+  {% set blogQuery = craft.entries()
+      .section('blog')
+      .limit(2)
+      .orderBy('postDate DESC') %}
+
+  Paginate the query into a `posts` variable:
+  {% paginate blogQuery as pageInfo, posts %}
+
+
+  {{ include('_components/pagination.twig', {
+    ...pageInfo,
+    visibleUrls: pageInfo.getDynamicRangeUrls(5),
+  }) }}
+
+#}
+
+{% set props = {
+  nextUrl: '#5',
+  prevUrl: '#3',
+  firstUrl: '#1',
+  lastUrl: '#15',
+  totalPages: 15,
+  currentPage: 4,
+  visibleUrls: {
+    2: '#2',
+    3: '#3',
+    4: '#4',
+    5: '#5',
+    6: '#6',
+  },
+} %}
+
+{% set examples %}
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'sm',
+  }) }}
+
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'md',
+  }) }}
+
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'lg',
+  }) }}
+{% endset %}
+
+{% block main %}
+  <div class="p-64 flex flex-col gap-48">
+    {{ examples }}
+  </div>
+
+  <div class="dark bg-black p-64 flex flex-col gap-48">
+    {{ examples }}
+  </div>
+{% endblock %}

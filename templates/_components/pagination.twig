@@ -1,0 +1,106 @@
+{# @var string|null nextUrl #}
+{% set nextUrl = nextUrl ?? null %}
+
+{# @var string|null prevUrl #}
+{% set prevUrl = prevUrl ?? null %}
+
+{# @var int currentPage #}
+{% set currentPage = currentPage %}
+
+{# @var int totalPages #}
+{% set totalPages = totalPages %}
+
+{# @var string|null firstUrl #}
+{% set firstUrl = firstUrl ?? null %}
+
+{# @var string|null lastUrl #}
+{% set lastUrl = lastUrl ?? null %}
+
+{# @var array visibleUrls #}
+{% set visibleUrls = visibleUrls ?? [] %}
+
+{# @var string size #}
+{% set size = size ?? 'md' %}
+
+{% set ariaLabel = ariaLabel ?? 'pagination navigation' %}
+
+{% macro paginationItem(props = {}) %}
+  {% set url = props.url ?? null %}
+  {% set page = props.page ?? null %}
+  {% set size = props.size ?? null %}
+  {% set currentPage = props.currentPage ?? null %}
+
+  {{ include('_components/button.twig', {
+      href: url,
+      text: page,
+      variant: page == currentPage ? 'contained' : 'subtle',
+      size: size,
+      class: cx('!p-0 aspect-square rounded-full'),
+      attrs: {
+        'aria-current': page == currentPage ? 'page' : null,
+      },
+    }) }}
+{% endmacro %}
+
+<nav
+  aria-label="{{ ariaLabel }}"
+  class="text-sky-600 dark:text-white"
+>
+  <ul class="flex items-center gap-16">
+    <li>
+      {{ include('_components/button.twig', {
+        href: prevUrl,
+        text: 'Previous',
+        icon: 'arrow-left',
+        variant: 'outlined',
+        size,
+        currentPage,
+      }) }}
+    </li>
+
+    {% if visibleUrls[1] is not defined %}
+      <li>
+        {{ _self.paginationItem({
+          url: firstUrl,
+          page: 1,
+          size,
+          currentPage,
+        }) }}
+      </li>
+      <li aria-hidden="true">...</li>
+    {% endif %}
+
+    {% for page, url in visibleUrls %}
+      <li>
+        {{ _self.paginationItem({
+          url: url,
+          page: page,
+          size,
+          currentPage,
+        }) }}
+      </li>
+    {% endfor %}
+
+    {% if visibleUrls[totalPages] is not defined %}
+      <li aria-hidden="true">...</li>
+      <li>
+        {{ _self.paginationItem({
+          url: lastUrl,
+          page: totalPages,
+          size: size,
+        }) }}
+      </li>
+    {% endif %}
+
+    <li>
+      {{ include('_components/button.twig', {
+        href: nextUrl,
+        text: 'Next',
+        icon: 'arrow-right',
+        variant: 'outlined',
+        size: size,
+        iconLast: true,
+      }) }}
+    </li>
+  </ul>
+</nav>
