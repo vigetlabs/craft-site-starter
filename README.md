@@ -1,8 +1,8 @@
 # Viget's Craft CMS Starter
 
-This repo is a Composer "project" intended for use with the `composer create-project` command.
+Our Craft Site Starter is a quick way to spin up a new Craft CMS project. It's pre-configured with top-notch building tooling, common plugins and starter components based on [Blueprint](https://github.com/vigetlabs/blueprint).
 
-Our starter uses DDEV for local development. Install it before doing any of the following steps.
+If you're a designer or developer at Viget working on a new project, view our [Building with Craft Site Starter](docs/building-with-site-starter.md) guide for more information.
 
 # Features
 
@@ -17,6 +17,9 @@ Our starter uses DDEV for local development. Install it before doing any of the 
 - Local email is routed
   through [Mailpit](https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit) (
   never worry about emailing a client or user)
+- Starter components based on [Blueprint](https://github.com/vigetlabs/blueprint)
+- A fully accessible header and navigation
+- A simple Matrix Field based block editor
 
 # Getting Started
 
