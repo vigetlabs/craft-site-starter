@@ -1,3 +1,5 @@
+<img src="docs/project-logo.png" alt="Craft Site Starter" width="120">
+
 # Viget's Craft CMS Starter
 
 Our Craft Site Starter is a quick way to spin up a new Craft CMS project. It's pre-configured with top-notch building tooling, common plugins and starter components based on [Blueprint](https://github.com/vigetlabs/blueprint).
