@@ -101,11 +101,6 @@ export default plugin(({ addComponents }) => {
       lineHeight: '0 !important',
       '@apply !p-0 !gap-0 aspect-square justify-center items-center': {},
     },
-
-    // Coerce a button to be square
-    '.btn-square': {
-      '@apply aspect-square p-0': {},
-    },
   }
 
   addComponents(buttons)
