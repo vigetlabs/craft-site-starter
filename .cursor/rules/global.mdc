@@ -1,0 +1,11 @@
+---
+description: Follow these high level rules when creating code for this project.
+globs:
+---
+# Project Overview
+This is a Craft CMS 5 project.
+
+## Components
+When asked to make a component, store it in templates/_components directory. Use Twig as the template language.
+Use Tailwind CSS Classes. Use the cx macro to merge classes conditionally.
+

@@ -1,0 +1,33 @@
+---
+description: Follow these rules when making Twig components.
+globs: 
+---
+Use Twig as templating language. Put it in templates/_components directory. Do not apply any css classes. Use the following as example markup. Always put a class prop on the root element.
+
+<example>
+{# @var string|null class #}
+{% set class = class ?? null %}
+
+{# @var string|null href #}
+{% set href = href ?? null %}
+
+{# @var string|null title #}
+{% set title = title ?? null %}
+
+{# @var string|null description #}
+{% set description = description ?? null %}
+
+{# Computed values #}
+{% set element = href ? 'a' : 'article' %}
+{% set headingElement = "h#{headingLevel}" %}
+
+<a href="{{ href }}" class="{{ cx(class) }}">
+    {% if title %}
+      <h2>{{ title }}</h2>
+    {% endif %}
+    {% if description %}
+      <p>{{ description }}</p>
+    {% endif %}
+</a>
+
+</example>
