@@ -1,28 +1,59 @@
+{# @var object pageInfo - Pass the pageInfo object from Craft's {% paginate %} tag to pre-fill all props #}
+{% set pageInfo = pageInfo ?? null %}
+
+{#
+   @var int maxLinks
+   Controls the number of page links to show. Includes the first and last page URLs.
+   Odd numbers work best.
+
+   maxLinks has no effect when using manual props
+#}
+{% set maxLinks = maxLinks ?? 5 %}
+
 {# @var string|null nextUrl #}
-{% set nextUrl = nextUrl ?? null %}
+{% set nextUrl = nextUrl ?? pageInfo.nextUrl ?? null %}
 
 {# @var string|null prevUrl #}
-{% set prevUrl = prevUrl ?? null %}
+{% set prevUrl = prevUrl ?? pageInfo.prevUrl ?? null %}
 
 {# @var int currentPage #}
-{% set currentPage = currentPage %}
+{% set currentPage = currentPage ?? pageInfo.currentPage ?? null %}
 
 {# @var int totalPages #}
-{% set totalPages = totalPages %}
+{% set totalPages = totalPages ?? pageInfo.totalPages ?? null %}
 
 {# @var string|null firstUrl #}
-{% set firstUrl = firstUrl ?? null %}
+{% set firstUrl = firstUrl ?? pageInfo.firstUrl ?? null %}
 
 {# @var string|null lastUrl #}
-{% set lastUrl = lastUrl ?? null %}
+{% set lastUrl = lastUrl ?? pageInfo.lastUrl ?? null %}
 
-{# @var array visibleUrls #}
+{# @var array visibleUrls An array of visible page URLs indexed by page number #}
 {% set visibleUrls = visibleUrls ?? [] %}
 
 {# @var string size #}
 {% set size = size ?? 'md' %}
 
+{# @var string ariaLabel #}
 {% set ariaLabel = ariaLabel ?? 'pagination navigation' %}
+
+{# Computed values #}
+{% set needEllipsis = totalPages > maxLinks %}
+{% set elipsisThreshold = floor(maxLinks / 2) %}
+{% set hasStartEllipsis = needEllipsis and currentPage > maxLinks - elipsisThreshold %}
+{% set hasEndEllipsis = needEllipsis and currentPage < totalPages - elipsisThreshold %}
+
+{% if pageInfo %}
+  {% if hasStartEllipsis %}
+    {% set maxLinks = maxLinks - 1 %}
+  {% endif  %}
+
+  {% if hasEndEllipsis or (currentPage < totalPages - (elipsisThreshold - 1)) %}
+    {% set maxLinks = maxLinks - 1 %}
+  {% endif %}
+
+  {% set visibleUrls = pageInfo.getDynamicRangeUrls(maxLinks) %}
+{% endif %}
 
 {% macro paginationItem(props = {}) %}
   {% set url = props.url ?? null %}
@@ -67,7 +98,10 @@
           currentPage,
         }) }}
       </li>
-      <li aria-hidden="true">...</li>
+      {# Hide elipsis if page 2 is in the visibleUrls array #}
+      {% if hasStartEllipsis %}
+        <li aria-hidden="true">...</li>
+      {% endif %}
     {% endif %}
 
     {% for page, url in visibleUrls %}
@@ -82,7 +116,10 @@
     {% endfor %}
 
     {% if visibleUrls[totalPages] is not defined %}
-      <li aria-hidden="true">...</li>
+      {# Hide elipsis if page totalPages - 1 is in the visibleUrls array #}
+      {% if hasEndEllipsis %}
+        <li aria-hidden="true">...</li>
+      {% endif %}
       <li>
         {{ _self.paginationItem({
           url: lastUrl,

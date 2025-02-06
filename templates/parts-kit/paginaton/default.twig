@@ -1,44 +1,47 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
 {#
-
-The pagination component is designed to work well with Craft's pagination features
+The pagination component that integrates well with Craft's {% paginate %} by
+using the pageInfo object.
 
 https://craftcms.com/docs/5.x/development/element-queries.html#pagination
 
-However, if you need to manually building up props for the component is relatively easy.
+You can manually use this component by passing props, however, calculating
+the number of links to show must be implemented manually.
 
-Example:
+Example Usage:
 
   {% set blogQuery = craft.entries()
-      .section('blog')
-      .limit(2)
-      .orderBy('postDate DESC') %}
+    .section('blog')
+    .limit(1)
+    .orderBy('postDate DESC') %}
 
-  Paginate the query into a `posts` variable:
   {% paginate blogQuery as pageInfo, posts %}
 
+  {% for post in posts %}
+    <article>
+      <h2>{{ post.title }}</h2>
+    </article>
+  {% endfor %}
 
   {{ include('_components/pagination.twig', {
-    ...pageInfo,
-    visibleUrls: pageInfo.getDynamicRangeUrls(5),
+    pageInfo,
+    maxLinks: 7,
   }) }}
 
 #}
 
 {% set props = {
-  nextUrl: '#5',
-  prevUrl: '#3',
-  firstUrl: '#1',
-  lastUrl: '#15',
+  nextUrl: '?page=5',
+  prevUrl: '?page=3',
+  firstUrl: '?page=1',
+  lastUrl: '?page=15',
   totalPages: 15,
-  currentPage: 4,
+  currentPage: 5,
   visibleUrls: {
-    2: '#2',
-    3: '#3',
-    4: '#4',
-    5: '#5',
-    6: '#6',
+    4: '?page=4',
+    5: '?page=5',
+    6: '?page=6',
   },
 } %}
 
