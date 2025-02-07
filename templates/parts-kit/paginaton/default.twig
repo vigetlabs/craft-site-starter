@@ -1,0 +1,73 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{#
+The pagination component that integrates well with Craft's {% paginate %} by
+using the pageInfo object.
+
+https://craftcms.com/docs/5.x/development/element-queries.html#pagination
+
+You can manually use this component by passing props, however, calculating
+the number of links to show must be implemented manually.
+
+Example Usage:
+
+  {% set blogQuery = craft.entries()
+    .section('blog')
+    .limit(1)
+    .orderBy('postDate DESC') %}
+
+  {% paginate blogQuery as pageInfo, posts %}
+
+  {% for post in posts %}
+    <article>
+      <h2>{{ post.title }}</h2>
+    </article>
+  {% endfor %}
+
+  {{ include('_components/pagination.twig', {
+    pageInfo,
+    maxLinks: 7,
+  }) }}
+
+#}
+
+{% set props = {
+  nextUrl: '?page=5',
+  prevUrl: '?page=3',
+  firstUrl: '?page=1',
+  lastUrl: '?page=15',
+  totalPages: 15,
+  currentPage: 5,
+  visibleUrls: {
+    4: '?page=4',
+    5: '?page=5',
+    6: '?page=6',
+  },
+} %}
+
+{% set examples %}
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'sm',
+  }) }}
+
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'md',
+  }) }}
+
+  {{ include('_components/pagination.twig', {
+    ...props,
+    size: 'lg',
+  }) }}
+{% endset %}
+
+{% block main %}
+  <div class="p-64 flex flex-col gap-48">
+    {{ examples }}
+  </div>
+
+  <div class="dark bg-black p-64 flex flex-col gap-48">
+    {{ examples }}
+  </div>
+{% endblock %}

@@ -4,7 +4,7 @@ export default plugin(({ addComponents }) => {
   // Base Styles
   const base = {
     // core
-    '@apply inline-flex items-center rounded font-bold transition text-base gap-12 cursor-pointer no-underline':
+    '@apply inline-flex items-center justify-center rounded font-bold transition text-base gap-12 cursor-pointer no-underline':
       {},
     // focus
     '@apply focus:outline-none focus-visible:ring-4': {},
