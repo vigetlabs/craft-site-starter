@@ -1,7 +1,8 @@
+import process from 'process'
+
 export default {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    '@tailwindcss/postcss': {},
     'postcss-pxtorem': {
       rootValue: 16,
       unitPrecision: 5,

@@ -49,13 +49,13 @@
   {# Logo and nav toggle button lockup #}
   <div
     class="container flex items-center justify-between transition-colors duration-300"
-    :class="isOpen && '!bg-neutral-800'"
+    :class="isOpen && 'bg-neutral-800!'"
   >
     {# The logo changes when you open the mobile nav. Just because it's rad. #}
     <a
       href="{{ url('/') }}"
       class="relative z-10 transition-colors duration-700 text-neutral-500"
-      :class="isOpen && '!text-amber-600'"
+      :class="isOpen && 'text-amber-600!'"
     >
       {{ icon({
         name: 'logo-primary',

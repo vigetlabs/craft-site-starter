@@ -31,14 +31,14 @@
         <button
           data-index="{{ loop.index0 }}"
           id="{{ id }}-tab-{{ loop.index }}"
-          class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+          class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_var(--color-blue-500)]"
           role="tab"
           aria-controls="{{ id }}-tabpanel-{{ loop.index }}"
           :aria-selected="activeIndex === {{ loop.index0 }}"
           @click="selectTab"
         >
           <span
-            class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+            class="pointer-events-none mb-4 flex items-center justify-center rounded-sm px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
           >
             {{ tab.title }}
           </span>
