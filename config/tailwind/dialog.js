@@ -23,23 +23,23 @@ export default plugin(({ addComponents }) => {
             'dialog-backdrop-out var(--dialog-transition-duration, 300ms) cubic-bezier(0.2, 0, 0.13, 1) forwards',
         },
       },
-      // Animation Keyframes
-      '@keyframes dialog-in': {
-        '0%': { transform: 'translateY(2rem)', opacity: 0 },
-        '100%': { transform: 'translateY(0px)', opacity: 1 },
-      },
-      '@keyframes dialog-out': {
-        '0%': { transform: 'scale(1)', opacity: 1 },
-        '100%': { transform: 'scale(0.9)', opacity: 0 },
-      },
-      '@keyframes dialog-backdrop-in': {
-        '0%': { opacity: 0 },
-        '100%': { opacity: 1 },
-      },
-      '@keyframes dialog-backdrop-out': {
-        '0%': { opacity: 1 },
-        '100%': { opacity: 0 },
-      },
+    },
+    // Animation Keyframes
+    '@keyframes dialog-in': {
+      '0%': { transform: 'translateY(2rem)', opacity: '0' },
+      '100%': { transform: 'translateY(0px)', opacity: '1' },
+    },
+    '@keyframes dialog-out': {
+      '0%': { transform: 'scale(1)', opacity: '1' },
+      '100%': { transform: 'scale(0.9)', opacity: '0' },
+    },
+    '@keyframes dialog-backdrop-in': {
+      '0%': { opacity: '0' },
+      '100%': { opacity: '1' },
+    },
+    '@keyframes dialog-backdrop-out': {
+      '0%': { opacity: '1' },
+      '100%': { opacity: '0' },
     },
   })
 })
