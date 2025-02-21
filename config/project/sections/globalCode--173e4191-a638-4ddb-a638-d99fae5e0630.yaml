@@ -1,0 +1,15 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  - 679826d7-4cc2-4833-876c-f3d295ff3680 # Global Code
+handle: globalCode
+maxAuthors: 1
+name: 'Global Code'
+propagationMethod: all
+siteSettings:
+  35b563a0-4662-40b9-b885-a8450a2868d9: # Viget Craft Starter
+    enabledByDefault: true
+    hasUrls: false
+    template: null
+    uriFormat: null
+type: single

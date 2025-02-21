@@ -1,4 +1,32 @@
 dateModified: 1740150714
+elementSources:
+  craft\elements\Entry:
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Singles
+      type: heading
+    -
+      key: 'single:969acdd6-6362-41b1-b782-6bbd43a8a6b4' # Home
+      type: native
+    -
+      heading: Globals
+      type: heading
+    -
+      key: 'single:173e4191-a638-4ddb-a638-d99fae5e0630' # Global Code
+      type: native
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -22,6 +50,7 @@ fs:
 meta:
   __names__:
     0e7762a5-2553-4c0d-b8af-9b43b59524bf: Home # Home
+    1b822704-0a4e-42df-9036-3d82a218bc98: Code # Code
     2ea51656-9b0c-4736-a6fe-c95dc805dc60: Button # Button
     3bcf7ddb-71e7-4115-868c-815b3611b34c: 'Text With Media' # Text With Media
     3f1dc0c5-f091-469a-858a-4cbd3596bab7: 'Icon Card' # Icon Card
@@ -35,12 +64,14 @@ meta:
     55cc26b6-8b49-47de-bbe7-5908da6f4545: 'Video Url' # Video Url
     69fe4c18-21c9-4a3d-8fce-9988d3f741e4: Link # Link
     101b4db6-8914-45eb-a661-180b15f70894: 'Footer Navigation' # Footer Navigation
+    173e4191-a638-4ddb-a638-d99fae5e0630: 'Global Code' # Global Code
     534ccdd8-7abd-4300-a102-71885b21c126: 'Call To Action' # Call To Action
     570fb481-ad97-46db-8bad-f7b0fd90e831: Image # Image
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
     896b8f2a-ed0c-42c9-b5fd-ba8668fc6784: 'Rich Text' # Rich Text
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
     4382f55f-01a1-4b67-84c8-ebbc89b238d2: Heading # Heading
+    679826d7-4cc2-4833-876c-f3d295ff3680: 'Global Code' # Global Code
     853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
     a99edea2-f8ae-44e5-a12f-89cb9aa66738: Description # Description
     ac3b0590-d417-429e-aa1f-96be3c79a5b0: 'Media Type' # Media Type

@@ -1,0 +1,78 @@
+color: null
+fieldLayouts:
+  265dea68-83f5-4ec6-955f-e4a6dea24878:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-02-21T14:59:23+00:00'
+            dismissible: false
+            elementCondition: null
+            style: warning
+            tip: "**Use Caution**: Improperly formatted code can break pages.\r\n\r\nBe sure to wrap any JavaScript in opening and closing tags. \r\n\r\n\r\n    <script>  \r\n        // Your Code Here  \r\n    </script>\r\n\r\nUnless a script needs to load before any other content on the site, it is better for performance to place scripts in the **Bottom of <body> Scripts & Code** field. "
+            type: craft\fieldlayoutelements\Tip
+            uid: ec57e586-f79e-4233-83da-ea2632faa1ca
+            userCondition: null
+          -
+            dateAdded: '2025-02-21T14:59:23+00:00'
+            elementCondition: null
+            fieldUid: 1b822704-0a4e-42df-9036-3d82a218bc98 # Code
+            handle: head
+            includeInCards: false
+            instructions: 'This code will be inserted into the `<head>` tag on every page.'
+            label: '<head> Scripts & Code'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: d2865248-db3e-45a4-b65a-8dd40fdafabd
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-02-21T14:59:23+00:00'
+            elementCondition: null
+            fieldUid: 1b822704-0a4e-42df-9036-3d82a218bc98 # Code
+            handle: bodyTop
+            includeInCards: false
+            instructions: 'This code will be inserted right after the opening `<body>` tag on every page.'
+            label: 'Top of <body> Scripts & Code'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0d070f90-058f-4e8d-aba0-eb35772ea3c9
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-02-21T14:59:23+00:00'
+            elementCondition: null
+            fieldUid: 1b822704-0a4e-42df-9036-3d82a218bc98 # Code
+            handle: bodyBottom
+            includeInCards: false
+            instructions: 'This code will be inserted right at the very end of your page before the closing `</body>` tag on every page.'
+            label: 'Bottom of <body> Scripts & Code'
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 894ba237-3a40-4426-b0cb-db2c9010788b
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 8ea525da-89e8-4bc6-86c1-7dfcfe451b59
+        userCondition: null
+handle: globalCode
+hasTitleField: false
+icon: code
+name: 'Global Code'
+showSlugField: false
+showStatusField: false
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

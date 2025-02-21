@@ -1,3 +1,4 @@
+{%- set globalCode = craft.entries.section('globalCode').one() -%}
 <!DOCTYPE html>
 <html dir="auto" lang="en">
 <head>
@@ -21,8 +22,12 @@
 
     {# Hide elements if we're in the parts-kit #}
     {% set isPartsKitUrl = craft.app.request.segments | first == 'parts-kit' %}
+
+    {{ globalCode.head|raw }}
 </head>
 <body>
+
+    {{ globalCode.bodyTop|raw }}
 
     {% if not isPartsKitUrl %}
         {{ include('_partials/header.twig') }}
@@ -35,6 +40,8 @@
     {% if not isPartsKitUrl %}
         {{ include('_partials/footer.twig') }}
     {% endif %}
+
+    {{ globalCode.bodyBottom|raw }}
 
 </body>
 </html>
