@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34338e9ad842dafdc77b8b50ac722dca",
+    "content-hash": "1b83de54c845dfa1a12cbbb1aa5f849e",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -6292,6 +6292,60 @@
             "time": "2024-11-13T00:08:07+00:00"
         },
         {
+            "name": "verbb/expanded-singles",
+            "version": "3.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/verbb/expanded-singles/zipball/7cd2d1c41344bb0ebacecb5d1e96a493649f6822",
+                "reference": "7cd2d1c41344bb0ebacecb5d1e96a493649f6822",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^5.0.0",
+                "php": "^8.2",
+                "verbb/base": "^3.0.0"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Expanded Singles",
+                "handle": "expanded-singles",
+                "description": "Alters the Entries Index sidebar to list all Singles, rather than grouping them under a 'Singles' link.",
+                "documentationUrl": "https://github.com/verbb/expanded-singles",
+                "changelogUrl": "https://raw.githubusercontent.com/verbb/expanded-singles/craft-5/CHANGELOG.md",
+                "class": "verbb\\expandedsingles\\ExpandedSingles"
+            },
+            "autoload": {
+                "psr-4": {
+                    "verbb\\expandedsingles\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Verbb",
+                    "homepage": "https://verbb.io"
+                }
+            ],
+            "description": "Extract Single entries to be top-level entries.",
+            "keywords": [
+                "cms",
+                "craft",
+                "craft-plugin",
+                "craftcms",
+                "expanded singles"
+            ],
+            "support": {
+                "email": "support@verbb.io",
+                "issues": "https://github.com/verbb/expanded-singles/issues?state=open",
+                "source": "https://github.com/verbb/expanded-singles",
+                "docs": "https://github.com/verbb/expanded-singles",
+                "rss": "https://github.com/verbb/expanded-singles/commits/v2.atom"
+            },
+            "time": "2024-10-20T02:02:19+00:00"
+        },
+        {
             "name": "verbb/navigation",
             "version": "3.0.5",
             "dist": {
@@ -8060,14 +8114,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "viget/craft-parts-kit": 20,
         "craftcms/ecs": 20,
-        "craftcms/phpstan": 20
+        "craftcms/phpstan": 20,
+        "viget/craft-parts-kit": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2"
     },
