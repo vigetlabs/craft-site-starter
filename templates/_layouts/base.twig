@@ -23,10 +23,12 @@
     {# Hide elements if we're in the parts-kit #}
     {% set isPartsKitUrl = craft.app.request.segments | first == 'parts-kit' %}
 
+    {# -- Dangerously adds raw HTML -- #}
     {{ globalCode.head|raw }}
 </head>
 <body>
 
+    {# -- Dangerously adds raw HTML -- #}
     {{ globalCode.bodyTop|raw }}
 
     {% if not isPartsKitUrl %}
@@ -41,6 +43,7 @@
         {{ include('_partials/footer.twig') }}
     {% endif %}
 
+    {# -- Dangerously adds raw HTML -- #}
     {{ globalCode.bodyBottom|raw }}
 
 </body>
