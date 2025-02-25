@@ -4,7 +4,6 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "plugins": ["@zackad/prettier-plugin-twig", "prettier-plugin-tailwindcss"],
-  "twigPrintWidth": 80,
   "twigAlwaysBreakObjects": true,
   "twigMultiTags": [
     "nav,endnav",

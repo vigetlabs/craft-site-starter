@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
-    "@zackad/prettier-plugin-twig": "^0.9.1",
+    "@zackad/prettier-plugin-twig": "^0.15.3",
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.1",
     "eslint-config-prettier": "^9.1.0",
@@ -23,7 +23,7 @@
     "postcss": "^8.4.38",
     "postcss-pxtorem": "^6.1.0",
     "prettier": "3.2.5",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0",
     "vite-plugin-static-copy": "^1.0.6"
