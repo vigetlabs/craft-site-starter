@@ -65,9 +65,14 @@ export default plugin(({ addComponents }) => {
         },
       },
       // required field styles
-      '&[data-required] label .field-label::after': {
-        '@apply content-["*"] text-red-600 align-super text-xs ml-2 font-medium dark:text-red-300':
-          {},
+      '&[data-required] label .field-label': {
+        '&::after': {
+          '@apply content-["*"] text-red-600 align-super text-xs ml-2 font-medium':
+            {},
+        },
+        '.dark &::after': {
+          '@apply text-red-300': {},
+        },
       },
       '&[data-required="long"] label .field-label::after': {
         '@apply content-["*Required"]': {},

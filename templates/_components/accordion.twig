@@ -16,13 +16,13 @@
 {% set headingTag = 'h' ~ headingLevel %}
 
 <details
-  class="{{ cx('group/details flex flex-col border-t last-of-type:border-b', class) }}"
+  class="{{ cx('group/details flex flex-col border-t last-of-type:border-b border-gray-200', class) }}"
   {{ attr({
     name,
   }) }}
 >
   <summary
-    class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+    class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-hidden"
   >
     {{ tag(headingTag, {
       class: 'text-lg font-bold',
@@ -31,7 +31,7 @@
 
     {# Animated toggle icon #}
     <span
-      class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+      class="relative size-28 shrink-0 rounded-sm border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
     >
       <span
         class="absolute inset-0 m-auto h-4 w-20 bg-neutral-600 transition-transform duration-500 group-open/details:rotate-[360deg]"

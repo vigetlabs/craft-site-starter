@@ -1,7 +1,58 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
+/* Import plugins */
+@plugin '../../config/tailwind/buttons.js';
+@plugin '../../config/tailwind/dialog.js';
+@plugin '../../config/tailwind/rich-text.js';
+@plugin '../../config/tailwind/forms.js';
+
+/* Configure Tailwind */
+@theme {
+  /* Custom Spacing */
+  --spacing-*: initial; /* Resets all spacing config */
+  --spacing-0: 0px;
+  --spacing-1: 1px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-36: 36px;
+  --spacing-40: 40px;
+  --spacing-44: 44px;
+  --spacing-48: 48px;
+  --spacing-52: 52px;
+  --spacing-56: 56px;
+  --spacing-60: 60px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-112: 112px;
+  --spacing-128: 128px;
+
+  /* Add named z-index values */
+  --z-index-header: 100;
+  --z-index-max: 9999;
+}
+
+/* Use selector based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Override the default Tailwind container class */
+@utility container {
+  /* Override the different max-widths at different breakpoints */
+  @apply max-w-[1240px];
+  /** Apply padding to the left and right and automatically center the container */
+  @apply mx-auto px-16 sm:px-32;
+}
+
+/* Base styles */
 @layer base {
   @font-face {
     font-display: swap;
