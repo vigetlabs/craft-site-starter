@@ -1,0 +1,15 @@
+<div class="h-128 bg-red-50 mb-1 p-10"></div>
+
+<div {{ attr(
+  class: 'h-128 bg-red-50 mb-1 p-10'
+) }}></div>
+
+<div
+  class="{{ cx('h-128 bg-red-50 mb-1 p-10') }}"
+>
+</div>
+
+
+<div class="{{ cx({
+  'h-128 bg-red-50 mb-1 p-10': true,
+}) }}"></div>
