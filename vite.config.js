@@ -28,6 +28,10 @@ export default defineConfig(({ command, mode }) => {
       strictPort: true,
       port: HTTP_PORT,
       origin: env.PRIMARY_SITE_URL + ':' + originPort,
+      allowedHosts: ['.ddev.site'],
+      cors: {
+        origin: /https?:\/\/([A-Za-z0-9\-.]+)?(\.ddev\.site)(?::\d+)?$/,
+      },
     },
     plugins: [
       viteStaticCopy({
