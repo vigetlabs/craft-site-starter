@@ -1,17 +1,11 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import process from 'node:process'
 
-// Match ports in .ddev/config.yaml -> web_extra_exposed_ports
-const HTTP_PORT = 3000
-const HTTPS_PORT = 3001
+// Matches ddev web_extra_exposed_ports.https_port
+const HTTPS_PORT = 3000
 
-export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
-  const originPort = env.PRIMARY_SITE_URL.startsWith('https')
-    ? HTTPS_PORT
-    : HTTP_PORT
-
+export default defineConfig(({ command }) => {
   return {
     base: command === 'serve' ? '' : '/dist/',
     build: {
@@ -26,8 +20,10 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: '0.0.0.0',
       strictPort: true,
-      port: HTTP_PORT,
-      origin: env.PRIMARY_SITE_URL + ':' + originPort,
+      // Matches ddev web_extra_exposed_ports.container_port
+      port: 3000,
+      // Strips custom ports from DDEV_PRIMARY_URL if present
+      origin: `${process.env.DDEV_PRIMARY_URL?.replace(/:\d+$/, '')}:${HTTPS_PORT}`,
       allowedHosts: ['.ddev.site'],
       cors: {
         origin: /https?:\/\/([A-Za-z0-9\-.]+)?(\.ddev\.site)(?::\d+)?$/,
