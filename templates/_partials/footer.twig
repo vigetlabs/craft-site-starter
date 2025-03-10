@@ -6,7 +6,7 @@
     .with(['children'])
     .collect() %}
 
-<footer class="bg-neutral-800 text-neutral-100 py-32 md:py-64">
+<footer class="bg-gray-800 text-gray-100 py-32 md:py-64">
   <div class="container">
     {# Logo and nav lockup #}
     <div class="grid md:grid-cols-5 gap-32">
@@ -29,7 +29,7 @@
             <li class="grid gap-16">
               {% tag element with {
                 href: node.url,
-                class: cx('text-neutral-200 font-semibold text-sm uppercase tracking-widest', {
+                class: cx('text-gray-200 font-semibold text-sm uppercase tracking-widest', {
                   'hover:text-white hover:underline': node.url,
                 }),
               } %}
@@ -43,7 +43,7 @@
                     <li>
                       {% tag childElement with {
                         href: child.url,
-                        class: cx('text-neutral-400 text-sm font-semibold text-lg', {
+                        class: cx('text-gray-400 text-sm font-semibold text-lg', {
                           'hover:text-white hover:underline': child.url,
                         }),
                       } %}
@@ -61,11 +61,11 @@
 
     {# Copyright and privacy policy #}
     <div class="border-t border-white/10 pt-32 mt-32 grid grid-cols-1 max-md:text-center md:grid-cols-[1fr_auto] text-sm gap-16 md:gap-0">
-      <p class="text-neutral-400">
+      <p class="text-gray-400">
         &copy; {{ now|date('Y') }} {{ currentSite.name }}. All rights reserved.
       </p>
 
-      <a class="text-neutral-400 hover:text-white hover:underline" href="#TODO">Privacy Policy</a>
+      <a class="text-gray-400 hover:text-white hover:underline" href="#TODO">Privacy Policy</a>
     </div>
   </div>
 </footer>

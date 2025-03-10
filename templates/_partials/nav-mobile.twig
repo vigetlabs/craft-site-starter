@@ -14,7 +14,7 @@
 
   {% tag element with {
     href: hasChildren ? null : node.url,
-    class: cx(textClass, 'text-neutral-100 group py-16 flex w-full items-center justify-between gap-4 px-16'),
+    class: cx(textClass, 'text-gray-100 group py-16 flex w-full items-center justify-between gap-4 px-16'),
     ':aria-expanded': hasChildren ? "isInStack($refs.subnav)" : null,
     ':aria-controls': hasChildren ? "$id('subnav')" : null,
     '@click': "toggle($refs.subnav)"
@@ -49,12 +49,12 @@
   {# Logo and nav toggle button lockup #}
   <div
     class="container flex items-center justify-between transition-colors duration-300"
-    :class="isOpen && 'bg-neutral-800!'"
+    :class="isOpen && 'bg-gray-800!'"
   >
     {# The logo changes when you open the mobile nav. Just because it's rad. #}
     <a
       href="{{ url('/') }}"
-      class="relative z-10 transition-colors duration-700 text-neutral-500"
+      class="relative z-10 transition-colors duration-700 text-gray-500"
       :class="isOpen && 'text-amber-600!'"
     >
       {{ icon({
@@ -73,9 +73,9 @@
       :aria-controls="$id('nav-mobile')"
     >
       <div class="flex flex-col justify-between group w-24 h-[18px]">
-        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[8px]"></span>
-        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
-        <span class="h-2 rounded-full bg-neutral-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
+        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[8px]"></span>
+        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
+        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
       </div>
       <span class="sr-only">Open Menu</span>
     </button>
@@ -86,7 +86,7 @@
     :id="$id('nav-mobile')"
     x-cloak
     x-show="isOpen"
-    class="absolute top-full left-0 w-full bottom-[calc(-100vh+100%)] bg-neutral-700 overflow-y-scroll -z-10"
+    class="absolute top-full left-0 w-full bottom-[calc(-100vh+100%)] bg-gray-700 overflow-y-scroll -z-10"
     x-data="nav"
     @keyup.escape="handleEscape"
     x-transition.opacity.duration.300ms
