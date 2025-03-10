@@ -57,8 +57,9 @@ ScriptHelpers::replaceFileText(
  * Update project config
  */
 
-ScriptHelpers::replaceFileText(
-    filePath: "$cwd/config/project/project.yaml",
+// Replace "Viget Craft Starter" site name in every file in the project config directory.
+ ScriptHelpers::replaceFileTextInDirectory(
+    directoryPath: "$cwd/config/project/",
     pattern: "/Viget Craft Starter/",
     replacement: "$projectName",
 );
@@ -69,18 +70,6 @@ ScriptHelpers::replaceFileText(
     filePath: "$cwd/config/project/project.yaml",
     pattern: "/    licenseKey: REPLACE[\r\n|\r|\n]/", // Make sure to remove new line too
     replacement: "",
-);
-
-ScriptHelpers::replaceFileText(
-    filePath: "$cwd/config/project/siteGroups/805d8826-faed-4186-9b88-f509eb9b07e6.yaml",
-    pattern: "/Viget Craft Starter/",
-    replacement: "$projectName",
-);
-
-ScriptHelpers::replaceFileText(
-    filePath: "$cwd/config/project/sites/default--35b563a0-4662-40b9-b885-a8450a2868d9.yaml",
-    pattern: "/Viget Craft Starter/",
-    replacement: "$projectName",
 );
 
 /**
