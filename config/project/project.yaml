@@ -1,4 +1,4 @@
-dateModified: 1740184038
+dateModified: 1741625195
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -72,6 +72,13 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  expanded-singles:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      expandSingles: true
+      redirectToEntry: true
   imager-x:
     edition: lite
     enabled: true
