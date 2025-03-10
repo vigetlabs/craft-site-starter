@@ -41,7 +41,7 @@
   @keydown.tab="handleTab($refs.subnav)"
 >
   <a
-    class="inline-flex py-4 text-neutral-500 transition-colors hover:text-amber-600"
+    class="inline-flex py-4 text-gray-500 transition-colors hover:text-amber-600"
     href="{{ url('/') }}"
   >
     {{ icon({
@@ -68,7 +68,7 @@
 
         {% if hasChildren %}
           <ul
-            class="{{ cx('absolute top-full bg-neutral-200 text-nowrap w-[200px] border border-neutral-300', {
+            class="{{ cx('absolute top-full bg-gray-200 text-nowrap w-[200px] border border-gray-300', {
               'left-0': not reverseNavAnchoring,
               'right-0': reverseNavAnchoring,
             }) }}"
@@ -107,7 +107,7 @@
 
                 {% if grandchildren.count() %}
                   <ul
-                    class="{{ cx('absolute -top-1 bg-neutral-500 border border-neutral-600 text-nowrap p-3', {
+                    class="{{ cx('absolute -top-1 bg-gray-500 border border-gray-600 text-nowrap p-3', {
                       'left-full': not reverseNavAnchoring,
                       'right-full': reverseNavAnchoring,
                     }) }}"
@@ -122,7 +122,7 @@
                       <li>
                         {{ _self.navIem({
                           node: grandchild,
-                          textClass: 'text-neutral-100',
+                          textClass: 'text-gray-100',
                           verticalPaddingClass: 'py-8',
                         }) }}
                       </li>
