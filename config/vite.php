@@ -2,21 +2,15 @@
 
 use craft\helpers\App;
 
+// This Vite config expects that PRIMARY_SITE_URL uses https
+$host = App::env('PRIMARY_SITE_URL');
 
-// Decides which port to use for devServerPublic. This allows
-// you to visit the http or https port. If you plant to only
-// use http, make sure that PRIMARY_SITE_URL is set to http
-//
-// Match ports to .ddev/config.yaml -> web_extra_exposed_ports
-$host = Craft::$app->getRequest()->getIsConsoleRequest()
-    ? App::env('PRIMARY_SITE_URL')
-    : Craft::$app->getRequest()->getHostInfo();
-$httpPort = 3000;
-$httpsPort = 3001;
-$devServerPort = str_starts_with($host, 'https') ? $httpsPort : $httpPort;
+// Matches ddev web_extra_exposed_ports.https_port
+$httpsPort = 3000;
 
 return [
-    'devServerPublic' => "$host:$devServerPort",
+    // Strips custom ports from PRIMARY_SITE_URL if present
+    'devServerPublic' => preg_replace('/:\d+$/', '', $host) . ':' . $httpsPort,
     'serverPublic' => '/dist/',
     'useDevServer' => App::env('CRAFT_ENVIRONMENT') === 'dev',
     'manifestPath' => '@webroot/dist/.vite/manifest.json',

@@ -27,8 +27,8 @@ web_extra_exposed_ports:
   # Expose ports for vite
   - name: vite
     container_port: 3000
-    http_port: 3000
-    https_port: 3001
+    http_port: 3001
+    https_port: 3000
 web_extra_daemons:
   # Run vite in a separate process
   - name: 'vite'
