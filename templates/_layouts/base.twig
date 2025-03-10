@@ -1,40 +1,65 @@
+{%- set globalCode = craft.entries.section('globalCode').one() -%}
+{%- set codeBlocks = globalCode.codeBlocks.collect() -%}
+{%- set codeBlocksTemplate = '_partials/global-code-blocks.twig' -%}
 <!DOCTYPE html>
 <html dir="auto" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {# -- Dangerously added raw HTML -- #}
+  {{ include(codeBlocksTemplate, {
+    codeBlocks,
+    codePosition: 'headTop'
+  }) }}
 
-    <title>{{ siteName }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {# Preload Webfonts #}
-    <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-bold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-light-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-regular-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-semibold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <title>{{ siteName }}</title>
 
-    {# Load our main CSS file to avoid FOUC in dev mode #}
-    {% if craft.vite.devServerRunning() %}
-        <link rel="stylesheet" href="{{ craft.vite.asset("src/css/app.css") }}">
-    {% endif %}
+  {# Preload Webfonts #}
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-bold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-light-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-regular-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-semibold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
 
-    {{ craft.vite.script('src/js/app.js', false) }}
+  {# Load our main CSS file to avoid FOUC in dev mode #}
+  {% if craft.vite.devServerRunning() %}
+    <link rel="stylesheet" href="{{ craft.vite.asset("src/css/app.css") }}">
+  {% endif %}
 
-    {# Hide elements if we're in the parts-kit #}
-    {% set isPartsKitUrl = craft.app.request.segments | first == 'parts-kit' %}
+  {{ craft.vite.script('src/js/app.js', false) }}
+
+  {# Hide elements if we're in the parts-kit #}
+  {% set isPartsKitUrl = craft.app.request.segments | first == 'parts-kit' %}
+
+  {# -- Dangerously added raw HTML -- #}
+  {{ include(codeBlocksTemplate, {
+    codeBlocks,
+    codePosition: 'headBottom'
+  }) }}
 </head>
 <body>
+  {# -- Dangerously added raw HTML -- #}
+  {{ include(codeBlocksTemplate, {
+    codeBlocks,
+    codePosition: 'bodyTop'
+  }) }}
 
-    {% if not isPartsKitUrl %}
-        {{ include('_partials/header.twig') }}
-    {% endif %}
+  {% if not isPartsKitUrl %}
+      {{ include('_partials/header.twig') }}
+  {% endif %}
 
-    <main id="content" tabindex="-1">
-        {% block content %}{% endblock %}
-    </main>
+  <main id="content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
 
-    {% if not isPartsKitUrl %}
-        {{ include('_partials/footer.twig') }}
-    {% endif %}
+  {% if not isPartsKitUrl %}
+    {{ include('_partials/footer.twig') }}
+  {% endif %}
 
+  {# -- Dangerously added raw HTML -- #}
+  {{ include(codeBlocksTemplate, {
+    codeBlocks,
+    codePosition: 'bodyBottom'
+  }) }}
 </body>
 </html>

@@ -22,6 +22,22 @@ fieldLayouts:
             warning: null
             width: 100
           -
+            dateAdded: '2025-03-10T17:28:48+00:00'
+            elementCondition: null
+            fieldUid: a99edea2-f8ae-44e5-a12f-89cb9aa66738 # Description
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: "Add a brief description of your code block. \r\n\r\nThis will never appear on the front end of the site. "
+            type: craft\fieldlayoutelements\CustomField
+            uid: 1b062515-de1a-4a90-b9e7-368032fe47e7
+            userCondition: null
+            warning: null
+            width: 100
+          -
             dateAdded: '2025-03-10T16:44:51+00:00'
             elementCondition: null
             fieldUid: 7a701601-ee6c-4d56-8bd0-efa7719f6a67 # Code
@@ -35,7 +51,7 @@ fieldLayouts:
             type: craft\fieldlayoutelements\CustomField
             uid: 9848de68-0b9e-4a27-a38c-34a7f68eeaba
             userCondition: null
-            warning: null
+            warning: 'Use Caution: Improperly formatted code can break pages.'
             width: 100
         name: Content
         uid: 39937348-1f3d-4fa6-aaf3-cffe7a6c2a13
