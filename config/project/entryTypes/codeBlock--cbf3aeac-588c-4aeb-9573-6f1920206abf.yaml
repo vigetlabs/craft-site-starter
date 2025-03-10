@@ -1,0 +1,53 @@
+color: null
+fieldLayouts:
+  e399cfbc-ad49-4346-af55-44c91bafc80c:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-03-10T16:53:04+00:00'
+            elementCondition: null
+            fieldUid: f7d30e72-f872-487a-aba1-c8e95268a220 # Code Position
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 0945a6dc-8201-4deb-bbad-dc2af0e0dd9b
+            userCondition: null
+            warning: null
+            width: 100
+          -
+            dateAdded: '2025-03-10T16:44:51+00:00'
+            elementCondition: null
+            fieldUid: 7a701601-ee6c-4d56-8bd0-efa7719f6a67 # Code
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: 9848de68-0b9e-4a27-a38c-34a7f68eeaba
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 39937348-1f3d-4fa6-aaf3-cffe7a6c2a13
+        userCondition: null
+handle: codeBlock
+hasTitleField: false
+icon: code
+name: 'Code Block'
+showSlugField: false
+showStatusField: false
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site

@@ -1,0 +1,25 @@
+columnSuffix: null
+handle: codeBlocks
+instructions: null
+name: 'Code Blocks'
+searchable: false
+settings:
+  createButtonLabel: 'Add Code Block'
+  defaultIndexViewMode: cards
+  entryTypes:
+    -
+      __assoc__:
+        -
+          - uid
+          - cbf3aeac-588c-4aeb-9573-6f1920206abf # Code Block
+  includeTableView: false
+  maxEntries: null
+  minEntries: null
+  pageSize: null
+  propagationKeyFormat: null
+  propagationMethod: all
+  showCardsInGrid: false
+  viewMode: blocks
+translationKeyFormat: null
+translationMethod: site
+type: craft\fields\Matrix
