@@ -90,3 +90,30 @@ ddev craft install
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for details on technical goals & decisions.
+
+## Release Testing
+
+Before releasing, run the following tests.
+
+### Verify project renaming scripts work
+
+- From within the Craft Site Starter repo, run `ddev composer run-script post-create-project-cmd` and follow the prompts.
+- Use your IDE's diff view to verify that files are renamed properly.
+
+<details>
+<summary>Show Example</summary>
+
+![Screenshot showing a diff of the codebase](docs/release-qa-1.png)
+
+![Screenshot showing a diff of the codebase](docs/release-qa-2.png)
+
+</details>
+
+### Run the composer create script to create a new project.
+
+```shell
+docker run --rm -it -v "$PWD":/app -v ${COMPOSER_HOME:-$HOME/.composer}:/tmp composer create-project viget/craft-site-starter=5.x-dev ./ --ignore-platform-reqs
+```
+
+- Follow the prompts to create a new local site.
+- Install Craft and ensure home page and Craft admin load.
