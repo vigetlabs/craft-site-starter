@@ -1,16 +1,18 @@
-{# @var \Illuminate\Support\Collection<\craft\elements\Entry> blocks #}
-{% set codeBlocks = codeBlocks ?? collect([]) %}
+{% apply spaceless %}
+  {# @var \Illuminate\Support\Collection<\craft\elements\Entry> blocks #}
+  {% set codeBlocks = codeBlocks ?? collect([]) %}
 
-{# @var string codePosition - Required #}
-{% set codePosition = codePosition ?? null %}
+  {# @var string codePosition - Required #}
+  {% set codePosition = codePosition ?? null %}
 
-{% set validPositions = ['headTop', 'headBottom', 'bodyTop', 'bodyBottom'] %}
+  {% set validPositions = ['headTop', 'headBottom', 'bodyTop', 'bodyBottom'] %}
 
-{% set blocksForPosition = codeBlocks|filter(block => (block.codePosition.value == codePosition)) %}
+  {% set blocksForPosition = codeBlocks|filter(block => (block.codePosition.value|default == codePosition)) %}
 
-{% if blocksForPosition|length and codePosition in validPositions %}
-  {% for block in blocksForPosition %}
-    {# -- Dangerously added raw HTML -- #}
-    {{ block.code|raw }}
-  {% endfor %}
-{% endif %}
+  {% if blocksForPosition|length and codePosition in validPositions %}
+    {% for block in blocksForPosition %}
+      {# -- Dangerously added raw HTML -- #}
+      {{ block.code|raw }}
+    {% endfor %}
+  {% endif %}
+{% endapply %}
