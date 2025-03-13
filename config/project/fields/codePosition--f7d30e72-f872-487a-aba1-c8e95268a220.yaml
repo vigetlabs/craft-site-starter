@@ -1,0 +1,55 @@
+columnSuffix: null
+handle: codePosition
+instructions: null
+name: 'Code Position'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Start of <head>'
+        -
+          - value
+          - headTop
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'End of <head>'
+        -
+          - value
+          - headBottom
+        -
+          - default
+          - '1'
+    -
+      __assoc__:
+        -
+          - label
+          - 'Start of <body>'
+        -
+          - value
+          - bodyTop
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'End of <body>'
+        -
+          - value
+          - bodyBottom
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Dropdown

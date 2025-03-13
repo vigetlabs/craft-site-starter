@@ -1,4 +1,42 @@
-dateModified: 1740184038
+dateModified: 1741627776
+elementSources:
+  craft\elements\Entry:
+    -
+      defaultSort:
+        - postDate
+        - desc
+      defaultViewMode: ''
+      disabled: false
+      key: '*'
+      tableAttributes:
+        - status
+        - section
+        - postDate
+        - expiryDate
+        - link
+      type: native
+    -
+      heading: Singles
+      type: heading
+    -
+      key: 'single:969acdd6-6362-41b1-b782-6bbd43a8a6b4' # Home
+      type: native
+    -
+      heading: Globals
+      type: heading
+    -
+      defaultSort:
+        - id
+        - asc
+      defaultViewMode: ''
+      disabled: false
+      key: 'single:b4bfeb63-5bc4-4368-b4c9-408f7bac68fc' # Global Code
+      tableAttributes:
+        - status
+        - postDate
+        - expiryDate
+        - link
+      type: native
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
@@ -26,9 +64,11 @@ meta:
     3bcf7ddb-71e7-4115-868c-815b3611b34c: 'Text With Media' # Text With Media
     3f1dc0c5-f091-469a-858a-4cbd3596bab7: 'Icon Card' # Icon Card
     5e84b0b7-6851-47ed-962e-76498ac9476f: 'Card Grid' # Card Grid
+    7a701601-ee6c-4d56-8bd0-efa7719f6a67: Code # Code
     7bd21dd3-6b12-4163-8432-030ea6a3f8d3: 'Page Blocks' # Page Blocks
     7ced3e9d-9b54-47f6-8103-e5c3a4fbaf9c: 'Card Grid' # Card Grid
     7d418368-91eb-4c64-8f5b-94c62cd62359: 'Image Card' # Image Card
+    9c7dc3c3-cb8c-4167-880d-ab9426eef873: 'Code Blocks' # Code Blocks
     0011a64a-91b6-4aa3-98e6-be048394a2cf: Icon # Icon
     27f19bae-64f8-47b8-9fc9-7552e11e2656: 'Page Hero' # Page Hero
     35b563a0-4662-40b9-b885-a8450a2868d9: 'Viget Craft Starter' # Viget Craft Starter
@@ -42,15 +82,19 @@ meta:
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
     4382f55f-01a1-4b67-84c8-ebbc89b238d2: Heading # Heading
     853413e4-e02c-487e-81a5-04e58eb18683: Assets # Assets
+    25362218-e66c-494e-9f2c-63e8cbc6ce0a: 'Global Code' # Global Code
     a99edea2-f8ae-44e5-a12f-89cb9aa66738: Description # Description
     ac3b0590-d417-429e-aa1f-96be3c79a5b0: 'Media Type' # Media Type
     b3d7753a-c7ad-4f33-aca8-df63277e9b42: 'Primary Navigation' # Primary Navigation
+    b4bfeb63-5bc4-4368-b4c9-408f7bac68fc: 'Global Code' # Global Code
     b7e66782-af96-4012-9e17-914134073ced: Simple # Simple
     c52a9170-652b-4d92-a226-69894b1822ed: 'Rich Text: Simple' # Rich Text: Simple
+    cbf3aeac-588c-4aeb-9573-6f1920206abf: 'Code Block' # Code Block
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text
     d7f9c488-b14d-48c2-b6fc-d616b7a9f49f: 'Show Media On' # Show Media On
     d39724b0-dd22-4c74-aa0b-87a022555cf2: Advanced # Advanced
     e445a3b9-5827-422a-8328-6b10449fa891: Heading # Heading
+    f7d30e72-f872-487a-aba1-c8e95268a220: 'Code Position' # Code Position
 plugins:
   aws-s3:
     edition: standard
@@ -72,6 +116,13 @@ plugins:
     edition: standard
     enabled: true
     schemaVersion: 1.0.0
+  expanded-singles:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
+    settings:
+      expandSingles: true
+      redirectToEntry: true
   imager-x:
     edition: lite
     enabled: true

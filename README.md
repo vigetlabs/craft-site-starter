@@ -75,6 +75,7 @@ replacing standard plugins with similar alternatives (unless absolutely necessar
 | [Retour](https://plugins.craftcms.com/retour)                     | `nystudio107/craft-retour`        | Provides an Craft admin UI to set up redirects. Will automatically create redirects when URLs of entries change.                                                                    | $59.00       | $29.00        |
 | [SEOMatic](https://plugins.craftcms.com/seomatic)                 | `nystudio107/craft-seomatic`      | A turnkey SEO plugin that follows [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance).                                                      | $99.00       | $49.00        |
 | [Vite](https://plugins.craftcms.com/vite)                         | `nystudio107/craft-vite`          | Loads front-end files that are compiled by Vite.                                                                                                                                    | Free         | Free          |
+| [Expanded Singles](https://plugins.craftcms.com/expanded-singles) | `verbb/expanded-singles`          | Change the entries index sidebar to list all singles, rather than grouping them under a 'Singles' menu item.                                                                        | Free         | Free          |
 
 # Contribute to this starter
 

@@ -1,0 +1,55 @@
+color: null
+fieldLayouts:
+  f275bbb7-5f45-46ad-8feb-16f35f683456:
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2025-03-10T17:00:59+00:00'
+            dismissible: false
+            elementCondition: null
+            style: warning
+            tip: "**Use Caution:** Improperly formatted code can break pages. \r\n\r\nBe sure to wrap any JavaScript in opening and closing tags. \r\n\r\n    <script>\r\n        // Your Code Here\r\n    </script> "
+            type: craft\fieldlayoutelements\Tip
+            uid: 6dae3c5a-5842-433f-93ff-8f5696852098
+            userCondition: null
+          -
+            content: "## Instructions\r\n\r\n**Code Positions**\r\n\r\n- **Start of <head>** - Code is loaded  at the beginning of the <head> tag. Only use when absolutely required.\r\n- **End of <head>** - Code is loaded at the end of the </head>.\r\n- **Start of <body>** - Code is loaded at the beginning of the <body> tag. \r\n- **End of <body>** - Code is loaded at the bottom of the <body> tag after all other scripts, styles and markup has loaded.  \r\nThis option has the lowest impact on page speed. "
+            dateAdded: '2025-03-10T17:02:50+00:00'
+            displayInPane: true
+            elementCondition: null
+            type: craft\fieldlayoutelements\Markdown
+            uid: c4baee17-adfa-4390-a757-7697c5e4752a
+            userCondition: null
+            width: 100
+          -
+            dateAdded: '2025-03-10T16:49:09+00:00'
+            elementCondition: null
+            fieldUid: 9c7dc3c3-cb8c-4167-880d-ab9426eef873 # Code Blocks
+            handle: null
+            includeInCards: false
+            instructions: null
+            label: null
+            providesThumbs: false
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: c37c8413-d135-4e9e-8d12-7ebca4b5662f
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 0cc45244-3937-457a-899e-6f786bb6b0a4
+        userCondition: null
+handle: globalCode
+hasTitleField: false
+icon: code
+name: 'Global Code'
+showSlugField: false
+showStatusField: false
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
