@@ -1,0 +1,24 @@
+{% extends 'viget-parts-kit/layout.twig' %}
+
+{#
+
+The image-caption component wraps the image component in a <figure> tag.
+It also includes a <figcaption> tag for the caption.
+
+Use the same props that are defined in the image component.
+
+#}
+
+{% block main %}
+  <div class="container flex flex-col py-64 gap-32">
+    <h2 class="text-xl font-bold">Image Caption</h2>
+
+    {{ include('_components/image-caption.twig', {
+      imageProps: {
+        image: craft.assets().one(),
+        ratio: 16/9,
+      },
+      caption: 'Image caption',
+    }) }}
+  </div>
+{% endblock %}

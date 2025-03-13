@@ -1,3 +1,30 @@
+{#
+  Configuration
+
+  This component is coupled to several values in your Tailwind config.
+
+  transformMaxWith:
+    The default for this prop should be double the width of your .container
+    class (or whatever is used to define the max width of your content)
+
+  screens:
+    This config lets you use breakpoint names in your sizes prop instead of
+    typing custom media queries for every image.
+
+    Keep in sync with Tailwind's screens config.
+
+  @see https://tailwindcss.com/docs/responsive-design
+#}
+{% set screens = {
+  'sm': '(min-width: 640px)',
+  'md': '(min-width: 768px)',
+  'lg': '(min-width: 1024px)',
+  'xl': '(min-width: 1280px)',
+  '2xl': '(min-width: 1536px)',
+} %}
+
+{# Props #}
+
 {# @var \craft\elements\Asset|null image #}
 {% set image = image ?? null %}
 
@@ -26,32 +53,74 @@
     '(min-width: 1200px)': '400px'
   }
   If not provided, it defaults to full viewport width at all sizes.
-
 #}
 {% set sizes = sizes ?? {
   default: '100vw',
 } %}
 
 {#
-  Calculated by dividing width by height.
   @var float|null ratio
+  Calculated by dividing width by height.
+  Example:
+  {
+    ratio: 16/9,
+  }
 #}
 {% set ratio = ratio ?? null %}
 
-{% set defaultSize = sizes.default ?? '100vw' %}
+{#
+  @var int|null transformMinWidth
+  The smallest transform to use when using fillTransforms: auto
+#}
+{% set transformMinWidth = transformMinWidth ?? 420 %}
 
 {#
-  Use Tailwind screen config in our sizes prop.
-  Keep this in sync with your TW's screens config.
-  https://tailwindcss.com/docs/screens
+  @var int|null transformMaxWidth
+  The largest transform to use when using fillTransforms: auto
 #}
-{% set screens = {
-  'sm': '(min-width: 640px)',
-  'md': '(min-width: 768px)',
-  'lg': '(min-width: 1024px)',
-  'xl': '(min-width: 1280px)',
-  '2xl': '(min-width: 1536px)',
-} %}
+{% set transformMaxWidth = transformMaxWidth ?? 2480 %}
+
+{#
+  @var int|null transformAutofillCount
+  The number of transforms to auto-fill between transformMinWidth and transformMaxWidth
+#}
+{% set transformAutofillCount = transformAutofillCount ?? 3 %}
+
+{#
+  @var array|string|null transform
+
+  Leave null to use an auto-filled transform (recommended).
+
+  Can optionally use a named transform.
+
+  The auto-filled transform uses Imager X to pre-populate our transform with multiple
+  transforms between the width of transformMinWidth and transformMaxWidth.
+
+  See:
+  - transformMinWidth
+  - transformMaxWidth
+  - transformAutofillCount
+  - fillTransforms
+  - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+#}
+{% set transform = transform ?? null %}
+
+{# This flag disables the imagerOverrides that set fillTransform: 'auto  #}
+{% set useDefaultTransform = transform is null %}
+
+{# Use either our default transform, or the overridden version from our props #}
+{% set transform = useDefaultTransform ? [
+  transformMinWidth,
+  transformMaxWidth,
+  {
+    ratio: ratio,
+    format: 'webp',
+  },
+] : transform %}
+
+{# Computed values #}
+
+{% set defaultSize = sizes.default ?? '100vw' %}
 
 {#
   Remove the default key so we can add it to the end.
@@ -65,32 +134,27 @@
   |merge([ defaultSize ])
   |join(', ') %}
 
-{% set minWidth = 320 %}
-{% set maxWidth = 2200 %}
-
 {#
   Default settings applied to all transforms
 
-  See:
-  https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+  imagerOverrides:
+  - Overides settings from config/imager-x.php
 
-  https://github.com/spacecatninja/craft-imager-x-power-pack
+  See:
+  - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+  - https://github.com/spacecatninja/craft-imager-x-power-pack
 #}
 {{ image ? ppimg(
   image: image,
-  transform: [
-    minWidth,
-    maxWidth,
-    {
-      ratio: ratio,
-    },
-  ],
+  transform: transform,
   params: {
     class: cx(class, 'w-full h-auto'),
     loading,
-    fillTransforms: 'auto',
-    autoFillCount: 5,
-    allowUpscale: false,
     sizes: sizes,
+    imagerOverrides: useDefaultTransform ? {
+      fillTransforms: 'auto',
+      autoFillCount: transformAutofillCount,
+      allowUpscale: false,
+    } : null,
   },
 ) }}
