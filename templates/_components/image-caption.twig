@@ -1,16 +1,25 @@
 {#
-  @var string|null content
+  @var array imageProps
+
+  Use the same props that are defined in the image component.
 
   Example:
 
   {{ include('_components/image-caption.twig', {
-    content: include('_components/image.twig', {
+    imageProps: {
       image: craft.assets().filename('image.jpg').one(),
-    }),
+      class: 'my-custom-class',
+      ratio: 1/1,
+      sizes: {
+        default: '100vw',
+        sm: '50vw',
+        md: '33vw',
+      },
+    },
     caption: 'Image caption',
   }) }}
 #}
-{% set content = content ?? null %}
+{% set imageProps = imageProps ?? {} %}
 
 {# @var string|null caption #}
 {% set caption = caption ?? null %}
@@ -19,6 +28,6 @@
 {% set class = class ?? null %}
 
 <figure class="{{ class }}">
-  {{ content|raw }}
+  {{ include('_components/image.twig', imageProps) }}
   <figcaption>{{ caption }}</figcaption>
 </figure>

@@ -22,8 +22,8 @@
         {{ include('_components/image.twig', {
           image: block.image.eagerly().one(),
           sizes: {
-            sm: '50vw',
             default: '100vw',
+            sm: '50vw',
           },
         }) }}
       {% case 'video' %}
