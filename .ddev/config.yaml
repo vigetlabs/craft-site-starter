@@ -34,6 +34,7 @@ web_extra_daemons:
   - name: 'vite'
     command: 'npm install && npm run build && npm run dev'
     directory: /var/www/html
+disable_upload_dirs_warning: true
 # Key features of ddev's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
