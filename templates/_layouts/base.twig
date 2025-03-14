@@ -7,7 +7,7 @@
   {{ include(codeBlocksTemplate, {
     codeBlocks,
     codePosition: 'headTop'
-  }) }}
+  }, with_context = false) }}
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,14 +36,14 @@
   {{ include(codeBlocksTemplate, {
     codeBlocks,
     codePosition: 'headBottom'
-  }) }}
+  }, with_context = false) }}
 </head>
 <body>
   {# -- Dangerously added raw HTML -- #}
   {{ include(codeBlocksTemplate, {
     codeBlocks,
     codePosition: 'bodyTop'
-  }) }}
+  }, with_context = false) }}
 
   {% if not isPartsKitUrl %}
       {{ include('_partials/header.twig') }}
@@ -61,6 +61,6 @@
   {{ include(codeBlocksTemplate, {
     codeBlocks,
     codePosition: 'bodyBottom'
-  }) }}
+  }, with_context = false) }}
 </body>
 </html>
