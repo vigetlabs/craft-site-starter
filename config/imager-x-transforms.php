@@ -4,7 +4,7 @@
  * @see https://github.com/spacecatninja/craft-imager-x-aws-serverless-transformer
  *
  * If you are using Serverless Image Transforms (which are a Site Starter Default),
- * automatic genration of transforms is not necessary and you may delete this file.
+ * automatic generation of transforms is not necessary and you may delete this file.
  *
  *
  * USING AUTOMATIC TRANSFORM GENRATION?
