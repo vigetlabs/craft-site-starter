@@ -1,10 +1,11 @@
 {% extends "viget-parts-kit/layout.twig" %}
+{% from '_components/accordion' import Accordion %}
 
 {% block main %}
 
   <div>
     {% for i in 1..3 %}
-      {{ include('_components/accordion.twig', {
+      {{ Accordion({
         title: 'Accordion Item ' ~ i,
         content: 'This is the content for accordion item ' ~ i ~ '.',
       }) }}
@@ -15,7 +16,7 @@
 
   <div>
     {% for i in 1..3 %}
-      {{ include('_components/accordion.twig', {
+      {{ Accordion({
         title: 'Accordion Item ' ~ i,
         content: 'This is the content for accordion item ' ~ i ~ '.',
         name: 'accordion-group',
