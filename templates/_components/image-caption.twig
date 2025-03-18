@@ -19,6 +19,8 @@
     caption: 'Image caption',
   }) }}
 #}
+{% from '_components/image' import Image %}
+
 {% set imageProps = imageProps ?? {} %}
 
 {# @var string|null caption #}
@@ -28,6 +30,6 @@
 {% set class = class ?? null %}
 
 <figure class="{{ class }}">
-  {{ include('_components/image.twig', imageProps) }}
+  {{ Image(imageProps) }}
   <figcaption>{{ caption }}</figcaption>
 </figure>

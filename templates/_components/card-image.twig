@@ -1,4 +1,5 @@
 {% from '_macros/icon.twig' import icon %}
+{% from '_components/image' import Image %}
 
 {# @var string|null class #}
 {% set class = class ?? null %}
@@ -43,7 +44,7 @@
   target: href and newTab ? '_blank' : null,
 } %}
   {% if image %}
-    {{ include('_components/image.twig', {
+    {{ Image({
       image: image,
       sizes: sizes,
       ratio: ratio,

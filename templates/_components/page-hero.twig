@@ -1,3 +1,5 @@
+{% from '_components/image' import Image %}
+
 {# @var string|null title #}
 {% set title = title ?? null %}
 
@@ -28,7 +30,7 @@
       {% endif %}
     </div>
 
-    {{ image ? include('_components/image.twig', {
+    {{ image ? Image({
       class: 'lg:col-span-2',
       image,
       ratio: 4/3,

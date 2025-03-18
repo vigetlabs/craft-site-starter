@@ -1,160 +1,162 @@
-{#
-  Configuration
+{% macro Image(props = {}) %}
+  {#
+    Configuration
 
-  This component is coupled to several values in your Tailwind config.
+    This component is coupled to several values in your Tailwind config.
 
-  transformMaxWith:
-    The default for this prop should be double the width of your .container
-    class (or whatever is used to define the max width of your content)
+    transformMaxWith:
+      The default for this prop should be double the width of your .container
+      class (or whatever is used to define the max width of your content)
 
-  screens:
-    This config lets you use breakpoint names in your sizes prop instead of
-    typing custom media queries for every image.
+    screens:
+      This config lets you use breakpoint names in your sizes prop instead of
+      typing custom media queries for every image.
 
-    Keep in sync with Tailwind's screens config.
+      Keep in sync with Tailwind's screens config.
 
-  @see https://tailwindcss.com/docs/responsive-design
-#}
-{% set screens = {
-  'sm': '(min-width: 640px)',
-  'md': '(min-width: 768px)',
-  'lg': '(min-width: 1024px)',
-  'xl': '(min-width: 1280px)',
-  '2xl': '(min-width: 1536px)',
-} %}
+    @see https://tailwindcss.com/docs/responsive-design
+  #}
+  {% set screens = {
+    'sm': '(min-width: 640px)',
+    'md': '(min-width: 768px)',
+    'lg': '(min-width: 1024px)',
+    'xl': '(min-width: 1280px)',
+    '2xl': '(min-width: 1536px)',
+  } %}
 
-{# Props #}
+  {# Props #}
 
-{# @var \craft\elements\Asset|null image #}
-{% set image = image ?? null %}
+  {# @var \craft\elements\Asset|null image #}
+  {% set image = props.image ?? null %}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{#
-  @var string|null loading
-  Can be 'lazy' or 'eager'
-#}
-{% set loading = loading ?? 'lazy' %}
+  {#
+    @var string|null loading
+    Can be 'lazy' or 'eager'
+  #}
+  {% set loading = props.loading ?? 'lazy' %}
 
-{#
-  @var array sizes
+  {#
+    @var array sizes
 
-  The 'sizes' prop is used to specify the size of the image at different viewport widths.
-  It should be an associative array where:
-  - Keys are either Tailwind breakpoint names (sm, md, lg, xl, 2xl) or custom media queries.
-  - Values are CSS length values (e.g., px, em, rem, vw) representing the image width at that breakpoint.
+    The 'sizes' prop is used to specify the size of the image at different viewport widths.
+    It should be an associative array where:
+    - Keys are either Tailwind breakpoint names (sm, md, lg, xl, 2xl) or custom media queries.
+    - Values are CSS length values (e.g., px, em, rem, vw) representing the image width at that breakpoint.
 
-  Example usage:
-  sizes:  {
+    Example usage:
+    sizes:  {
+      default: '100vw',
+      sm: '50vw',
+      md: '33vw',
+      '(min-width: 1200px)': '400px'
+    }
+    If not provided, it defaults to full viewport width at all sizes.
+  #}
+  {% set sizes = props.sizes ?? {
     default: '100vw',
-    sm: '50vw',
-    md: '33vw',
-    '(min-width: 1200px)': '400px'
-  }
-  If not provided, it defaults to full viewport width at all sizes.
-#}
-{% set sizes = sizes ?? {
-  default: '100vw',
-} %}
+  } %}
 
-{#
-  @var float|null ratio
-  Calculated by dividing width by height.
-  Example:
-  {
-    ratio: 16/9,
-  }
-#}
-{% set ratio = ratio ?? null %}
+  {#
+    @var float|null ratio
+    Calculated by dividing width by height.
+    Example:
+    {
+      ratio: 16/9,
+    }
+  #}
+  {% set ratio = props.ratio ?? null %}
 
-{#
-  @var int|null transformMinWidth
-  The smallest transform to use when using fillTransforms: auto
-#}
-{% set transformMinWidth = transformMinWidth ?? 420 %}
+  {#
+    @var int|null transformMinWidth
+    The smallest transform to use when using fillTransforms: auto
+  #}
+  {% set transformMinWidth = props.transformMinWidth ?? 420 %}
 
-{#
-  @var int|null transformMaxWidth
-  The largest transform to use when using fillTransforms: auto
-#}
-{% set transformMaxWidth = transformMaxWidth ?? 2480 %}
+  {#
+    @var int|null transformMaxWidth
+    The largest transform to use when using fillTransforms: auto
+  #}
+  {% set transformMaxWidth = props.transformMaxWidth ?? 2480 %}
 
-{#
-  @var int|null transformAutofillCount
-  The number of transforms to auto-fill between transformMinWidth and transformMaxWidth
-#}
-{% set transformAutofillCount = transformAutofillCount ?? 3 %}
+  {#
+    @var int|null transformAutofillCount
+    The number of transforms to auto-fill between transformMinWidth and transformMaxWidth
+  #}
+  {% set transformAutofillCount = props.transformAutofillCount ?? 3 %}
 
-{#
-  @var array|string|null transform
+  {#
+    @var array|string|null transform
 
-  Leave null to use an auto-filled transform (recommended).
+    Leave null to use an auto-filled transform (recommended).
 
-  Can optionally use a named transform.
+    Can optionally use a named transform.
 
-  The auto-filled transform uses Imager X to pre-populate our transform with multiple
-  transforms between the width of transformMinWidth and transformMaxWidth.
+    The auto-filled transform uses Imager X to pre-populate our transform with multiple
+    transforms between the width of transformMinWidth and transformMaxWidth.
 
-  See:
-  - transformMinWidth
-  - transformMaxWidth
-  - transformAutofillCount
-  - fillTransforms
-  - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
-#}
-{% set transform = transform ?? null %}
+    See:
+    - transformMinWidth
+    - transformMaxWidth
+    - transformAutofillCount
+    - fillTransforms
+    - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+  #}
+  {% set transform = props.transform ?? null %}
 
-{# This flag disables the imagerOverrides that set fillTransform: 'auto  #}
-{% set useDefaultTransform = transform is null %}
+  {# Computed values #}
 
-{# Use either our default transform, or the overridden version from our props #}
-{% set transform = useDefaultTransform ? [
-  transformMinWidth,
-  transformMaxWidth,
-  {
-    ratio: ratio,
-    format: 'webp',
-  },
-] : transform %}
+  {# This flag disables the imagerOverrides that set fillTransform: 'auto  #}
+  {% set useDefaultTransform = transform is null %}
 
-{# Computed values #}
+  {# Use either our default transform, or the overridden version from our props #}
+  {% set transform = useDefaultTransform ? [
+    transformMinWidth,
+    transformMaxWidth,
+    {
+      ratio: ratio,
+      format: 'webp',
+    },
+  ] : transform %}
 
-{% set defaultSize = sizes.default ?? '100vw' %}
+  {% set defaultSize = sizes.default ?? '100vw' %}
 
-{#
-  Remove the default key so we can add it to the end.
-  Create our pair of MQs + Unit values. First we check
-  if the key matches our Tailwind screen config. If not, we'll
-  assume it's a media query.
-#}
-{% set sizes = sizes
-  |filter((value, key) => key != 'default')
-  |map((value, key) => "#{screens[key] ?? key} #{value}")
-  |merge([ defaultSize ])
-  |join(', ') %}
+  {#
+    Remove the default key so we can add it to the end.
+    Create our pair of MQs + Unit values. First we check
+    if the key matches our Tailwind screen config. If not, we'll
+    assume it's a media query.
+  #}
+  {% set sizes = sizes
+    |filter((value, key) => key != 'default')
+    |map((value, key) => "#{screens[key] ?? key} #{value}")
+    |merge([ defaultSize ])
+    |join(', ') %}
 
-{#
-  Default settings applied to all transforms
+  {#
+    Default settings applied to all transforms
 
-  imagerOverrides:
-  - Overides settings from config/imager-x.php
+    imagerOverrides:
+    - Overides settings from config/imager-x.php
 
-  See:
-  - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
-  - https://github.com/spacecatninja/craft-imager-x-power-pack
-#}
-{{ image ? ppimg(
-  image: image,
-  transform: transform,
-  params: {
-    class: cx(class, 'w-full h-auto'),
-    loading,
-    sizes: sizes,
-    imagerOverrides: useDefaultTransform ? {
-      fillTransforms: 'auto',
-      autoFillCount: transformAutofillCount,
-      allowUpscale: false,
-    } : null,
-  },
-) }}
+    See:
+    - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+    - https://github.com/spacecatninja/craft-imager-x-power-pack
+  #}
+  {{ image ? ppimg(
+    image: image,
+    transform: transform,
+    params: {
+      class: cx(class, 'w-full h-auto'),
+      loading,
+      sizes: sizes,
+      imagerOverrides: useDefaultTransform ? {
+        fillTransforms: 'auto',
+        autoFillCount: transformAutofillCount,
+        allowUpscale: false,
+      } : null,
+    },
+  ) }}
+{% endmacro %}

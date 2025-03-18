@@ -1,3 +1,5 @@
+{% from '_components/image' import Image %}
+
 {# @var \craft\elements\Entry block #}
 {% set block = block ?? null %}
 
@@ -19,7 +21,7 @@
   <div>
     {% switch block.mediaType %}
       {% case 'image' %}
-        {{ include('_components/image.twig', {
+        {{ Image({
           image: block.image.eagerly().one(),
           sizes: {
             default: '100vw',
