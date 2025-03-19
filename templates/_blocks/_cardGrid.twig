@@ -18,6 +18,12 @@
         {% case 'imageCard' %}
           {{ CardImage({
             image: card.image.eagerly().one(),
+            sizes: {
+              default: '100vw',
+              sm: '50vw',
+              md: '33vw',
+              lg: '25vw',
+            },
             href: card.basicLink,
             newTab: card.basicLink.target ?? null,
             title: card.title,
