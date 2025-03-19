@@ -1,52 +1,58 @@
-{% from '_macros/icon.twig' import icon %}
+{% macro Tag(props = {}) %}
+  {% from '_macros/icon.twig' import icon %}
 
-{# @var string|null as #}
-{% set as = as ?? null %}
+  {# Props #}
 
-{# @var string variant #}
-{% set variant = variant ?? 'contained' %}
+  {# @var string|null as #}
+  {% set as = props.as ?? null %}
 
-{# @var string size #}
-{% set size = size ?? 'sm' %}
+  {# @var string variant #}
+  {% set variant = props.variant ?? 'contained' %}
 
-{# @var boolean clickable #}
-{% set clickable = clickable ?? false %}
+  {# @var string size #}
+  {% set size = props.size ?? 'sm' %}
 
-{# @var string|null href #}
-{% set href = href ?? null %}
+  {# @var boolean clickable #}
+  {% set clickable = props.clickable ?? false %}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
+  {# @var string|null href #}
+  {% set href = props.href ?? null %}
 
-{# Determine element type #}
-{% set el = as ?? (href ? 'a' : (clickable ? 'button' : 'span')) %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var array attrs #}
-{% set attrs = attrs ?? {} %}
+  {# @var array attrs #}
+  {% set attrs = props.attrs ?? {} %}
 
-{# @var string|null text #}
-{% set text = text ?? null %}
+  {# @var string|null text #}
+  {% set text = props.text ?? null %}
 
-{# @var string|null icon #}
-{% set icon = icon ?? null %}
+  {# @var string|null icon #}
+  {% set icon = props.icon ?? null %}
 
-{% tag el with attrs|merge({
-  href: href,
-  type: clickable and el == 'button' ? 'button' : null,
-  class: classNames('inline-flex items-center justify-center gap-4 rounded-xs text-center font-medium focus:outline-hidden focus-visible:ring-4', {
-    'bg-sky-600 text-white dark:bg-sky-200 dark:text-sky-800': variant == 'contained',
-    'no-underline hover:bg-sky-700 focus-visible:bg-sky-700 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100': variant == 'contained' and (href or clickable),
-    'border border-sky-600 bg-transparent text-sky-600 dark:border-white dark:text-white': variant == 'outlined',
-    'hover:border-sky-700 hover:bg-sky-100 hover:text-sky-700 focus-visible:border-sky-700 focus-visible:bg-sky-100 focus-visible:ring-sky-600/50 active:bg-sky-200/80 active:text-sky-800 dark:hover:border-white dark:hover:bg-white/25 dark:hover:text-white dark:focus-visible:border-white dark:focus-visible:bg-white/25 dark:focus-visible:ring-white/50 dark:active:bg-white/30': variant == 'outlined' and (href or clickable),
-    'min-h-20 px-6 text-xs [&_svg]:size-12': size == 'sm',
-    'min-h-28 px-8 text-sm [&_svg]:size-16': size == 'md',
-    'min-h-36 px-10 text-base [&_svg]:size-20': size == 'lg',
-  }, class),
-}) %}
-  {{ icon ? icon({
-    name: icon,
-    size: 'none',
-    class: '-my-4',
-  }) }}
-  {{ text }}
-{% endtag %}
+  {# Computed values #}
+
+  {# Determine element type #}
+  {% set el = as ?? (href ? 'a' : (clickable ? 'button' : 'span')) %}
+
+  {% tag el with attrs|merge({
+    href: href,
+    type: clickable and el == 'button' ? 'button' : null,
+    class: cx('inline-flex items-center justify-center gap-4 rounded-xs text-center font-medium focus:outline-hidden focus-visible:ring-4', {
+      'bg-sky-600 text-white dark:bg-sky-200 dark:text-sky-800': variant == 'contained',
+      'no-underline hover:bg-sky-700 focus-visible:bg-sky-700 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100': variant == 'contained' and (href or clickable),
+      'border border-sky-600 bg-transparent text-sky-600 dark:border-white dark:text-white': variant == 'outlined',
+      'hover:border-sky-700 hover:bg-sky-100 hover:text-sky-700 focus-visible:border-sky-700 focus-visible:bg-sky-100 focus-visible:ring-sky-600/50 active:bg-sky-200/80 active:text-sky-800 dark:hover:border-white dark:hover:bg-white/25 dark:hover:text-white dark:focus-visible:border-white dark:focus-visible:bg-white/25 dark:focus-visible:ring-white/50 dark:active:bg-white/30': variant == 'outlined' and (href or clickable),
+      'min-h-20 px-6 text-xs [&_svg]:size-12': size == 'sm',
+      'min-h-28 px-8 text-sm [&_svg]:size-16': size == 'md',
+      'min-h-36 px-10 text-base [&_svg]:size-20': size == 'lg',
+    }, class),
+  }) %}
+    {{ icon ? icon({
+      name: icon,
+      size: 'none',
+      class: '-my-4',
+    }) }}
+    {{ text }}
+  {% endtag %}
+{% endmacro %}

@@ -8,102 +8,103 @@ configured as an input, select, textarea, or other field element.
 The field attrs hash is used to pass additional attributes to the field element.
 #}
 
-{% from '_macros/icon.twig' import icon %}
+{% macro FieldGroup(props = {}) %}
+  {% from '_macros/icon.twig' import icon %}
 
-{# @var id string #}
-{% set id = id ?? ('input-' ~ random()) %}
+  {# @var string id #}
+  {% set id = props.id ?? ('input-' ~ random()) %}
 
-{# @var class string|null #}
-{% set class = class ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var fieldElement string - Required #}
-{% set fieldElement = fieldElement %}
+  {# @var string fieldElement - Required #}
+  {% set fieldElement = props.fieldElement %}
 
-{# @var fieldAttrs array - Additional attributes to pass to the field element #}
-{% set fieldAttrs = fieldAttrs ?? {} %}
+  {# @var array fieldAttrs - Additional attributes to pass to the field element #}
+  {% set fieldAttrs = props.fieldAttrs ?? {} %}
 
-{# @var fieldChildren array|null An array of elements to render inside the field element, used for select dropdowns #}
-{% set fieldChildren = fieldChildren ?? []%}
+  {# @var array|null fieldChildren An array of elements to render inside the field element, used for select dropdowns #}
+  {% set fieldChildren = props.fieldChildren ?? [] %}
 
-{# @var label string|null #}
-{% set label = label ?? null %}
+  {# @var string|null label #}
+  {% set label = props.label ?? null %}
 
-{# @var labelHidden bool #}
-{% set labelHidden = labelHidden ?? false %}
+  {# @var bool labelHidden #}
+  {% set labelHidden = props.labelHidden ?? false %}
 
-{# @var required bool|string long is an option in addition to true #}
-{% set required = required ?? false %}
+  {# @var bool|string required long is an option in addition to true #}
+  {% set required = props.required ?? false %}
 
-{# @var subLabel string|null #}
-{% set subLabel = subLabel ?? null %}
+  {# @var string|null subLabel #}
+  {% set subLabel = props.subLabel ?? null %}
 
-{# @var instructions string|null #}
-{% set instructions = instructions ?? null %}
+  {# @var string|null instructions #}
+  {% set instructions = props.instructions ?? null %}
 
-{# @var errorMessages string[] #}
-{% set errorMessages = errorMessages ?? [] %}
+  {# @var string[] errorMessages #}
+  {% set errorMessages = props.errorMessages ?? [] %}
 
+  {# Generated vars #}
+  {% set idErrors = id ~ '-errors' %}
+  {% set idInstructions = id ~ '-instructions' %}
+  {% set hasError = errorMessages|length %}
+  {% set dataRequired = required ? (required is same as 'long' ? 'long' : true) : null %}
+  {% set describedByElements = [
+    instructions ? idInstructions,
+    hasError ? idErrors,
+  ]|filter|join(' ') %}
 
-{# Generated vars #}
-{% set idErrors = id ~ '-errors' %}
-{% set idInstructions = id ~ '-instructions' %}
-{% set hasError = errorMessages|length %}
-{% set dataRequired = required ? (required is same as 'long' ? 'long' : true) : null %}
-{% set describedByElements = [
-  instructions ? idInstructions,
-  hasError ? idErrors,
-]|filter|join(' ') %}
+  <div {{ attr({
+    class: cx('field-group', class),
+    'data-required': dataRequired,
+  }) }}>
+    <label for="{{ id }}">
+      {% if label %}
+        <span {{ attr({
+          class: cx('field-label', {
+            'sr-only': labelHidden,
+          }),
+        }) }}>
+          {{ label }}
+        </span>
+      {% endif %}
 
-<div {{ attr({
-  class: cx('field-group', class),
-  'data-required': dataRequired,
-}) }}>
-  <label for="{{ id }}">
-    {% if label %}
-      <span {{ attr({
-        class: cx('field-label', {
-          'sr-only': labelHidden,
-        }),
-      }) }}>
-        {{ label }}
+      {% if subLabel %}
+        <span class="field-sublabel">{{ subLabel }}</span>
+      {% endif %}
+    </label>
+
+    {% tag fieldElement with {
+      ...fieldAttrs,
+      id,
+      'aria-required': required ? 'true' : null,
+      'aria-describedby': describedByElements ? describedByElements : null,
+      'aria-invalid': hasError ? 'true' : null,
+      required: required is same as false ? null : '',
+    } -%}
+      {% for child in fieldChildren %}
+        {{ child }}
+      {% endfor %}
+    {%- endtag %}
+
+    {% if instructions %}
+      <span class="field-instructions" id="{{ idInstructions }}">
+        {{ instructions }}
       </span>
     {% endif %}
 
-    {% if subLabel %}
-      <span class="field-sublabel">{{ subLabel }}</span>
+    {% if hasError %}
+      <ul class="field-errors" id="{{ idErrors }}">
+        {{ icon({
+          name: 'error',
+          class: 'absolute left-0 top-2 shrink-0',
+          size: 'sm',
+        }) }}
+
+        {% for error in errorMessages %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
-  </label>
-
-  {% tag fieldElement with {
-    ...fieldAttrs,
-    id,
-    'aria-required': required ? 'true' : null,
-    'aria-describedby': describedByElements ? describedByElements : null,
-    'aria-invalid': hasError ? 'true' : null,
-    required: required is same as false ? null : '',
-  } -%}
-    {% for child in fieldChildren %}
-      {{ child }}
-    {% endfor %}
-  {%- endtag %}
-
-  {% if instructions %}
-    <span class="field-instructions" id="{{ idInstructions }}">
-      {{ instructions }}
-    </span>
-  {% endif %}
-
-  {% if hasError %}
-    <ul class="field-errors" id="{{ idErrors }}">
-      {{ icon({
-        name: 'error',
-        class: 'absolute left-0 top-2 shrink-0',
-        size: 'sm',
-      }) }}
-
-      {% for error in errorMessages %}
-        <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-</div>
+  </div>
+{% endmacro %}

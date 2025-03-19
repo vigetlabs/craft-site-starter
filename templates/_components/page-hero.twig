@@ -1,43 +1,51 @@
-{% from '_components/image' import Image %}
+{% macro PageHero(props = {}) %}
+  {% from '_components/image' import Image %}
 
-{# @var string|null title #}
-{% set title = title ?? null %}
+  {# Props #}
 
-{# @var string|null description #}
-{% set description = description ?? null %}
+  {# @var string|null title #}
+  {% set title = props.title ?? null %}
 
-{# @var \craft\elements\Asset|null image #}
-{% set image = image ?? null %}
+  {# @var string|null description #}
+  {% set description = props.description ?? null %}
 
-{# @var int headingLevel #}
-{% set headingLevel = headingLevel ?? 1 %}
+  {# @var \craft\elements\Asset|null image #}
+  {% set image = props.image ?? null %}
 
-{% set element = "h#{headingLevel}" %}
+  {# @var int headingLevel #}
+  {% set headingLevel = props.headingLevel ?? 1 %}
 
-<div class="bg-gray-100 py-48">
-  <div class="container grid items-center gap-24 sm:grid-cols-2 sm:px-32 lg:gap-48 lg:grid-cols-5">
-    <div class="flex flex-col gap-24 max-w-[640px] lg:col-span-3">
-      {% if title %}
-        {% tag element with {
-          class: 'text-4xl font-bold',
-        } %}
-          {{ title }}
-        {% endtag %}
-      {% endif %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-      {% if description %}
-        <div class="rich-text">{{ description }}</div>
-      {% endif %}
+  {# Computed values #}
+  {% set element = "h#{headingLevel}" %}
+
+  <div class="{{ cx('bg-gray-100 py-48', class) }}">
+    <div class="container grid items-center gap-24 sm:grid-cols-2 sm:px-32 lg:gap-48 lg:grid-cols-5">
+      <div class="flex flex-col gap-24 max-w-[640px] lg:col-span-3">
+        {% if title %}
+          {% tag element with {
+            class: 'text-4xl font-bold',
+          } %}
+            {{ title }}
+          {% endtag %}
+        {% endif %}
+
+        {% if description %}
+          <div class="rich-text">{{ description }}</div>
+        {% endif %}
+      </div>
+
+      {{ image ? Image({
+        class: 'lg:col-span-2',
+        image,
+        ratio: 4/3,
+        sizes: {
+          default: '100vw',
+          sm: '50vw',
+        }
+      }) }}
     </div>
-
-    {{ image ? Image({
-      class: 'lg:col-span-2',
-      image,
-      ratio: 4/3,
-      sizes: {
-        default: '100vw',
-        sm: '50vw',
-      }
-    }) }}
   </div>
-</div>
+{% endmacro %}

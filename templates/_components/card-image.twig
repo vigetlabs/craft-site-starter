@@ -1,68 +1,72 @@
-{% from '_macros/icon.twig' import icon %}
-{% from '_components/image' import Image %}
+{% macro CardImage(props = {}) %}
+  {% from '_macros/icon.twig' import icon %}
+  {% from '_components/image' import Image %}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
+  {# Props #}
 
-{# @var string|null href #}
-{% set href = href ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var bool newTab #}
-{% set newTab = newTab ?? false %}
+  {# @var string|null href #}
+  {% set href = props.href ?? null %}
 
-{# @var craft\elements\Asset|null image #}
-{% set image = image ?? null %}
+  {# @var bool newTab #}
+  {% set newTab = props.newTab ?? false %}
 
-{# @var float|null ratio #}
-{% set ratio = ratio ?? null %}
+  {# @var craft\elements\Asset|null image #}
+  {% set image = props.image ?? null %}
 
-{# @var array|null sizes #}
-{% set sizes = sizes ?? null %}
+  {# @var float|null ratio #}
+  {% set ratio = props.ratio ?? null %}
 
-{# @var string align #}
-{% set align = align ?? 'left' %}
+  {# @var array|null sizes #}
+  {% set sizes = props.sizes ?? null %}
 
-{# @var int headingLevel #}
-{% set headingLevel = headingLevel ?? 3 %}
+  {# @var string align #}
+  {% set align = props.align ?? 'left' %}
 
-{# @var string|null title #}
-{% set title = title ?? null %}
+  {# @var int headingLevel #}
+  {% set headingLevel = props.headingLevel ?? 3 %}
 
-{# @var string|null description #}
-{% set description = description ?? null %}
+  {# @var string|null title #}
+  {% set title = props.title ?? null %}
 
-{# Computed values #}
-{% set element = href ? 'a' : 'article' %}
-{% set headingElement = "h#{headingLevel}" %}
+  {# @var string|null description #}
+  {% set description = props.description ?? null %}
 
-{% tag element with {
-  class: cx(class, 'flex flex-col gap-24', {
-    'items-start': align == 'left',
-    'items-center text-center': align == 'center',
-  }),
-  href: href,
-  target: href and newTab ? '_blank' : null,
-} %}
-  {% if image %}
-    {{ Image({
-      image: image,
-      sizes: sizes,
-      ratio: ratio,
-    }) }}
-  {% endif %}
+  {# Computed values #}
+  {% set element = href ? 'a' : 'article' %}
+  {% set headingElement = "h#{headingLevel}" %}
 
-  {% if title or description %}
-    <div class="flex flex-col gap-8">
-      {% if title %}
-        {% tag headingElement with {
-          class: 'text-xl font-bold',
-        } %}
-          {{ title }}
-        {% endtag %}
-      {% endif %}
-      {% if description %}
-        <p class="text-sm">{{ description }}</p>
-      {% endif %}
-    </div>
-  {% endif %}
-{% endtag %}
+  {% tag element with {
+    class: cx(class, 'flex flex-col gap-24', {
+      'items-start': align == 'left',
+      'items-center text-center': align == 'center',
+    }),
+    href: href,
+    target: href and newTab ? '_blank' : null,
+  } %}
+    {% if image %}
+      {{ Image({
+        image: image,
+        sizes: sizes,
+        ratio: ratio,
+      }) }}
+    {% endif %}
+
+    {% if title or description %}
+      <div class="flex flex-col gap-8">
+        {% if title %}
+          {% tag headingElement with {
+            class: 'text-xl font-bold',
+          } %}
+            {{ title }}
+          {% endtag %}
+        {% endif %}
+        {% if description %}
+          <p class="text-sm">{{ description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endtag %}
+{% endmacro %}

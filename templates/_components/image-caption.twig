@@ -1,35 +1,41 @@
-{#
-  @var array imageProps
+{% macro ImageCaption(props = {}) %}
+  {% from '_components/image' import Image %}
 
-  Use the same props that are defined in the image component.
+  {# Props #}
 
-  Example:
+  {#
+    @var array imageProps
 
-  {{ include('_components/image-caption.twig', {
-    imageProps: {
-      image: craft.assets().filename('image.jpg').one(),
-      class: 'my-custom-class',
-      ratio: 1/1,
-      sizes: {
-        default: '100vw',
-        sm: '50vw',
-        md: '33vw',
+    Use the same props that are defined in the image component.
+
+    Example:
+
+    {{ include('_components/image-caption.twig', {
+      imageProps: {
+        image: craft.assets().filename('image.jpg').one(),
+        class: 'my-custom-class',
+        ratio: 1/1,
+        sizes: {
+          default: '100vw',
+          sm: '50vw',
+          md: '33vw',
+        },
       },
-    },
-    caption: 'Image caption',
-  }) }}
-#}
-{% from '_components/image' import Image %}
+      caption: 'Image caption',
+    }) }}
+  #}
+  {% set imageProps = props.imageProps ?? {} %}
 
-{% set imageProps = imageProps ?? {} %}
+  {# @var string|null caption #}
+  {% set caption = props.caption ?? null %}
 
-{# @var string|null caption #}
-{% set caption = caption ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
-
-<figure class="{{ class }}">
-  {{ Image(imageProps) }}
-  <figcaption>{{ caption }}</figcaption>
-</figure>
+  <figure class="{{ class }}">
+    {{ Image(imageProps) }}
+    {% if caption %}
+      <figcaption>{{ caption }}</figcaption>
+    {% endif %}
+  </figure>
+{% endmacro %}

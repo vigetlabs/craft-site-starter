@@ -1,61 +1,64 @@
-{% from '_macros/icon.twig' import icon %}
+{% macro CardIcon(props = {}) %}
+  {% from '_macros/icon.twig' import icon %}
+  {# Props #}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var string|null href #}
-{% set href = href ?? null %}
+  {# @var string|null href #}
+  {% set href = props.href ?? null %}
 
-{# @var string|null newTab #}
-{% set newTab = newTab ?? null %}
+  {# @var string|null newTab #}
+  {% set newTab = props.newTab ?? null %}
 
-{# @var string align #}
-{% set align = align ?? 'left' %}
+  {# @var string align #}
+  {% set align = props.align ?? 'left' %}
 
-{# @var string|null icon #}
-{% set icon = icon ?? null %}
+  {# @var string|null icon #}
+  {% set icon = props.icon ?? null %}
 
-{# @var int headingLevel #}
-{% set headingLevel = headingLevel ?? 3 %}
+  {# @var int headingLevel #}
+  {% set headingLevel = props.headingLevel ?? 3 %}
 
-{# @var string|null title #}
-{% set title = title ?? null %}
+  {# @var string|null title #}
+  {% set title = props.title ?? null %}
 
-{# @var string|null description #}
-{% set description = description ?? null %}
+  {# @var string|null description #}
+  {% set description = props.description ?? null %}
 
-{# Computed values #}
-{% set element = href ? 'a' : 'article' %}
-{% set headingElement = "h#{headingLevel}" %}
+  {# Computed values #}
+  {% set element = href ? 'a' : 'article' %}
+  {% set headingElement = "h#{headingLevel}" %}
 
-{% tag element with {
-  class: cx(class, 'flex flex-col gap-24', {
-    'items-start': align == 'left',
-    'items-center text-center': align == 'center',
-  }),
-  href: href,
-  target: href and newTab ? '_blank' : null,
-} %}
-  {% if icon %}
-    <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black">
-      {{ icon({
-        name: icon,
-      }) }}
-    </div>
-  {% endif %}
+  {% tag element with {
+    class: cx(class, 'flex flex-col gap-24', {
+      'items-start': align == 'left',
+      'items-center text-center': align == 'center',
+    }),
+    href: href,
+    target: href and newTab ? '_blank' : null,
+  } %}
+    {% if icon %}
+      <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black">
+        {{ icon({
+          name: icon,
+        }) }}
+      </div>
+    {% endif %}
 
-  {% if title or description %}
-    <div class="flex flex-col gap-8">
-      {% if title %}
-        {% tag headingElement with {
-          class: 'text-xl font-bold',
-        } %}
-          {{ title }}
-        {% endtag %}
-      {% endif %}
-      {% if description %}
-        <p class="text-sm">{{ description }}</p>
-      {% endif %}
-    </div>
-  {% endif %}
-{% endtag %}
+    {% if title or description %}
+      <div class="flex flex-col gap-8">
+        {% if title %}
+          {% tag headingElement with {
+            class: 'text-xl font-bold',
+          } %}
+            {{ title }}
+          {% endtag %}
+        {% endif %}
+        {% if description %}
+          <p class="text-sm">{{ description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endtag %}
+{% endmacro %}

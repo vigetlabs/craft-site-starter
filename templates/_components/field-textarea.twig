@@ -1,70 +1,76 @@
-{# These props mirror the props in field-group.twig #}
+{% macro FieldTextarea(props = {}) %}
+  {% from '_components/field-group' import FieldGroup %}
 
-{# @var id string #}
-{% set id = id ?? null %}
+  {# Props #}
 
-{# @var class string|null #}
-{% set class = class ?? null %}
+  {# These props mirror the props in field-group.twig #}
 
-{# @var fieldAttrs array #}
-{% set fieldAttrs = fieldAttrs ?? {} %}
+  {# @var id string #}
+  {% set id = props.id ?? null %}
 
-{# @var label string|null #}
-{% set label = label ?? null %}
+  {# @var class string|null #}
+  {% set class = props.class ?? null %}
 
-{# @var labelHidden bool #}
-{% set labelHidden = labelHidden ?? false %}
+  {# @var fieldAttrs array #}
+  {% set fieldAttrs = props.fieldAttrs ?? {} %}
 
-{# @var required bool #}
-{% set required = required ?? false %}
+  {# @var label string|null #}
+  {% set label = props.label ?? null %}
 
-{# @var subLabel string|null #}
-{% set subLabel = subLabel ?? null %}
+  {# @var labelHidden bool #}
+  {% set labelHidden = props.labelHidden ?? false %}
 
-{# @var instructions string|null #}
-{% set instructions = instructions ?? null %}
+  {# @var required bool #}
+  {% set required = props.required ?? false %}
 
-{# @var errorMessages string[] #}
-{% set errorMessages = errorMessages ?? [] %}
+  {# @var subLabel string|null #}
+  {% set subLabel = props.subLabel ?? null %}
 
-{# These props are for the textarea element #}
+  {# @var instructions string|null #}
+  {% set instructions = props.instructions ?? null %}
 
-{# @var name string|null #}
-{% set name = name ?? null %}
+  {# @var errorMessages string[] #}
+  {% set errorMessages = props.errorMessages ?? [] %}
 
-{# @var placeholder string|null #}
-{% set placeholder = placeholder ?? null %}
+  {# These props are for the textarea element #}
 
-{# @var disabled bool #}
-{% set disabled = disabled ?? false %}
+  {# @var name string|null #}
+  {% set name = props.name ?? null %}
 
-{# @var rows int #}
-{% set rows = rows ?? 4 %}
+  {# @var placeholder string|null #}
+  {% set placeholder = props.placeholder ?? null %}
 
-{# @var resize bool #}
-{% set resize = resize ?? false %}
+  {# @var disabled bool #}
+  {% set disabled = props.disabled ?? false %}
 
-{{ include('_components/field-group.twig', {
-  fieldElement: 'textarea',
-  fieldAttrs: {
-    ...fieldAttrs,
-    class: cx(
-      fieldAttrs.class ?? null,
-      {
-        'resize-none': not resize,
-      },
-    ),
-    name,
-    placeholder,
-    disabled: disabled ? '' : null,
-    rows,
-  },
-  id,
-  class,
-  label,
-  labelHidden,
-  required,
-  subLabel,
-  instructions,
-  errorMessages,
-}) }}
+  {# @var rows int #}
+  {% set rows = props.rows ?? 4 %}
+
+  {# @var resize bool #}
+  {% set resize = props.resize ?? false %}
+
+  {{ FieldGroup({
+    fieldElement: 'textarea',
+    fieldAttrs: {
+      ...fieldAttrs,
+      class: cx(
+        fieldAttrs.class ?? null,
+        {
+          'resize-none': not resize,
+        },
+      ),
+      name,
+      placeholder,
+      disabled: disabled ? '' : null,
+      rows,
+    },
+    id,
+    class,
+    label,
+    labelHidden,
+    required,
+    subLabel,
+    instructions,
+    errorMessages,
+  }) }}
+{% endmacro %}

@@ -1,143 +1,156 @@
-{# @var object pageInfo - Pass the pageInfo object from Craft's {% paginate %} tag to pre-fill all props #}
-{% set pageInfo = pageInfo ?? null %}
+{% macro Pagination(props = {}) %}
+  {% from '_components/button' import Button %}
+  {# Props #}
 
-{#
-   @var int maxLinks
-   Controls the number of page links to show. Includes the first and last page URLs.
-   Odd numbers work best.
+  {# @var object pageInfo - Pass the pageInfo object from Craft's {% paginate %} tag to pre-fill all props #}
+  {% set pageInfo = props.pageInfo ?? null %}
 
-   maxLinks has no effect when using manual props
-#}
-{% set maxLinks = maxLinks ?? 5 %}
+  {#
+     @var int maxLinks
+     Controls the number of page links to show. Includes the first and last page URLs.
+     Odd numbers work best.
 
-{# @var string|null nextUrl #}
-{% set nextUrl = nextUrl ?? pageInfo.nextUrl ?? null %}
+     maxLinks has no effect when using manual props
+  #}
+  {% set maxLinks = props.maxLinks ?? 5 %}
 
-{# @var string|null prevUrl #}
-{% set prevUrl = prevUrl ?? pageInfo.prevUrl ?? null %}
+  {# @var string|null nextUrl #}
+  {% set nextUrl = props.nextUrl ?? pageInfo.nextUrl ?? null %}
 
-{# @var int currentPage #}
-{% set currentPage = currentPage ?? pageInfo.currentPage ?? null %}
+  {# @var string|null prevUrl #}
+  {% set prevUrl = props.prevUrl ?? pageInfo.prevUrl ?? null %}
 
-{# @var int totalPages #}
-{% set totalPages = totalPages ?? pageInfo.totalPages ?? null %}
+  {# @var int currentPage #}
+  {% set currentPage = props.currentPage ?? pageInfo.currentPage ?? null %}
 
-{# @var string|null firstUrl #}
-{% set firstUrl = firstUrl ?? pageInfo.firstUrl ?? null %}
+  {# @var int totalPages #}
+  {% set totalPages = props.totalPages ?? pageInfo.totalPages ?? null %}
 
-{# @var string|null lastUrl #}
-{% set lastUrl = lastUrl ?? pageInfo.lastUrl ?? null %}
+  {# @var string|null firstUrl #}
+  {% set firstUrl = props.firstUrl ?? pageInfo.firstUrl ?? null %}
 
-{# @var array visibleUrls An array of visible page URLs indexed by page number #}
-{% set visibleUrls = visibleUrls ?? [] %}
+  {# @var string|null lastUrl #}
+  {% set lastUrl = props.lastUrl ?? pageInfo.lastUrl ?? null %}
 
-{# @var string size #}
-{% set size = size ?? 'md' %}
+  {# @var array visibleUrls An array of visible page URLs indexed by page number #}
+  {% set visibleUrls = props.visibleUrls ?? [] %}
 
-{# @var string ariaLabel #}
-{% set ariaLabel = ariaLabel ?? 'pagination navigation' %}
+  {# @var string size #}
+  {% set size = props.size ?? 'md' %}
 
-{# Computed values #}
-{% set needEllipsis = totalPages > maxLinks %}
-{% set elipsisThreshold = floor(maxLinks / 2) %}
-{% set hasStartEllipsis = needEllipsis and currentPage > maxLinks - elipsisThreshold %}
-{% set hasEndEllipsis = needEllipsis and currentPage < totalPages - elipsisThreshold %}
+  {# @var string ariaLabel #}
+  {% set ariaLabel = props.ariaLabel ?? 'pagination navigation' %}
 
-{% if pageInfo %}
-  {% if hasStartEllipsis %}
-    {% set maxLinks = maxLinks - 1 %}
-  {% endif  %}
+  {# Computed values #}
+  {% set needEllipsis = totalPages > maxLinks %}
+  {% set elipsisThreshold = floor(maxLinks / 2) %}
+  {% set hasStartEllipsis = needEllipsis and currentPage > maxLinks - elipsisThreshold %}
+  {% set hasEndEllipsis = needEllipsis and currentPage < totalPages - elipsisThreshold %}
 
-  {% if hasEndEllipsis or (currentPage < totalPages - (elipsisThreshold - 1)) %}
-    {% set maxLinks = maxLinks - 1 %}
+  {% if pageInfo %}
+    {% if hasStartEllipsis %}
+      {% set maxLinks = maxLinks - 1 %}
+    {% endif  %}
+
+    {% if hasEndEllipsis or (currentPage < totalPages - (elipsisThreshold - 1)) %}
+      {% set maxLinks = maxLinks - 1 %}
+    {% endif %}
+
+    {% set visibleUrls = pageInfo.getDynamicRangeUrls(maxLinks) %}
   {% endif %}
 
-  {% set visibleUrls = pageInfo.getDynamicRangeUrls(maxLinks) %}
-{% endif %}
+  <nav
+    aria-label="{{ ariaLabel }}"
+    class="text-sky-600 dark:text-white"
+  >
+    <ul class="flex items-center gap-16">
+      <li>
+        {{ Button({
+          href: prevUrl,
+          text: 'Previous',
+          icon: 'arrow-left',
+          variant: 'outlined',
+          size,
+          currentPage,
+        }) }}
+      </li>
 
-{% macro paginationItem(props = {}) %}
-  {% set url = props.url ?? null %}
-  {% set page = props.page ?? null %}
-  {% set size = props.size ?? null %}
-  {% set currentPage = props.currentPage ?? null %}
+      {% if visibleUrls[1] is not defined %}
+        <li>
+          {{ _self._PaginationItem({
+            url: firstUrl,
+            page: 1,
+            size,
+            currentPage,
+          }) }}
+        </li>
+        {# Hide elipsis if page 2 is in the visibleUrls array #}
+        {% if hasStartEllipsis %}
+          <li aria-hidden="true">...</li>
+        {% endif %}
+      {% endif %}
 
-  {{ include('_components/button.twig', {
-      href: url,
-      text: page,
-      variant: page == currentPage ? 'contained' : 'subtle',
-      size: size,
-      class: cx('!p-0 aspect-square rounded-full'),
-      attrs: {
-        'aria-current': page == currentPage ? 'page' : null,
-      },
-    }) }}
+      {% for page, url in visibleUrls %}
+        <li>
+          {{ _self._PaginationItem({
+            url: url,
+            page: page,
+            size,
+            currentPage,
+          }) }}
+        </li>
+      {% endfor %}
+
+      {% if visibleUrls[totalPages] is not defined %}
+        {# Hide elipsis if page totalPages - 1 is in the visibleUrls array #}
+        {% if hasEndEllipsis %}
+          <li aria-hidden="true">...</li>
+        {% endif %}
+        <li>
+          {{ _self._PaginationItem({
+            url: lastUrl,
+            page: totalPages,
+            size: size,
+          }) }}
+        </li>
+      {% endif %}
+
+      <li>
+        {{ Button({
+          href: nextUrl,
+          text: 'Next',
+          icon: 'arrow-right',
+          variant: 'outlined',
+          size: size,
+          iconLast: true,
+        }) }}
+      </li>
+    </ul>
+  </nav>
 {% endmacro %}
 
-<nav
-  aria-label="{{ ariaLabel }}"
-  class="text-sky-600 dark:text-white"
->
-  <ul class="flex items-center gap-16">
-    <li>
-      {{ include('_components/button.twig', {
-        href: prevUrl,
-        text: 'Previous',
-        icon: 'arrow-left',
-        variant: 'outlined',
-        size,
-        currentPage,
-      }) }}
-    </li>
+{# Reused markup for pagination items #}
+{% macro _PaginationItem(props = {}) %}
+  {# @var string|null url #}
+  {% set url = props.url ?? null %}
 
-    {% if visibleUrls[1] is not defined %}
-      <li>
-        {{ _self.paginationItem({
-          url: firstUrl,
-          page: 1,
-          size,
-          currentPage,
-        }) }}
-      </li>
-      {# Hide elipsis if page 2 is in the visibleUrls array #}
-      {% if hasStartEllipsis %}
-        <li aria-hidden="true">...</li>
-      {% endif %}
-    {% endif %}
+  {# @var int|null page #}
+  {% set page = props.page ?? null %}
 
-    {% for page, url in visibleUrls %}
-      <li>
-        {{ _self.paginationItem({
-          url: url,
-          page: page,
-          size,
-          currentPage,
-        }) }}
-      </li>
-    {% endfor %}
+  {# @var string|null size #}
+  {% set size = props.size ?? null %}
 
-    {% if visibleUrls[totalPages] is not defined %}
-      {# Hide elipsis if page totalPages - 1 is in the visibleUrls array #}
-      {% if hasEndEllipsis %}
-        <li aria-hidden="true">...</li>
-      {% endif %}
-      <li>
-        {{ _self.paginationItem({
-          url: lastUrl,
-          page: totalPages,
-          size: size,
-        }) }}
-      </li>
-    {% endif %}
+  {# @var int|null currentPage #}
+  {% set currentPage = props.currentPage ?? null %}
 
-    <li>
-      {{ include('_components/button.twig', {
-        href: nextUrl,
-        text: 'Next',
-        icon: 'arrow-right',
-        variant: 'outlined',
-        size: size,
-        iconLast: true,
-      }) }}
-    </li>
-  </ul>
-</nav>
+  {{ Button({
+    href: url,
+    text: page,
+    variant: page == currentPage ? 'contained' : 'subtle',
+    size: size,
+    class: cx('!p-0 aspect-square rounded-full'),
+    attrs: {
+      'aria-current': page == currentPage ? 'page' : null,
+    },
+  }) }}
+{% endmacro %}

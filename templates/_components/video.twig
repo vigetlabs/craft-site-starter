@@ -1,45 +1,51 @@
 {#
   TODO possible improvements
   - rework to parse the video provider & id from any type of URL.
-  - lazy load the iframe
   - customizable thumbnail / play button
 #}
 
-{#
-  The source of the video. E.g. 'https://www.youtube.com/embed/lJIrF4YjHfQ'
-  @var string source
-#}
-{% set source = source ?? '' %}
+{% macro Video(props = {}) %}
+  {% from '_components/button' import Button %}
 
-{#
-  Additional attributes to pass to the iframe element.
-  @var array iframeAttrs
-#}
-{% set iframeAttrs = iframeAttrs ?? {} %}
+  {# Props #}
 
-{#
-  Additional classes for the wrapper div
-  @var string|null class
-#}
-{% set class = class ?? null %}
+  {#
+    @var string source - The source of the video. E.g. 'https://www.youtube.com/embed/lJIrF4YjHfQ'
+  #}
+  {% set source = props.source ?? '' %}
 
-{# Generate a unique ID for the video element #}
-{% set id = 'video-' ~ random() %}
+  {#
+    @var array iframeAttrs - Additional attributes to pass to the iframe element.
+  #}
+  {% set iframeAttrs = props.iframeAttrs ?? {} %}
 
-<div class="{{ classNames('relative', class) }}">
-  {{ include('_components/button.twig', {
-    href: '#' ~ id,
-    variant: 'text',
-    class: 'sr-only focus-visible:not-sr-only',
-    text: 'Skip past video'
-  }) }}
+  {#
+    @var string|null class - Additional classes for the wrapper div
+  #}
+  {% set class = props.class ?? null %}
 
-  <iframe
-    src="{{ source }}"
-    class="aspect-video size-full"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowfullscreen="true"
-  ></iframe>
-</div>
+  {# Computed values #}
 
-<div id="{{ id }}"></div>
+  {# Generate a unique ID for the video element #}
+  {% set id = 'video-' ~ random() %}
+
+  <div class="{{ classNames('relative', class) }}">
+    {{ Button({
+      href: '#' ~ id,
+      variant: 'text',
+      class: 'sr-only focus-visible:not-sr-only',
+      text: 'Skip past video'
+    }) }}
+
+    <iframe
+      src="{{ source }}"
+      class="aspect-video size-full"
+      allow="autoplay; fullscreen; picture-in-picture"
+      allowfullscreen="true"
+      loading="lazy"
+      {{ attr(iframeAttrs) }}
+    ></iframe>
+  </div>
+
+  <div id="{{ id }}"></div>
+{% endmacro %}
