@@ -1,7 +1,9 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/call-to-action' import CallToAction %}
+
 {% block main %}
-  {{ include('_components/call-to-action.twig', {
+  {{ CallToAction({
     title: 'Lorem ipsum dolor sit amet',
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing e lit. Nulla facilisi. Nulla facilisi. Nulla facilisi.',
     href: '#TEST',

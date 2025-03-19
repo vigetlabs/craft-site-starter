@@ -1,4 +1,7 @@
 {# @var \craft\elements\Entry block #}
+{% from '_components/card-image' import CardImage %}
+{% from '_components/card-icon' import CardIcon %}
+
 {% set block = block ?? null %}
 
 {% set cardHeadingLevel = block.heading is not empty ? 3 : 2 %}
@@ -13,7 +16,7 @@
     {% for card in block.cardGrid.eagerly().collect() %}
       {% switch card.type.handle %}
         {% case 'imageCard' %}
-          {{ include('_components/card-image.twig', {
+          {{ CardImage({
             image: card.image.eagerly().one(),
             href: card.basicLink,
             newTab: card.basicLink.target ?? null,
@@ -22,7 +25,7 @@
             headingLevel: cardHeadingLevel,
           }) }}
         {% case 'iconCard' %}
-          {{ include('_components/card-icon.twig', {
+          {{ CardIcon({
             href: card.basicLink,
             newTab: card.basicLink.target ?? null,
             icon: card.icon.value,

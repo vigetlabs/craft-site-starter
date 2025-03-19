@@ -1,10 +1,11 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/video' import Video %}
+
 {% block main %}
   <div class="max-w-prose mx-auto">
 
-
-    {{ include('_components/video.twig', {
+    {{ Video({
       source: 'https://www.youtube.com/embed/lJIrF4YjHfQ',
       class: 'mb-24',
     }) }}

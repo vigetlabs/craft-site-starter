@@ -1,7 +1,9 @@
 {# @var \craft\elements\Entry|null block #}
+{% from '_components/call-to-action' import CallToAction %}
+
 {% set block = block ?? null %}
 
-{{ include('_components/call-to-action.twig', {
+{{ CallToAction({
   title: block.title,
   text: block.richTextSimple,
   href: block.button.value,
