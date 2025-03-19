@@ -9,7 +9,7 @@ The field attrs hash is used to pass additional attributes to the field element.
 #}
 
 {% macro FieldGroup(props = {}) %}
-  {% from '_macros/icon.twig' import icon %}
+  {% from '_components/icon.twig' import icon %}
 
   {# @var string id #}
   {% set id = props.id ?? ('input-' ~ random()) %}
