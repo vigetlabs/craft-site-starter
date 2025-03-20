@@ -1,5 +1,5 @@
 {% macro Tag(props = {}) %}
-  {% from '_components/icon.twig' import icon %}
+  {% from '_components/icon.twig' import Icon %}
 
   {# Props #}
 
@@ -48,7 +48,7 @@
       'min-h-36 px-10 text-base [&_svg]:size-20': size == 'lg',
     }, class),
   }) %}
-    {{ icon ? icon({
+    {{ icon ? Icon({
       name: icon,
       size: 'none',
       class: '-my-4',

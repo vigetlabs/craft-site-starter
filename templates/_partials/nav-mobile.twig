@@ -21,7 +21,7 @@
   } %}
     {{ node.title }}
 
-    {{ hasChildren ? icon({
+    {{ hasChildren ? Icon({
       name: 'chevron-down',
       size: 'sm',
       class: iconTransitionClass,
@@ -57,7 +57,7 @@
       class="relative z-10 transition-colors duration-700 text-gray-500"
       :class="isOpen && 'text-amber-600!'"
     >
-      {{ icon({
+      {{ Icon({
         name: 'logo-primary',
         size: 'none',
         class: 'w-[186px] h-32',

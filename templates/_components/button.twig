@@ -1,5 +1,5 @@
 {% macro Button(props = {}) %}
-  {% from '_components/icon.twig' import icon %}
+  {% from '_components/icon.twig' import Icon %}
   {# Props #}
 
   {# @var string|null as #}
@@ -63,7 +63,7 @@
       'btn-lg': size == 'lg',
     }, class),
   }) %}
-    {{ icon ? icon({
+    {{ icon ? Icon({
       name: icon,
       size: size,
       class: iconLast ? 'order-last' : null,

@@ -9,7 +9,7 @@ The field attrs hash is used to pass additional attributes to the field element.
 #}
 
 {% macro FieldGroup(props = {}) %}
-  {% from '_components/icon.twig' import icon %}
+  {% from '_components/icon.twig' import Icon %}
 
   {# @var string id #}
   {% set id = props.id ?? ('input-' ~ random()) %}
@@ -95,7 +95,7 @@ The field attrs hash is used to pass additional attributes to the field element.
 
     {% if hasError %}
       <ul class="field-errors" id="{{ idErrors }}">
-        {{ icon({
+        {{ Icon({
           name: 'error',
           class: 'absolute left-0 top-2 shrink-0',
           size: 'sm',

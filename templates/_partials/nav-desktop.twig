@@ -25,7 +25,7 @@
   } %}
     {{ node.title }}
 
-    {{ hasChildren ? icon({
+    {{ hasChildren ? Icon({
       name: 'chevron-down',
       size: 'sm',
       class: iconTransitionClass,
@@ -44,7 +44,7 @@
     class="inline-flex py-4 text-gray-500 transition-colors hover:text-amber-600"
     href="{{ url('/') }}"
   >
-    {{ icon({
+    {{ Icon({
       name: 'logo-primary',
       size: 'none',
       class: 'w-[186px] h-32',
