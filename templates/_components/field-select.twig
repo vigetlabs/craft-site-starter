@@ -5,48 +5,48 @@
 
   {# These props mirror the props in field-group.twig #}
 
-  {# @var id string #}
+  {# @var string|null id #}
   {% set id = props.id ?? null %}
 
-  {# @var class string|null #}
+  {# @var string|null class #}
   {% set class = props.class ?? null %}
 
-  {# @var fieldAttrs array #}
+  {# @var array fieldAttrs #}
   {% set fieldAttrs = props.fieldAttrs ?? {} %}
 
-  {# @var label string|null #}
+  {# @var string|null label #}
   {% set label = props.label ?? null %}
 
-  {# @var labelHidden bool #}
+  {# @var bool labelHidden #}
   {% set labelHidden = props.labelHidden ?? false %}
 
-  {# @var required bool #}
+  {# @var bool required #}
   {% set required = props.required ?? false %}
 
-  {# @var subLabel string|null #}
+  {# @var string|null subLabel #}
   {% set subLabel = props.subLabel ?? null %}
 
-  {# @var instructions string|null #}
+  {# @var string|null instructions #}
   {% set instructions = props.instructions ?? null %}
 
-  {# @var errorMessages string[] #}
+  {# @var string[] errorMessages #}
   {% set errorMessages = props.errorMessages ?? [] %}
 
   {# These props are for the select element #}
 
-  {# @var name string|null #}
+  {# @var string|null name #}
   {% set name = props.name ?? null %}
 
-  {# @var placeholder string|null Only used when a blank option is present #}
+  {# @var string|null placeholder Only used when a blank option is present #}
   {% set placeholder = props.placeholder ?? null %}
 
-  {# @var useEmptyOption bool #}
+  {# @var bool useEmptyOption #}
   {% set useEmptyOption = props.useEmptyOption ?? false %}
 
-  {# @var disabled bool #}
+  {# @var bool disabled #}
   {% set disabled = props.disabled ?? false %}
 
-  {# @var options array{label: string, value: string, selected: bool}[] #}
+  {# @var array{label: string, value: string, selected: bool}[] options #}
   {% set options = props.options ?? [] %}
 
   {% macro option(item) %}
