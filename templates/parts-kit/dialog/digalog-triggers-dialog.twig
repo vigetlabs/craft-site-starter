@@ -1,12 +1,15 @@
 {% extends "viget-parts-kit/layout.twig" %}
 
+{% from '_components/button' import Button %}
+{% from '_components/dialog' import Dialog %}
+
 {% block main %}
 
 {% set dialog1Content %}
     <p>Dialog 1</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
 
-    {{ include('_components/button.twig', {
+    {{ Button({
       text: 'Open Dialog 2',
       attrs: {
         'x-data': '',
@@ -23,7 +26,7 @@
   {% endset %}
 
   {# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
-  {{ include('_components/button.twig', {
+  {{ Button({
     text: 'Open Dialog 1',
     attrs: {
       'x-data': '',
@@ -31,12 +34,12 @@
     },
   }) }}
 
-  {{ include('_components/dialog.twig', {
+  {{ Dialog({
     content: dialog1Content,
     id: 'my-dialog',
   }) }}
 
-  {{ include('_components/dialog.twig', {
+  {{ Dialog({
     content: dialog2Content,
     id: 'my-dialog-2',
   }) }}

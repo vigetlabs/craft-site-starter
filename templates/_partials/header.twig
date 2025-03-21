@@ -1,4 +1,5 @@
-{% from "_macros/icon.twig" import icon %}
+{% from "_components/icon.twig" import Icon %}
+{% from '_components/button' import Button %}
 
 {# The primary nav has a max depth of 3 levels. This simplifies our code since it doesn't have to be truly recursive #}
 {% set primaryNavigation = craft.navigation.nodes()
@@ -7,7 +8,7 @@
     .with(['children.children'])
     .collect() %}
 
-{{ include('_components/button.twig', {
+{{ Button({
   text: 'Skip to main content',
   href: '#content',
   class: 'sr-only focus:not-sr-only focus:absolute focus:top-16 focus:left-16 focus:z-50 focus:p-16 focus:z-max',

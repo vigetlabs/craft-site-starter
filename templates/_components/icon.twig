@@ -1,0 +1,34 @@
+{#
+Inlines the SVG markup directly into the page.
+
+Provides icon size props so you don't have to remember to pass
+`.size-xyz` every time you want to use your icon system.
+
+By setting size to `none` you can add arbitrary size classes to the icon.
+#}
+{% macro Icon(props = {}) %}
+  {# Props #}
+
+  {# @var string|null name #}
+  {% set name = props.name ?? null %}
+
+  {# @var string size #}
+  {% set size = props.size ?? 'md' %}
+
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
+
+  {# Computed values #}
+  {% set sizeConfig = {
+    'sm': 'size-16',
+    'md': 'size-24',
+    'lg': 'size-32',
+    'none': null,
+  } %}
+
+  {% set sizeClass = sizeConfig[size] ?? sizeConfig.md %}
+
+  {{ svg('@webroot/dist/assets/icons/' ~ name ~ '.svg')|attr({
+    class: cx(sizeClass, class),
+  }) }}
+{% endmacro %}

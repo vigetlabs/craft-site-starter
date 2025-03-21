@@ -1,9 +1,11 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/card-image' import CardImage %}
+
 {% block main %}
   <div class="grid grid-cols-3 gap-16 mb-48">
     {% for i in 1..3 %}
-      {{ include('_components/card-image.twig', {
+      {{ CardImage({
         image: craft.assets.one(),
         href: i == 2 ? '#TEST' : null,
         newTab: i == 2,
@@ -18,7 +20,7 @@
 
   <div class="grid grid-cols-3 gap-16 mb-48">
     {% for i in 1..3 %}
-      {{ include('_components/card-image.twig', {
+      {{ CardImage({
         align: 'center',
         image: craft.assets.one(),
         href: i == 2 ? '#TEST' : null,

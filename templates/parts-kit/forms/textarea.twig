@@ -1,10 +1,12 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/field-textarea' import FieldTextarea %}
+
 {% block main %}
 
   {% set fields %}
     <div class="flex flex-col gap-48 p-32 max-w-lg">
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         id: 'custom-id',
         label: 'Text Area',
         subLabel: 'This is a sublabel',
@@ -12,7 +14,7 @@
         name: 'textarea',
       }) }}
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area',
         placeholder: 'Placeholder (label hidden)',
         labelHidden: true,
@@ -21,7 +23,7 @@
       }) }}
 
       <form class="flex flex-col gap-16 items-start">
-        {{ include('_components/field-textarea.twig', {
+        {{ FieldTextarea({
           class: 'w-full',
           label: 'Text Area (required)',
           required: true,
@@ -32,14 +34,14 @@
         <button class="dark:text-white" type="submit">Test Validation</button>
       </form>
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area (required long)',
         required: 'long',
         instructions: 'This is an instruction',
         name: 'textarea-required-long',
       }) }}
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area (required with error)',
         required: true,
         instructions: 'This is an instruction',
@@ -47,19 +49,19 @@
         name: 'textarea-required-with-error',
       }) }}
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area (disabled)',
         disabled: true,
         name: 'textarea-disabled',
       }) }}
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area (custom rows)',
         rows: 10,
         name: 'textarea-custom-rows',
       }) }}
 
-      {{ include('_components/field-textarea.twig', {
+      {{ FieldTextarea({
         label: 'Text Area (resize)',
         resize: true,
         name: 'textarea-resize',

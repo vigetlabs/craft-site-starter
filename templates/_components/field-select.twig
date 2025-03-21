@@ -1,76 +1,82 @@
-{# These props mirror the props in field-group.twig #}
+{% macro FieldSelect(props = {}) %}
+  {% from '_components/field-group' import FieldGroup %}
 
-{# @var id string #}
-{% set id = id ?? null %}
+  {# Props #}
 
-{# @var class string|null #}
-{% set class = class ?? null %}
+  {# These props mirror the props in field-group.twig #}
 
-{# @var fieldAttrs array #}
-{% set fieldAttrs = fieldAttrs ?? {} %}
+  {# @var string|null id #}
+  {% set id = props.id ?? null %}
 
-{# @var label string|null #}
-{% set label = label ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var labelHidden bool #}
-{% set labelHidden = labelHidden ?? false %}
+  {# @var array fieldAttrs #}
+  {% set fieldAttrs = props.fieldAttrs ?? {} %}
 
-{# @var required bool #}
-{% set required = required ?? false %}
+  {# @var string|null label #}
+  {% set label = props.label ?? null %}
 
-{# @var subLabel string|null #}
-{% set subLabel = subLabel ?? null %}
+  {# @var bool labelHidden #}
+  {% set labelHidden = props.labelHidden ?? false %}
 
-{# @var instructions string|null #}
-{% set instructions = instructions ?? null %}
+  {# @var bool required #}
+  {% set required = props.required ?? false %}
 
-{# @var errorMessages string[] #}
-{% set errorMessages = errorMessages ?? [] %}
+  {# @var string|null subLabel #}
+  {% set subLabel = props.subLabel ?? null %}
 
-{# These props are for the select element #}
+  {# @var string|null instructions #}
+  {% set instructions = props.instructions ?? null %}
 
-{# @var name string|null #}
-{% set name = name ?? null %}
+  {# @var string[] errorMessages #}
+  {% set errorMessages = props.errorMessages ?? [] %}
 
-{# @var placeholder string|null Only used when a blank option is present #}
-{% set placeholder = placeholder ?? null %}
+  {# These props are for the select element #}
 
-{# @var useEmptyOption bool #}
-{% set useEmptyOption = useEmptyOption ?? false %}
+  {# @var string|null name #}
+  {% set name = props.name ?? null %}
 
-{# @var disabled bool #}
-{% set disabled = disabled ?? false %}
+  {# @var string|null placeholder Only used when a blank option is present #}
+  {% set placeholder = props.placeholder ?? null %}
 
-{# @var options array{label: string, value: string, selected: bool}[] #}
-{% set options = options ?? [] %}
+  {# @var bool useEmptyOption #}
+  {% set useEmptyOption = props.useEmptyOption ?? false %}
 
-{% macro option(item) %}
-  <option {{ attr({
-    value: item.value ?? '',
-    selected: item.selected is defined ? '' : null,
-  }) }}>
-    {{ item.label }}
-  </option>
+  {# @var bool disabled #}
+  {% set disabled = props.disabled ?? false %}
+
+  {# @var array{label: string, value: string, selected: bool}[] options #}
+  {% set options = props.options ?? [] %}
+
+  {% macro option(item) %}
+    <option {{ attr({
+      value: item.value ?? '',
+      selected: item.selected is defined ? '' : null,
+    }) }}>
+      {{ item.label }}
+    </option>
+  {% endmacro %}
+
+  {% if useEmptyOption %}
+    {% set options = options|unshift({label: placeholder, value: '' }) %}
+  {% endif %}
+
+  {{ FieldGroup({
+    fieldElement: 'select',
+    fieldAttrs: {
+      ...fieldAttrs,
+      name,
+      disabled: disabled ? '' : null,
+    },
+    id,
+    class,
+    fieldChildren: options|map(item => _self.option(item)),
+    label,
+    labelHidden,
+    required,
+    subLabel,
+    instructions,
+    errorMessages,
+  }) }}
 {% endmacro %}
-
-{% if useEmptyOption %}
-  {% set options = options|unshift({label: placeholder, value: '' }) %}
-{% endif %}
-
-{{ include('_components/field-group.twig', {
-  fieldElement: 'select',
-  fieldAttrs: {
-    ...fieldAttrs,
-    name,
-    disabled: disabled ? '' : null,
-  },
-  id,
-  class,
-  fieldChildren: options|map(item => _self.option(item)),
-  label,
-  labelHidden,
-  required,
-  subLabel,
-  instructions,
-  errorMessages,
-}) }}

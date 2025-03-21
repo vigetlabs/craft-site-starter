@@ -1,8 +1,10 @@
 {% extends "viget-parts-kit/layout.twig" %}
 
+{% from '_components/tabs' import Tabs %}
+
 {% block main %}
   <div class="container py-64">
-    {{ include('_components/tabs.twig', {
+    {{ Tabs({
       tabs: [
         { title: 'Tab 1', content: 'Content for Tab 1' },
         { title: 'Tab 2', content: 'Content for Tab 2' },
@@ -11,7 +13,7 @@
   </div>
 
   <div class="container py-64 bg-black dark">
-    {{ include('_components/tabs.twig', {
+    {{ Tabs({
       tabs: [
         { title: 'Tab 1', content: 'Content for Tab 1' },
         { title: 'Tab 2', content: 'Content for Tab 2' },

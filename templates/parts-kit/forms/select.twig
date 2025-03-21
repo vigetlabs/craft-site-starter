@@ -1,5 +1,7 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/field-select' import FieldSelect %}
+
 {% block main %}
 
   {% set options = [
@@ -10,7 +12,7 @@
 
   {% set fields %}
     <div class="flex flex-col gap-48 p-32 max-w-lg">
-      {{ include('_components/field-select.twig', {
+      {{ FieldSelect({
         id: 'custom-id',
         label: 'Select',
         subLabel: 'This is a sublabel',
@@ -19,7 +21,7 @@
         name: 'select',
       }) }}
 
-      {{ include('_components/field-select.twig', {
+      {{ FieldSelect({
         label: 'Selected options',
         options: [
           { label: 'Option 1', value: 'option-1' },
@@ -30,7 +32,7 @@
       }) }}
 
       <form class="flex flex-col gap-16 items-start">
-        {{ include('_components/field-select.twig', {
+        {{ FieldSelect({
           class: 'w-full',
           label: 'Select (required)',
           required: true,
@@ -44,7 +46,7 @@
         <button class="dark:text-white" type="submit">Test Validation</button>
       </form>
 
-      {{ include('_components/field-select.twig', {
+      {{ FieldSelect({
         label: 'Select (required long)',
         required: 'long',
         instructions: 'This is an instruction',
@@ -52,7 +54,7 @@
         name: 'select-required-long',
       }) }}
 
-      {{ include('_components/field-select.twig', {
+      {{ FieldSelect({
         label: 'Select (required with error)',
         required: true,
         instructions: 'This is an instruction',
@@ -61,7 +63,7 @@
         name: 'select-required-with-error',
       }) }}
 
-      {{ include('_components/field-select.twig', {
+      {{ FieldSelect({
         label: 'Select (disabled)',
         disabled: true,
         options,

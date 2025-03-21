@@ -1,5 +1,7 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/pagination' import Pagination %}
+
 {#
 The pagination component that integrates well with Craft's {% paginate %} by
 using the pageInfo object.
@@ -24,7 +26,7 @@ Example Usage:
     </article>
   {% endfor %}
 
-  {{ include('_components/pagination.twig', {
+  {{ Pagination({
     pageInfo,
     maxLinks: 7,
   }) }}
@@ -46,17 +48,17 @@ Example Usage:
 } %}
 
 {% set examples %}
-  {{ include('_components/pagination.twig', {
+  {{ Pagination({
     ...props,
     size: 'sm',
   }) }}
 
-  {{ include('_components/pagination.twig', {
+  {{ Pagination({
     ...props,
     size: 'md',
   }) }}
 
-  {{ include('_components/pagination.twig', {
+  {{ Pagination({
     ...props,
     size: 'lg',
   }) }}

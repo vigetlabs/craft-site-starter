@@ -1,10 +1,12 @@
 {# @var \craft\elements\Entry|null block #}
+{% from '_components/page-hero' import PageHero %}
+
 {% set block = block ?? null %}
 
 {# @var bool hasPreviousBlocksWithH1 #}
 {% set hasPreviousBlocksWithH1 = hasPreviousBlocksWithH1 ?? false %}
 
-{{ include('_components/page-hero.twig', {
+{{ PageHero({
   image: block.image.eagerly().one(),
   title: block.title,
   description: block.richTextSimple,

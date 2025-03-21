@@ -1,34 +1,43 @@
-{# @var string|null title #}
-{% set title = title ?? null %}
+{% macro CallToAction(props = {}) %}
+  {% from '_components/button' import Button %}
 
-{# @var string|null text #}
-{% set text = text ?? null %}
+  {# Props #}
 
-{# @var string|null href #}
-{% set href = href ?? null %}
+  {# @var string|null title #}
+  {% set title = props.title ?? null %}
 
-{# @var string|null buttonText #}
-{% set buttonText = buttonText ?? null %}
+  {# @var string|null text #}
+  {% set text = props.text ?? null %}
 
-{# @var boolean|null newTab #}
-{% set newTab = newTab ?? null %}
+  {# @var string|null href #}
+  {% set href = props.href ?? null %}
 
-<div class="bg-gray-200 py-48">
-  <div class="container flex flex-col items-center gap-24">
-    {% if title %}
-      <h2 class="text-xl font-semibold">{{ title }}</h2>
-    {% endif %}
+  {# @var string|null buttonText #}
+  {% set buttonText = props.buttonText ?? null %}
 
-    {% if text %}
-      <div class="max-w-[640px]">{{ text }}</div>
-    {% endif %}
+  {# @var boolean|null newTab #}
+  {% set newTab = props.newTab ?? null %}
 
-    {% if href and buttonText %}
-      {{ include('_components/button.twig', {
-        href,
-        newTab,
-        text: buttonText,
-      }) }}
-    {% endif %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
+
+  <div class="{{ cx('bg-gray-200 py-48', class) }}">
+    <div class="container flex flex-col items-center gap-24">
+      {% if title %}
+        <h2 class="text-xl font-semibold">{{ title }}</h2>
+      {% endif %}
+
+      {% if text %}
+        <div class="max-w-[640px]">{{ text }}</div>
+      {% endif %}
+
+      {% if href and buttonText %}
+        {{ Button({
+          href,
+          newTab,
+          text: buttonText,
+        }) }}
+      {% endif %}
+    </div>
   </div>
-</div>
+{% endmacro %}

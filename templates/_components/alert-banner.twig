@@ -1,38 +1,45 @@
+{% macro AlertBanner(props = {}) %}
+  {% from '_components/button' import Button %}
+  {# Props #}
 
-{# @var string title #}
-{% set title = title ?? null %}
+  {# @var string title #}
+  {% set title = props.title ?? null %}
 
-{# @var string description #}
-{% set description = description ?? null %}
+  {# @var string description #}
+  {% set description = props.description ?? null %}
 
-{# @var bool dismissible #}
-{% set dismissible = dismissible ?? false %}
+  {# @var bool dismissible #}
+  {% set dismissible = props.dismissible ?? false %}
 
-<div
-  role="alert"
-  data-component="AlertBanner"
-  aria-live="assertive"
-  aria-atomic="true"
-  class="relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48"
-  x-data="{ dismiss() { this.$root.remove() } }"
->
-  {% if title %}
-    <h2 class="text-lg font-bold">{{ title }}</h2>
-  {% endif %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-  {% if description %}
-    <p>{{ description }}</p>
-  {% endif %}
+  <div
+    role="alert"
+    data-component="AlertBanner"
+    aria-live="assertive"
+    aria-atomic="true"
+    class="{{ cx('relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48', class) }}"
+    x-data="{ dismiss() { this.$root.remove() } }"
+  >
+    {% if title %}
+      <h2 class="text-lg font-bold">{{ title }}</h2>
+    {% endif %}
 
-  {{ dismissible ? include('_components/button.twig', {
-    variant: 'subtle',
-    size: 'sm',
-    icon: 'close',
-    iconOnly: true,
-    class: 'absolute right-24 top-24',
-    text: 'Close',
-    attrs: {
-      'x-on:click': 'dismiss()',
-    },
-  }) }}
-</div>
+    {% if description %}
+      <p>{{ description }}</p>
+    {% endif %}
+
+    {{ dismissible ? Button({
+      variant: 'subtle',
+      size: 'sm',
+      icon: 'close',
+      iconOnly: true,
+      class: 'absolute right-24 top-24',
+      text: 'Close',
+      attrs: {
+        'x-on:click': 'dismiss()',
+      },
+    }) }}
+  </div>
+{% endmacro %}

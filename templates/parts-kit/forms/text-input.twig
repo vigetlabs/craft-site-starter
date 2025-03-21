@@ -1,10 +1,12 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/field-text-input' import FieldTextInput %}
+
 {% block main %}
 
   {% set fields %}
     <div class="flex flex-col gap-48 p-32 max-w-lg">
-      {{ include('_components/field-text-input.twig', {
+      {{ FieldTextInput({
         id: 'custom-id',
         label: 'Text Input',
         subLabel: 'This is a sublabel',
@@ -12,7 +14,7 @@
         name: 'text-input',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
+      {{ FieldTextInput({
         label: 'Text Input',
         placeholder: 'Placeholder (label hidden)',
         labelHidden: true,
@@ -21,7 +23,7 @@
       }) }}
 
       <form class="flex flex-col gap-16 items-start">
-        {{ include('_components/field-text-input.twig', {
+        {{ FieldTextInput({
           class: 'w-full',
           label: 'Text Input (required)',
           required: true,
@@ -32,14 +34,14 @@
         <button class="dark:text-white" type="submit">Test Validation</button>
       </form>
 
-      {{ include('_components/field-text-input.twig', {
+      {{ FieldTextInput({
         label: 'Text Input (required long)',
         required: 'long',
         instructions: 'This is an instruction',
         name: 'text-input-required-long',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
+      {{ FieldTextInput({
         label: 'Text Input (required with error)',
         required: true,
         instructions: 'This is an instruction',
@@ -47,7 +49,7 @@
         name: 'text-input-required-with-error',
       }) }}
 
-      {{ include('_components/field-text-input.twig', {
+      {{ FieldTextInput({
         label: 'Text Input (disabled)',
         disabled: true,
         name: 'text-input-disabled',
@@ -55,7 +57,7 @@
 
       {% set inputTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
       {% for type in inputTypes %}
-        {{ include('_components/field-text-input.twig', {
+        {{ FieldTextInput({
           label: 'Text Input (' ~ type ~ ')',
           type,
           name: 'text-input-' ~ type,

@@ -1,5 +1,7 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/image' import Image %}
+
 {#
   Overview:
 
@@ -22,7 +24,7 @@
 
   Example:
 
-    {{ include('_components/image.twig', {
+    {{ Image({
       image: craft.assets.one(),
       sizes: {
         default: '50vw',
@@ -57,7 +59,7 @@
       Transforms and sizes are configured to work well with the .container class.
     #}
     <h2 class="text-xl font-bold">Basic Example</h2>
-    {{ include('_components/image.twig', {
+    {{ Image({
       image: craft.assets.one(),
       ratio: 16/9,
     }) }}
@@ -70,7 +72,7 @@
     <div class="grid gap-16 grid-cols-2 sm:grid-cols-4 md:grid-cols-3">
       <div>
         <h2 class="text-xl font-bold mb-16">Custom Sizes</h2>
-        {{ include('_components/image.twig', {
+        {{ Image({
           image: craft.assets.one(),
           sizes: {
             default: '50vw',
@@ -81,7 +83,7 @@
       </div>
       <div>
         <h2 class="text-xl font-bold mb-16">Custom Sizes and Aspect Ratio</h2>
-        {{ include('_components/image.twig', {
+        {{ Image({
           image: craft.assets.one(),
           sizes: {
             default: '50vw',
@@ -97,7 +99,7 @@
           If you need to use a named transform, you can pass a string into the `transform` prop.
         #}
         <h2 class="text-xl font-bold mb-16">Named Transform</h2>
-        {{ include('_components/image.twig', {
+        {{ Image({
           image: craft.assets.one(),
           transform: 'exampleNamedTransform',
           sizes: {
@@ -136,7 +138,7 @@
 
 <div class="flex flex-col gap-32">
   <h2 class="text-xl font-bold">Full Bleed Image</h2>
-  {{ include('_components/image.twig', {
+  {{ Image({
     image: craft.assets.one(),
     ratio: 16/9,
     transformMinWidth: 800,

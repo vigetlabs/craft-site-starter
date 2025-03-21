@@ -1,5 +1,7 @@
 {% extends 'viget-parts-kit/layout.twig' %}
 
+{% from '_components/button' import Button %}
+
 {% set sizes = ['sm', 'md', 'lg'] %}
 
 {% block main %}
@@ -8,25 +10,25 @@
       <div class="flex items-center gap-16">
         <h3 class="text-lg font-bold">{{ size }}</h3>
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'contained',
           text: 'Button',
           size,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'outlined',
           text: 'Button',
           size,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'subtle',
           text: 'Button',
           size,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'text',
           text: 'Button',
           size,
@@ -42,14 +44,14 @@
     {% for size in sizes %}
       <div class="flex items-center gap-16">
         <h3 class="text-lg font-bold">{{ size }}</h3>
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'contained',
           text: 'Button',
           size,
           icon: 'arrow-right',
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'contained',
           text: 'Button',
           size,
@@ -57,7 +59,7 @@
           iconLast: true,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'contained',
           text: 'Button',
           size,
@@ -65,14 +67,14 @@
           iconOnly: true,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'outlined',
           text: 'Button',
           size,
           icon: 'arrow-right',
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'outlined',
           text: 'Button',
           size,
@@ -80,14 +82,14 @@
           iconOnly: true,
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'subtle',
           text: 'Button',
           size,
           icon: 'arrow-right',
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'subtle',
           iconOnly: true,
           text: 'Button',
@@ -95,14 +97,14 @@
           icon: 'arrow-right',
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'text',
           text: 'Button',
           size,
           icon: 'arrow-right',
         }) }}
 
-        {{ include('_components/button.twig', {
+        {{ Button({
           variant: 'text',
           text: 'Button',
           size,

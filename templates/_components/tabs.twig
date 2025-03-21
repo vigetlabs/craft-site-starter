@@ -1,75 +1,83 @@
-{# @var array{title: string, content: string}[] tabs #}
-{% set tabs = tabs ?? [] %}
+{% macro Tabs(props = {}) %}
+  {% from '_components/button' import Button %}
 
-{# @var int activeIndex #}
-{% set activeIndex = activeIndex ?? 0 %}
+  {# Props #}
 
-{# Computed attributes #}
+  {# @var array{title: string, content: string}[] tabs #}
+  {% set tabs = props.tabs ?? [] %}
 
-{% set id = 'tabs-' ~ random() %}
+  {# @var int activeIndex #}
+  {% set activeIndex = props.activeIndex ?? 0 %}
 
-<div
-  class="dark:text-white"
-  x-data="{
-    activeIndex: {{ activeIndex }},
-    selectTab(event) {
-      const tab = event.target
-      this.activeIndex = parseInt(tab.dataset.index, 10)
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-      $nextTick(() => {
-        document.getElementById(tab.getAttribute('aria-controls')).focus()
-      })
-    },
-    get activeTab() {
-      return $root.querySelector(`button[aria-selected=true]`)
-    },
-  }"
->
-  <ul class="mb-16 flex border-b border-gray-200 dark:border-gray-700" role="tablist">
-    {% for tab in tabs %}
-      <li>
-        <button
-          data-index="{{ loop.index0 }}"
-          id="{{ id }}-tab-{{ loop.index }}"
-          class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_var(--color-blue-500)]"
-          role="tab"
-          aria-controls="{{ id }}-tabpanel-{{ loop.index }}"
-          :aria-selected="activeIndex === {{ loop.index0 }}"
-          @click="selectTab"
-        >
-          <span
-            class="pointer-events-none mb-4 flex items-center justify-center rounded-sm px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+  {# Computed values #}
+  {% set id = 'tabs-' ~ random() %}
+
+  <div
+    class="{{ cx('dark:text-white', class) }}"
+    x-data="{
+      activeIndex: {{ activeIndex }},
+      selectTab(event) {
+        const tab = event.target
+        this.activeIndex = parseInt(tab.dataset.index, 10)
+
+        $nextTick(() => {
+          document.getElementById(tab.getAttribute('aria-controls')).focus()
+        })
+      },
+      get activeTab() {
+        },
+        }"
+        return $root.querySelector(`button[aria-selected=true]`)
+  >
+    <ul class="mb-16 flex border-b border-gray-200 dark:border-gray-700" role="tablist">
+      {% for tab in tabs %}
+        <li>
+          <button
+            data-index="{{ loop.index0 }}"
+            id="{{ id }}-tab-{{ loop.index }}"
+            class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_var(--color-blue-500)]"
+            role="tab"
+            aria-controls="{{ id }}-tabpanel-{{ loop.index }}"
+            :aria-selected="activeIndex === {{ loop.index0 }}"
+            @click="selectTab"
           >
-            {{ tab.title }}
-          </span>
-        </button>
-      </li>
+            <span
+              class="pointer-events-none mb-4 flex items-center justify-center rounded-sm px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+            >
+              {{ tab.title }}
+            </span>
+          </button>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% for tab in tabs %}
+      <div
+        id="{{ id }}-tabpanel-{{ loop.index }}"
+        aria-labelledby="{{ id }}-tab-{{ loop.index }}"
+        role="tabpanel"
+        tabindex="0"
+        :hidden="activeIndex !== {{ loop.index0 }}"
+        {{ attr({
+          'x-cloak': activeIndex != loop.index0 ? '' : null,
+        }) }}
+      >
+        {{ tab.content }}
+      </div>
     {% endfor %}
-  </ul>
 
-  {% for tab in tabs %}
-    <div
-      id="{{ id }}-tabpanel-{{ loop.index }}"
-      aria-labelledby="{{ id }}-tab-{{ loop.index }}"
-      role="tabpanel"
-      tabindex="0"
-      :hidden="activeIndex !== {{ loop.index0 }}"
-      {{ attr({
-        'x-cloak': activeIndex != loop.index0 ? '' : null,
-      }) }}
-    >
-      {{ tab.content }}
-    </div>
-  {% endfor %}
-
-  {{ include('_components/button.twig', {
-    text: 'Back to tabs list',
-    size: 'sm',
-    variant: 'text',
-    class: 'sr-only focus:not-sr-only focus:mt-16 focus:z-max',
-    attrs: {
-      '@click': 'activeTab.focus()',
-    },
-  }) }}
-</div>
+    {{ Button({
+      text: 'Back to tabs list',
+      size: 'sm',
+      variant: 'text',
+      class: 'sr-only focus:not-sr-only focus:mt-16 focus:z-max',
+      attrs: {
+        '@click': 'activeTab.focus()',
+      },
+    }) }}
+  </div>
+{% endmacro %}
 

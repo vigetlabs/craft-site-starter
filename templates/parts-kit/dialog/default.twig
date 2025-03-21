@@ -1,5 +1,8 @@
 {% extends "viget-parts-kit/layout.twig" %}
 
+{% from '_components/button' import Button %}
+{% from '_components/dialog' import Dialog %}
+
 {% block main %}
 
   {% set content %}
@@ -8,7 +11,7 @@
   {% endset %}
 
   {# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
-  {{ include('_components/button.twig', {
+  {{ Button({
     text: 'Open Dialog',
     attrs: {
       'x-data': '',
@@ -16,7 +19,7 @@
     },
   }) }}
 
-  {{ include('_components/dialog.twig', {
+  {{ Dialog({
     content,
     id: 'my-dialog',
     hideClose: true,

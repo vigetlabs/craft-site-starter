@@ -1,65 +1,71 @@
-{# These props mirror the props in field-group.twig #}
+{% macro FieldTextInput(props = {}) %}
+  {% from '_components/field-group' import FieldGroup %}
 
-{# @var id string #}
-{% set id = id ?? null %}
+  {# Props #}
 
-{# @var class string|null #}
-{% set class = class ?? null %}
+  {# These props mirror the props in field-group.twig #}
 
-{# @var fieldAttrs array #}
-{% set fieldAttrs = fieldAttrs ?? {} %}
+  {# @var string|null id #}
+  {% set id = props.id ?? null %}
 
-{# @var label string|null #}
-{% set label = label ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var labelHidden bool #}
-{% set labelHidden = labelHidden ?? false %}
+  {# @var array fieldAttrs #}
+  {% set fieldAttrs = props.fieldAttrs ?? {} %}
 
-{# @var required bool #}
-{% set required = required ?? false %}
+  {# @var string|null label #}
+  {% set label = props.label ?? null %}
 
-{# @var subLabel string|null #}
-{% set subLabel = subLabel ?? null %}
+  {# @var bool labelHidden #}
+  {% set labelHidden = props.labelHidden ?? false %}
 
-{# @var instructions string|null #}
-{% set instructions = instructions ?? null %}
+  {# @var bool required #}
+  {% set required = props.required ?? false %}
 
-{# @var errorMessages string[] #}
-{% set errorMessages = errorMessages ?? [] %}
+  {# @var string|null subLabel #}
+  {% set subLabel = props.subLabel ?? null %}
 
-{# These props are for the input element #}
+  {# @var string|null instructions #}
+  {% set instructions = props.instructions ?? null %}
 
-{# @var name string|null #}
-{% set name = name ?? null %}
+  {# @var string[] errorMessages #}
+  {% set errorMessages = props.errorMessages ?? [] %}
 
-{# @var placeholder string|null #}
-{% set placeholder = placeholder ?? null %}
+  {# These props are for the input element #}
 
-{# @var disabled bool #}
-{% set disabled = disabled ?? false %}
+  {# @var string|null name #}
+  {% set name = props.name ?? null %}
 
-{# @var type string|null #}
-{% set type = type ?? 'text' %}
+  {# @var string|null placeholder #}
+  {% set placeholder = props.placeholder ?? null %}
 
-{# Allowed types #}
-{% set allowedTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
-{% set validatedType = type in allowedTypes ? type : 'text' %}
+  {# @var bool disabled #}
+  {% set disabled = props.disabled ?? false %}
 
-{{ include('_components/field-group.twig', {
-  fieldElement: 'input',
-  fieldAttrs: {
-    ...fieldAttrs,
-    name,
-    type: validatedType,
-    placeholder,
-    disabled: disabled ? '' : null,
-  },
-  id,
-  class,
-  label,
-  labelHidden,
-  required,
-  subLabel,
-  instructions,
-  errorMessages,
-}) }}
+  {# @var string|null type #}
+  {% set type = props.type ?? 'text' %}
+
+  {# Allowed types #}
+  {% set allowedTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
+  {% set validatedType = type in allowedTypes ? type : 'text' %}
+
+  {{ FieldGroup({
+    fieldElement: 'input',
+    fieldAttrs: {
+      ...fieldAttrs,
+      name,
+      type: validatedType,
+      placeholder,
+      disabled: disabled ? '' : null,
+    },
+    id,
+    class,
+    label,
+    labelHidden,
+    required,
+    subLabel,
+    instructions,
+    errorMessages,
+  }) }}
+{% endmacro %}

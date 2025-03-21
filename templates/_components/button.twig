@@ -1,72 +1,74 @@
-{% from '_macros/icon.twig' import icon %}
+{% macro Button(props = {}) %}
+  {% from '_components/icon.twig' import Icon %}
+  {# Props #}
 
-{# @var string|null as #}
-{% set as = as ?? null %}
+  {# @var string|null as #}
+  {% set as = props.as ?? null %}
 
-{# @var string variant #}
-{% set variant = variant ?? 'contained' %}
+  {# @var string variant #}
+  {% set variant = props.variant ?? 'contained' %}
 
-{# @var string size #}
-{% set size = size ?? 'md' %}
+  {# @var string size #}
+  {% set size = props.size ?? 'md' %}
 
-{# @var string|null title #}
-{% set title = title ?? null %}
+  {# @var string|null title #}
+  {% set title = props.title ?? null %}
 
-{# @var string|null icon The name of the icon to use #}
-{% set icon = icon ?? null %}
+  {# @var string|null icon The name of the icon to use #}
+  {% set icon = props.icon ?? null %}
 
-{# @var bool iconLast #}
-{% set iconLast = iconLast ?? false %}
+  {# @var bool iconLast #}
+  {% set iconLast = props.iconLast ?? false %}
 
-{# @var boolean iconOnly #}
-{% set iconOnly = iconOnly ?? false %}
+  {# @var boolean iconOnly #}
+  {% set iconOnly = props.iconOnly ?? false %}
 
-{# @var string|null href #}
-{% set href = href ?? null %}
+  {# @var string|null href #}
+  {% set href = props.href ?? null %}
 
-{# @var boolean newTab #}
-{% set newTab = newTab ?? false %}
+  {# @var boolean newTab #}
+  {% set newTab = props.newTab ?? false %}
 
-{# @var string type #}
-{% set type = type ?? 'button' %}
+  {# @var string type #}
+  {% set type = props.type ?? 'button' %}
 
-{# @var boolean disabled #}
-{% set disabled = disabled ?? false %}
+  {# @var boolean disabled #}
+  {% set disabled = props.disabled ?? false %}
 
-{# @var string|null class #}
-{% set class = class ?? null %}
+  {# @var string|null class #}
+  {% set class = props.class ?? null %}
 
-{# @var string|null text #}
-{% set text = text ?? null %}
+  {# @var string|null text #}
+  {% set text = props.text ?? null %}
 
-{# Determine element type #}
-{% set el = as ?? (href and not disabled ? 'a' : 'button') %}
+  {# Determine element type #}
+  {% set el = as ?? (href and not disabled ? 'a' : 'button') %}
 
-{# @var array attrs #}
-{% set attrs = attrs ?? {} %}
+  {# @var array attrs #}
+  {% set attrs = props.attrs ?? {} %}
 
-{% tag el with attrs | merge({
-  href: not disabled ? href : null,
-  target: newTab ? '_blank' : null,
-  disabled: disabled ? true : null,
-  type: el == 'button' ? type : null,
-  title: title,
-  class: classNames({
-    'btn-contained': variant == 'contained',
-    'btn-outlined': variant == 'outlined',
-    'btn-subtle': variant == 'subtle',
-    'btn-text': variant == 'text',
-    'btn-icon': iconOnly,
-    'btn-sm': size == 'sm',
-    'btn-lg': size == 'lg',
-  }, class),
-}) %}
+  {% tag el with attrs | merge({
+    href: not disabled ? href : null,
+    target: newTab ? '_blank' : null,
+    disabled: disabled ? true : null,
+    type: el == 'button' ? type : null,
+    title: title,
+    class: classNames({
+      'btn-contained': variant == 'contained',
+      'btn-outlined': variant == 'outlined',
+      'btn-subtle': variant == 'subtle',
+      'btn-text': variant == 'text',
+      'btn-icon': iconOnly,
+      'btn-sm': size == 'sm',
+      'btn-lg': size == 'lg',
+    }, class),
+  }) %}
+    {{ icon ? Icon({
+      name: icon,
+      size: size,
+      class: iconLast ? 'order-last' : null,
+    }) }}
 
-  {{ icon ? icon({
-    name: icon,
-    size: size,
-    class: iconLast ? 'order-last' : null,
-  }) }}
-
-  {{ text }}
-{% endtag %}
+    {{ text }}
+  {% endtag %}
+{% endmacro %}
