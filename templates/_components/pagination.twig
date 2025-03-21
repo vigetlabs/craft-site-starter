@@ -131,6 +131,8 @@
 
 {# Reused markup for pagination items #}
 {% macro _PaginationItem(props = {}) %}
+  {% from '_components/button' import Button %}
+
   {# @var string|null url #}
   {% set url = props.url ?? null %}
 
