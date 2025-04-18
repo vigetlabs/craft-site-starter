@@ -23,6 +23,8 @@ hooks:
     - composer: install
     # Ensures that lint-staged runs properly in ddev container
     - exec: git config --global --add safe.directory /var/www/html
+  post-import-db:
+    - exec: './craft clear-caches/all'
 web_extra_exposed_ports:
   # Expose ports for vite
   - name: vite
