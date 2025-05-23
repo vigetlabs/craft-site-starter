@@ -1,4 +1,4 @@
-dateModified: 1748039388
+dateModified: 1748040389
 elementSources:
   craft\elements\Entry:
     -
@@ -124,10 +124,14 @@ plugins:
       expandSingles: true
       redirectToEntry: true
   imager-x:
-    edition: lite
+    edition: pro
     enabled: true
     licenseKey: REPLACE
     schemaVersion: 4.0.0
+  imager-x-aws-serverless-transformer:
+    edition: standard
+    enabled: true
+    schemaVersion: 2.0.0
   imager-x-power-pack:
     edition: standard
     enabled: true
