@@ -23,7 +23,7 @@
     "postcss-pxtorem": "^6.1.0",
     "prettier": "^3.5.2",
     "tailwindcss": "^4.0.0",
-    "vite": "^6.2.0",
+    "vite": "^6.3.5",
     "vite-plugin-static-copy": "^2.2.0"
   },
   "dependencies": {
