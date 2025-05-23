@@ -65,12 +65,12 @@ fieldLayouts:
         name: Content
         uid: c5d6deb9-e383-44bf-aa0f-a8de30dfca6f
         userCondition: null
-fs: $ASSET_FILESYSTEM
+fs: s3
 handle: assets
 name: Assets
 sortOrder: 1
 subpath: ''
 titleTranslationKeyFormat: null
 titleTranslationMethod: site
-transformFs: $ASSET_FILESYSTEM
+transformFs: ''
 transformSubpath: transforms

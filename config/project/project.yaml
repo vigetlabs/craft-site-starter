@@ -1,4 +1,4 @@
-dateModified: 1748040389
+dateModified: 1748040902
 elementSources:
   craft\elements\Entry:
     -
@@ -50,13 +50,25 @@ email:
     username: $SYSTEM_EMAIL_USERNAME
   transportType: craft\mail\transportadapters\Smtp
 fs:
-  local:
+  s3:
     hasUrls: true
-    name: Local
+    name: S3
     settings:
-      path: '@webroot/assets'
-    type: craft\fs\Local
-    url: /assets/
+      addSubfolderToRootUrl: true
+      autoFocalPoint: false
+      bucket: $S3_BUCKET
+      bucketSelectionMode: manual
+      cfDistributionId: $S3_CLOUDFRONT_DISTRIBUTION_ID
+      cfPrefix: $S3_SUBFOLDER
+      expires: ''
+      keyId: $S3_ACCESS_KEY_ID
+      makeUploadsPublic: false
+      region: $S3_BUCKET_REGION
+      secret: $S3_SECRET_ACCESS_KEY
+      storageClass: ''
+      subfolder: $S3_SUBFOLDER
+    type: craft\awss3\Fs
+    url: $S3_BASE_URL
 meta:
   __names__:
     0e7762a5-2553-4c0d-b8af-9b43b59524bf: Home # Home
