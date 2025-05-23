@@ -109,6 +109,22 @@
           },
         }) }}
       </div>
+      <div>
+        {#
+          Scalar Sizes
+          This component supports custom transforms and scalar values for the sizes prop.
+        #}
+        <h2 class="text-xl font-bold mb-16">Scalar Sizes & Custom Transform</h2>
+        {{ Image({
+          image: craft.assets.one(),
+          class: 'size-40',
+          transformMinWidth: 40,
+          transformMaxWidth: 80,
+          transformAutofillCount: 0,
+          ratio: 1/1,
+          sizes: '40px',
+        }) }}
+      </div>
     </div>
   </div>
 
