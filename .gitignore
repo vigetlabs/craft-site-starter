@@ -8,6 +8,8 @@ node_modules
 /web/imager
 /.vite
 php-cs-fixer.cache
+# Ignore generated visualization files
+vite-bundle-visualizer.html
 
 # BEGIN-STARTER-ONLY
 config/license.key
