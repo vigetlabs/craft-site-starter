@@ -1,10 +1,22 @@
 {% macro Image(props = {}) %}
   {#
-    Configuration
+    Example Usage:
+      ```
+      {{ Image({
+        image: craft.assets.one(),
+        ratio: 3/4,
+        sizes: {
+          default: '50vw',
+          sm: '25vw',
+          md: '33vw',
+        }
+      }) }}      ```
+
+    Component Configuration:
 
     This component is coupled to several values in your Tailwind config.
 
-    transformMaxWith:
+    transformMaxWidth:
       The default for this prop should be double the width of your .container
       class (or whatever is used to define the max width of your content)
 
@@ -12,9 +24,10 @@
       This config lets you use breakpoint names in your sizes prop instead of
       typing custom media queries for every image.
 
-      Keep in sync with Tailwind's screens config.
+      You must manually keep in sync with Tailwind's screens config.
+      @see https://tailwindcss.com/docs/responsive-design
 
-    @see https://tailwindcss.com/docs/responsive-design
+      You may add any custom breakpoint names (such as `container` to apply a size when the container width is reached)
   #}
   {% set screens = {
     'sm': '(min-width: 640px)',
@@ -29,8 +42,11 @@
   {# @var \craft\elements\Asset|null image #}
   {% set image = props.image ?? null %}
 
-  {# @var string|null class #}
-  {% set class = props.class ?? null %}
+  {#
+    @var string|null class
+    Pass an empty string to have no class applied to the image.
+  #}
+  {% set class = props.class ?? "w-full h-auto" %}
 
   {#
     @var string|null loading
@@ -124,34 +140,39 @@
   {% set defaultSize = sizes.default ?? '100vw' %}
 
   {#
-    Remove the default key so we can add it to the end.
-    Create our pair of MQs + Unit values. First we check
-    if the key matches our Tailwind screen config. If not, we'll
-    assume it's a media query.
+    When sizes is scalar, the  single value will be used in the images sizes attribute.\
+
+    Otherwise, iterate through sizes object:
+    1. Remove the default key so we can add it to the end (step 3).
+    2. Create our pair of MQs + Unit values. First checks if the
+    key matches our Tailwind screen config. If not, assumes that
+    it is a manually defined media query.
+    3. Add the default size to the end.
+    4. Join the values with a comma.
   #}
-  {% set sizes = sizes
+  {% set sizes = sizes is scalar ? sizes : sizes
     |filter((value, key) => key != 'default')
     |map((value, key) => "#{screens[key] ?? key} #{value}")
     |merge([ defaultSize ])
     |join(', ') %}
 
   {#
-    Default settings applied to all transforms
+  Default settings applied to all transforms
 
-    imagerOverrides:
-    - Overides settings from config/imager-x.php
+  imagerOverrides:
+  - Overides settings from config/imager-x.php
 
-    See:
-    - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
-    - https://github.com/spacecatninja/craft-imager-x-power-pack
+  See:
+  - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
+  - https://github.com/spacecatninja/craft-imager-x-power-pack
   #}
   {{ image ? ppimg(
     image: image,
     transform: transform,
     params: {
-      class: cx(class, 'w-full h-auto'),
+      class,
       loading,
-      sizes: sizes,
+      sizes,
       imagerOverrides: useDefaultTransform ? {
         fillTransforms: 'auto',
         autoFillCount: transformAutofillCount,
