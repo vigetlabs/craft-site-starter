@@ -60,7 +60,7 @@ fs:
       bucketSelectionMode: manual
       cfDistributionId: $S3_CLOUDFRONT_DISTRIBUTION_ID
       cfPrefix: $S3_SUBFOLDER
-      expires: ''
+      expires: '30 days'
       keyId: $S3_ACCESS_KEY_ID
       makeUploadsPublic: false
       region: $S3_BUCKET_REGION
