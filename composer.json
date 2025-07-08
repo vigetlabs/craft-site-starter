@@ -7,7 +7,7 @@
   "require": {
     "craftcms/aws-s3": "2.2.2",
     "craftcms/ckeditor": "4.9.0",
-    "craftcms/cms": "5.7.7",
+    "craftcms/cms": "5.8.4",
     "mmikkel/cp-field-inspect": "2.0.4",
     "nystudio107/craft-emptycoalesce": "5.0.0",
     "nystudio107/craft-retour": "5.0.10",
