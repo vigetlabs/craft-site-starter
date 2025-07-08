@@ -8,7 +8,6 @@
     "craftcms/aws-s3": "2.2.3",
     "craftcms/ckeditor": "4.9.0",
     "craftcms/cms": "5.8.4",
-    "mmikkel/cp-field-inspect": "2.0.4",
     "nystudio107/craft-emptycoalesce": "5.0.0",
     "nystudio107/craft-retour": "5.0.11",
     "nystudio107/craft-seomatic": "5.1.16",
