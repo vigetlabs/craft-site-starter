@@ -9,7 +9,7 @@ return static function(ECSConfig $ecsConfig): void {
     $ecsConfig->parallel();
     $ecsConfig->paths([
         __DIR__ . '/modules',
-        __DIR__ . '/install-scripts',
+        __DIR__ . '/config',
         __DIR__ . '/bootstrap.php',
         __DIR__ . '/web/index.php',
         __FILE__,
