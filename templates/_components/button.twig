@@ -20,19 +20,19 @@
   {# @var bool iconLast #}
   {% set iconLast = props.iconLast ?? false %}
 
-  {# @var boolean iconOnly #}
+  {# @var bool iconOnly #}
   {% set iconOnly = props.iconOnly ?? false %}
 
   {# @var string|null href #}
   {% set href = props.href ?? null %}
 
-  {# @var boolean newTab #}
+  {# @var bool newTab #}
   {% set newTab = props.newTab ?? false %}
 
   {# @var string type #}
   {% set type = props.type ?? 'button' %}
 
-  {# @var boolean disabled #}
+  {# @var bool disabled #}
   {% set disabled = props.disabled ?? false %}
 
   {# @var string|null class #}
@@ -50,10 +50,11 @@
   {% tag el with attrs | merge({
     href: not disabled ? href : null,
     target: newTab ? '_blank' : null,
+    rel: newTab ? 'noopener' : null,
     disabled: disabled ? true : null,
     type: el == 'button' ? type : null,
     title: title,
-    class: classNames({
+    class: cx({
       'btn-contained': variant == 'contained',
       'btn-outlined': variant == 'outlined',
       'btn-subtle': variant == 'subtle',
