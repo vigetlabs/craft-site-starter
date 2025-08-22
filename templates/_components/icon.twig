@@ -18,6 +18,9 @@ By setting size to `none` you can add arbitrary size classes to the icon.
   {# @var string|null class #}
   {% set class = props.class ?? null %}
 
+  {# @var bool ariaHidden #}
+  {% set ariaHidden = props.ariaHidden ?? true %}
+
   {# Computed values #}
   {% set sizeConfig = {
     'sm': 'size-16',
@@ -30,5 +33,6 @@ By setting size to `none` you can add arbitrary size classes to the icon.
 
   {{ svg('@webroot/dist/assets/icons/' ~ name ~ '.svg')|attr({
     class: cx(sizeClass, class),
+    'aria-hidden': ariaHidden ? 'true' : null,
   }) }}
 {% endmacro %}
