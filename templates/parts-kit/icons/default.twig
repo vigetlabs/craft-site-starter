@@ -28,6 +28,15 @@
           </div>
         {% endfor %}
       </div>
+      <h2 class="text-xl font-bold">Accessibility</h2>
+      <p class="text-sm text-gray-500">
+        Icons are hidden from screen readers by default. Use <code>ariaHidden: false</code> to show the icon to screen readers.
+      </p>
+
+      {{ Icon({
+        name: 'arrow-right',
+        ariaHidden: false,
+      }) }}
     </div>
   {% endfor %}
 {% endblock %}
