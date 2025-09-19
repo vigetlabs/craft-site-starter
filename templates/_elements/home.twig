@@ -1,7 +1,9 @@
 {% extends '_layouts/base.twig' %}
 
+{% set asset = craft.assets.id(427).one() %}
+
 {% block content %}
-  {{ include("_blocks/index.twig", {
-    blocks: entry.pageBlocks,
-  }) }}
+  <div style="--icon-color: red;">
+    <svg data-src="{{ asset.url }}" fill="currentColor"></svg>
+  </div>
 {% endblock %}

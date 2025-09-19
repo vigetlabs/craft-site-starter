@@ -29,6 +29,7 @@
   "dependencies": {
     "@alpinejs/collapse": "^3.14.1",
     "@alpinejs/focus": "^3.14.1",
-    "alpinejs": "^3.14.1"
+    "alpinejs": "^3.14.1",
+    "external-svg-loader": "^1.7.1"
   }
 }

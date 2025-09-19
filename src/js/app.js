@@ -1,3 +1,7 @@
+import 'external-svg-loader'
+
+// SVGLoader.destroyCache();
+
 import '../css/app.css'
 
 import Alpine from 'alpinejs'

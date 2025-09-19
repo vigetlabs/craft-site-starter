@@ -1,4 +1,4 @@
-dateModified: 1751982681
+dateModified: 1757708816
 elementSources:
   craft\elements\Entry:
     -
@@ -50,6 +50,13 @@ email:
     username: $SYSTEM_EMAIL_USERNAME
   transportType: craft\mail\transportadapters\Smtp
 fs:
+  local:
+    hasUrls: true
+    name: Local
+    settings:
+      path: '@webroot/local-filesystem'
+    type: craft\fs\Local
+    url: /local-filesystem
   s3:
     hasUrls: true
     name: S3

@@ -2,6 +2,7 @@ altTranslationKeyFormat: null
 altTranslationMethod: none
 fieldLayouts:
   a7f496e4-142f-49a4-b241-2cb6ce1a1f30:
+    cardThumbAlignment: end
     tabs:
       -
         elementCondition: null
@@ -65,7 +66,7 @@ fieldLayouts:
         name: Content
         uid: c5d6deb9-e383-44bf-aa0f-a8de30dfca6f
         userCondition: null
-fs: s3
+fs: local
 handle: assets
 name: Assets
 sortOrder: 1
