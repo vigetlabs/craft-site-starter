@@ -1,4 +1,4 @@
-dateModified: 1751982681
+dateModified: 1758315776
 elementSources:
   craft\elements\Entry:
     -
@@ -148,7 +148,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: REPLACE
-    schemaVersion: 2.1.0
+    schemaVersion: 2.1.1
   retour:
     edition: standard
     enabled: true
