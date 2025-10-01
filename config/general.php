@@ -10,6 +10,7 @@
 
 use craft\config\GeneralConfig;
 use craft\helpers\App;
+use craft\helpers\StringHelper;
 
 return GeneralConfig::create()
     // Set the default week start day for date pickers (0 = Sunday, 1 = Monday, etc.)
@@ -23,5 +24,6 @@ return GeneralConfig::create()
     // Set the @webroot alias so the clear-caches command knows where to find CP resources
     ->aliases([
         '@webroot' => dirname(__DIR__) . '/web',
-    ])
-;
+        '@web' => App::env('PRIMARY_SITE_URL'),
+        '@primarySiteUrl' => StringHelper::ensureRight(App::env('PRIMARY_SITE_URL'), '/'),
+    ]);

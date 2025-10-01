@@ -1,6 +1,7 @@
 <?php
 
 use craft\helpers\App;
+use craft\helpers\StringHelper;
 
 // This Vite config expects that PRIMARY_SITE_URL uses https
 $host = App::env('PRIMARY_SITE_URL');
@@ -10,7 +11,7 @@ $httpsPort = 3000;
 
 return [
     // Strips custom ports from PRIMARY_SITE_URL if present
-    'devServerPublic' => preg_replace('/:\d+$/', '', $host) . ':' . $httpsPort,
+    'devServerPublic' => StringHelper::trimRight(preg_replace('/:\d+$/', '', $host), '/') . ':' . $httpsPort,
     'serverPublic' => '/dist/',
     'useDevServer' => App::env('CRAFT_ENVIRONMENT') === 'dev',
     'manifestPath' => '@webroot/dist/.vite/manifest.json',
