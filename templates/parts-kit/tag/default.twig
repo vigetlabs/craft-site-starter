@@ -1,35 +1,31 @@
-{% extends "viget-parts-kit/layout.twig" %}
-
 {% from '_components/tag' import Tag %}
 
 {% set variants = ['contained', 'outlined'] %}
 
 {% set sizes = ['sm', 'md', 'lg'] %}
 
-{% block main %}
-  {% for variant in variants %}
-    <div class="flex items-center gap-8 mb-48">
-      {% for size in sizes %}
-        {{ Tag({
-          text: 'Tag ' ~ size ~ ' ' ~ variant,
-          size: size,
-          variant: variant,
-        }) }}
+{% for variant in variants %}
+  <div class="flex items-center gap-8 mb-48">
+    {% for size in sizes %}
+      {{ Tag({
+        text: 'Tag ' ~ size ~ ' ' ~ variant,
+        size: size,
+        variant: variant,
+      }) }}
 
-        {{ Tag({
-          text: 'Tag ' ~ size ~ ' link',
-          size: size,
-          variant: variant,
-          href: '#TEST',
-        }) }}
+      {{ Tag({
+        text: 'Tag ' ~ size ~ ' link',
+        size: size,
+        variant: variant,
+        href: '#TEST',
+      }) }}
 
-        {{ Tag({
-          text: 'Tag ' ~ size ~ ' ' ~ variant,
-          size: size,
-          variant: variant,
-          icon: 'clock',
-        }) }}
-      {% endfor %}
-    </div>
-  {% endfor %}
-{% endblock %}
+      {{ Tag({
+        text: 'Tag ' ~ size ~ ' ' ~ variant,
+        size: size,
+        variant: variant,
+        icon: 'clock',
+      }) }}
+    {% endfor %}
+  </div>
+{% endfor %}
