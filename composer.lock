@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7eed07ec961dd9c52509228576cfec9f",
+    "content-hash": "c7f8009cd90cf35e37b75a5dc50ba928",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -8802,16 +8802,16 @@
         },
         {
             "name": "viget/craft-parts-kit",
-            "version": "dev-jp/plugin-release",
+            "version": "dev-jp/settings-and-remove-layout-dependency",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vigetlabs/craft-parts-kit.git",
-                "reference": "7b9f68ca42c8896b254a5c0c331e1001cac659d0"
+                "reference": "14ce907e956e375c2fa286c95e309cd652dc11b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vigetlabs/craft-parts-kit/zipball/7b9f68ca42c8896b254a5c0c331e1001cac659d0",
-                "reference": "7b9f68ca42c8896b254a5c0c331e1001cac659d0",
+                "url": "https://api.github.com/repos/vigetlabs/craft-parts-kit/zipball/14ce907e956e375c2fa286c95e309cd652dc11b6",
+                "reference": "14ce907e956e375c2fa286c95e309cd652dc11b6",
                 "shasum": ""
             },
             "require": {
@@ -8850,10 +8850,10 @@
             ],
             "support": {
                 "email": "craft@viget.com",
-                "source": "https://github.com/vigetlabs/craft-parts-kit/tree/jp/plugin-release",
+                "source": "https://github.com/vigetlabs/craft-parts-kit/tree/jp/settings-and-remove-layout-dependency",
                 "issues": "https://github.com/vigetlabs/craft-parts-kit/issues"
             },
-            "time": "2025-10-31T17:53:53+00:00"
+            "time": "2025-10-31T22:46:49+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
