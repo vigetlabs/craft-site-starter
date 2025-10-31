@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74f2c4ac6954373736405fd941c6ec58",
+    "content-hash": "7eed07ec961dd9c52509228576cfec9f",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -8802,16 +8802,16 @@
         },
         {
             "name": "viget/craft-parts-kit",
-            "version": "dev-main",
+            "version": "dev-jp/plugin-release",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vigetlabs/craft-parts-kit.git",
-                "reference": "853b0d0fa94fae0a78164f539218c9fb05817762"
+                "reference": "7b9f68ca42c8896b254a5c0c331e1001cac659d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vigetlabs/craft-parts-kit/zipball/853b0d0fa94fae0a78164f539218c9fb05817762",
-                "reference": "853b0d0fa94fae0a78164f539218c9fb05817762",
+                "url": "https://api.github.com/repos/vigetlabs/craft-parts-kit/zipball/7b9f68ca42c8896b254a5c0c331e1001cac659d0",
+                "reference": "7b9f68ca42c8896b254a5c0c331e1001cac659d0",
                 "shasum": ""
             },
             "require": {
@@ -8822,13 +8822,12 @@
                 "craftcms/ecs": "dev-main",
                 "craftcms/phpstan": "dev-main"
             },
-            "default-branch": true,
             "type": "craft-plugin",
             "extra": {
-                "handle": "viget-parts-kit",
-                "name": "Viget Parts Kit",
+                "handle": "parts-kit",
+                "name": "Parts Kit",
                 "developer": "Viget",
-                "documentationUrl": ""
+                "documentationUrl": "https://github.com/vigetlabs/craft-parts-kit"
             },
             "autoload": {
                 "psr-4": {
@@ -8851,10 +8850,10 @@
             ],
             "support": {
                 "email": "craft@viget.com",
-                "source": "https://github.com/vigetlabs/craft-parts-kit/tree/main",
+                "source": "https://github.com/vigetlabs/craft-parts-kit/tree/jp/plugin-release",
                 "issues": "https://github.com/vigetlabs/craft-parts-kit/issues"
             },
-            "time": "2024-09-25T23:27:00+00:00"
+            "time": "2025-10-31T17:53:53+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -10712,14 +10711,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "viget/craft-parts-kit": 20,
         "craftcms/ecs": 20,
-        "craftcms/phpstan": 20
+        "craftcms/phpstan": 20,
+        "viget/craft-parts-kit": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.2"
     },
