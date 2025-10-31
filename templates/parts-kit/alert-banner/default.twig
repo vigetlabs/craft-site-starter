@@ -1,19 +1,15 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/alert-banner' import AlertBanner %}
 
-{% block main %}
-  {{ AlertBanner({
-    title: 'Dismissible Alert Banner',
-    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-    dismissible: true,
-  }) }}
+{{ AlertBanner({
+  title: 'Dismissible Alert Banner',
+  description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+  dismissible: true,
+}) }}
 
-  <hr class="my-48" />
+<hr class="my-48" />
 
-  {{ AlertBanner({
-    title: 'Non-Dismissible Alert Banner',
-    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-    dismissible: false,
-  }) }}
-{% endblock %}
+{{ AlertBanner({
+  title: 'Non-Dismissible Alert Banner',
+  description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+  dismissible: false,
+}) }}

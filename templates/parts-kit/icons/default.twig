@@ -1,42 +1,37 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/icon.twig' import Icon %}
 
 {% set sizes = ['sm', 'md', 'lg', 'none'] %}
 
 {% set icons = ['arrow-left', 'arrow-right', 'clock', 'close'] %}
 
-{% block main %}
-
-  {% for size in sizes %}
-    <div class="container flex flex-col gap-24 mb-48">
-      <h2 class="text-2xl font-bold">
-        {{ size }}
-        {% if size == 'none' %}
-          <span class="block text-sm font-normal text-gray-500">Custom size class</span>
-        {% endif %}
-      </h2>
-      <div class="grid grid-cols-8 gap-16">
-        {% for icon in icons %}
-          <div class="flex flex-col items-center gap-8 border border-gray-200 rounded-md p-16">
-            {{ Icon({
-              name: icon,
-              size: size,
-              class: size == 'none' ? 'size-64' : null,
-            }) }}
-            <span class="text-sm text-gray-500">{{ icon }}</span>
-          </div>
-        {% endfor %}
-      </div>
-      <h2 class="text-xl font-bold">Accessibility</h2>
-      <p class="text-sm text-gray-500">
-        Icons are hidden from screen readers by default. Use <code>ariaHidden: false</code> to show the icon to screen readers.
-      </p>
-
-      {{ Icon({
-        name: 'arrow-right',
-        ariaHidden: false,
-      }) }}
+{% for size in sizes %}
+  <div class="container flex flex-col gap-24 mb-48">
+    <h2 class="text-2xl font-bold">
+      {{ size }}
+      {% if size == 'none' %}
+        <span class="block text-sm font-normal text-gray-500">Custom size class</span>
+      {% endif %}
+    </h2>
+    <div class="grid grid-cols-8 gap-16">
+      {% for icon in icons %}
+        <div class="flex flex-col items-center gap-8 border border-gray-200 rounded-md p-16">
+          {{ Icon({
+            name: icon,
+            size: size,
+            class: size == 'none' ? 'size-64' : null,
+          }) }}
+          <span class="text-sm text-gray-500">{{ icon }}</span>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
-{% endblock %}
+    <h2 class="text-xl font-bold">Accessibility</h2>
+    <p class="text-sm text-gray-500">
+      Icons are hidden from screen readers by default. Use <code>ariaHidden: false</code> to show the icon to screen readers.
+    </p>
+
+    {{ Icon({
+      name: 'arrow-right',
+      ariaHidden: false,
+    }) }}
+  </div>
+{% endfor %}

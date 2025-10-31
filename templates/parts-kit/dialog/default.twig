@@ -1,17 +1,13 @@
-{% extends "viget-parts-kit/layout.twig" %}
-
 {% from '_components/button' import Button %}
 {% from '_components/dialog' import Dialog %}
 
-{% block main %}
+{% set content %}
+  <p>Hello World</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
+{% endset %}
 
-  {% set content %}
-    <p>Hello World</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
-  {% endset %}
-
-  {# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
-  {{ Button({
+{# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
+{{ Button({
     text: 'Open Dialog',
     attrs: {
       'x-data': '',
@@ -19,9 +15,8 @@
     },
   }) }}
 
-  {{ Dialog({
-    content,
-    id: 'my-dialog',
-    hideClose: true,
-  }) }}
-{% endblock %}
+{{ Dialog({
+  content,
+  id: 'my-dialog',
+  hideClose: true,
+}) }}

@@ -1,5 +1,3 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/image-caption' import ImageCaption %}
 
 {#
@@ -11,16 +9,14 @@ Use the same props that are defined in the image component.
 
 #}
 
-{% block main %}
-  <div class="container flex flex-col py-64 gap-32">
-    <h2 class="text-xl font-bold">Image Caption</h2>
+<div class="container flex flex-col py-64 gap-32">
+  <h2 class="text-xl font-bold">Image Caption</h2>
 
-    {{ ImageCaption({
-      imageProps: {
-        image: craft.assets().one(),
-        ratio: 16/9,
-      },
-      caption: 'Image caption',
-    }) }}
-  </div>
-{% endblock %}
+  {{ ImageCaption({
+    imageProps: {
+      image: craft.assets().one(),
+      ratio: 16/9,
+    },
+    caption: 'Image caption',
+  }) }}
+</div>
