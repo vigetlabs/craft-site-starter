@@ -1,23 +1,19 @@
-{% extends "parts-kit/layout.twig" %}
-
 {% from '_components/tabs' import Tabs %}
 
-{% block main %}
-  <div class="container py-64">
-    {{ Tabs({
-      tabs: [
-        { title: 'Tab 1', content: 'Content for Tab 1' },
-        { title: 'Tab 2', content: 'Content for Tab 2' },
-      ],
-    }) }}
-  </div>
+<div class="container py-64">
+  {{ Tabs({
+    tabs: [
+      { title: 'Tab 1', content: 'Content for Tab 1' },
+      { title: 'Tab 2', content: 'Content for Tab 2' },
+    ],
+  }) }}
+</div>
 
-  <div class="container py-64 bg-black dark">
-    {{ Tabs({
-      tabs: [
-        { title: 'Tab 1', content: 'Content for Tab 1' },
-        { title: 'Tab 2', content: 'Content for Tab 2' },
-      ],
-    }) }}
-  </div>
-{% endblock %}
+<div class="container py-64 bg-black dark">
+  {{ Tabs({
+    tabs: [
+      { title: 'Tab 1', content: 'Content for Tab 1' },
+      { title: 'Tab 2', content: 'Content for Tab 2' },
+    ],
+  }) }}
+</div>

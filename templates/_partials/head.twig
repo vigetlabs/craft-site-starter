@@ -1,0 +1,12 @@
+  {# Preload Webfonts #}
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-bold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-light-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-regular-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ craft.vite.asset("src/fonts/sourcesanspro-semibold-webfont.woff2") }}" as="font" type="font/woff2" crossorigin>
+
+  {# Load our main CSS file to avoid FOUC in dev mode #}
+  {% if craft.vite.devServerRunning() %}
+    <link rel="stylesheet" href="{{ craft.vite.asset("src/css/app.css") }}">
+  {% endif %}
+
+  {{ craft.vite.script('src/js/app.js', false) }}

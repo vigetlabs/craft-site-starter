@@ -1,26 +1,22 @@
-{% extends "parts-kit/layout.twig" %}
 {% from '_components/accordion' import Accordion %}
 
-{% block main %}
+<div>
+  {% for i in 1..3 %}
+    {{ Accordion({
+      title: 'Accordion Item ' ~ i,
+      content: 'This is the content for accordion item ' ~ i ~ '.',
+    }) }}
+  {% endfor %}
+</div>
 
-  <div>
-    {% for i in 1..3 %}
-      {{ Accordion({
-        title: 'Accordion Item ' ~ i,
-        content: 'This is the content for accordion item ' ~ i ~ '.',
-      }) }}
-    {% endfor %}
-  </div>
+<h2 class="text-2xl font-bold mb-16 mt-40">Grouped Accordions</h2>
 
-  <h2 class="text-2xl font-bold mb-16 mt-40">Grouped Accordions</h2>
-
-  <div>
-    {% for i in 1..3 %}
-      {{ Accordion({
-        title: 'Accordion Item ' ~ i,
-        content: 'This is the content for accordion item ' ~ i ~ '.',
-        name: 'accordion-group',
-      }) }}
-    {% endfor %}
-  </div>
-{% endblock %}
+<div>
+  {% for i in 1..3 %}
+    {{ Accordion({
+      title: 'Accordion Item ' ~ i,
+      content: 'This is the content for accordion item ' ~ i ~ '.',
+      name: 'accordion-group',
+    }) }}
+  {% endfor %}
+</div>

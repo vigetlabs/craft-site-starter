@@ -1,13 +1,9 @@
-{% extends 'parts-kit/layout.twig' %}
-
 {% from '_components/call-to-action' import CallToAction %}
 
-{% block main %}
-  {{ CallToAction({
-    title: 'Lorem ipsum dolor sit amet',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing e lit. Nulla facilisi. Nulla facilisi. Nulla facilisi.',
-    href: '#TEST',
-    buttonText: 'Button',
-    newTab: true,
-  }) }}
-{% endblock %}
+{{ CallToAction({
+  title: 'Lorem ipsum dolor sit amet',
+  text: 'Lorem ipsum dolor sit amet, consectetur adipiscing e lit. Nulla facilisi. Nulla facilisi. Nulla facilisi.',
+  href: '#TEST',
+  buttonText: 'Button',
+  newTab: true,
+}) }}

@@ -1,117 +1,114 @@
-{% extends 'parts-kit/layout.twig' %}
-
 {% from '_components/button' import Button %}
 
 {% set sizes = ['sm', 'md', 'lg'] %}
 
-{% block main %}
-  <div class="flex flex-col gap-16">
-    {% for size in sizes %}
-      <div class="flex items-center gap-16">
-        <h3 class="text-lg font-bold">{{ size }}</h3>
+<div class="flex flex-col gap-16">
+  {% for size in sizes %}
+    <div class="flex items-center gap-16">
+      <h3 class="text-lg font-bold">{{ size }}</h3>
 
-        {{ Button({
-          variant: 'contained',
-          text: 'Button',
-          size,
-        }) }}
+      {{ Button({
+        variant: 'contained',
+        text: 'Button',
+        size,
+      }) }}
 
-        {{ Button({
-          variant: 'outlined',
-          text: 'Button',
-          size,
-        }) }}
+      {{ Button({
+        variant: 'outlined',
+        text: 'Button',
+        size,
+      }) }}
 
-        {{ Button({
-          variant: 'subtle',
-          text: 'Button',
-          size,
-        }) }}
+      {{ Button({
+        variant: 'subtle',
+        text: 'Button',
+        size,
+      }) }}
 
-        {{ Button({
-          variant: 'text',
-          text: 'Button',
-          size,
-        }) }}
-      </div>
-    {% endfor %}
-  </div>
+      {{ Button({
+        variant: 'text',
+        text: 'Button',
+        size,
+      }) }}
+    </div>
+  {% endfor %}
+</div>
 
-  <hr class="my-32">
+<hr class="my-32">
 
-  <div class="flex flex-col gap-16">
-    <h1 class="text-2xl font-bold">With Icon</h1>
-    {% for size in sizes %}
-      <div class="flex items-center gap-16">
-        <h3 class="text-lg font-bold">{{ size }}</h3>
-        {{ Button({
-          variant: 'contained',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-        }) }}
+<div class="flex flex-col gap-16">
+  <h1 class="text-2xl font-bold">With Icon</h1>
 
-        {{ Button({
-          variant: 'contained',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-          iconLast: true,
-        }) }}
+  {% for size in sizes %}
+    <div class="flex items-center gap-16">
+      <h3 class="text-lg font-bold">{{ size }}</h3>
+      {{ Button({
+        variant: 'contained',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+      }) }}
 
-        {{ Button({
-          variant: 'contained',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-          iconOnly: true,
-        }) }}
+      {{ Button({
+        variant: 'contained',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+        iconLast: true,
+      }) }}
 
-        {{ Button({
-          variant: 'outlined',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-        }) }}
+      {{ Button({
+        variant: 'contained',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+        iconOnly: true,
+      }) }}
 
-        {{ Button({
-          variant: 'outlined',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-          iconOnly: true,
-        }) }}
+      {{ Button({
+        variant: 'outlined',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+      }) }}
 
-        {{ Button({
-          variant: 'subtle',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-        }) }}
+      {{ Button({
+        variant: 'outlined',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+        iconOnly: true,
+      }) }}
 
-        {{ Button({
-          variant: 'subtle',
-          iconOnly: true,
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-        }) }}
+      {{ Button({
+        variant: 'subtle',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+      }) }}
 
-        {{ Button({
-          variant: 'text',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-        }) }}
+      {{ Button({
+        variant: 'subtle',
+        iconOnly: true,
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+      }) }}
 
-        {{ Button({
-          variant: 'text',
-          text: 'Button',
-          size,
-          icon: 'arrow-right',
-          iconOnly: true,
-        }) }}
-      </div>
-    {% endfor %}
-  </div>
-{% endblock %}
+      {{ Button({
+        variant: 'text',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+      }) }}
+
+      {{ Button({
+        variant: 'text',
+        text: 'Button',
+        size,
+        icon: 'arrow-right',
+        iconOnly: true,
+      }) }}
+    </div>
+  {% endfor %}
+</div>
