@@ -1,4 +1,4 @@
-dateModified: 1758315776
+dateModified: 1764606009
 elementSources:
   craft\elements\Entry:
     -
@@ -149,6 +149,10 @@ plugins:
     enabled: true
     licenseKey: REPLACE
     schemaVersion: 2.1.1
+  parts-kit:
+    edition: standard
+    enabled: true
+    schemaVersion: 1.0.0
   retour:
     edition: standard
     enabled: true
@@ -159,10 +163,6 @@ plugins:
     enabled: true
     licenseKey: REPLACE
     schemaVersion: 3.0.13
-  viget-parts-kit:
-    edition: standard
-    enabled: true
-    schemaVersion: 1.0.0
   vite:
     edition: standard
     enabled: true
