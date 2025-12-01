@@ -18,7 +18,7 @@
     "verbb/expanded-singles": "3.0.3",
     "verbb/navigation": "3.0.15",
     "viget/craft-classnames": "3.0.0",
-    "viget/craft-parts-kit": "dev-main",
+    "viget/craft-parts-kit": "^1.0",
     "vlucas/phpdotenv": "^5.4.0"
   },
   "require-dev": {
@@ -69,10 +69,6 @@
       "type": "composer",
       "url": "https://composer.craftcms.com",
       "canonical": false
-    },
-    {
-      "type": "github",
-      "url": "https://github.com/vigetlabs/craft-parts-kit.git"
     }
   ]
 }
