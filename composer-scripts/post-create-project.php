@@ -38,6 +38,18 @@ ScriptHelpers::replaceFileText(
 );
 
 /**
+ * Update PRIMARY_SITE_URL in .ddev/.env.web
+ */
+
+$primarySiteUrl = "https://$projectSlug.ddev.site";
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/.ddev/.env.web",
+    pattern: '/PRIMARY_SITE_URL="https?:\/\/[^"]+"/',
+    replacement: "PRIMARY_SITE_URL=\"$primarySiteUrl\"",
+);
+
+/**
  * Update package.json
  */
 
