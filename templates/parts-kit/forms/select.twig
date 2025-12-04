@@ -1,85 +1,79 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/field-select' import FieldSelect %}
 
-{% block main %}
+{% set options = [
+  { label: 'Option 1', value: 'option-1' },
+  { label: 'Option 2', value: 'option-2' },
+  { label: 'Option 3', value: 'option-3' },
+] %}
 
-  {% set options = [
-    { label: 'Option 1', value: 'option-1' },
-    { label: 'Option 2', value: 'option-2' },
-    { label: 'Option 3', value: 'option-3' },
-  ] %}
+{% set fields %}
+  <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldSelect({
+      id: 'custom-id',
+      label: 'Select',
+      subLabel: 'This is a sublabel',
+      instructions: 'This is an instruction',
+      options,
+      name: 'select',
+    }) }}
 
-  {% set fields %}
-    <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldSelect({
+      label: 'Selected options',
+      options: [
+        { label: 'Option 1', value: 'option-1' },
+        { label: 'Option 2 (selected)', value: 'option-2', selected: true },
+        { label: 'Option 3', value: 'option-3' },
+      ],
+      name: 'select-selected',
+    }) }}
+
+    <form class="flex flex-col gap-16 items-start">
       {{ FieldSelect({
-        id: 'custom-id',
-        label: 'Select',
-        subLabel: 'This is a sublabel',
-        instructions: 'This is an instruction',
-        options,
-        name: 'select',
-      }) }}
-
-      {{ FieldSelect({
-        label: 'Selected options',
-        options: [
-          { label: 'Option 1', value: 'option-1' },
-          { label: 'Option 2 (selected)', value: 'option-2', selected: true },
-          { label: 'Option 3', value: 'option-3' },
-        ],
-        name: 'select-selected',
-      }) }}
-
-      <form class="flex flex-col gap-16 items-start">
-        {{ FieldSelect({
-          class: 'w-full',
-          label: 'Select (required)',
-          required: true,
-          instructions: 'This is an instruction',
-          useEmptyOption: true,
-          placeholder: 'Choose an option',
-          options,
-          name: 'select-required',
-        }) }}
-
-        <button class="dark:text-white" type="submit">Test Validation</button>
-      </form>
-
-      {{ FieldSelect({
-        label: 'Select (required long)',
-        required: 'long',
-        instructions: 'This is an instruction',
-        options,
-        name: 'select-required-long',
-      }) }}
-
-      {{ FieldSelect({
-        label: 'Select (required with error)',
+        class: 'w-full',
+        label: 'Select (required)',
         required: true,
         instructions: 'This is an instruction',
-        errorMessages: ['This is an error message', 'This is another error message'],
+        useEmptyOption: true,
+        placeholder: 'Choose an option',
         options,
-        name: 'select-required-with-error',
+        name: 'select-required',
       }) }}
 
-      {{ FieldSelect({
-        label: 'Select (disabled)',
-        disabled: true,
-        options,
-        name: 'select-disabled',
-      }) }}
-    </div>
-  {% endset %}
+      <button class="dark:text-white" type="submit">Test Validation</button>
+    </form>
 
-  {# default colors #}
-  {{ fields }}
+    {{ FieldSelect({
+      label: 'Select (required long)',
+      required: 'long',
+      instructions: 'This is an instruction',
+      options,
+      name: 'select-required-long',
+    }) }}
 
-  {# dark background #}
-  <div class="bg-black dark">
-    {% namespace 'dark' %}
-      {{ fields }}
-    {% endnamespace %}
+    {{ FieldSelect({
+      label: 'Select (required with error)',
+      required: true,
+      instructions: 'This is an instruction',
+      errorMessages: ['This is an error message', 'This is another error message'],
+      options,
+      name: 'select-required-with-error',
+    }) }}
+
+    {{ FieldSelect({
+      label: 'Select (disabled)',
+      disabled: true,
+      options,
+      name: 'select-disabled',
+    }) }}
   </div>
+{% endset %}
 
-{% endblock %}
+{# default colors #}
+{{ fields }}
+
+{# dark background #}
+<div class="bg-black dark">
+  {% namespace 'dark' %}
+    {{ fields }}
+  {% endnamespace %}
+</div>

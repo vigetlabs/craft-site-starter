@@ -1,82 +1,76 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/field-textarea' import FieldTextarea %}
 
-{% block main %}
+{% set fields %}
+  <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldTextarea({
+      id: 'custom-id',
+      label: 'Text Area',
+      subLabel: 'This is a sublabel',
+      instructions: 'This is an instruction',
+      name: 'textarea',
+    }) }}
 
-  {% set fields %}
-    <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldTextarea({
+      label: 'Text Area',
+      placeholder: 'Placeholder (label hidden)',
+      labelHidden: true,
+      required: 'long',
+      name: 'textarea-placeholder',
+    }) }}
+
+    <form class="flex flex-col gap-16 items-start">
       {{ FieldTextarea({
-        id: 'custom-id',
-        label: 'Text Area',
-        subLabel: 'This is a sublabel',
-        instructions: 'This is an instruction',
-        name: 'textarea',
-      }) }}
-
-      {{ FieldTextarea({
-        label: 'Text Area',
-        placeholder: 'Placeholder (label hidden)',
-        labelHidden: true,
-        required: 'long',
-        name: 'textarea-placeholder',
-      }) }}
-
-      <form class="flex flex-col gap-16 items-start">
-        {{ FieldTextarea({
-          class: 'w-full',
-          label: 'Text Area (required)',
-          required: true,
-          instructions: 'This is an instruction',
-          name: 'textarea-required',
-        }) }}
-
-        <button class="dark:text-white" type="submit">Test Validation</button>
-      </form>
-
-      {{ FieldTextarea({
-        label: 'Text Area (required long)',
-        required: 'long',
-        instructions: 'This is an instruction',
-        name: 'textarea-required-long',
-      }) }}
-
-      {{ FieldTextarea({
-        label: 'Text Area (required with error)',
+        class: 'w-full',
+        label: 'Text Area (required)',
         required: true,
         instructions: 'This is an instruction',
-        errorMessages: ['This is an error message', 'This is another error message'],
-        name: 'textarea-required-with-error',
+        name: 'textarea-required',
       }) }}
 
-      {{ FieldTextarea({
-        label: 'Text Area (disabled)',
-        disabled: true,
-        name: 'textarea-disabled',
-      }) }}
+      <button class="dark:text-white" type="submit">Test Validation</button>
+    </form>
 
-      {{ FieldTextarea({
-        label: 'Text Area (custom rows)',
-        rows: 10,
-        name: 'textarea-custom-rows',
-      }) }}
+    {{ FieldTextarea({
+      label: 'Text Area (required long)',
+      required: 'long',
+      instructions: 'This is an instruction',
+      name: 'textarea-required-long',
+    }) }}
 
-      {{ FieldTextarea({
-        label: 'Text Area (resize)',
-        resize: true,
-        name: 'textarea-resize',
-      }) }}
-    </div>
-  {% endset %}
+    {{ FieldTextarea({
+      label: 'Text Area (required with error)',
+      required: true,
+      instructions: 'This is an instruction',
+      errorMessages: ['This is an error message', 'This is another error message'],
+      name: 'textarea-required-with-error',
+    }) }}
 
-  {# default colors #}
-  {{ fields }}
+    {{ FieldTextarea({
+      label: 'Text Area (disabled)',
+      disabled: true,
+      name: 'textarea-disabled',
+    }) }}
 
-  {# dark background #}
-  <div class="bg-black dark">
-    {% namespace 'dark' %}
-      {{ fields }}
-    {% endnamespace %}
+    {{ FieldTextarea({
+      label: 'Text Area (custom rows)',
+      rows: 10,
+      name: 'textarea-custom-rows',
+    }) }}
+
+    {{ FieldTextarea({
+      label: 'Text Area (resize)',
+      resize: true,
+      name: 'textarea-resize',
+    }) }}
   </div>
+{% endset %}
 
-{% endblock %}
+{# default colors #}
+{{ fields }}
+
+{# dark background #}
+<div class="bg-black dark">
+  {% namespace 'dark' %}
+    {{ fields }}
+  {% endnamespace %}
+</div>

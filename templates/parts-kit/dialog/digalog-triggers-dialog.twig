@@ -1,48 +1,39 @@
-{% extends "viget-parts-kit/layout.twig" %}
-
 {% from '_components/button' import Button %}
 {% from '_components/dialog' import Dialog %}
 
-{% block main %}
-
 {% set dialog1Content %}
-    <p>Dialog 1</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
+  <p>Dialog 1</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
 
-    {{ Button({
-      text: 'Open Dialog 2',
-      attrs: {
-        'x-data': '',
-        '@click': "$dispatch('dialog:open', { id: 'my-dialog-2' })"
-    },
-  }) }}
-  {% endset %}
-
-  {% set dialog2Content %}
-    <p>Dialog 2</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
-
-
-  {% endset %}
-
-  {# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
   {{ Button({
-    text: 'Open Dialog 1',
+    text: 'Open Dialog 2',
     attrs: {
       'x-data': '',
-      '@click': "$dispatch('dialog:open', { id: 'my-dialog' })"
+      '@click': "$dispatch('dialog:open', { id: 'my-dialog-2' })"
     },
   }) }}
+{% endset %}
 
-  {{ Dialog({
-    content: dialog1Content,
-    id: 'my-dialog',
-  }) }}
+{% set dialog2Content %}
+  <p>Dialog 2</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
+{% endset %}
 
-  {{ Dialog({
-    content: dialog2Content,
-    id: 'my-dialog-2',
-  }) }}
+{# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
+{{ Button({
+  text: 'Open Dialog 1',
+  attrs: {
+    'x-data': '',
+    '@click': "$dispatch('dialog:open', { id: 'my-dialog' })"
+  },
+}) }}
 
+{{ Dialog({
+  content: dialog1Content,
+  id: 'my-dialog',
+}) }}
 
-{% endblock %}
+{{ Dialog({
+  content: dialog2Content,
+  id: 'my-dialog-2',
+}) }}
