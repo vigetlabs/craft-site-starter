@@ -1,79 +1,73 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/field-text-input' import FieldTextInput %}
 
-{% block main %}
+{% set fields %}
+  <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldTextInput({
+      id: 'custom-id',
+      label: 'Text Input',
+      subLabel: 'This is a sublabel',
+      instructions: 'This is an instruction',
+      name: 'text-input',
+    }) }}
 
-  {% set fields %}
-    <div class="flex flex-col gap-48 p-32 max-w-lg">
+    {{ FieldTextInput({
+      label: 'Text Input',
+      placeholder: 'Placeholder (label hidden)',
+      labelHidden: true,
+      required: 'long',
+      name: 'text-input-placeholder',
+    }) }}
+
+    <form class="flex flex-col gap-16 items-start">
       {{ FieldTextInput({
-        id: 'custom-id',
-        label: 'Text Input',
-        subLabel: 'This is a sublabel',
-        instructions: 'This is an instruction',
-        name: 'text-input',
-      }) }}
-
-      {{ FieldTextInput({
-        label: 'Text Input',
-        placeholder: 'Placeholder (label hidden)',
-        labelHidden: true,
-        required: 'long',
-        name: 'text-input-placeholder',
-      }) }}
-
-      <form class="flex flex-col gap-16 items-start">
-        {{ FieldTextInput({
-          class: 'w-full',
-          label: 'Text Input (required)',
-          required: true,
-          instructions: 'This is an instruction',
-          name: 'text-input-required',
-        }) }}
-
-        <button class="dark:text-white" type="submit">Test Validation</button>
-      </form>
-
-      {{ FieldTextInput({
-        label: 'Text Input (required long)',
-        required: 'long',
-        instructions: 'This is an instruction',
-        name: 'text-input-required-long',
-      }) }}
-
-      {{ FieldTextInput({
-        label: 'Text Input (required with error)',
+        class: 'w-full',
+        label: 'Text Input (required)',
         required: true,
         instructions: 'This is an instruction',
-        errorMessages: ['This is an error message', 'This is another error message'],
-        name: 'text-input-required-with-error',
+        name: 'text-input-required',
       }) }}
 
+      <button class="dark:text-white" type="submit">Test Validation</button>
+    </form>
+
+    {{ FieldTextInput({
+      label: 'Text Input (required long)',
+      required: 'long',
+      instructions: 'This is an instruction',
+      name: 'text-input-required-long',
+    }) }}
+
+    {{ FieldTextInput({
+      label: 'Text Input (required with error)',
+      required: true,
+      instructions: 'This is an instruction',
+      errorMessages: ['This is an error message', 'This is another error message'],
+      name: 'text-input-required-with-error',
+    }) }}
+
+    {{ FieldTextInput({
+      label: 'Text Input (disabled)',
+      disabled: true,
+      name: 'text-input-disabled',
+    }) }}
+
+    {% set inputTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
+    {% for type in inputTypes %}
       {{ FieldTextInput({
-        label: 'Text Input (disabled)',
-        disabled: true,
-        name: 'text-input-disabled',
+        label: 'Text Input (' ~ type ~ ')',
+        type,
+        name: 'text-input-' ~ type,
       }) }}
-
-      {% set inputTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
-      {% for type in inputTypes %}
-        {{ FieldTextInput({
-          label: 'Text Input (' ~ type ~ ')',
-          type,
-          name: 'text-input-' ~ type,
-        }) }}
-      {% endfor %}
-    </div>
-  {% endset %}
-
-  {# default colors #}
-  {{ fields }}
-
-  {# dark background #}
-  <div class="bg-black dark">
-    {% namespace 'dark' %}
-      {{ fields }}
-    {% endnamespace %}
+    {% endfor %}
   </div>
+{% endset %}
 
-{% endblock %}
+{# default colors #}
+{{ fields }}
+
+{# dark background #}
+<div class="bg-black dark">
+  {% namespace 'dark' %}
+    {{ fields }}
+  {% endnamespace %}
+</div>

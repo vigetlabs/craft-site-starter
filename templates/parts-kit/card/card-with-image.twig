@@ -1,37 +1,33 @@
-{% extends 'viget-parts-kit/layout.twig' %}
-
 {% from '_components/card-image' import CardImage %}
 
-{% block main %}
-  <div class="grid grid-cols-3 gap-16 mb-48">
-    {% for i in 1..3 %}
-      {{ CardImage({
-        image: craft.assets.one(),
-        href: i == 2 ? '#TEST' : null,
-        newTab: i == 2,
-        sizes: {
-          default: '33vw',
-        },
-        title: 'Lorem ipsum dolor sit amet',
-        description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-      }) }}
-    {% endfor %}
-  </div>
+<div class="grid grid-cols-3 gap-16 mb-48">
+  {% for i in 1..3 %}
+    {{ CardImage({
+      image: craft.assets.one(),
+      href: i == 2 ? '#TEST' : null,
+      newTab: i == 2,
+      sizes: {
+        default: '33vw',
+      },
+      title: 'Lorem ipsum dolor sit amet',
+      description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    }) }}
+  {% endfor %}
+</div>
 
-  <div class="grid grid-cols-3 gap-16 mb-48">
-    {% for i in 1..3 %}
-      {{ CardImage({
-        align: 'center',
-        image: craft.assets.one(),
-        href: i == 2 ? '#TEST' : null,
-        newTab: i == 2,
-        ratio: 1/1,
-        sizes: {
-          default: '33vw',
-        },
-        title: 'Lorem ipsum dolor sit amet',
-        description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-      }) }}
-    {% endfor %}
-  </div>
-{% endblock %}
+<div class="grid grid-cols-3 gap-16 mb-48">
+  {% for i in 1..3 %}
+    {{ CardImage({
+      align: 'center',
+      image: craft.assets.one(),
+      href: i == 2 ? '#TEST' : null,
+      newTab: i == 2,
+      ratio: 1/1,
+      sizes: {
+        default: '33vw',
+      },
+      title: 'Lorem ipsum dolor sit amet',
+      description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    }) }}
+  {% endfor %}
+</div>
