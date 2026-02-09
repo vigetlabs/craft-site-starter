@@ -1,4 +1,4 @@
-dateModified: 1764867081
+dateModified: 1770675882
 elementSources:
   craft\elements\Entry:
     -
@@ -148,7 +148,7 @@ plugins:
     edition: standard
     enabled: true
     licenseKey: REPLACE
-    schemaVersion: 2.1.1
+    schemaVersion: 2.1.2
   parts-kit:
     edition: standard
     enabled: true
@@ -171,7 +171,7 @@ system:
   edition: solo
   live: true
   name: 'Viget Craft Starter'
-  schemaVersion: 5.8.0.3
+  schemaVersion: 5.9.0.8
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
