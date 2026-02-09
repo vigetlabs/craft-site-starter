@@ -28,10 +28,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 9c7dc3c3-cb8c-4167-880d-ab9426eef873 # Code Blocks
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField

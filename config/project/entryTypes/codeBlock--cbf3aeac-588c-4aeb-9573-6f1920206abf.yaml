@@ -10,10 +10,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: f7d30e72-f872-487a-aba1-c8e95268a220 # Code Position
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
@@ -26,10 +24,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: a99edea2-f8ae-44e5-a12f-89cb9aa66738 # Description
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: "Add a brief description of your code block. \r\n\r\nThis will never appear on the front end of the site. "
             type: craft\fieldlayoutelements\CustomField
@@ -42,10 +38,8 @@ fieldLayouts:
             elementCondition: null
             fieldUid: 7a701601-ee6c-4d56-8bd0-efa7719f6a67 # Code
             handle: null
-            includeInCards: false
             instructions: null
             label: null
-            providesThumbs: false
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
