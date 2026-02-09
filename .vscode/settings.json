@@ -1,5 +1,5 @@
 {
     "intelephense.environment.phpVersion": "8.2",
-    "php.version": "8.2",
+    "php.version": "8.4",
     "twiggy.framework": "craft"
 }
