@@ -2,7 +2,7 @@
 
 # Viget's Craft CMS Starter
 
-Our Craft Site Starter is a quick way to spin up a new Craft CMS project. It's pre-configured with top-notch building tooling, common plugins and starter components based on [Blueprint](https://github.com/vigetlabs/blueprint).
+Our Craft Site Starter is a quick way to spin up a new Craft CMS project. It's pre-configured with top-notch build tooling, common plugins and starter components based on [Blueprint](https://github.com/vigetlabs/blueprint).
 
 If you're a designer or developer at Viget working on a new project, view our [Building with Craft Site Starter](docs/building-with-site-starter.md) guide for more information.
 
@@ -42,7 +42,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
    composer create-project viget/craft-site-starter=^5.0.0 ./ --ignore-platform-reqs
    ```
 
-   If you'd rather not set up PHP, you can create the project with a desposable Docker
+   If you'd rather not set up PHP, you can create the project with a disposable Docker
    image ([Thanks nystudio107](https://nystudio107.com/blog/dock-life-using-docker-for-all-the-things)).
 
    ```shell
@@ -58,23 +58,23 @@ If you're a designer or developer at Viget working on a new project, view our [B
 
 # Plugins
 
-This starter includes common plugins that we use on most of our sites. This provides consistency and familiarly between
+This starter includes common plugins that we use on most of our sites. This provides consistency and familiarity between
 client projects. You may not need every plugin, but avoid
 replacing standard plugins with similar alternatives (unless absolutely necessary).
 
-| Name                                                              | Composer                          | Usage                                                                                                                                                                               | Year 1 Price | Renewal Price |
-| ----------------------------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
-| [Amazon S3](https://plugins.craftcms.com/aws-s3)                  | `craftcms/aws-s3`                 | This plugin integrates Craft CMS and Amazon S3 cloud storage service.                                                                                                               | Free         | Free          |
-| [Autocomplete](https://github.com/nystudio107/craft-autocomplete) | `nystudio107/craft-autocomplete`  | Provides Twig template IDE autocomplete of Craft CMS & plugin variables. Requires the [PHPStorm Symphony Support Plugin](https://plugins.jetbrains.com/plugin/7219-symfony-support) | Free         | Free          |
-| [CKEditor](https://plugins.craftcms.com/ckeditor)                 | `craftcms/ckeditor`               | Craft CMS’s official rich text plugin                                                                                                                                               | Free         | Free          |
-| [Classnames](https://plugins.craftcms.com/classnames)             | `viget/craft-classnames`          | Conditionally join css class names together in Twig                                                                                                                                 | Free         | Free          |
-| [Empty Coalesce](https://plugins.craftcms.com/empty-coalesce)     | `nystudio107/craft-emptycoalesce` | Adds the `???` operator to Twig that will return the first thing that is defined, not null, and not empty.                                                                          | Free         | Free          |
-| [Imager X](https://plugins.craftcms.com/imager-x)                 | `spacecatninja/imager-x`          | Image optimization and Imgix connector. Provides useful Twig shortcuts for generating transforms and placeholders.                                                                  | $99.00       | $59.00        |
-| [Navigation](https://plugins.craftcms.com/navigation)             | `verbb/navigation`                | Simplifies management of complex navigation groups (main menus, footer menus, etc.)                                                                                                 | $19.00       | $5.00         |
-| [Retour](https://plugins.craftcms.com/retour)                     | `nystudio107/craft-retour`        | Provides an Craft admin UI to set up redirects. Will automatically create redirects when URLs of entries change.                                                                    | $59.00       | $29.00        |
-| [SEOMatic](https://plugins.craftcms.com/seomatic)                 | `nystudio107/craft-seomatic`      | A turnkey SEO plugin that follows [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance).                                                      | $99.00       | $49.00        |
-| [Vite](https://plugins.craftcms.com/vite)                         | `nystudio107/craft-vite`          | Loads front-end files that are compiled by Vite.                                                                                                                                    | Free         | Free          |
-| [Expanded Singles](https://plugins.craftcms.com/expanded-singles) | `verbb/expanded-singles`          | Change the entries index sidebar to list all singles, rather than grouping them under a 'Singles' menu item.                                                                        | Free         | Free          |
+| Name                                                              | Composer                          | Usage                                                                                                                                                                              | Year 1 Price | Renewal Price |
+| ----------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
+| [Amazon S3](https://plugins.craftcms.com/aws-s3)                  | `craftcms/aws-s3`                 | This plugin integrates Craft CMS and Amazon S3 cloud storage service.                                                                                                              | Free         | Free          |
+| [Autocomplete](https://github.com/nystudio107/craft-autocomplete) | `nystudio107/craft-autocomplete`  | Provides Twig template IDE autocomplete of Craft CMS & plugin variables. Requires the [PHPStorm Symfony Support Plugin](https://plugins.jetbrains.com/plugin/7219-symfony-support) | Free         | Free          |
+| [CKEditor](https://plugins.craftcms.com/ckeditor)                 | `craftcms/ckeditor`               | Craft CMS’s official rich text plugin                                                                                                                                              | Free         | Free          |
+| [Classnames](https://plugins.craftcms.com/classnames)             | `viget/craft-classnames`          | Conditionally join css class names together in Twig                                                                                                                                | Free         | Free          |
+| [Empty Coalesce](https://plugins.craftcms.com/empty-coalesce)     | `nystudio107/craft-emptycoalesce` | Adds the `???` operator to Twig that will return the first thing that is defined, not null, and not empty.                                                                         | Free         | Free          |
+| [Imager X](https://plugins.craftcms.com/imager-x)                 | `spacecatninja/imager-x`          | Image optimization and Imgix connector. Provides useful Twig shortcuts for generating transforms and placeholders.                                                                 | $99.00       | $59.00        |
+| [Navigation](https://plugins.craftcms.com/navigation)             | `verbb/navigation`                | Simplifies management of complex navigation groups (main menus, footer menus, etc.)                                                                                                | $19.00       | $5.00         |
+| [Retour](https://plugins.craftcms.com/retour)                     | `nystudio107/craft-retour`        | Provides a Craft admin UI to set up redirects. Will automatically create redirects when URLs of entries change.                                                                    | $59.00       | $29.00        |
+| [SEOMatic](https://plugins.craftcms.com/seomatic)                 | `nystudio107/craft-seomatic`      | A turnkey SEO plugin that follows [modern SEO best practices](https://nystudio107.com/blog/modern-seo-snake-oil-vs-substance).                                                     | $99.00       | $49.00        |
+| [Vite](https://plugins.craftcms.com/vite)                         | `nystudio107/craft-vite`          | Loads front-end files that are compiled by Vite.                                                                                                                                   | Free         | Free          |
+| [Expanded Singles](https://plugins.craftcms.com/expanded-singles) | `verbb/expanded-singles`          | Change the entries index sidebar to list all singles, rather than grouping them under a 'Singles' menu item.                                                                       | Free         | Free          |
 
 # Contribute to this starter
 
