@@ -110,3 +110,15 @@ ScriptHelpers::replaceFileText(
     pattern: "/# BEGIN-STARTER-ONLY\X*# END-STARTER-ONLY/m",
     replacement: '',
 );
+
+/**
+ * phpstan.neon
+ * Remove the scanFiles entry for composer-scripts/ since that directory
+ * is deleted after create-project runs.
+ */
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/phpstan.neon",
+    pattern: "/\n    scanFiles:\n        - composer-scripts\/ScriptHelpers\.php/",
+    replacement: '',
+);
