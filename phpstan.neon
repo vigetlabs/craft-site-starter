@@ -8,3 +8,5 @@ parameters:
         - config
     scanDirectories:
         - storage/runtime/compiled_classes
+    scanFiles:
+        - composer-scripts/ScriptHelpers.php
