@@ -9,23 +9,40 @@ require_once 'vendor/autoload.php';
 $cwd = getcwd();
 
 /**
- * Prompt the user for input
+ * Prompt the user for input or accept environment variables.
  */
-$projectName = Console::prompt('What is the name of your project (Example: My Client Name)? ', [
-    'required' => true,
-]);
+$envProjectName = getenv('PROJECT_NAME') ?: null;
+$envProjectSlug = getenv('PROJECT_SLUG') ?: null;
 
-Console::output("Great! We'll use the name: $projectName");
+if ($envProjectName) {
+    // Non-interactive mode
+    $projectName = $envProjectName;
+    $projectSlug = $envProjectSlug
+        ? StringHelper::toKebabCase($envProjectSlug)
+        : StringHelper::toKebabCase($projectName);
 
-$suggestedProjectSlug = StringHelper::toKebabCase($projectName);
+    Console::output("Using project name: $projectName");
+    Console::output("Using project slug: $projectSlug");
+} else {
+    // Interactive mode (current behavior, unchanged)
+    $projectName = Console::prompt('What is the name of your project (Example: My Client Name)? ', [
+        'required' => true,
+    ]);
 
-$projectSlugPrompt = Console::prompt("Customize the project slug? This controls the DDEV URL, etc.", [
-    'default' => $suggestedProjectSlug,
-]);
+    Console::output("Great! We'll use the name: $projectName");
 
-$projectSlug = !empty(trim($projectSlugPrompt)) ? StringHelper::toKebabCase($projectSlugPrompt) : $suggestedProjectSlug;
+    $suggestedProjectSlug = StringHelper::toKebabCase($projectName);
 
-Console::output("Great! We'll use $projectSlug");
+    $projectSlugPrompt = Console::prompt("Customize the project slug? This controls the DDEV URL, etc.", [
+        'default' => $suggestedProjectSlug,
+    ]);
+
+    $projectSlug = !empty(trim($projectSlugPrompt))
+        ? StringHelper::toKebabCase($projectSlugPrompt)
+        : $suggestedProjectSlug;
+
+    Console::output("Great! We'll use $projectSlug");
+}
 
 /**
  * Update DDEV config
