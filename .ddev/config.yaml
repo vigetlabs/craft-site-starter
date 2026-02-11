@@ -17,6 +17,9 @@ web_environment:
   - SYSTEM_EMAIL_PORT=1025
   - SYSTEM_EMAIL_USERNAME=abc
   - SYSTEM_EMAIL_PASSWORD=123
+webimage_extra_packages:
+  # Process viewer for debugging CPU and memory use: `ddev exec htop`
+  - htop
 nodejs_version: '24'
 hooks:
   post-start:
