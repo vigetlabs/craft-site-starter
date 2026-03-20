@@ -24,6 +24,7 @@ Remember these — you'll need them to log in and verify the install.
 **Stop immediately on any unexpected result.** Every step below has explicit success criteria. If any step produces a non-zero exit code, unexpected output, missing files, incorrect values, or any other deviation from what is described — **stop execution, report exactly what went wrong (including full command output), and ask the user how to proceed.** Do not attempt to fix, retry, or work around failures automatically.
 
 This includes but is not limited to:
+
 - Commands exiting with non-zero status
 - Docker daemon not running
 - DDEV not installed or not responding
