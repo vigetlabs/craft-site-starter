@@ -21,6 +21,7 @@ nodejs_version: '20'
 hooks:
   post-start:
     - composer: install
+    - exec: php ./craft up
     # Ensures that lint-staged runs properly in ddev container
     - exec: git config --global --add safe.directory /var/www/html
   post-import-db:
