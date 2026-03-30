@@ -37,6 +37,13 @@ web_extra_daemons:
     command: 'npm install && npm run build && npm run dev'
     directory: /var/www/html
 disable_upload_dirs_warning: true
+upload_dirs:
+  # https://docs.ddev.com/en/stable/users/install/performance/#mutagen:~:text=Large%20node_modules%20can%20cause%20cause%20slow%20sync%20times
+  - node_modules
+  - storage
+  - web/cpresources
+  - vendor
+
 # Key features of ddev's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
