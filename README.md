@@ -28,7 +28,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
 
 Icons are bundled into a single SVG spritemap at build time by [@spiriit/vite-plugin-svg-spritemap](https://github.com/SpiriitLabs/vite-plugin-svg-spritemap) and referenced via `<use href>` from the `Icon` macro in `templates/_components/icon.twig`.
 
-To add an icon, drop an SVG into `src/icons/` and run `npm run build` (HMR does not work currently)
+To add an icon, drop an SVG into `src/icons/` and run `npm run build`
 
 # Getting Started
 

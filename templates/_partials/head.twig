@@ -10,3 +10,7 @@
   {% endif %}
 
   {{ craft.vite.script('src/js/app.js', false) }}
+
+  {% if craft.vite.devServerRunning() %}
+    {{ craft.vite.script('@vite-plugin-svg-spritemap/client', false) }}
+  {% endif %}

@@ -32,6 +32,7 @@ export default defineConfig(({ command }) => {
     plugins: [
       VitePluginSvgSpritemap('./src/icons/*.svg', {
         output: { name: 'spritemap.svg' },
+        injectSVGOnDev: true, // Used only in dev mode for HMR
       }),
     ],
   }
