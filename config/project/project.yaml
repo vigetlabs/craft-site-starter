@@ -1,4 +1,4 @@
-dateModified: 1778121163
+dateModified: 1778123830
 elementSources:
   craft\elements\Entry:
     -
@@ -26,11 +26,6 @@ elementSources:
       page: Entries
       type: native
     -
-      heading: Globals
-      key: 'heading:5af39cb5-3202-4e4e-b093-23ef87051c97'
-      page: Entries
-      type: heading
-    -
       defaultSort:
         - id
         - asc
@@ -43,6 +38,10 @@ elementSources:
         - postDate
         - expiryDate
         - link
+      type: native
+    -
+      key: 'single:616ddfb4-d727-49d5-9da2-10382368d299' # AI Settings
+      page: Globals
       type: native
 elementSourcesPages:
   craft\elements\Entry:
@@ -100,6 +99,7 @@ meta:
     101b4db6-8914-45eb-a661-180b15f70894: 'Footer Navigation' # Footer Navigation
     534ccdd8-7abd-4300-a102-71885b21c126: 'Call To Action' # Call To Action
     570fb481-ad97-46db-8bad-f7b0fd90e831: Image # Image
+    616ddfb4-d727-49d5-9da2-10382368d299: 'AI Settings' # AI Settings
     805d8826-faed-4186-9b88-f509eb9b07e6: 'Viget Craft Starter' # Viget Craft Starter
     896b8f2a-ed0c-42c9-b5fd-ba8668fc6784: 'Rich Text' # Rich Text
     969acdd6-6362-41b1-b782-6bbd43a8a6b4: Home # Home
@@ -110,6 +110,7 @@ meta:
     ac3b0590-d417-429e-aa1f-96be3c79a5b0: 'Media Type' # Media Type
     b3d7753a-c7ad-4f33-aca8-df63277e9b42: 'Primary Navigation' # Primary Navigation
     b4bfeb63-5bc4-4368-b4c9-408f7bac68fc: 'Global Code' # Global Code
+    b818de5a-9910-4caa-8bc7-1518eec27fa9: 'AI Settings' # AI Settings
     c52a9170-652b-4d92-a226-69894b1822ed: 'Rich Text: Simple' # Rich Text: Simple
     cbf3aeac-588c-4aeb-9573-6f1920206abf: 'Code Block' # Code Block
     cd489d3c-f914-475c-a270-ab926e4e7485: 'Rich Text' # Rich Text

@@ -1,0 +1,16 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: b818de5a-9910-4caa-8bc7-1518eec27fa9 # AI Settings
+handle: aiSettings
+maxAuthors: 1
+name: 'AI Settings'
+propagationMethod: all
+siteSettings:
+  35b563a0-4662-40b9-b885-a8450a2868d9: # Viget Craft Starter
+    enabledByDefault: true
+    hasUrls: true
+    template: null
+    uriFormat: ai-settings
+type: single

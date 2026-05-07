@@ -1,0 +1,42 @@
+allowLineBreaksInTitles: false
+color: null
+description: null
+fieldLayouts:
+  615e51a2-a869-44eb-a776-c94f0accb177:
+    cardThumbAlignment: end
+    tabs:
+      -
+        elementCondition: null
+        elements:
+          -
+            dateAdded: '2026-05-07T02:40:43+00:00'
+            editCondition: null
+            elementCondition: null
+            elementEditCondition: null
+            fieldUid: 7a701601-ee6c-4d56-8bd0-efa7719f6a67 # Code
+            handle: llmsTxtContent
+            instructions: "Add content that appears at the `/llms.txt` path. \r\n\r\nLeave this field empty to disable this feature and URL path. \r\n\r\n"
+            label: 'llms.txt content'
+            required: false
+            tip: null
+            type: craft\fieldlayoutelements\CustomField
+            uid: cb4138c6-9843-4b43-9b17-f74f183f36d1
+            userCondition: null
+            warning: null
+            width: 100
+        name: Content
+        uid: 92c1ec88-5b06-4a84-b4c8-7704960f923d
+        userCondition: null
+    thumbFieldKey: null
+handle: aiSettings
+hasTitleField: false
+icon: null
+name: 'AI Settings'
+showSlugField: true
+showStatusField: true
+slugTranslationKeyFormat: null
+slugTranslationMethod: site
+titleFormat: null
+titleTranslationKeyFormat: null
+titleTranslationMethod: site
+uiLabelFormat: '{title}'
