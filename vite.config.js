@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap'
 import process from 'node:process'
 
 // Matches ddev web_extra_exposed_ports.https_port
@@ -30,8 +30,8 @@ export default defineConfig(({ command }) => {
       },
     },
     plugins: [
-      viteStaticCopy({
-        targets: [{ src: 'src/icons/**/*', dest: './assets/icons' }],
+      VitePluginSvgSpritemap('./src/icons/*.svg', {
+        output: { name: 'spritemap.svg' },
       }),
     ],
   }

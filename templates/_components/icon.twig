@@ -1,5 +1,7 @@
 {#
-Inlines the SVG markup directly into the page.
+References icons from a Vite-generated SVG sprite sheet.
+
+Drop a new file in `src/icons/` and it's automatically available by name.
 
 Provides icon size props so you don't have to remember to pass
 `.size-xyz` every time you want to use your icon system.
@@ -31,8 +33,14 @@ By setting size to `none` you can add arbitrary size classes to the icon.
 
   {% set sizeClass = sizeConfig[size] ?? sizeConfig.md %}
 
-  {{ svg('@webroot/dist/assets/icons/' ~ name ~ '.svg')|attr({
+  {# `<use href>` enforces same-origin, so we reference the built spritemap from
+     `web/dist/` even in dev. `craft.vite.entry()` resolves the manifest URL for
+     non-script assets, avoiding the dev server's cross-origin URL.
+     Adding new icons in `src/icons/` requires an `npm run build` to take effect. #}
+  <svg {{ attr({
     class: cx(sizeClass, class),
     'aria-hidden': ariaHidden ? 'true' : null,
-  }) }}
+  }) }}>
+    <use href="{{ craft.vite.entry('spritemap.svg') }}#sprite-{{ name }}"></use>
+  </svg>
 {% endmacro %}
