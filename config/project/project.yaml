@@ -1,4 +1,4 @@
-dateModified: 1772753181
+dateModified: 1778121163
 elementSources:
   craft\elements\Entry:
     -
@@ -8,6 +8,7 @@ elementSources:
       defaultViewMode: ''
       disabled: false
       key: '*'
+      page: Entries
       tableAttributes:
         - status
         - section
@@ -17,12 +18,17 @@ elementSources:
       type: native
     -
       heading: Singles
+      key: 'heading:aeacc05c-5467-44a9-987f-b6b16d96b7de'
+      page: Entries
       type: heading
     -
       key: 'single:969acdd6-6362-41b1-b782-6bbd43a8a6b4' # Home
+      page: Entries
       type: native
     -
       heading: Globals
+      key: 'heading:5af39cb5-3202-4e4e-b093-23ef87051c97'
+      page: Entries
       type: heading
     -
       defaultSort:
@@ -31,12 +37,17 @@ elementSources:
       defaultViewMode: ''
       disabled: false
       key: 'single:b4bfeb63-5bc4-4368-b4c9-408f7bac68fc' # Global Code
+      page: Globals
       tableAttributes:
         - status
         - postDate
         - expiryDate
         - link
       type: native
+elementSourcesPages:
+  craft\elements\Entry:
+    Globals:
+      icon: globe
 email:
   fromEmail: $SYSTEM_EMAIL_FROM
   fromName: 'Viget Craft Starter'
