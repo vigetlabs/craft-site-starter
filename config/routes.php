@@ -9,4 +9,8 @@
  * https://craftcms.com/docs/5.x/system/routing.html
  */
 
-return [];
+return [
+    'llms.txt' => [
+        'template' => '_llms.twig',
+    ],
+];

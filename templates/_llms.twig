@@ -1,0 +1,9 @@
+{%- set llmsTxtContent = aiSettings.llmsTxtContent|trim -%}
+
+{%- if not llmsTxtContent -%}
+  {%- exit 404 -%}
+{%- endif -%}
+
+{%- header "Content-Type: text/plain" -%}
+
+{{- llmsTxtContent|raw -}}
