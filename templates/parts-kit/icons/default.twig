@@ -33,5 +33,14 @@
       name: 'arrow-right',
       ariaHidden: false,
     }) }}
+
+    <p class="text-sm text-gray-500">
+      Pass a <code>title</code> to render an SVG <code>&lt;title&gt;</code> element. This automatically exposes the icon to screen readers.
+    </p>
+
+    {{ Icon({
+      name: 'arrow-right',
+      title: 'Next page',
+    }) }}
   </div>
 {% endfor %}
