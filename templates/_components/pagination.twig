@@ -39,7 +39,7 @@
   {% set size = props.size ?? 'md' %}
 
   {# @var string ariaLabel #}
-  {% set ariaLabel = props.ariaLabel ?? 'pagination navigation' %}
+  {% set ariaLabel = props.ariaLabel ?? 'pagination navigation'|t %}
 
   {# Computed values #}
   {% set needEllipsis = totalPages > maxLinks %}
@@ -67,7 +67,7 @@
       <li>
         {{ Button({
           href: prevUrl,
-          text: 'Previous',
+          text: 'Previous'|t,
           icon: 'arrow-left',
           variant: 'outlined',
           size,
@@ -118,7 +118,7 @@
       <li>
         {{ Button({
           href: nextUrl,
-          text: 'Next',
+          text: 'Next'|t,
           icon: 'arrow-right',
           variant: 'outlined',
           size: size,

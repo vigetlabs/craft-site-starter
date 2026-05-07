@@ -22,6 +22,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
 - Starter components based on [Blueprint](https://github.com/vigetlabs/blueprint)
 - A fully accessible header and navigation
 - A simple Matrix Field based block editor
+- [Static message translations](https://craftcms.com/docs/5.x/system/sites.html#static-message-translations) have been pre-filled for common elements. 
 
 # Getting Started
 

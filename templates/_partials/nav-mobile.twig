@@ -30,7 +30,7 @@
 {% endmacro %}
 
 <nav
-  aria-label="Site Navigation"
+  aria-label="{{ 'Site Navigation'|t }}"
   class="md:hidden"
   :style="isOpen ? 'display: block' : ''" {# Keeps the mobile nav open even if the breakpoint changes #}
   x-id="['nav-mobile']"
@@ -63,7 +63,7 @@
         class: 'w-[186px] h-32',
       }) }}
 
-      <span class="sr-only">{{ currentSite.name }} - Home</span>
+      <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
     </a>
 
     <button
@@ -77,7 +77,7 @@
         <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
         <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
       </div>
-      <span class="sr-only">Open Menu</span>
+      <span class="sr-only">{{ 'Open Menu'|t }}</span>
     </button>
   </div>
 
