@@ -35,7 +35,7 @@
 
 <nav
   class="container flex flex-wrap items-center justify-between max-md:hidden"
-  aria-label="Site Navigation"
+  aria-label="{{ 'Site Navigation'|t }}"
   x-data="nav"
   @keyup.escape.window="popStack(1)"
   @keydown.tab="handleTab($refs.subnav)"
@@ -50,7 +50,7 @@
       class: 'w-[186px] h-32',
     }) }}
 
-    <span class="sr-only">{{ currentSite.name }} - Home</span>
+    <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
   </a>
 
   <ul class="inline-flex flex-wrap gap-8" @click.outside="resetStack()">

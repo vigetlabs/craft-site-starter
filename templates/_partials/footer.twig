@@ -17,11 +17,11 @@
             size: 'lg',
           }) }}
 
-          <span class="sr-only">{{ currentSite.name }} - Home</span>
+          <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
         </a>
       </div>
 
-      <nav class="md:col-span-4 lg:col-span-3" aria-label="Footer Navigation">
+      <nav class="md:col-span-4 lg:col-span-3" aria-label="{{ 'Footer Navigation'|t }}">
         <ul class="grid grid-cols-2 md:grid-cols-4 gap-32">
           {% for node in footerNavigation %}
             {% set children = node.children %}
@@ -62,10 +62,10 @@
     {# Copyright and privacy policy #}
     <div class="border-t border-white/10 pt-32 mt-32 grid grid-cols-1 max-md:text-center md:grid-cols-[1fr_auto] text-sm gap-16 md:gap-0">
       <p class="text-gray-400">
-        &copy; {{ now|date('Y') }} {{ currentSite.name }}. All rights reserved.
+        &copy; {{ '{year} {name}. All rights reserved.'|t({ year: now|date('Y'), name: currentSite.name }) }}
       </p>
 
-      <a class="text-gray-400 hover:text-white hover:underline" href="#TODO">Privacy Policy</a>
+      <a class="text-gray-400 hover:text-white hover:underline" href="#TODO">{{ 'Privacy Policy'|t }}</a>
     </div>
   </div>
 </footer>
