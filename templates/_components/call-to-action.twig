@@ -9,14 +9,14 @@
   {# @var string|null text #}
   {% set text = props.text ?? null %}
 
-  {# @var string|null href #}
-  {% set href = props.href ?? null %}
+  {# @var string|null url #}
+  {% set url = props.url ?? null %}
 
   {# @var string|null buttonText #}
   {% set buttonText = props.buttonText ?? null %}
 
-  {# @var boolean|null newTab #}
-  {% set newTab = props.newTab ?? null %}
+  {# @var string|null target Pass '_blank' to open in a new tab. #}
+  {% set target = props.target ?? null %}
 
   {# @var string|null class #}
   {% set class = props.class ?? null %}
@@ -31,10 +31,10 @@
         <div class="max-w-[640px]">{{ text }}</div>
       {% endif %}
 
-      {% if href and buttonText %}
+      {% if url and buttonText %}
         {{ Button({
-          href,
-          newTab,
+          url,
+          target,
           text: buttonText,
         }) }}
       {% endif %}

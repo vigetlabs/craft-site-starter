@@ -66,7 +66,7 @@
     <ul class="flex items-center gap-16">
       <li>
         {{ Button({
-          href: prevUrl,
+          url: prevUrl,
           text: 'Previous',
           icon: 'arrow-left',
           variant: 'outlined',
@@ -117,7 +117,7 @@
 
       <li>
         {{ Button({
-          href: nextUrl,
+          url: nextUrl,
           text: 'Next',
           icon: 'arrow-right',
           variant: 'outlined',
@@ -146,7 +146,7 @@
   {% set currentPage = props.currentPage ?? null %}
 
   {{ Button({
-    href: url,
+    url: url,
     text: page,
     variant: page == currentPage ? 'contained' : 'subtle',
     size: size,

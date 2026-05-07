@@ -4,8 +4,8 @@
   {% for i in 1..3 %}
     {{ CardImage({
       image: craft.assets.one(),
-      href: i == 2 ? '#TEST' : null,
-      newTab: i == 2,
+      url: i == 2 ? '#TEST' : null,
+      target: i == 2 ? '_blank' : null,
       sizes: {
         default: '33vw',
       },
@@ -20,8 +20,8 @@
     {{ CardImage({
       align: 'center',
       image: craft.assets.one(),
-      href: i == 2 ? '#TEST' : null,
-      newTab: i == 2,
+      url: i == 2 ? '#TEST' : null,
+      target: i == 2 ? '_blank' : null,
       ratio: 1/1,
       sizes: {
         default: '33vw',
