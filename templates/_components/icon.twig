@@ -33,14 +33,14 @@ By setting size to `none` you can add arbitrary size classes to the icon.
 
   {% set sizeClass = sizeConfig[size] ?? sizeConfig.md %}
 
-  {# `<use href>` enforces same-origin, so we reference the built spritemap from
-     `web/dist/` even in dev. `craft.vite.entry()` resolves the manifest URL for
-     non-script assets, avoiding the dev server's cross-origin URL.
-     Adding new icons in `src/icons/` requires an `npm run build` to take effect. #}
+  {# In dev the plugin's `injectSVGOnDev` injects the spritemap into the page,
+     so `<use href="#sprite-X">` resolves locally and HMR works.
+     In prod we reference the built same-origin spritemap to avoid HTML bloat. #}
+  {% set spritemapUrl = craft.vite.devServerRunning() ? '' : craft.vite.entry('spritemap.svg') %}
   <svg {{ attr({
     class: cx(sizeClass, class),
     'aria-hidden': ariaHidden ? 'true' : null,
   }) }}>
-    <use href="{{ craft.vite.entry('spritemap.svg') }}#sprite-{{ name }}"></use>
+    <use href="{{ spritemapUrl }}#sprite-{{ name }}"></use>
   </svg>
 {% endmacro %}
