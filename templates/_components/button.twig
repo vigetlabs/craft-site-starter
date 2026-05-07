@@ -23,11 +23,17 @@
   {# @var bool iconOnly #}
   {% set iconOnly = props.iconOnly ?? false %}
 
-  {# @var string|null href #}
-  {% set href = props.href ?? null %}
+  {# @var string|null url #}
+  {% set url = props.url ?? null %}
 
-  {# @var bool newTab #}
-  {% set newTab = props.newTab ?? false %}
+  {# @var string|null target Pass '_blank' to open in a new tab. #}
+  {% set target = props.target ?? null %}
+
+  {# @var string|null ariaLabel #}
+  {% set ariaLabel = props.ariaLabel ?? null %}
+
+  {# @var bool|string|null download Pass true (or a filename) to set the download attribute. #}
+  {% set download = props.download ?? null %}
 
   {# @var string type #}
   {% set type = props.type ?? 'button' %}
@@ -41,16 +47,19 @@
   {# @var string|null text #}
   {% set text = props.text ?? null %}
 
-  {# Determine element type #}
-  {% set el = as ?? (href and not disabled ? 'a' : 'button') %}
-
   {# @var array attrs #}
   {% set attrs = props.attrs ?? {} %}
 
-  {% tag el with attrs | merge({
-    href: not disabled ? href : null,
-    target: newTab ? '_blank' : null,
-    rel: newTab ? 'noopener' : null,
+  {# Determine element type #}
+  {% set el = as ?? (url and not disabled ? 'a' : 'button') %}
+
+  {% tag el with {
+    ...attrs,
+    href: not disabled ? url : null,
+    target: target,
+    rel: target == '_blank' ? 'noopener noreferrer' : null,
+    download: download,
+    'aria-label': ariaLabel ?? attrs['aria-label'] ?? null,
     disabled: disabled ? true : null,
     type: el == 'button' ? type : null,
     title: title,
@@ -63,7 +72,7 @@
       'btn-sm': size == 'sm',
       'btn-lg': size == 'lg',
     }, class),
-  }) %}
+  } %}
     {{ icon ? Icon({
       name: icon,
       size: size,

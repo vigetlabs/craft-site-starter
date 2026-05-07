@@ -7,11 +7,11 @@
   {# @var string|null class #}
   {% set class = props.class ?? null %}
 
-  {# @var string|null href #}
-  {% set href = props.href ?? null %}
+  {# @var string|null url #}
+  {% set url = props.url ?? null %}
 
-  {# @var bool newTab #}
-  {% set newTab = props.newTab ?? false %}
+  {# @var string|null target Pass '_blank' to open in a new tab. #}
+  {% set target = props.target ?? null %}
 
   {# @var craft\elements\Asset|null image #}
   {% set image = props.image ?? null %}
@@ -35,7 +35,7 @@
   {% set description = props.description ?? null %}
 
   {# Computed values #}
-  {% set element = href ? 'a' : 'article' %}
+  {% set element = url ? 'a' : 'article' %}
   {% set headingElement = "h#{headingLevel}" %}
 
   {% tag element with {
@@ -43,8 +43,9 @@
       'items-start': align == 'left',
       'items-center text-center': align == 'center',
     }),
-    href: href,
-    target: href and newTab ? '_blank' : null,
+    href: url,
+    target: target,
+    rel: target == '_blank' ? 'noopener noreferrer' : null,
   } %}
     {% if image %}
       {{ Image({

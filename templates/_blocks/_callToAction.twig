@@ -6,7 +6,7 @@
 {{ CallToAction({
   title: block.title,
   text: block.richTextSimple,
-  href: block.button.value,
+  url: block.button.value,
   buttonText: block.button.label ?? null,
-  newTab: block.button.target ?? null,
+  target: block.button.target ?? null,
 }) }}
