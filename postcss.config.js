@@ -10,7 +10,7 @@ export default {
       selectorBlackList: [],
       replace: true,
       mediaQuery: true,
-      minPixelValue: 1,
+      minPixelValue: 2,
       exclude: /node_modules/i,
     },
     ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {}),
