@@ -36,13 +36,15 @@ web_extra_daemons:
   - name: 'vite'
     command: 'npm install && npm run build && npm run dev'
     directory: /var/www/html
-disable_upload_dirs_warning: true
 upload_dirs:
   # https://docs.ddev.com/en/stable/users/install/performance/#mutagen:~:text=Large%20node_modules%20can%20cause%20cause%20slow%20sync%20times
-  - node_modules
-  - storage
-  - web/cpresources
-  - vendor
+  # Paths are relative to the docroot (web/)
+  # First entry is the `ddev import-files` default target, which gets replaced
+  - cpresources
+  - ../storage
+  - ../node_modules
+  # - ../vendor # uncomment for OrbStack only
+  # - ../backstop_data # uncomment with BackstopJS
 
 # Key features of ddev's config.yaml:
 
