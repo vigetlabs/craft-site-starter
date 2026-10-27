@@ -86,6 +86,22 @@ replacing standard plugins with similar alternatives (unless absolutely necessar
 | [Vite](https://plugins.craftcms.com/vite)                                                               | `nystudio107/craft-vite`                            | Loads front-end files that are compiled by Vite.                                                                                                                                   | Free         | Free          |
 | [Expanded Singles](https://plugins.craftcms.com/expanded-singles)                                       | `verbb/expanded-singles`                            | Change the entries index sidebar to list all singles, rather than grouping them under a 'Singles' menu item.                                                                       | Free         | Free          |
 
+# Deployment
+
+> This section is a template — customize it for each project after setup.
+
+Push to the `staging` or `production` branch to deploy. `.github/workflows/deploy.yml` runs `bin/deploy <branch>`, which reads its hosts and paths from `config/deploy.conf`. The workflow needs a `DEPLOY_KEY` repository secret holding an SSH key the deploy user accepts.
+
+Each deploy builds a new release directory, backs up the database, runs `craft up` (migrations and project config), and only links the release if that succeeds. It then reloads PHP-FPM (the `php-fpm` key in `deploy.conf`), clears caches, and restarts any queue workers listed under `workers`.
+
+Other commands: `bin/deploy <env> fetch-database`, `bin/deploy <env> connect`, `bin/deploy <env> run <cmd>`.
+
+## Cache clearing
+
+Every deploy clears `compiled-templates`, `compiled-classes` and `vite-file-cache`. If the project adds Blitz, add `clear-caches/blitz` to `bin/deploy`.
+
+Never run `clear-caches/data` or `clear-caches/all` on deploy. The data cache holds plugin data such as Imager X placeholders and Embedded Assets metadata, which is slow or impossible to rebuild. Locally, `post-import-db` clears everything, which is fine.
+
 # Contribute to this starter
 
 ## Local Dev

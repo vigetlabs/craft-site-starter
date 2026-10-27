@@ -1,0 +1,612 @@
+#!/usr/bin/env bash
+
+#
+# deploy(1) - Minimalistic shell script to deploy Git repositories.
+# Released under the MIT License.
+#
+# https://github.com/visionmedia/deploy
+#
+
+VERSION="0.6.0"
+CONFIG=./config/deploy.conf
+LOG=/tmp/deploy.log
+REF=
+ENV=
+KEEP_RELEASES=8
+
+#
+# Output usage information.
+#
+usage() {
+  cat <<-EOF
+
+Usage: deploy [options] <env> [command]
+
+Options:
+
+  -C, --chdir <path>         change the working directory to <path>
+  -c, --config <path>        set config path. defaults to $CONFIG
+  -V, --version              output program version
+  -h, --help                 output help information
+
+Commands:
+
+  setup                      run remote setup commands
+  config [key]               output config file or [key]
+  run <cmd>                  run the given <cmd>
+  connect                    open an ssh session to the host
+  fetch-database             download a database dump
+  apply-project-config       applies the project config file
+  migrate                    run migrations
+  migrate-excluding-content  run migrations, excluding content migrations
+  [ref]                      deploy to [ref], the 'ref' setting, or latest tag
+
+EOF
+}
+
+cyan="\\033[0;36m"
+green="\\033[0;32m"
+red="\\033[0;31m"
+# yellow="\\033[0;33m"
+nc="\\033[0m"
+
+puts() {
+  echo -e "$*"
+}
+
+puterr() {
+  echo -e "$@" >&2
+}
+
+log() {
+  puts "  → ${cyan}$*${nc}"
+}
+
+success() {
+  puts "${green}$*${nc}"
+}
+
+failure() {
+  puterr "${red}$*${nc}"
+}
+
+abort() {
+  if [ $# -gt 0 ]; then
+    puterr "$*"
+  fi
+
+  exit 1
+}
+
+#
+# Set configuration file <path>.
+#
+set_config_path() {
+  [[ -f "$1" ]] || abort "invalid --config path"
+  CONFIG="$1"
+}
+
+#
+# Check if config <section> exists.
+#
+config_section() {
+  grep "^\\[$1" "$CONFIG" &> /dev/null
+}
+
+#
+# Get config value by <key>.
+#
+config_get() {
+  local key="$1"
+
+  [[ -n "$key" ]] \
+    && grep "^\\[$ENV" -A 20 "$CONFIG" \
+    | grep "^$key" \
+    | head -n 1 \
+    | cut -d ' ' -f 2-999 \
+    | sed -E "s/^ +//"
+}
+
+#
+# Output version.
+#
+version() {
+  echo "$VERSION"
+}
+
+#
+# Return the ssh command to run.
+#
+ssh_command() {
+  local url
+  local key
+  local forward_agent
+  local port
+  local needs_tty
+  local control
+
+  url="$(config_get user)@$(config_get host)"
+  key="$(config_get key)"
+  forward_agent="$(config_get forward-agent)"
+  port="$(config_get port)"
+  needs_tty="$(config_get needs_tty)"
+
+  # Persist SSH connections for 60 seconds
+  control="  -o ControlMaster=auto"
+  control+=" -o ControlPath=tmp/sockets/%r@%h-%p"
+  control+=" -o ControlPersist=60"
+
+  [[ -n "$forward_agent" ]] && local agent="-A"
+  [[ -n "$key" ]]           && local identity="-i $key"
+  [[ -n "$port" ]]          && local port="-p $port"
+  [[ -n "$needs_tty" ]]     && local tty="-t"
+
+  echo "ssh $tty $agent $port $identity $control $url"
+}
+
+#
+# Run the given remote <cmd>.
+#
+run() {
+  local job
+  local cmd
+
+  job="$1"
+  cmd="$(ssh_command)"
+
+  echo "$cmd" "\"$job\"" >> $LOG
+
+  # shellcheck disable=SC2086
+  $cmd $job
+}
+
+#
+# Launch an interactive ssh console session.
+#
+connect() {
+  local path
+  local shell
+
+  path="$(config_get path)"
+  shell="$(ssh_command)"
+
+  echo "$shell"
+
+  # shellcheck disable=SC2086
+  exec $shell -t "cd $path; \$SHELL --login"
+}
+
+#
+# Output config or [key].
+#
+config() {
+  if [[ $# -eq 0 ]]; then
+    cat "$CONFIG"
+  else
+    config_get "$1"
+  fi
+}
+
+check-ssh-agent() {
+  if [ -z "$(config_get forward-agent)" ]; then
+    return
+  fi
+
+  if ssh-add -l | grep -q "agent has no identities"; then
+    failure "Unable to deploy"
+    puterr
+    puterr "This site deploys using SSH agent forwarding,"
+    puterr "but no identity was found in your local SSH agent."
+    puterr
+    puterr "To add your identity, run:"
+    puterr
+    puterr "  ssh-add"
+    puterr
+    puterr "and try again."
+
+    exit 1
+  fi
+}
+
+#
+# Run setup.
+#
+setup() {
+  local path
+  local repo
+
+  path=$(config_get path)
+  repo=$(config_get repo)
+
+  log "cloning $repo"
+  run "if [[ ! -d $path/shared/cached-copy/.git ]]; then git clone $repo $path/shared/cached-copy; fi"
+  [[ $? -eq 0 ]] || abort "failed to clone"
+
+  log "setup complete"
+}
+
+#
+# Apply project config
+#
+apply-project-config() {
+  local path
+  local current_path
+
+  path="$(config_get path)"
+  current_path="$path/current"
+
+  # Apply project config
+  log "applying project config"
+  run "cd $current_path && ./craft project-config/apply"
+
+  success "finished"
+}
+
+#
+# Migrate
+#
+migrate() {
+  local path
+  local current_path
+
+  path="$(config_get path)"
+  current_path="$path/current"
+
+  # Migrate
+  log "running migrations"
+  run "cd $current_path && ./craft migrate/all --interactive=0 --no-backup"
+
+  success "finished"
+}
+
+#
+# Migrate excluding content migrations
+#
+migrate-excluding-content() {
+  local path
+  local current_path
+
+  path="$(config_get path)"
+  current_path="$path/current"
+
+  # Migrate
+  log "running migrations, excluding content migrations"
+  run "cd $current_path && ./craft migrate/all --no-content=1 --interactive=0"
+
+  success "finished"
+}
+
+#
+# Export and download the database
+#
+fetch-database() {
+  local path
+  local current_path
+  local timestamp
+  local file
+  local url
+  local app
+
+  path="$(config_get path)"
+  current_path="$path/current"
+  timestamp="$(date +'%Y%m%d-%H%M%S')"
+  app="$(config_get app)"
+  file="$app-$ENV-$timestamp.sql.gz"
+
+  url="$(config_get user)@$(config_get host)"
+
+  # Export database
+  log "exporting database"
+  run "set -o pipefail && cd $current_path && \
+       mkdir -p $current_path/tmp && \
+       eval \$(cat .env | grep CRAFT_DB) && \
+       mysqldump --single-transaction --no-tablespaces --set-gtid-purged=OFF \
+         -h \"\$CRAFT_DB_SERVER\" \
+         -u \"\$CRAFT_DB_USER\" \
+         -p\"\$CRAFT_DB_PASSWORD\" \
+         \"\$CRAFT_DB_DATABASE\" | gzip > $current_path/tmp/$file"
+  [[ $? -eq 0 ]] || abort "export failed"
+
+  # Download file
+  log "downloading database"
+  scp "$url:$current_path/tmp/$file" .
+  [[ $? -eq 0 ]] || abort "failed to download database file"
+
+  # Delete dump from server
+  log "cleaning database dump"
+  run "rm -f $current_path/tmp/$file"
+  [[ $? -eq 0 ]] || abort "failed to clean database file from server"
+
+  success "finished exporting database to file - $file"
+}
+
+#
+# Deploy
+#
+deploy() {
+  local release_name
+  local ref
+  local workers
+  local php_fpm
+  local path
+  local shared_path
+  local source_path
+  local releases_path
+  local release_path
+
+  release_name="$(date +%Y%m%d%H%M%S)"
+  ref="$1"
+  workers="$(config_get workers)"
+  php_fpm="$(config_get php-fpm)"
+  path="$(config_get path)"
+  shared_path="$path/shared"
+  source_path="$shared_path/cached-copy"
+  releases_path="$path/releases"
+  release_path="$releases_path/$release_name"
+
+  log "deploying..."
+
+  log "checking SSH agent"
+  check-ssh-agent
+
+  # Fetch source
+  log "fetching updates"
+  run "cd $source_path && git fetch --all"
+  [[ $? -eq 0 ]] || abort "fetch failed"
+
+  # Latest tag
+  if [[ -z "$ref" ]]; then
+    log "fetching latest tag"
+
+    ref=$(run "cd $source_path && git for-each-ref refs/tags \"
+      --sort=-*authordate \
+      --format='%(refname)' \
+      --count=1 | cut -d '/' -f 3")
+
+    [[ $? -eq 0 ]] || abort "failed to determine latest tag"
+  fi
+
+  # Reset HEAD
+  log "resetting HEAD to $ref"
+  run "cd $source_path && git reset --hard $ref"
+  [[ $? -eq 0 ]] || abort "git reset failed"
+
+  # Create release
+  log "creating release $release_name"
+  run "mkdir $release_path"
+  [[ $? -eq 0 ]] || abort "failed to create $release_path"
+
+  run "rsync -lrpt --exclude=.git $source_path/ $release_path"
+  [[ $? -eq 0 ]] || abort "failed to copy source to $release_path"
+
+  revision=$(run "cd $source_path && git rev-parse --short HEAD")
+  run "echo $revision > $release_path/REVISION"
+
+  # Symlink shared resources
+  log "symlinking shared resources"
+  run "ln -sfn $shared_path/config/.env $release_path/.env && \
+
+       ln -sfn $shared_path/node_modules $release_path/node_modules && \
+
+       rm -dfr $release_path/storage && \
+       ln -sfn $shared_path/storage $release_path/storage && \
+
+       rm -dfr $release_path/web/cpresources && \
+       ln -sfn $shared_path/web/cpresources $release_path/web/cpresources"
+  [[ $? -eq 0 ]] || abort "failed to symlink resources"
+
+  # Backup database
+  log "backing up database"
+  run "set -o pipefail && cd $release_path && \
+       eval \$(cat .env | grep CRAFT_DB) && \
+       mysqldump --no-tablespaces --single-transaction --set-gtid-purged=OFF -h \"\$CRAFT_DB_SERVER\" -u \"\$CRAFT_DB_USER\" -p\"\$CRAFT_DB_PASSWORD\" \"\$CRAFT_DB_DATABASE\" | gzip > $release_path/backup-predeploy.sql.gz"
+  [[ $? -eq 0 ]] || abort "failed to backup database"
+
+  # Composer packages
+  log "installing composer packages"
+  run "cd $release_path && composer install"
+  [[ $? -eq 0 ]] || abort "failed to install composer packages"
+
+  # Node modules
+  log "installing node modules"
+  run "cd $release_path && npm ci"
+  [[ $? -eq 0 ]] || abort "failed to install node modules"
+
+  # Build assets
+  log "building assets"
+  run "cd $release_path && npm run build"
+  [[ $? -eq 0 ]] || abort "failed to build assets"
+
+  # Fix ./craft executable
+  log "fix ./craft executable permissions"
+  run "cd $release_path && chmod a+x ./craft"
+  [[ $? -eq 0 ]] || abort "failed to fix ./craft executable permissions"
+
+  # Runs non-content migrations, then project-config/apply, then content migrations
+  log "running migrations and applying project config"
+  run "cd $release_path && ./craft up --interactive=0 --no-backup=1"
+  [[ $? -eq 0 ]] || abort "craft up failed; release not linked"
+
+  # Symlink directories
+  log "linking release"
+  run "ln -sfn $release_path/web $path/web && \
+       ln -sfn $release_path     $path/current"
+  [[ $? -eq 0 ]] || abort "failed to link release"
+
+  # Reload PHP-FPM, which also clears OPcache
+  if [ -n "$php_fpm" ]; then
+    log "reloading $php_fpm"
+    run "sudo systemctl reload $php_fpm"
+    [[ $? -eq 0 ]] || abort "failed to reload $php_fpm"
+  fi
+
+  # Runs after the new release is live, so old requests can't refill the caches.
+  # Never clear-caches/data or clear-caches/all here: the data cache holds
+  # plugin data that is expensive or impossible to rebuild.
+  # Add ./craft clear-caches/blitz if Blitz is installed.
+  log "clearing craft caches"
+  run "cd $release_path && \
+       ./craft clear-caches/compiled-templates && \
+       ./craft clear-caches/compiled-classes && \
+       ./craft clear-caches/vite-file-cache"
+  [[ $? -eq 0 ]] || abort "failed to clear caches"
+
+  # Restart workers
+  if [ -n "$workers" ]; then
+    local ws
+    IFS=',' read -ra ws <<< "$workers"
+    for w in "${ws[@]}"; do
+      log "restarting $w"
+      run "sudo systemctl restart $w"
+      [[ $? -eq 0 ]] || abort "failed to restart $w"
+    done
+  fi
+
+  # Cleanup
+  log "cleaning previous releases (keeping $KEEP_RELEASES)"
+  run "ls -1dt $releases_path/* | tail -n +$((KEEP_RELEASES + 1)) | xargs rm -rf"
+  [[ $? -eq 0 ]] || abort "failed to clean up previous releases"
+
+  # Done
+  success "successfully deployed $ref"
+}
+
+#
+# Get current commit.
+#
+current_commit() {
+  local path
+  path="$(config_get path)"
+  run "cd $path/shared/cached-copy && git rev-parse HEAD"
+}
+
+commit_message() {
+  local commit
+  local path
+
+  commit="$1"
+  path="$(config_get path)"
+
+  run "cd $path/shared/cached-copy && git show --pretty=format:\"%s - %an\" HEAD | head -n 1"
+}
+
+#
+# Require environment arg.
+#
+require_env() {
+  config_section "$ENV" || abort "[$ENV] config section not defined"
+  [[ -z "$ENV" ]] && abort "<env> required"
+}
+
+#
+# Ensure all changes are committed and pushed before deploying.
+#
+check_for_local_changes() {
+  git --no-pager diff --exit-code --quiet          || abort "commit or stash your changes before deploying"
+  git --no-pager diff --exit-code --quiet --cached || abort "commit your staged changes before deploying"
+  [ -z "$(git rev-list "@{upstream}.." -n 1)" ]      || abort "push your changes before deploying"
+}
+
+#
+# main
+#
+main() {
+  # Create tmp directory for persisted sockets
+  mkdir -p tmp/sockets
+
+  while [[ $# -ne 0 ]]; do
+    arg="$1"
+    shift
+
+    case "$arg" in
+      -h|--help)
+        usage
+        exit
+        ;;
+
+      -V|--version)
+        version
+        exit
+        ;;
+
+      -c|--config)
+        set_config_path "$1"
+        shift ;;
+
+      -C|--chdir)
+        log "path/sourced $1"
+        cd "$1" || exit 1
+        shift
+        ;;
+
+      run)
+        require_env;
+        run "cd $(config_get path) && $*"
+        exit
+        ;;
+
+      connect)
+        require_env
+        connect
+        exit
+        ;;
+
+      curr|current)
+        require_env
+        current_commit
+        exit
+        ;;
+
+      setup)
+        require_env
+        setup "$@"
+        exit
+        ;;
+
+      config)
+        config "$@"
+        exit
+        ;;
+
+      fetch-database)
+        require_env
+        fetch-database
+        exit
+        ;;
+
+      migrate-excluding-content)
+        require_env
+        migrate-excluding-content
+        exit
+        ;;
+
+      apply-project-config)
+        require_env
+        apply-project-config
+        exit
+        ;;
+
+      migrate)
+        require_env
+        migrate
+        exit
+        ;;
+
+      *)
+        if [[ -z "$ENV" ]]; then
+          ENV=$arg
+        else
+          REF="$REF $arg"
+        fi
+        ;;
+    esac
+  done
+
+  require_env
+  # check_for_local_changes
+
+  # Deploy
+  deploy "${REF:-$(config_get ref)}"
+}
+
+main "$@"

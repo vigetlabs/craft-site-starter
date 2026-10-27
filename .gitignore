@@ -14,3 +14,6 @@ vite-bundle-visualizer.html
 # BEGIN-STARTER-ONLY
 config/license.key
 # END-STARTER-ONLY
+
+# bin/deploy SSH control sockets
+/tmp
