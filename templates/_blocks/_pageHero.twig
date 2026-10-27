@@ -3,12 +3,12 @@
 
 {% set block = block ?? null %}
 
-{# @var bool hasPreviousBlocksWithH1 #}
-{% set hasPreviousBlocksWithH1 = hasPreviousBlocksWithH1 ?? false %}
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 1 %}
 
 {{ PageHero({
   image: block.image.eagerly().one(),
   title: block.title,
   description: block.richTextSimple,
-  headingLevel: hasPreviousBlocksWithH1 ? 2 : 1,
+  headingLevel,
 }) }}

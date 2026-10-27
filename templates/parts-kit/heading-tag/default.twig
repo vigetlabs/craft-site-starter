@@ -1,0 +1,19 @@
+{% from '_components/heading-tag' import HeadingTag %}
+
+<div class="flex flex-col gap-16">
+  {% for level in [1, 2, 3, 4, 5, 6, 7, null] %}
+    {% set element = HeadingTag(level) %}
+
+    {% tag element with {
+      class: 'text-xl font-bold',
+    } %}
+      Level {{ level ?? 'null' }} renders &lt;{{ element }}&gt;
+    {% endtag %}
+  {% endfor %}
+
+  {% tag HeadingTag(7, 'p') with {
+    class: 'text-xl font-bold',
+  } %}
+    Level 7 with a custom fallback renders &lt;p&gt;
+  {% endtag %}
+</div>

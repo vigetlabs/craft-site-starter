@@ -1,0 +1,16 @@
+{#
+Returns a heading tag name (`h1`–`h6`) for a level of 1–6, or `fallback` for
+anything else, so a level computed past 6 never renders an invalid `h7`.
+
+The macro outputs only the tag name, so it can be used wherever a tag name is
+expected: `{% tag HeadingTag(headingLevel) %}` or `tag(HeadingTag(headingLevel))`.
+#}
+{% macro HeadingTag(level, fallback = 'div') -%}
+  {# @var int|string|null level -#}
+  {# @var string fallback -#}
+  {% set isValid = level is not iterable
+    and level is not same as(true)
+    and level matches '/^[1-6]$/'
+  -%}
+  {{- isValid ? "h#{level}" : fallback -}}
+{%- endmacro %}

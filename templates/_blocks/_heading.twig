@@ -1,15 +1,15 @@
 {# @var \craft\elements\Entry|null block #}
+{% from '_components/heading-tag' import HeadingTag %}
+
 {% set block = block ?? null %}
 
-{# @var bool hasPreviousBlocksWithH1 #}
-{% set hasPreviousBlocksWithH1 = hasPreviousBlocksWithH1 ?? false %}
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 1 %}
 
-{% set element = hasPreviousBlocksWithH1 ? 'h2' : 'h1' %}
-
-{% tag element with {
+{% tag HeadingTag(headingLevel) with {
   class: cx('container font-bold', {
-    'text-4xl': not hasPreviousBlocksWithH1,
-    'text-3xl': hasPreviousBlocksWithH1,
+    'text-4xl': headingLevel == 1,
+    'text-3xl': headingLevel != 1,
   }),
 } %}
   {{ block.heading }}
