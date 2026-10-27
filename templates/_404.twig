@@ -1,0 +1,15 @@
+{% extends '_layouts/base.twig' %}
+
+{% from '_components/button.twig' import Button %}
+
+{% block content %}
+  <div class="container py-64">
+    <h1 class="text-4xl font-bold">{{ 'Page not found'|t }}</h1>
+    <p class="mt-16 text-lg">{{ 'The page you’re looking for doesn’t exist or has moved.'|t }}</p>
+    {{ Button({
+      href: url('/'),
+      text: 'Go to the homepage'|t,
+      class: 'mt-32',
+    }) }}
+  </div>
+{% endblock %}
