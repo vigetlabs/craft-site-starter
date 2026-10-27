@@ -55,6 +55,13 @@
   {% set loading = props.loading ?? 'lazy' %}
 
   {#
+    @var string|null fetchPriority
+    Can be 'high', 'low' or 'auto'. Use 'high' with loading: 'eager'
+    for the largest image above the fold.
+  #}
+  {% set fetchPriority = props.fetchPriority ?? null %}
+
+  {#
     @var array sizes
 
     The 'sizes' prop is used to specify the size of the image at different viewport widths.
@@ -172,6 +179,7 @@
     params: {
       class,
       loading,
+      fetchpriority: fetchPriority,
       sizes,
       imagerOverrides: useDefaultTransform ? {
         fillTransforms: 'auto',
