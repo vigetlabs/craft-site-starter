@@ -2,12 +2,14 @@
 /**
  * Blitz Configuration
  *
- * Takes effect once Blitz (putyourlightson/craft-blitz) is installed; Craft ignores it until then.
+ * Commented out because Blitz (putyourlightson/craft-blitz) isn't installed; PHPStan
+ * fails on its classes otherwise. Uncomment after installing Blitz.
  * Settings here override the Blitz settings in the control panel.
  *
  * @see \putyourlightson\blitz\models\SettingsModel
  */
 
+/*
 use putyourlightson\blitz\drivers\generators\LocalGenerator;
 use putyourlightson\blitz\drivers\integrations\SeomaticIntegration;
 use putyourlightson\blitz\models\SettingsModel;
@@ -46,3 +48,4 @@ return [
         'outputComments' => true,
     ],
 ];
+*/
