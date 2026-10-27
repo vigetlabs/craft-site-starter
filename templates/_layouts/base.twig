@@ -1,7 +1,7 @@
 {%- set codeBlocks = globalCode.codeBlocks.collect() -%}
 {%- set codeBlocksTemplate = '_partials/global-code-blocks.twig' -%}
 <!DOCTYPE html>
-<html dir="auto" lang="en">
+<html dir="auto" lang="{{ currentSite.language }}">
 <head>
   {# -- Dangerously added raw HTML -- #}
   {{ include(codeBlocksTemplate, {
