@@ -1,10 +1,9 @@
 <?php
 
 use craft\helpers\App;
-use craft\helpers\StringHelper;
 
 // This Vite config expects that PRIMARY_SITE_URL uses https
-$host = StringHelper::removeRight(App::env('PRIMARY_SITE_URL'), '/');
+$host = Craft::getAlias('@primarySiteUrl');
 
 // Matches ddev web_extra_exposed_ports.https_port
 $httpsPort = 3000;
