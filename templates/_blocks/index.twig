@@ -1,6 +1,8 @@
 {# @var \Illuminate\Support\Collection<\craft\elements\Entry> blocks #}
 {% set blocks = blocks is defined ? blocks.collect() : collect([]) %}
 
+{% set h1Blocks = ['pageHero', 'heading'] %}
+
 {% if blocks.count() %}
   <div class="{{ cx({
     'pt-64': blocks.first().type.handle not in ['pageHero', 'callToAction'],
@@ -13,12 +15,14 @@
     {#
     Check if there are previous blocks that have a heading level of 1. This is used
     to determine if the current block should use an h1 or h2 as its root heading level.
+    Blocks that can't carry the page title always start at h2.
     #}
     {% set hasPreviousBlocksWithH1 = previousBlocks
       |map(block => block.type.handle)
-      |intersect(['pageHero', 'heading'])
+      |intersect(h1Blocks)
       |length
     %}
+    {% set headingLevel = block.type.handle in h1Blocks and not hasPreviousBlocksWithH1 ? 1 : 2 %}
 
     {% set marginBottomConfig = {
       default: 'mb-64',
@@ -57,7 +61,7 @@
     }) }}">
       {{ include("_blocks/_#{block.type.handle}.twig", {
         block,
-        hasPreviousBlocksWithH1,
+        headingLevel,
       }) }}
     </div>
     {% endfor %}

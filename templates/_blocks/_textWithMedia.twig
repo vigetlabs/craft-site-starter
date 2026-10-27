@@ -1,13 +1,19 @@
 {% from '_components/image' import Image %}
 {% from '_components/video' import Video %}
+{% from '_components/heading-tag' import HeadingTag %}
 
 {# @var \craft\elements\Entry block #}
 {% set block = block ?? null %}
 
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 2 %}
+
 {% set textContent %}
   <div>
     {% if block.heading %}
-      <h2 class="text-2xl font-bold mb-32">{{ block.heading }}</h2>
+      {% tag HeadingTag(headingLevel) with {
+        class: 'text-2xl font-bold mb-32',
+      } %}{{ block.heading }}{% endtag %}
     {% endif %}
 
     {% if block.richText %}

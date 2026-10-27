@@ -1,5 +1,6 @@
 {% macro PageHero(props = {}) %}
   {% from '_components/image' import Image %}
+  {% from '_components/heading-tag' import HeadingTag %}
 
   {# Props #}
 
@@ -19,7 +20,7 @@
   {% set class = props.class ?? null %}
 
   {# Computed values #}
-  {% set element = "h#{headingLevel}" %}
+  {% set element = HeadingTag(headingLevel) %}
 
   <div class="{{ cx('bg-gray-100 py-48', class) }}">
     <div class="container grid items-center gap-24 sm:grid-cols-2 sm:px-32 lg:gap-48 lg:grid-cols-5">
