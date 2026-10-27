@@ -17,6 +17,8 @@ web_environment:
   - SYSTEM_EMAIL_PORT=1025
   - SYSTEM_EMAIL_USERNAME=abc
   - SYSTEM_EMAIL_PASSWORD=123
+webimage_extra_packages:
+  - htop
 nodejs_version: '20'
 hooks:
   post-start:
