@@ -55,6 +55,18 @@
   {% set loading = props.loading ?? 'lazy' %}
 
   {#
+    @var string|null alt
+    Defaults to the asset's alt field. Pass an empty string for decorative images.
+  #}
+  {% set alt = props.alt ?? null %}
+
+  {#
+    @var array attrs
+    Additional attributes for the img element. The other props take precedence.
+  #}
+  {% set attrs = props.attrs ?? {} %}
+
+  {#
     @var array sizes
 
     The 'sizes' prop is used to specify the size of the image at different viewport widths.
@@ -169,15 +181,16 @@
   {{ image ? ppimg(
     image: image,
     transform: transform,
-    params: {
+    params: attrs|merge({
       class,
       loading,
+      alt,
       sizes,
       imagerOverrides: useDefaultTransform ? {
         fillTransforms: 'auto',
         autoFillCount: transformAutofillCount,
         allowUpscale: false,
       } : null,
-    },
+    }),
   ) }}
 {% endmacro %}
