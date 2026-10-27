@@ -1,5 +1,5 @@
-{# @var \Illuminate\Support\Collection<\craft\elements\Entry> blocks #}
-{% set blocks = blocks is defined ? blocks.collect() : collect([]) %}
+{# @var \craft\elements\db\EntryQuery|\craft\elements\Entry[]|\Illuminate\Support\Collection<\craft\elements\Entry>|null blocks #}
+{% set blocks = collect(blocks ?? []) %}
 
 {% if blocks.count() %}
   <div class="{{ cx({
