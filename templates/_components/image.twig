@@ -49,10 +49,16 @@
   {% set class = props.class ?? "w-full h-auto" %}
 
   {#
-    @var string|null loading
-    Can be 'lazy' or 'eager'
+    @var string|null fetchpriority
+    Can be 'high', 'low' or 'auto'. Use 'high' for the largest image above the fold.
   #}
-  {% set loading = props.loading ?? 'lazy' %}
+  {% set fetchpriority = props.fetchpriority ?? props.attrs.fetchpriority ?? null %}
+
+  {#
+    @var string|null loading
+    Can be 'lazy' or 'eager'. Defaults to 'eager' when fetchpriority is 'high', otherwise 'lazy'.
+  #}
+  {% set loading = props.loading ?? (fetchpriority == 'high' ? 'eager' : 'lazy') %}
 
   {#
     @var string|null alt
@@ -185,6 +191,7 @@
       class,
       loading,
       alt,
+      fetchpriority,
       sizes,
       imagerOverrides: useDefaultTransform ? {
         fillTransforms: 'auto',
