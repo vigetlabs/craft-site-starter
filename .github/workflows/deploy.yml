@@ -1,0 +1,26 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - staging
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup SSH Keys and known_hosts
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p -m 700 ~/.ssh
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.DEPLOY_KEY }}"
+          ssh-keyscan $(bin/deploy $GITHUB_REF_NAME config host) >> ~/.ssh/known_hosts
+      - name: Deploy
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          bin/deploy $GITHUB_REF_NAME
