@@ -112,6 +112,13 @@ ScriptHelpers::replaceFileText(
 );
 
 /**
+ * CLAUDE.md
+ * Its guidance is for the public starter repo, not the projects created from it.
+ */
+
+unlink("$cwd/CLAUDE.md");
+
+/**
  * phpstan.neon
  * Remove the scanFiles entry for composer-scripts/ since that directory
  * is deleted after create-project runs.
