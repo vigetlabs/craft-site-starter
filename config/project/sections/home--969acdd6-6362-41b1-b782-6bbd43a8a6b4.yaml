@@ -1,22 +1,17 @@
 defaultPlacement: end
 enableVersioning: true
 entryTypes:
-  - 0e7762a5-2553-4c0d-b8af-9b43b59524bf # Home
+  -
+    uid: 0e7762a5-2553-4c0d-b8af-9b43b59524bf # Home
 handle: home
 maxAuthors: 1
+minAuthors: 1
 name: Home
 previewTargets:
   -
-    __assoc__:
-      -
-        - label
-        - 'Primary entry page'
-      -
-        - urlFormat
-        - '{url}'
-      -
-        - refresh
-        - '1'
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
 propagationMethod: all
 siteSettings:
   35b563a0-4662-40b9-b885-a8450a2868d9: # Viget Craft Starter

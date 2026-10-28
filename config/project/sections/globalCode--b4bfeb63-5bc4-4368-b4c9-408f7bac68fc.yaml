@@ -5,6 +5,7 @@ entryTypes:
     uid: 25362218-e66c-494e-9f2c-63e8cbc6ce0a # Global Code
 handle: globalCode
 maxAuthors: 1
+minAuthors: 1
 name: 'Global Code'
 propagationMethod: all
 siteSettings:
