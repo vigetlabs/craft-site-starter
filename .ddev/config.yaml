@@ -21,8 +21,17 @@ nodejs_version: '24'
 hooks:
   post-start:
     - composer: install
-    # Applies pending migrations and project config; skipped until Craft is installed
-    - exec: if php ./craft install/check >/dev/null 2>&1; then php ./craft up --interactive=0; fi
+    # Applies pending migrations and project config; skipped until Craft is installed.
+    # Opt out with RUN_CRAFT_UP_ON_START=false (see README)
+    - exec: |
+        run="${RUN_CRAFT_UP_ON_START:-true}"
+        if [[ "${run,,}" =~ ^(false|0|no|off)$ ]]; then
+          echo "Skipping craft up: RUN_CRAFT_UP_ON_START=$run"
+        elif status=$(php ./craft install/check 2>&1); then
+          php ./craft up --interactive=0
+        else
+          echo "Skipping craft up: $status"
+        fi
     # Ensures that lint-staged runs properly in ddev container
     - exec: git config --global --add safe.directory /var/www/html
   post-import-db:
