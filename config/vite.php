@@ -14,4 +14,8 @@ return [
     'serverPublic' => '/dist/',
     'useDevServer' => App::env('CRAFT_ENVIRONMENT') === 'dev',
     'manifestPath' => '@webroot/dist/.vite/manifest.json',
+    // Falls back to the built manifest when the Vite daemon is down
+    'checkDevServer' => true,
+    // Matches ddev web_extra_exposed_ports.container_port, reached from inside the web container
+    'devServerInternal' => 'http://localhost:3000',
 ];
