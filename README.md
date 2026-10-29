@@ -24,6 +24,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
 - A fully accessible header and navigation
 - A simple Matrix Field based block editor
 - [Static message translations](https://craftcms.com/docs/5.x/system/sites.html#static-message-translations) have been pre-filled for common elements.
+- Error templates: a `_404.twig` page using the site layout, plus self-contained `_error.twig` and `_offline.twig` (503/maintenance) pages.
 
 ## Icons
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>{{ statusCode is defined ? statusCode ~ ' ' }}Error</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #1f2937;
+      background: #fff;
+    }
+    main { max-width: 32rem; text-align: center; }
+    h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+    p { margin: 0 0 1rem; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    {% if statusCode is defined %}
+      <p>Error {{ statusCode }}</p>
+    {% endif %}
+    <h1>Something went wrong</h1>
+    <p>Please try again in a few minutes.</p>
+    <p><a href="/">Go to the homepage</a></p>
+  </main>
+</body>
+</html>
