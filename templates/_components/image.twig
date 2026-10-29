@@ -155,18 +155,36 @@
     When sizes is scalar, the  single value will be used in the images sizes attribute.\
 
     Otherwise, iterate through sizes object:
-    1. Remove the default key so we can add it to the end (step 3).
+    1. Remove the default key so we can add it to the end (step 4).
     2. Create our pair of MQs + Unit values. First checks if the
     key matches our Tailwind screen config. If not, assumes that
     it is a manually defined media query.
-    3. Add the default size to the end.
-    4. Join the values with a comma.
+    3. Sort by min-width, widest first. The browser uses the first
+    matching media condition, so a narrower breakpoint listed first
+    would always win. Queries without a min-width keep their order
+    after the min-width ones. em/rem are 16px in media queries.
+    4. Add the default size to the end.
+    5. Join the values with a comma.
   #}
-  {% set sizes = sizes is scalar ? sizes : sizes
-    |filter((value, key) => key != 'default')
-    |map((value, key) => "#{screens[key] ?? key} #{value}")
-    |merge([ defaultSize ])
-    |join(', ') %}
+  {% if sizes is not scalar %}
+    {% set sizeEntries = [] %}
+    {% for key, value in sizes|filter((value, key) => key != 'default') %}
+      {% set query = screens[key] ?? key %}
+      {% set minWidth = query matches '/min-width:\\s*[\\d.]+\\s*(px|r?em)/'
+        ? (query|replace('/^.*?min-width:\\s*([\\d.]+).*$/s', '$1')) * (query matches '/min-width:\\s*[\\d.]+\\s*px/' ? 1 : 16)
+        : 0 %}
+      {% set sizeEntries = sizeEntries|merge([{
+        minWidth,
+        size: "#{query} #{value}",
+      }]) %}
+    {% endfor %}
+
+    {% set sizes = sizeEntries
+      |sort((a, b) => b.minWidth <=> a.minWidth)
+      |column('size')
+      |merge([ defaultSize ])
+      |join(', ') %}
+  {% endif %}
 
   {#
   Default settings applied to all transforms
