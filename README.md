@@ -64,6 +64,21 @@ To add an icon, drop an SVG into `src/icons/` and run `npm run build`
    ```
 5. Run `ddev launch` to open the project in your browser
 
+## Migrations and project config on `ddev start`
+
+`ddev start` and `ddev restart` run `craft up`, which applies pending migrations and project config. They skip it until Craft is installed.
+
+To turn it off for yourself, add this to `.ddev/config.local.yaml` (DDEV gitignores it), then run `ddev restart`:
+
+```yaml
+web_environment:
+  - RUN_CRAFT_UP_ON_START=false
+```
+
+- To turn it off in every DDEV project on your computer, run `ddev config global --web-environment-add=RUN_CRAFT_UP_ON_START=false`
+- To skip it once, run `ddev start --skip-hooks` or `ddev restart --skip-hooks`. This also skips the other post-start hooks, such as `composer install`. Use it after restoring a database snapshot from another branch, or `craft up` applies this branch's migrations and project config to it.
+- To make it opt-in for the whole project, add `- RUN_CRAFT_UP_ON_START=false` to `web_environment` in `.ddev/config.yaml`. Developers then opt in with `RUN_CRAFT_UP_ON_START=true` in `.ddev/config.local.yaml`.
+
 # Plugins
 
 This starter includes common plugins that we use on most of our sites. This provides consistency and familiarity between
