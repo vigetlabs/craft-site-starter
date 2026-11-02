@@ -97,16 +97,22 @@
   [x-cloak] {
     display: none !important;
   }
+}
 
-  /* 0.01ms rather than 0 so animationend/transitionend still fire and fill-mode: forwards end states still apply */
-  @media (prefers-reduced-motion: reduce), (update: slow) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+/*
+ * Blanket on purpose: color fades go too. Unlayered, because an important declaration in a layer
+ * beats an unlayered one, so a loader that must keep moving can opt out with animate-spin!.
+ */
+@media (prefers-reduced-motion: reduce), (update: slow) {
+  *,
+  *::before,
+  *::after,
+  *::backdrop {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0s !important;
+    transition-duration: 0s !important;
   }
 }
