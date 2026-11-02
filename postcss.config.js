@@ -6,8 +6,8 @@ export default {
     'postcss-pxtorem': {
       rootValue: 16,
       unitPrecision: 5,
-      // rounded-full emits 3.40282e38px; pxtorem rewrites the exponent's 38px into invalid CSS
-      propList: ['*', '!border-radius'],
+      // rounded-*-full utilities emit 3.40282e38px; pxtorem would rewrite the exponent's 38px
+      propList: ['*', '!*radius*'],
       selectorBlackList: [],
       replace: true,
       mediaQuery: true,
