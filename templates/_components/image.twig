@@ -56,9 +56,9 @@
 
   {#
     @var string|null alt
-    Defaults to the asset's alt field. Pass an empty string for decorative images.
+    Falls back to attrs.alt, then the asset's alt field. Pass an empty string for decorative images.
   #}
-  {% set alt = props.alt ?? null %}
+  {% set alt = props.alt ?? props.attrs.alt ?? null %}
 
   {#
     @var array attrs
