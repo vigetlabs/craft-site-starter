@@ -25,8 +25,8 @@ return [
             ],
         ],
         'excludedUriPatterns' => [],
-        // Generating runs in a queue job, so this needs a running queue worker.
-        // Without one, use REFRESH_MODE_CLEAR so pages regenerate on their next visit.
+        // Generating runs in a queue job. Craft runs the queue from web requests by default; if
+        // runQueueAutomatically is off and no worker runs, use REFRESH_MODE_CLEAR so pages regenerate on their next visit.
         'refreshMode' => SettingsModel::REFRESH_MODE_CLEAR_AND_GENERATE,
         // Query strings are dropped from the cache key, so tracking params don't create duplicate cached pages.
         // In this mode includedQueryStringParams is ignored. If a template reads query params (search, filters),
@@ -43,7 +43,7 @@ return [
         'cacheGeneratorType' => LocalGenerator::class,
     ],
     'staging' => [
-        // Staging sits behind basic auth, which the HTTP generator can't get past
+        // For staging behind basic auth, which the HTTP generator can't get past
         'cacheGeneratorType' => LocalGenerator::class,
         'outputComments' => true,
     ],
