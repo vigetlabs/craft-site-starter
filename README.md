@@ -125,3 +125,18 @@ docker run --rm -it -v "$PWD":/app -v ${COMPOSER_HOME:-$HOME/.composer}:/tmp com
 
 - Follow the prompts to create a new local site.
 - Install Craft and ensure home page and Craft admin load.
+
+## Releasing
+
+New versions are tagged and published by the [Release workflow](.github/workflows/release.yml). Once the release tests above pass:
+
+1. Go to **Actions → Release → Run workflow** on GitHub.
+2. Under **Use workflow from**, choose the release branch (e.g. `5.x`).
+3. Choose the **Version bump**:
+   - `patch` (5.0.3 → 5.0.4) for fixes and package updates
+   - `minor` (5.0.3 → 5.1.0) for new features, components or plugins
+   - `major` (5.x → 6.0.0) only from a new major branch such as `6.x`, since the starter's major version follows Craft's
+4. Tick **Dry run** to preview the version number and release notes in the run summary without tagging anything.
+5. Click **Run workflow**.
+
+The workflow tags the latest commit on the branch, publishes a GitHub release listing every pull request merged since the previous version, and Packagist picks up the new version within a few minutes. `composer-scripts/post-create-project.php` deletes the workflow from new projects.

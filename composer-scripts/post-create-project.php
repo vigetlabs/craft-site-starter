@@ -122,3 +122,22 @@ ScriptHelpers::replaceFileText(
     pattern: "/\n    scanFiles:\n        - composer-scripts\/ScriptHelpers\.php/",
     replacement: '',
 );
+
+/**
+ * .github/workflows/release.yml
+ * The release workflow publishes new versions of the starter itself, so it
+ * doesn't belong in new projects.
+ */
+
+$releaseWorkflow = "$cwd/.github/workflows/release.yml";
+
+if (is_file($releaseWorkflow)) {
+    unlink($releaseWorkflow);
+}
+
+// Remove .github/workflows and .github too, unless something else is in them.
+foreach (["$cwd/.github/workflows", "$cwd/.github"] as $directory) {
+    if (is_dir($directory) && count(scandir($directory)) === 2) {
+        rmdir($directory);
+    }
+}
