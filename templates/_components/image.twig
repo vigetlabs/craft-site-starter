@@ -147,10 +147,11 @@
     2. Create our pair of MQs + Unit values. First checks if the
     key matches our Tailwind screen config. If not, assumes that
     it is a manually defined media query.
-    3. Sort by min-width, widest first. The browser uses the first
+    3. Sort by minimum width, widest first. The browser uses the first
     matching media condition, so a narrower breakpoint listed first
-    would always win. Queries without a min-width keep their order
-    after the min-width ones. em/rem are 16px in media queries.
+    would always win. Range syntax counts: (width >= 768px) sorts like
+    (min-width: 768px). Queries with no minimum width keep their order
+    after the others. em/rem are 16px in media queries.
     4. Add the default size to the end.
     5. Join the values with a comma.
   #}
@@ -158,8 +159,11 @@
     {% set sizeEntries = [] %}
     {% for key, value in sizes|filter((value, key) => key != 'default') %}
       {% set query = screens[key] ?? key %}
-      {% set minWidth = query matches '/min-width:\\s*[\\d.]+\\s*(px|r?em)/'
-        ? (query|replace('/^.*?min-width:\\s*([\\d.]+).*$/s', '$1')) * (query matches '/min-width:\\s*[\\d.]+\\s*px/' ? 1 : 16)
+      {% set minQuery = query
+        |replace('/\\(\\s*width\\s*>=?\\s*/', '(min-width: ')
+        |replace('/\\(\\s*([\\d.]+\\s*(?:px|r?em))\\s*<=?\\s*width\\b/', '(min-width: $1') %}
+      {% set minWidth = minQuery matches '/min-width:\\s*[\\d.]+\\s*(px|r?em)/'
+        ? (minQuery|replace('/^.*?min-width:\\s*([\\d.]+).*$/s', '$1')) * (minQuery matches '/min-width:\\s*[\\d.]+\\s*px/' ? 1 : 16)
         : 0 %}
       {% set sizeEntries = sizeEntries|merge([{
         minWidth,
