@@ -24,6 +24,7 @@ Remember these — you'll need them to log in and verify the install.
 **Stop immediately on any unexpected result.** Every step below has explicit success criteria. If any step produces a non-zero exit code, unexpected output, missing files, incorrect values, or any other deviation from what is described — **stop execution, report exactly what went wrong (including full command output), and ask the user how to proceed.** Do not attempt to fix, retry, or work around failures automatically.
 
 This includes but is not limited to:
+
 - Commands exiting with non-zero status
 - Docker daemon not running
 - DDEV not installed or not responding
@@ -117,6 +118,12 @@ The string `Viget Craft Starter` should have been replaced with `Test Project` i
 #### 3j. phpstan.neon — scanFiles removed
 
 - `phpstan.neon` should **not** contain a `scanFiles` section or any reference to `composer-scripts/ScriptHelpers.php`
+
+#### 3k. CLAUDE.md — replaced by CLAUDE.project.md
+
+- `CLAUDE.project.md` should **not** exist
+- `CLAUDE.md` should start with `# Test Project` (not `# Viget Craft Starter`), and otherwise match the starter's `CLAUDE.project.md`
+- `CLAUDE.md` should **not** contain `This is a public repository` or `@CLAUDE.project.md` (those are in the starter's own `CLAUDE.md`)
 
 ### 4. Start DDEV
 
