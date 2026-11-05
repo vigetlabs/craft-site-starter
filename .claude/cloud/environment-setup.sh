@@ -106,6 +106,8 @@ web_build="$DDEV_HOME/.ddev/web-build"
 mkdir -p "$web_build"
 rm -f "$web_build"/claude-ca-*.crt
 for ca in /usr/local/share/ca-certificates/*.crt; do
+    # With no CAs, the glob stays unexpanded
+    [ -e "$ca" ] || continue
     case "$(basename "$ca")" in mkcert*) continue ;; esac
     cp "$ca" "$web_build/claude-ca-$(basename "$ca")"
 done
@@ -162,6 +164,8 @@ for config in /home/user/*/.ddev/config.yaml; do
         project=${config%/.ddev/config.yaml}
         projects+=("$project")
         setfacl -R -m "u:$DDEV_USER:rwX" -m "d:u:$DDEV_USER:rwX" "$project"
+        # DDEV chmods .ddev/, which only its owner can do
+        chown "$DDEV_USER": "$project/.ddev"
     fi
 done
 
