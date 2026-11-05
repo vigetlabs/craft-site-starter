@@ -20,7 +20,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
 - Local email is routed
   through [Mailpit](https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit) (
   never worry about emailing a client or user)
-- [htop](https://htop.dev/) is installed in the DDEV web container for [debugging CPU and memory usage](#debugging-cpu-performance-with-htop)
+- [htop](https://htop.dev/) is installed in the DDEV web container for [debugging CPU and memory usage](#debugging-cpu-performance-with-htop-and-xhprof)
 - Starter components based on [Blueprint](https://github.com/vigetlabs/blueprint)
 - A fully accessible header and navigation
 - A simple Matrix Field based block editor
@@ -65,7 +65,7 @@ To add an icon, drop an SVG into `src/icons/` and run `npm run build`
    ```
 5. Run `ddev launch` to open the project in your browser
 
-# Debugging CPU Performance with htop
+# Debugging CPU Performance with htop and xhprof
 
 [htop](https://htop.dev/) is installed in the DDEV web container (see `webimage_extra_packages` in `.ddev/config.yaml`). It's an interactive process viewer that shows what is using CPU and memory inside the container: PHP-FPM workers, Craft console commands, Nginx and the Vite dev server.
 
@@ -74,6 +74,8 @@ ddev exec htop
 ```
 
 Press `q` or `F10` to quit. htop only sees processes in the web container, not your computer or the database container.
+
+Once htop shows that PHP is the problem, DDEV's built-in [xhprof](https://docs.ddev.com/en/stable/users/debugging-profiling/xhprof-profiling/) profiler shows which PHP functions are using the time (step 5 below).
 
 <details>
 <summary>Common workflow: tracking down high CPU usage</summary>
