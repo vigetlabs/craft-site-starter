@@ -112,6 +112,21 @@ ScriptHelpers::replaceFileText(
 );
 
 /**
+ * CLAUDE.md
+ * The starter's CLAUDE.md is about working on the public starter repo.
+ * CLAUDE.project.md is about working in the site, so it becomes the project's CLAUDE.md.
+ */
+
+unlink("$cwd/CLAUDE.md");
+rename("$cwd/CLAUDE.project.md", "$cwd/CLAUDE.md");
+
+ScriptHelpers::replaceFileText(
+    filePath: "$cwd/CLAUDE.md",
+    pattern: "/^# Viget Craft Starter$/m",
+    replacement: "# $projectName",
+);
+
+/**
  * phpstan.neon
  * Remove the scanFiles entry for composer-scripts/ since that directory
  * is deleted after create-project runs.
