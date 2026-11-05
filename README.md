@@ -20,6 +20,7 @@ If you're a designer or developer at Viget working on a new project, view our [B
 - Local email is routed
   through [Mailpit](https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit) (
   never worry about emailing a client or user)
+- [htop](https://htop.dev/) is installed in the DDEV web container for [debugging CPU and memory usage](#debugging-cpu-performance-with-htop-and-xhprof)
 - Starter components based on [Blueprint](https://github.com/vigetlabs/blueprint)
 - A fully accessible header and navigation
 - A simple Matrix Field based block editor
@@ -63,6 +64,75 @@ To add an icon, drop an SVG into `src/icons/` and run `npm run build`
    ddev craft install
    ```
 5. Run `ddev launch` to open the project in your browser
+
+# Debugging CPU Performance with htop and xhprof
+
+[htop](https://htop.dev/) is installed in the DDEV web container (see `webimage_extra_packages` in `.ddev/config.yaml`). It's an interactive process viewer that shows what is using CPU and memory inside the container: PHP-FPM workers, Craft console commands, Nginx and the Vite dev server.
+
+```shell
+ddev exec htop
+```
+
+Press `q` or `F10` to quit. htop only sees processes in the web container, not your computer or the database container.
+
+Once htop shows that PHP is the problem, DDEV's built-in [xhprof](https://docs.ddev.com/en/stable/users/debugging-profiling/xhprof-profiling/) profiler shows which PHP functions are using the time (step 5 below).
+
+<details>
+<summary>Common workflow: tracking down high CPU usage</summary>
+
+1. **Find the busy container.** On your computer, run `docker stats` to see CPU per container.
+   - `ddev-<project>-web` runs PHP, Nginx and Vite. Continue to step 2.
+   - `ddev-<project>-db` runs MySQL. See what queries are running with `ddev mysql -e "SHOW FULL PROCESSLIST"`.
+   - If neither is busy, the problem is on your computer (Mutagen sync, Docker itself, your editor), not in the project.
+
+2. **Open htop sorted by CPU, in tree view**, so each process sits under the one that started it:
+
+   ```shell
+   ddev exec htop --sort-key=PERCENT_CPU --tree
+   ```
+
+   | Key  | Action                                               |
+   | ---- | ---------------------------------------------------- |
+   | `P`  | Sort by CPU                                          |
+   | `M`  | Sort by memory                                       |
+   | `F5` | Toggle tree view                                     |
+   | `F4` | Filter by command, e.g. `php-fpm` or `vite`          |
+   | `F9` | Kill the selected process (`SIGTERM` is the default) |
+
+   You can also start htop already filtered: `ddev exec htop --filter=php-fpm`.
+
+3. **Reproduce the problem while htop is open.** Reload the slow page, run the slow `ddev craft` command or save the entry, and watch the `CPU%` column. A process that sits at or near 100% is your culprit. Short spikes are normal.
+
+4. **Match the process to a likely cause.**
+
+   | Process at the top                           | Usually means                                                                                                                                                                                | Next step                                                                                        |
+   | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+   | `php-fpm: pool www`                          | A slow web request: a heavy Twig template, N+1 element queries, or image transforms being generated. Queue jobs also run here, because Craft runs the queue through web requests by default. | Profile the request (step 5). Check **Utilities → Queue Manager** in the control panel for jobs. |
+   | `php ./craft …`                              | A long-running console command, such as `resave/entries` or `clear-caches/all`.                                                                                                              | Let it finish, or kill it with `F9`.                                                             |
+   | `node …/vite` or `esbuild`                   | The Vite dev server (a `web_extra_daemons` entry) rebuilding after a file change.                                                                                                            | If it stays high with nothing changing, run `ddev restart`.                                      |
+   | `npm install`, `npm run build` or `composer` | Dependencies installing from the `post-start` hook or the Vite daemon, usually right after `ddev start`.                                                                                     | Wait for it to finish.                                                                           |
+
+5. **Profile slow PHP requests.** Once htop points at `php-fpm`, find out which code is slow with DDEV's built-in [xhprof](https://docs.ddev.com/en/stable/users/debugging-profiling/xhprof-profiling/) profiler:
+
+   ```shell
+   ddev xhprof on
+   ```
+
+   Reload the slow page a few times, then open the results:
+
+   ```shell
+   ddev xhgui
+   ```
+
+   Turn the profiler off when you're done, since it slows down every request:
+
+   ```shell
+   ddev xhprof off
+   ```
+
+   For N+1 queries, Craft's debug toolbar shows how many database queries a page runs. Turn it on in the control panel under **My Account → Preferences → Development → Show the debug toolbar on the front end**.
+
+</details>
 
 # Plugins
 
