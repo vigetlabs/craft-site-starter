@@ -1,5 +1,9 @@
-{# @var \craft\elements\db\EntryQuery|\craft\elements\Entry[]|\Illuminate\Support\Collection<\craft\elements\Entry>|null blocks #}
-{% set blocks = collect(blocks ?? []) %}
+{#
+  Accepts an entry query, a Collection or an array of entries
+  (for example, the result of |filter). null or no value renders nothing.
+#}
+{# @var \Illuminate\Support\Collection<int, \craft\elements\Entry> blocks #}
+{% set blocks = collect(blocks ?? []).values() %}
 
 {% if blocks.count() %}
   <div class="{{ cx({
