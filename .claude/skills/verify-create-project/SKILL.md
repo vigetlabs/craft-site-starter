@@ -124,6 +124,12 @@ The string `Viget Craft Starter` should have been replaced with `Test Project` i
 - `.github/workflows/release.yml` should **not exist**
 - If the release workflow was the only file in `.github/`, the `.github/` directory should **not exist** either
 
+#### 3l. CLAUDE.md — replaced by CLAUDE.project.md
+
+- `CLAUDE.project.md` should **not** exist
+- `CLAUDE.md` should start with `# Test Project` (not `# Viget Craft Starter`), and otherwise match the starter's `CLAUDE.project.md`
+- `CLAUDE.md` should **not** contain `This is a public repository` or `@CLAUDE.project.md` (those are in the starter's own `CLAUDE.md`)
+
 ### 4. Start DDEV
 
 ```bash
