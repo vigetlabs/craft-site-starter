@@ -1,0 +1,164 @@
+# Tags a new version of viget/craft-site-starter and publishes a GitHub release.
+# Packagist picks up the tag through its GitHub hook, so the new version can be
+# installed with `composer create-project` a few minutes later.
+#
+# To run it: Actions → Release → Run workflow, choose the release branch
+# (e.g. 5.x) and the kind of version bump. See "Releasing" in the README.
+#
+# This file is starter-only: composer-scripts/post-create-project.php deletes it
+# from new projects.
+
+name: Release
+
+run-name: "${{ inputs.dry_run && 'Dry run: ' || '' }}${{ inputs.bump }} release from ${{ github.ref_name }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+      dry_run:
+        description: Dry run (show the version and release notes without tagging)
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Two releases at once would both pick the same version number.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the release branch
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # Full history and tags, to find the previous version
+
+      - name: Work out the next version
+        id: version
+        env:
+          BUMP: ${{ inputs.bump }}
+        run: |
+          set -euo pipefail
+
+          # The starter's major version follows Craft's, and each major has its
+          # own branch (5.x for Craft 5), so only release from a branch like that.
+          if [[ "$GITHUB_REF_TYPE" != "branch" || ! "$GITHUB_REF_NAME" =~ ^([0-9]+)\.x$ ]]; then
+            echo "::error::Releases are made from a release branch such as 5.x, not '$GITHUB_REF_NAME'. Choose the release branch under 'Use workflow from'."
+            exit 1
+          fi
+          branch_major="${BASH_REMATCH[1]}"
+
+          # Newest X.Y.Z tag on this branch. Pre-release tags such as 5.0.0-alpha.1 are skipped.
+          previous="$(git tag --merged HEAD --sort=-version:refname | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sed -n 1p || true)"
+          if [[ -z "$previous" ]]; then
+            echo "::error::Found no X.Y.Z version tag on $GITHUB_REF_NAME to bump from."
+            exit 1
+          fi
+
+          IFS=. read -r major minor patch <<< "$previous"
+          case "$BUMP" in
+            major) next="$((major + 1)).0.0" ;;
+            minor) next="$major.$((minor + 1)).0" ;;
+            patch) next="$major.$minor.$((patch + 1))" ;;
+            *) echo "::error::Unknown version bump '$BUMP'."; exit 1 ;;
+          esac
+
+          if [[ "${next%%.*}" != "$branch_major" ]]; then
+            echo "::error::A $BUMP bump from $previous gives $next, which isn't a $branch_major.x version. Release $next from the ${next%%.*}.x branch instead."
+            exit 1
+          fi
+
+          if git rev-parse -q --verify "refs/tags/$next" > /dev/null; then
+            echo "::error::Tag $next already exists."
+            exit 1
+          fi
+
+          commits="$(git rev-list --count "$previous..HEAD")"
+          if [[ "$commits" -eq 0 ]]; then
+            echo "::error::Nothing to release: $GITHUB_REF_NAME has no commits since $previous."
+            exit 1
+          fi
+
+          echo "Releasing $next ($BUMP bump from $previous, $commits commits)"
+          {
+            echo "previous=$previous"
+            echo "next=$next"
+            echo "commits=$commits"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Write the release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREVIOUS: ${{ steps.version.outputs.previous }}
+          NEXT: ${{ steps.version.outputs.next }}
+        run: |
+          set -euo pipefail
+
+          # The same notes GitHub's "Generate release notes" button writes:
+          # every merged pull request since the previous version.
+          gh api "repos/$GITHUB_REPOSITORY/releases/generate-notes" \
+            -f tag_name="$NEXT" \
+            -f target_commitish="$GITHUB_SHA" \
+            -f previous_tag_name="$PREVIOUS" \
+            --jq .body > "$RUNNER_TEMP/release-notes.md"
+
+      - name: Tag the release
+        if: ${{ !inputs.dry_run }}
+        env:
+          NEXT: ${{ steps.version.outputs.next }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898233+github-actions[bot]@users.noreply.github.com"
+          git tag --annotate "$NEXT" --message "Release $NEXT"
+          git push origin "refs/tags/$NEXT"
+
+      - name: Publish the GitHub release
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEXT: ${{ steps.version.outputs.next }}
+        run: |
+          gh release create "$NEXT" \
+            --verify-tag \
+            --title "$NEXT" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"
+
+      - name: Summarize
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          BUMP: ${{ inputs.bump }}
+          PREVIOUS: ${{ steps.version.outputs.previous }}
+          NEXT: ${{ steps.version.outputs.next }}
+          COMMITS: ${{ steps.version.outputs.commits }}
+        run: |
+          set -euo pipefail
+          {
+            if [[ "$DRY_RUN" == "true" ]]; then
+              echo "## Dry run: would release $NEXT"
+              echo
+              echo "Nothing was tagged or published. Run the workflow again without **Dry run** to release."
+            else
+              echo "## Released [$NEXT]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/tag/$NEXT)"
+              echo
+              echo "[Packagist](https://packagist.org/packages/viget/craft-site-starter) should list $NEXT within a few minutes."
+            fi
+            echo
+            echo "$BUMP bump from $PREVIOUS, $COMMITS commits on $GITHUB_REF_NAME."
+            echo
+            echo "### Release notes"
+            echo
+            cat "$RUNNER_TEMP/release-notes.md"
+          } >> "$GITHUB_STEP_SUMMARY"
