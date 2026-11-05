@@ -26,6 +26,7 @@
     "craftcms/generator": "^2.0.0",
     "craftcms/phpstan": "dev-main",
     "nystudio107/craft-autocomplete": "^1.12",
+    "phpstan/phpstan": "^1.12.34",
     "yiisoft/yii2-shell": "^2.0.3"
   },
   "autoload": {
