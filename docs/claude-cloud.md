@@ -4,14 +4,15 @@ Claude Code can work on this project in a cloud VM instead of on your laptop: fr
 
 Projects created from this starter keep these files, so their cloud sessions work the same way.
 
-Four files do the work:
+Five files do the work:
 
-| File                                                                              | Runs                                                                                                                                  | Does                                                                                                                                                          |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`.claude/cloud/environment-setup.sh`](../.claude/cloud/environment-setup.sh)     | Once per environment, as its setup script. The VM snapshot keeps the result for ~7 days                                               | Installs DDEV and mkcert, makes DDEV's containers trust the cloud's egress proxy, pulls Docker images, and builds the DDEV images of the projects checked out |
-| [`.claude/hooks/session-start.sh`](../.claude/hooks/session-start.sh)             | At the start of every cloud session ([SessionStart hook](https://code.claude.com/docs/en/hooks#sessionstart)). Local sessions skip it | Starts Docker and `ddev start`, waits for the vite daemon, installs Craft, tells Claude how to work in the session                                            |
-| [`.claude/cloud/install-craft.sh`](../.claude/cloud/install-craft.sh)             | From the hook, when Craft isn't installed                                                                                             | Installs Craft, with no content, into DDEV's empty database ([Craft](#craft))                                                                                 |
-| [`.claude/cloud/warm-composer-cache.sh`](../.claude/cloud/warm-composer-cache.sh) | From the setup script and the hook, before `ddev start`                                                                               | Builds every package in `composer.lock` from git into DDEV's Composer cache ([below](#how-the-cloud-vm-differs-from-a-laptop))                                |
+| File                                                                                | Runs                                                                                                                                  | Does                                                                                                                                                          |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`.claude/cloud/environment-setup.sh`](../.claude/cloud/environment-setup.sh)       | Once per environment, as its setup script. The VM snapshot keeps the result for ~7 days                                               | Installs DDEV and mkcert, makes DDEV's containers trust the cloud's egress proxy, pulls Docker images, and builds the DDEV images of the projects checked out |
+| [`.claude/hooks/session-start.sh`](../.claude/hooks/session-start.sh)               | At the start of every cloud session ([SessionStart hook](https://code.claude.com/docs/en/hooks#sessionstart)). Local sessions skip it | Starts Docker and `ddev start`, waits for the vite daemon, installs Craft, tells Claude how to work in the session                                            |
+| [`.claude/cloud/install-shot-scraper.sh`](../.claude/cloud/install-shot-scraper.sh) | From the hook, in the background while DDEV starts                                                                                    | Installs shot-scraper, for screenshots and videos of pages ([Screenshots and videos](#screenshots-and-videos))                                                |
+| [`.claude/cloud/install-craft.sh`](../.claude/cloud/install-craft.sh)               | From the hook, when Craft isn't installed                                                                                             | Installs Craft, with no content, into DDEV's empty database ([Craft](#craft))                                                                                 |
+| [`.claude/cloud/warm-composer-cache.sh`](../.claude/cloud/warm-composer-cache.sh)   | From the setup script and the hook, before `ddev start`                                                                               | Builds every package in `composer.lock` from git into DDEV's Composer cache ([below](#how-the-cloud-vm-differs-from-a-laptop))                                |
 
 Nothing else in the project changes for the cloud.
 
@@ -59,6 +60,7 @@ ddev craft install/check
 ddev composer phpstan
 ddev composer ecs-check
 curl -I https://viget-craft-starter.ddev.site   # your project's name from .ddev/config.yaml
+shot-scraper https://viget-craft-starter.ddev.site -o home.png
 ```
 
 ## What a session looks like
@@ -71,7 +73,8 @@ Once the environment is cached, a new session runs the SessionStart hook before 
 4. Warms DDEV's Composer cache with `.claude/cloud/warm-composer-cache.sh`. The setup script has usually done this already, and then it takes seconds.
 5. Runs `ddev start`. This builds the project's images (from the build cache the setup script left), starts the containers, and runs the post-start `composer install`. If it fails because another container took a host port DDEV picked (see [Troubleshooting](#troubleshooting)), the hook runs it once more.
 6. Waits up to 5 minutes for the vite daemon to finish `npm install` and `npm run build`, so `node_modules` exists for the pre-commit hook. If it doesn't answer, the hook tells Claude.
-7. Installs Craft with `.claude/cloud/install-craft.sh`, and tells Claude the control panel login ([Craft](#craft)).
+7. Tells Claude that shot-scraper is installed. The hook starts installing it before step 1, so it installs while DDEV starts, and adds mkcert's CA to Chromium's certificate store ([Screenshots and videos](#screenshots-and-videos)).
+8. Installs Craft with `.claude/cloud/install-craft.sh`, and tells Claude the control panel login ([Craft](#craft)).
 
 Measured in a cloud session:
 
@@ -94,7 +97,7 @@ Each difference below is something the setup script or hook handles. They're lis
 
 **Docker Hub rate-limits anonymous pulls.** Pulls from cloud sessions get `429 Too Many Requests`, because many sessions share the egress IPs. The Docker daemon pulls through `mirror.gcr.io`, Google's Docker Hub mirror, instead.
 
-**`*.ddev.site` doesn't resolve, and the VM's tools send it to the proxy.** A cloud VM's DNS may only answer for hosts its network access allows, so `<project>.ddev.site` doesn't resolve. DDEV then adds the project's hostnames to `/etc/hosts` with `sudo ddev-hostname`, and the setup script lets the `ubuntu` user run that without a password. Separately, `HTTPS_PROXY` is set for every command, and the proxy refuses local addresses. The hook adds `.ddev.site` to `NO_PROXY` for the session, so `curl` and Playwright reach the site directly. The setup script trusts mkcert's CA in the VM's trust stores, including Chromium's.
+**`*.ddev.site` doesn't resolve, and the VM's tools send it to the proxy.** A cloud VM's DNS may only answer for hosts its network access allows, so `<project>.ddev.site` doesn't resolve. DDEV then adds the project's hostnames to `/etc/hosts` with `sudo ddev-hostname`, and the setup script lets the `ubuntu` user run that without a password. Separately, `HTTPS_PROXY` is set for every command, and the proxy refuses local addresses. The hook adds `.ddev.site` to `NO_PROXY` for the session, so `curl` and Playwright reach the site directly. The setup script trusts mkcert's CA in the VM's system trust store, and the hook adds it to Chromium's ([Screenshots and videos](#screenshots-and-videos)).
 
 **GitHub archives work inside DDEV, but the hook doesn't rely on them.** Composer downloads every locked package as a GitHub archive (`api.github.com/repos/…/zipball/…`). From the VM itself, the GitHub proxy refuses these for any repository not attached to the session. From DDEV's containers they go through the egress proxy like other traffic, and `ddev composer install` works. These requests are anonymous, and the egress IPs share GitHub's 60 requests/hour API limit.
 
@@ -128,6 +131,45 @@ It takes about 10 seconds. It installs Craft from project config, with no conten
 
 Afterwards, `ddev craft` commands work, the site is at `https://<project>.ddev.site`, and the control panel is at `/admin`. If the password is lost (a resumed session's context doesn't have it), set a new one with `ddev craft users/set-password admin@example.com`.
 
+## Screenshots and videos
+
+[shot-scraper](https://shot-scraper.datasette.io) lets Claude see pages in Chromium, to check a UI change and show you the result: a screenshot of a page, or a video recorded from a YAML storyboard of clicks, typing and scrolling ([`shot-scraper video`](https://shot-scraper.datasette.io/en/stable/video.html)). Claude saves them outside the checkout, so they aren't committed, and shares them in the conversation.
+
+```sh
+shot-scraper https://<project>.ddev.site -o home.png
+shot-scraper video storyboard.yml --mp4   # --mp4 also writes an MP4 next to the WebM
+shot-scraper video --help                 # the storyboard's keys and actions
+```
+
+This storyboard logs in to the control panel with the login the hook put in Claude's context:
+
+```yaml
+output: login.webm
+url: https://<project>.ddev.site/admin
+cursor: true
+wait_for: 'input[name=password]'
+scenes:
+  - name: Log in to the control panel
+    do:
+      - type:
+          {
+            into: 'input[name=username] >> nth=0',
+            text: 'admin@example.com',
+            delay_ms: 20,
+          }
+      - type: { into: 'input[name=password] >> nth=0', text: '<password>' }
+      - click: 'button[type=submit] >> nth=0'
+      - wait_for: 'h1:has-text("Dashboard")'
+      - pause: 1
+```
+
+Each selector must match one element, or Playwright stops with `strict mode violation`. The login page has two forms, hence `>> nth=0`. The local site has no content ([Limitations](#limitations)). To record a deployed site, add its host to the [network access](#1-network-access).
+
+The hook runs [`.claude/cloud/install-shot-scraper.sh`](../.claude/cloud/install-shot-scraper.sh) in the background while DDEV starts, so it adds no time to the session's start. It downloads shot-scraper and Python's Playwright from PyPI (~50 MB, ~10 seconds), or does nothing when they're installed. Two things about the cloud VM need handling:
+
+- **Playwright can't download browsers.** Each Playwright version looks for the Chromium build it was released with, and Playwright's CDN isn't an allowed host, so `shot-scraper install` fails. The VM image ships the builds of the Node Playwright it preinstalls, in `$PLAYWRIGHT_BROWSERS_PATH` (`/opt/pw-browsers`). The script pins Python's Playwright to the same minor version, which uses those builds. A plain `uv tool install shot-scraper` gets the newest Playwright, which fails with `Executable doesn't exist at /opt/pw-browsers/…`.
+- **Chromium doesn't read the system's CAs.** It trusts the CAs in its NSS store, `~/.pki/nssdb`. The agent proxy creates that store as Claude Code starts, after the setup script's `mkcert -install` has run, so it holds only the proxy's CA. The hook adds mkcert's, so Chromium trusts `https://<project>.ddev.site`. Any Chromium that Playwright drives needs it, not only shot-scraper's.
+
 ## Limitations
 
 - **The site has no content.** The hook installs Craft with no entries or users besides its admin. Don't import a real project's database into a cloud VM: that means handing a session production credentials and personal data. If Claude needs to see pages with content, a scrubbed dump or a seed script would be the way.
@@ -140,18 +182,21 @@ Afterwards, `ddev craft` commands work, the site is at `https://<project>.ddev.s
 
 ## Troubleshooting
 
-| Symptom                                                                                            | Cause and fix                                                                                                                                                                                                                                                                           |
-| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ddev start` fails building the web image with `403 Forbidden`                                     | A host from [Network access](#1-network-access) is missing                                                                                                                                                                                                                              |
-| `ddev craft update` fails with `Could not resolve host: api.craftcms.com`                          | `*.craftcms.com` is missing from [Network access](#1-network-access). If it was added while the session was running, start a new session: the VM's proxy allows a new host right away, but DDEV's containers resolve hosts through the session's DNS, which still doesn't answer for it |
-| `ddev start` fails with `could not change permissions on file …/.ddev`                             | `.ddev/` isn't owned by `ubuntu`. Run `chown ubuntu: .ddev` from the checkout                                                                                                                                                                                                           |
-| `SSL certificate problem` or `SELF_SIGNED_CERT_IN_CHAIN` inside a container                        | The proxy's CAs aren't in the web image. Re-run `.claude/cloud/environment-setup.sh`, then `ddev restart`. Check with `ddev exec curl -I https://repo.packagist.org`                                                                                                                    |
-| `429 Too Many Requests` pulling an image                                                           | Docker isn't using the mirror. Check `/etc/docker/daemon.json` and restart `dockerd`                                                                                                                                                                                                    |
-| `ddev composer update` fails with `ssh: connect to host github.com port 22: Connection timed out`  | Composer is using GitHub's API. `ddev exec composer config -g use-github-api` should print `false`. If it doesn't, re-run `.claude/cloud/environment-setup.sh`, then `ddev restart`                                                                                                     |
-| `composer install` fails with `…/composer/files/<package> does not exist and could not be created` | A directory in DDEV's Composer cache belongs to root, so Composer in the web container can't write to it. Run `chown -R ubuntu: "$(docker volume inspect ddev-global-cache --format '{{.Mountpoint}}')/composer"`. Run the warm script with `ddev exec`, not as root on the VM          |
-| The hook logs `warming Composer's cache failed`                                                    | A git fetch failed. `/tmp/warm-composer-cache.log` lists the packages, and the post-start `composer install` downloads them instead. To retry, run `ddev exec .claude/cloud/warm-composer-cache.sh`                                                                                     |
-| `ddev start` fails with `Bind for 127.0.0.1:32768 failed: port is already allocated`               | Another container got that host port first, which can happen just after Docker starts. DDEV picks the web and db containers' ports, Docker picks the rest. The hook runs `ddev start` once more. If that fails too, run `ddev start` again                                              |
-| `DDEV is not designed to be run with root privileges`                                              | Something ran `/usr/bin/ddev` directly. Use `ddev`                                                                                                                                                                                                                                      |
-| `permission denied` writing in the checkout from DDEV                                              | The checkout lost its ACLs. Re-run `setfacl -R -m u:ubuntu:rwX -m d:u:ubuntu:rwX .` from the checkout                                                                                                                                                                                   |
-| `curl https://<project>.ddev.site` gets `CONNECT tunnel failed, response 403`                      | `NO_PROXY` doesn't include `.ddev.site`. Use `curl --noproxy .ddev.site …`                                                                                                                                                                                                              |
-| The hook says installing Craft failed                                                              | `/tmp/install-craft.log` has Craft's output. Fix the cause, then run `.claude/cloud/install-craft.sh`. If it says to commit or stash your changes first, `config/project/` has uncommitted changes                                                                                      |
+| Symptom                                                                                              | Cause and fix                                                                                                                                                                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ddev start` fails building the web image with `403 Forbidden`                                       | A host from [Network access](#1-network-access) is missing                                                                                                                                                                                                                              |
+| `ddev craft update` fails with `Could not resolve host: api.craftcms.com`                            | `*.craftcms.com` is missing from [Network access](#1-network-access). If it was added while the session was running, start a new session: the VM's proxy allows a new host right away, but DDEV's containers resolve hosts through the session's DNS, which still doesn't answer for it |
+| `ddev start` fails with `could not change permissions on file …/.ddev`                               | `.ddev/` isn't owned by `ubuntu`. Run `chown ubuntu: .ddev` from the checkout                                                                                                                                                                                                           |
+| `SSL certificate problem` or `SELF_SIGNED_CERT_IN_CHAIN` inside a container                          | The proxy's CAs aren't in the web image. Re-run `.claude/cloud/environment-setup.sh`, then `ddev restart`. Check with `ddev exec curl -I https://repo.packagist.org`                                                                                                                    |
+| `429 Too Many Requests` pulling an image                                                             | Docker isn't using the mirror. Check `/etc/docker/daemon.json` and restart `dockerd`                                                                                                                                                                                                    |
+| `ddev composer update` fails with `ssh: connect to host github.com port 22: Connection timed out`    | Composer is using GitHub's API. `ddev exec composer config -g use-github-api` should print `false`. If it doesn't, re-run `.claude/cloud/environment-setup.sh`, then `ddev restart`                                                                                                     |
+| `composer install` fails with `…/composer/files/<package> does not exist and could not be created`   | A directory in DDEV's Composer cache belongs to root, so Composer in the web container can't write to it. Run `chown -R ubuntu: "$(docker volume inspect ddev-global-cache --format '{{.Mountpoint}}')/composer"`. Run the warm script with `ddev exec`, not as root on the VM          |
+| The hook logs `warming Composer's cache failed`                                                      | A git fetch failed. `/tmp/warm-composer-cache.log` lists the packages, and the post-start `composer install` downloads them instead. To retry, run `ddev exec .claude/cloud/warm-composer-cache.sh`                                                                                     |
+| `ddev start` fails with `Bind for 127.0.0.1:32768 failed: port is already allocated`                 | Another container got that host port first, which can happen just after Docker starts. DDEV picks the web and db containers' ports, Docker picks the rest. The hook runs `ddev start` once more. If that fails too, run `ddev start` again                                              |
+| `DDEV is not designed to be run with root privileges`                                                | Something ran `/usr/bin/ddev` directly. Use `ddev`                                                                                                                                                                                                                                      |
+| `permission denied` writing in the checkout from DDEV                                                | The checkout lost its ACLs. Re-run `setfacl -R -m u:ubuntu:rwX -m d:u:ubuntu:rwX .` from the checkout                                                                                                                                                                                   |
+| `curl https://<project>.ddev.site` gets `CONNECT tunnel failed, response 403`                        | `NO_PROXY` doesn't include `.ddev.site`. Use `curl --noproxy .ddev.site …`                                                                                                                                                                                                              |
+| shot-scraper or Playwright gets `net::ERR_CERT_AUTHORITY_INVALID` from `https://<project>.ddev.site` | Chromium's NSS store doesn't have mkcert's CA ([Screenshots and videos](#screenshots-and-videos)). The hook adds it. To add it by hand: `certutil -A -d sql:$HOME/.pki/nssdb -t C,, -n "mkcert development CA" -i "$(runuser -u ubuntu -- mkcert -CAROOT)/rootCA.pem"`                  |
+| shot-scraper fails with `Executable doesn't exist at /opt/pw-browsers/…`                             | Its Playwright doesn't match the VM image's browsers, after `uv tool upgrade` or on a newer VM image. Run `.claude/cloud/install-shot-scraper.sh`. `shot-scraper install` can't download browsers                                                                                       |
+| `shot-scraper: command not found`                                                                    | Its install failed (log: `/tmp/install-shot-scraper.log`). Run `.claude/cloud/install-shot-scraper.sh`                                                                                                                                                                                  |
+| The hook says installing Craft failed                                                                | `/tmp/install-craft.log` has Craft's output. Fix the cause, then run `.claude/cloud/install-craft.sh`. If it says to commit or stash your changes first, `config/project/` has uncommitted changes                                                                                      |
