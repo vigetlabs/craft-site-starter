@@ -28,9 +28,9 @@
         })
       },
       get activeTab() {
-        },
-        }"
         return $root.querySelector(`button[aria-selected=true]`)
+      },
+    }"
   >
     <ul class="mb-16 flex border-b border-gray-200 dark:border-gray-700" role="tablist">
       {% for tab in tabs %}
