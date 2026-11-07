@@ -64,6 +64,7 @@ fieldLayouts:
 fs: s3
 handle: assets
 name: Assets
+propagationMethod: custom
 sortOrder: 1
 subpath: ''
 titleTranslationKeyFormat: null
