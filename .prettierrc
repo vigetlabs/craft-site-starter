@@ -2,5 +2,34 @@
   "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "plugins": ["@zackad/prettier-plugin-twig", "prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/css/app.css",
+  "tailwindFunctions": ["cx"],
+  "twigMultiTags": [
+    "tag,endtag",
+    "nav,endnav",
+    "switch,case,default,endswitch",
+    "ifchildren,endifchildren",
+    "cache,endcache",
+    "namespace,endnamespace",
+    "js,endjs",
+    "css,endcss",
+    "script,endscript",
+    "html,endhtml"
+  ],
+  "twigTestExpressions": [
+    "array",
+    "boolean",
+    "callable",
+    "countable",
+    "float",
+    "integer",
+    "missing",
+    "numeric",
+    "object",
+    "resource",
+    "scalar",
+    "string"
+  ]
 }

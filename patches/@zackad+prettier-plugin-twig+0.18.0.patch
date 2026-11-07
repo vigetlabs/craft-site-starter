@@ -1,0 +1,43 @@
+diff --git a/node_modules/@zackad/prettier-plugin-twig/src/melody/melody-extension-core/parser/macro.js b/node_modules/@zackad/prettier-plugin-twig/src/melody/melody-extension-core/parser/macro.js
+index 5430a60..3feac2a 100644
+--- a/node_modules/@zackad/prettier-plugin-twig/src/melody/melody-extension-core/parser/macro.js
++++ b/node_modules/@zackad/prettier-plugin-twig/src/melody/melody-extension-core/parser/macro.js
+@@ -55,36 +55,8 @@ export const MacroParser = {
+                 );
+             } else {
+                 tokens.expect(Types.ASSIGNMENT);
+-                let value;
+-                let node;
+-                if (tokens.nextIf(Types.STRING_START)) {
+-                    if (tokens.test(Types.STRING_END)) {
+-                        // handle empty string as default value
+-                        value = tokens.expect(Types.STRING_END);
+-                        node = createNode(StringLiteral, value, "");
+-                    } else {
+-                        // handle non-empty string as default value
+-                        value = tokens.expect(Types.STRING);
+-                        tokens.expect(Types.STRING_END);
+-                        node = createNode(StringLiteral, value, value.text);
+-                    }
+-                }
+-                if (tokens.test(Types.NUMBER)) {
+-                    value = tokens.expect(Types.NUMBER);
+-                    node = createNode(NumericLiteral, value, value.text);
+-                }
+-                if (tokens.test(Types.NULL)) {
+-                    value = tokens.expect(Types.NULL);
+-                    node = createNode(NullLiteral, value, value.text);
+-                }
+-                if (tokens.test(Types.TRUE)) {
+-                    value = tokens.expect(Types.TRUE);
+-                    node = createNode(BooleanLiteral, value, value.text);
+-                }
+-                if (tokens.test(Types.FALSE)) {
+-                    value = tokens.expect(Types.FALSE);
+-                    node = createNode(BooleanLiteral, value, value.text);
+-                }
++                // Accept any expression as a default value (hashes, arrays, etc.)
++                const node = parser.matchExpression();
+                 args.push(
+                     attachListItemComments(
+                         createNode(Identifier, arg, arg.text, node),
