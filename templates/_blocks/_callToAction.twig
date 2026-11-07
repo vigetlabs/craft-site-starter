@@ -3,10 +3,14 @@
 
 {% set block = block ?? null %}
 
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 2 %}
+
 {{ CallToAction({
   title: block.title,
   text: block.richTextSimple,
   href: block.button.value,
   buttonText: block.button.label ?? null,
   newTab: block.button.target ?? null,
+  headingLevel,
 }) }}

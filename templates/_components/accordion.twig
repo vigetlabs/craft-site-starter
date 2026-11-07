@@ -1,4 +1,6 @@
 {% macro Accordion(props = {}) %}
+  {% from '_components/heading-tag' import HeadingTag %}
+
   {# Props #}
 
   {# @var string|null title #}
@@ -18,7 +20,7 @@
 
   {# Computed values #}
 
-  {% set headingTag = 'h' ~ headingLevel %}
+  {% set headingTag = HeadingTag(headingLevel) %}
 
   <details
     class="{{ cx('group/details flex flex-col border-t last-of-type:border-b border-gray-200', class) }}"

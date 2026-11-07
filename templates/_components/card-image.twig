@@ -1,6 +1,7 @@
 {% macro CardImage(props = {}) %}
   {% from '_components/icon.twig' import Icon %}
   {% from '_components/image' import Image %}
+  {% from '_components/heading-tag' import HeadingTag %}
 
   {# Props #}
 
@@ -36,7 +37,7 @@
 
   {# Computed values #}
   {% set element = href ? 'a' : 'article' %}
-  {% set headingElement = "h#{headingLevel}" %}
+  {% set headingElement = HeadingTag(headingLevel) %}
 
   {% tag element with {
     class: cx(class, 'flex flex-col gap-24', {

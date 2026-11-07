@@ -1,5 +1,6 @@
 {% macro CallToAction(props = {}) %}
   {% from '_components/button' import Button %}
+  {% from '_components/heading-tag' import HeadingTag %}
 
   {# Props #}
 
@@ -18,13 +19,18 @@
   {# @var boolean|null newTab #}
   {% set newTab = props.newTab ?? null %}
 
+  {# @var int headingLevel #}
+  {% set headingLevel = props.headingLevel ?? 2 %}
+
   {# @var string|null class #}
   {% set class = props.class ?? null %}
 
   <div class="{{ cx('bg-gray-200 py-48', class) }}">
     <div class="container flex flex-col items-center gap-24">
       {% if title %}
-        <h2 class="text-xl font-semibold">{{ title }}</h2>
+        {% tag HeadingTag(headingLevel) with {
+          class: 'text-xl font-semibold',
+        } %}{{ title }}{% endtag %}
       {% endif %}
 
       {% if text %}

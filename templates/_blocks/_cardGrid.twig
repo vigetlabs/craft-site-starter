@@ -1,16 +1,22 @@
 {# @var \craft\elements\Entry block #}
 {% from '_components/card-image' import CardImage %}
 {% from '_components/card-icon' import CardIcon %}
+{% from '_components/heading-tag' import HeadingTag %}
 
 {% set block = block ?? null %}
 
-{% set cardHeadingLevel = block.heading is not empty ? 3 : 2 %}
+{# @var int headingLevel #}
+{% set headingLevel = headingLevel ?? 2 %}
+
+{% set cardHeadingLevel = block.heading is not empty ? headingLevel + 1 : headingLevel %}
 
 <div class="container">
   {% if block.heading %}
-    <h2 class="text-3xl font-bold mb-48">
+    {% tag HeadingTag(headingLevel) with {
+      class: 'text-3xl font-bold mb-48',
+    } %}
       {{ block.heading }}
-    </h2>
+    {% endtag %}
   {% endif %}
   <div class="grid gap-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-48">
     {% for card in block.cardGrid.eagerly().collect() %}
