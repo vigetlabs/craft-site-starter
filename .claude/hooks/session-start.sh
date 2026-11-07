@@ -24,6 +24,26 @@ if ! command -v ddev >/dev/null; then
     .claude/cloud/environment-setup.sh >&2
 fi
 
+# shot-scraper, for screenshots and videos of pages, installs while DDEV starts.
+.claude/cloud/install-shot-scraper.sh >/tmp/install-shot-scraper.log 2>&1 &
+shot_scraper_install=$!
+
+# Chromium, which shot-scraper and Playwright drive, trusts the CAs in its NSS
+# store, not the system's. The setup script's `mkcert -install` can't add
+# mkcert's CA there: the store doesn't exist yet when the setup script runs. The
+# session's agent proxy creates it as Claude Code starts, with only the proxy's
+# CA. Without mkcert's, the site fails with ERR_CERT_AUTHORITY_INVALID.
+trust_mkcert_in_chromium() {
+    local nssdb="$HOME/.pki/nssdb"
+    mkdir -p "$nssdb"
+    if [ ! -f "$nssdb/cert9.db" ]; then
+        certutil -N -d "sql:$nssdb" --empty-password || return
+    fi
+    certutil -A -d "sql:$nssdb" -t C,, -n "mkcert development CA" \
+        -i "$(runuser -u ubuntu -- mkcert -CAROOT)/rootCA.pem"
+}
+trust_mkcert_in_chromium >/dev/null 2>&1 || log "couldn't add mkcert's CA to Chromium's NSS store"
+
 if ! docker info >/dev/null 2>&1; then
     log "starting Docker"
     nohup setsid dockerd >/var/log/dockerd.log 2>&1 &
@@ -117,6 +137,22 @@ commands as you would locally, e.g. `ddev composer phpstan`, `ddev composer
 ecs-check`, `ddev craft …` and `ddev npm run build`. The husky pre-commit hook
 runs lint-staged in DDEV.
 CONTEXT
+
+if wait "$shot_scraper_install"; then
+    cat <<CONTEXT
+
+shot-scraper is installed, to check UI changes in Chromium. Take a screenshot
+with \`shot-scraper $site_url -o page.png\`, or record a walkthrough from a
+YAML storyboard with \`shot-scraper video storyboard.yml --mp4\` (see
+\`shot-scraper video --help\`). Save them outside the checkout.
+CONTEXT
+else
+    cat <<'CONTEXT'
+
+shot-scraper didn't install (log: /tmp/install-shot-scraper.log). Run
+.claude/cloud/install-shot-scraper.sh to try again.
+CONTEXT
+fi
 
 if [ "$vite_up" = false ]; then
     cat <<'CONTEXT'
