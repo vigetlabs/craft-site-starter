@@ -1,0 +1,40 @@
+{#
+  Self-contained: no built assets and no database queries, so these pages still
+  render when Craft can't reach the database.
+#}
+{% if seomatic is defined %}
+  {% do seomatic.config.renderEnabled(false) %}
+{% endif %}
+<!DOCTYPE html>
+<html dir="{{ craft.app.locale.getOrientation() }}" lang="{{ craft.app.language }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #1f2937;
+      background: #fff;
+    }
+    main { max-width: 32rem; text-align: center; }
+    h1 { margin: 0 0 0.5rem; font-size: 2rem; }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+</body>
+</html>

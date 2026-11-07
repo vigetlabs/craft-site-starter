@@ -1,0 +1,18 @@
+{% extends '_layouts/error.twig' %}
+
+{% set code = statusCode ?? 500 %}
+{% set isClientError = code >= 400 and code < 500 %}
+
+{% block title %}{{ 'Error {code}'|t({ code }) }}{% endblock %}
+
+{% block main %}
+  <p>{{ 'Error {code}'|t({ code }) }}</p>
+  {% if isClientError %}
+    <h1>{{ 'We couldn’t complete that request'|t }}</h1>
+    <p>{{ (message ?? null) ?: 'Check the link, or start again from the homepage.'|t }}</p>
+  {% else %}
+    <h1>{{ 'Something went wrong'|t }}</h1>
+    <p>{{ 'Please try again in a few minutes.'|t }}</p>
+  {% endif %}
+  <p><a href="{{ currentSite.baseUrl ?? '/' }}">{{ 'Go to the homepage'|t }}</a></p>
+{% endblock %}
