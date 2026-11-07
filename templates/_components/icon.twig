@@ -24,7 +24,8 @@ By setting size to `none` you can add arbitrary size classes to the icon.
   {% set title = props.title ?? null %}
 
   {# @var bool ariaHidden #}
-  {% set ariaHidden = props.ariaHidden ?? (title is null) %}
+  {% set hasNoTitle = title is null %}
+  {% set ariaHidden = props.ariaHidden ?? hasNoTitle %}
 
   {# Computed values #}
   {% set sizeConfig = {

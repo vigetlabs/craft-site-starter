@@ -52,7 +52,7 @@
       {% set maxLinks = maxLinks - 1 %}
     {% endif  %}
 
-    {% if hasEndEllipsis or (currentPage < totalPages - (elipsisThreshold - 1)) %}
+    {% if hasEndEllipsis or currentPage < totalPages - elipsisThreshold + 1 %}
       {% set maxLinks = maxLinks - 1 %}
     {% endif %}
 

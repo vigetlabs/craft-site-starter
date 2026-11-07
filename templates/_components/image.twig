@@ -58,7 +58,8 @@
     @var string|null loading
     Can be 'lazy' or 'eager'. Defaults to 'eager' when fetchpriority is 'high', otherwise 'lazy'.
   #}
-  {% set loading = props.loading ?? (fetchpriority == 'high' ? 'eager' : 'lazy') %}
+  {% set defaultLoading = fetchpriority == 'high' ? 'eager' : 'lazy' %}
+  {% set loading = props.loading ?? defaultLoading %}
 
   {#
     @var string|null alt

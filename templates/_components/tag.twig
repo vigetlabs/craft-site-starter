@@ -33,7 +33,8 @@
   {# Computed values #}
 
   {# Determine element type #}
-  {% set el = as ?? (href ? 'a' : (clickable ? 'button' : 'span')) %}
+  {% set defaultEl = href ? 'a' : (clickable ? 'button' : 'span') %}
+  {% set el = as ?? defaultEl %}
 
   {% tag el with attrs|merge({
     href: href,

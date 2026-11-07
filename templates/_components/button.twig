@@ -42,7 +42,8 @@
   {% set text = props.text ?? null %}
 
   {# Determine element type #}
-  {% set el = as ?? (href and not disabled ? 'a' : 'button') %}
+  {% set defaultEl = href and not disabled ? 'a' : 'button' %}
+  {% set el = as ?? defaultEl %}
 
   {# @var array attrs #}
   {% set attrs = props.attrs ?? {} %}

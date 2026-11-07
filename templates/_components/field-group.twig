@@ -48,7 +48,7 @@ The field attrs hash is used to pass additional attributes to the field element.
   {% set idErrors = id ~ '-errors' %}
   {% set idInstructions = id ~ '-instructions' %}
   {% set hasError = errorMessages|length %}
-  {% set dataRequired = required ? (required is same as 'long' ? 'long' : true) : null %}
+  {% set dataRequired = required ? (required is same as('long') ? 'long' : true) : null %}
   {% set describedByElements = [
     instructions ? idInstructions,
     hasError ? idErrors,
@@ -80,7 +80,7 @@ The field attrs hash is used to pass additional attributes to the field element.
       'aria-required': required ? 'true' : null,
       'aria-describedby': describedByElements ? describedByElements : null,
       'aria-invalid': hasError ? 'true' : null,
-      required: required is same as false ? null : '',
+      required: required is same as(false) ? null : '',
     } -%}
       {% for child in fieldChildren %}
         {{ child }}
