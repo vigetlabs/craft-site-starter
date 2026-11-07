@@ -35,7 +35,9 @@
   <figure class="{{ class }}">
     {{ Image(imageProps) }}
     {% if caption %}
-      <figcaption>{{ caption }}</figcaption>
+      <figcaption>
+        {{ caption }}
+      </figcaption>
     {% endif %}
   </figure>
 {% endmacro %}

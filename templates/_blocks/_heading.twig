@@ -6,11 +6,17 @@
 
 {% set element = hasPreviousBlocksWithH1 ? 'h2' : 'h1' %}
 
-{% tag element with {
-  class: cx('container font-bold', {
-    'text-4xl': not hasPreviousBlocksWithH1,
-    'text-3xl': hasPreviousBlocksWithH1,
-  }),
-} %}
+{% tag element
+  with
+  {
+    class: cx(
+      'container font-bold',
+      {
+        'text-4xl': not hasPreviousBlocksWithH1,
+        'text-3xl': hasPreviousBlocksWithH1
+      }
+    )
+  }
+%}
   {{ block.heading }}
 {% endtag %}

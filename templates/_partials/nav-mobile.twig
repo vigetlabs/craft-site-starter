@@ -1,4 +1,4 @@
-{% from "_components/icon.twig" import Icon %}
+{% from '_components/icon.twig' import Icon %}
 
 {# @var \Illuminate\Support\Collection<verbb\navigation\elements\Node> nodes #}
 {% set nodes = nodes ?? collect([]) %}
@@ -8,31 +8,41 @@
 {% macro navIem(props = {}) %}
   {% set node = props.node %}
   {% set textClass = props.textClass ?? null %}
-  {% set iconTransitionClass = props.iconTransitionClass ?? 'transition-transform group-aria-expanded:rotate-180' %}
+  {% set iconTransitionClass = props.iconTransitionClass
+    ?? 'transition-transform group-aria-expanded:rotate-180'
+  %}
   {% set hasChildren = props.hasChildren ?? false %}
   {% set element = hasChildren ? 'button' : 'a' %}
 
-  {% tag element with {
-    href: hasChildren ? null : node.url,
-    class: cx(textClass, 'text-gray-100 group py-16 flex w-full items-center justify-between gap-4 px-16'),
-    ':aria-expanded': hasChildren ? "isInStack($refs.subnav)" : null,
-    ':aria-controls': hasChildren ? "$id('subnav')" : null,
-    '@click': "toggle($refs.subnav)"
-  } %}
+  {% tag element
+    with
+    {
+      href: hasChildren ? null : node.url,
+      class: cx(
+        textClass,
+        'group flex w-full items-center justify-between gap-4 px-16 py-16 text-gray-100'
+      ),
+      ':aria-expanded': hasChildren ? 'isInStack($refs.subnav)' : null,
+      ':aria-controls': hasChildren ? "$id('subnav')" : null,
+      '@click': 'toggle($refs.subnav)'
+    }
+  %}
     {{ node.title }}
 
-    {{ hasChildren ? Icon({
-      name: 'chevron-down',
-      size: 'sm',
-      class: iconTransitionClass,
-    }) }}
+    {{ hasChildren
+      ? Icon({
+        name: 'chevron-down',
+        size: 'sm',
+        class: iconTransitionClass
+      }) }}
   {% endtag %}
 {% endmacro %}
 
 <nav
   aria-label="{{ 'Site Navigation'|t }}"
   class="md:hidden"
-  :style="isOpen ? 'display: block' : ''" {# Keeps the mobile nav open even if the breakpoint changes #}
+  :style="isOpen ? 'display: block' : ''"
+  {# Keeps the mobile nav open even if the breakpoint changes #}
   x-id="['nav-mobile']"
   x-data="{
     isOpen: false,
@@ -45,7 +55,6 @@
   x-trap.noscroll.inert="isOpen"
   @keyup.escape.window="isOpen && toggle()"
 >
-
   {# Logo and nav toggle button lockup #}
   <div
     class="container flex items-center justify-between transition-colors duration-300"
@@ -54,28 +63,48 @@
     {# The logo changes when you open the mobile nav. Just because it's rad. #}
     <a
       href="{{ url('/') }}"
-      class="relative z-10 transition-colors duration-700 text-gray-500"
+      class="relative z-10 text-gray-500 transition-colors duration-700"
       :class="isOpen && 'text-amber-600!'"
     >
-      {{ Icon({
-        name: 'logo-primary',
-        size: 'none',
-        class: 'w-[186px] h-32',
-      }) }}
+      {{
+        Icon({
+          name: 'logo-primary',
+          size: 'none',
+          class: 'w-[186px] h-32'
+        })
+      }}
 
-      <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
+      <span class="sr-only">
+        {{
+          '{name} - Home'|t({
+            name: currentSite.name
+          })
+        }}
+      </span>
     </a>
 
     <button
-      class="flex py-16 px-8 -mr-8 group relative z-10"
+      class="group relative z-10 -mr-8 flex px-8 py-16"
       @click="toggle()"
       :aria-expanded="isOpen"
       :aria-controls="$id('nav-mobile')"
     >
-      <div class="flex flex-col justify-between group w-24 h-[18px]">
-        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:rotate-45 group-aria-expanded:translate-y-[8px]"></span>
-        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"></span>
-        <span class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-[8px]"></span>
+      <div class="group flex h-[18px] w-24 flex-col justify-between">
+        <span
+          class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:translate-y-[8px] group-aria-expanded:rotate-45 group-aria-expanded:bg-white"
+        >
+
+        </span>
+        <span
+          class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:bg-white group-aria-expanded:opacity-0"
+        >
+
+        </span>
+        <span
+          class="h-2 rounded-full bg-gray-600 transition-all duration-300 ease-in-out group-aria-expanded:-translate-y-[8px] group-aria-expanded:-rotate-45 group-aria-expanded:bg-white"
+        >
+
+        </span>
       </div>
       <span class="sr-only">{{ 'Open Menu'|t }}</span>
     </button>
@@ -86,12 +115,11 @@
     :id="$id('nav-mobile')"
     x-cloak
     x-show="isOpen"
-    class="absolute top-full left-0 w-full bottom-[calc(-100vh+100%)] bg-gray-700 overflow-y-scroll -z-10"
+    class="absolute top-full bottom-[calc(-100vh+100%)] left-0 -z-10 w-full overflow-y-scroll bg-gray-700"
     x-data="nav"
     @keyup.escape="handleEscape"
     x-transition.opacity.duration.300ms
   >
-
     <ul
       x-show="isOpen"
       class="flex flex-col py-32"
@@ -109,11 +137,13 @@
         {% set hasChildren = children.count() %}
 
         <li class="relative" x-data x-id="['subnav']">
-          {{ _self.navIem({
-            node,
-            hasChildren,
-            textClass: 'text-2xl',
-          }) }}
+          {{
+            _self.navIem({
+              node,
+              hasChildren,
+              textClass: 'text-2xl'
+            })
+          }}
 
           {% if hasChildren %}
             <ul
@@ -125,17 +155,18 @@
               x-collapse
               data-level="{{ node.level }}"
             >
-
               {#
               If the root node has a url, render it as a link since the top level element is a <button>
               Use the passive node type to prevent this behavior
               #}
               {% if node.url %}
                 <li>
-                  {{ _self.navIem({
-                    node: node,
-                    hasChildren: false,
-                  }) }}
+                  {{
+                    _self.navIem({
+                      node: node,
+                      hasChildren: false
+                    })
+                  }}
                 </li>
               {% endif %}
 
@@ -143,10 +174,12 @@
                 {% set grandchildren = child.children.collect() %}
 
                 <li class="relative" x-data x-id="['subnav']">
-                  {{ _self.navIem({
-                    node: child,
-                    hasChildren: grandchildren.count(),
-                  }) }}
+                  {{
+                    _self.navIem({
+                      node: child,
+                      hasChildren: grandchildren.count()
+                    })
+                  }}
 
                   {% if grandchildren.count() %}
                     <ul
@@ -160,10 +193,12 @@
                     >
                       {% for grandchild in grandchildren %}
                         <li>
-                          {{ _self.navIem({
-                            node: grandchild,
-                            verticalPaddingClass: 'py-8',
-                          }) }}
+                          {{
+                            _self.navIem({
+                              node: grandchild,
+                              verticalPaddingClass: 'py-8'
+                            })
+                          }}
                         </li>
                       {% endfor %}
                     </ul>

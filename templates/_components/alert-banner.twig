@@ -19,7 +19,12 @@
     data-component="AlertBanner"
     aria-live="assertive"
     aria-atomic="true"
-    class="{{ cx('relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48', class) }}"
+    class="{{
+    cx(
+      'relative flex flex-col gap-16 bg-sky-100 p-24 lg:p-48 dark:bg-gray-600 dark:text-white',
+      class
+    )
+    }}"
     x-data="{ dismiss() { this.$root.remove() } }"
   >
     {% if title %}
@@ -27,19 +32,22 @@
     {% endif %}
 
     {% if description %}
-      <p>{{ description }}</p>
+      <p>
+        {{ description }}
+      </p>
     {% endif %}
 
-    {{ dismissible ? Button({
-      variant: 'subtle',
-      size: 'sm',
-      icon: 'close',
-      iconOnly: true,
-      class: 'absolute right-24 top-24',
-      text: 'Close'|t,
-      attrs: {
-        'x-on:click': 'dismiss()',
-      },
-    }) }}
+    {{ dismissible
+      ? Button({
+        variant: 'subtle',
+        size: 'sm',
+        icon: 'close',
+        iconOnly: true,
+        class: 'absolute right-24 top-24',
+        text: 'Close'|t,
+        attrs: {
+          'x-on:click': 'dismiss()'
+        }
+      }) }}
   </div>
 {% endmacro %}

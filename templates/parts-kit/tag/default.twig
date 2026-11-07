@@ -5,27 +5,33 @@
 {% set sizes = ['sm', 'md', 'lg'] %}
 
 {% for variant in variants %}
-  <div class="flex items-center gap-8 mb-48">
+  <div class="mb-48 flex items-center gap-8">
     {% for size in sizes %}
-      {{ Tag({
-        text: 'Tag ' ~ size ~ ' ' ~ variant,
-        size: size,
-        variant: variant,
-      }) }}
+      {{
+        Tag({
+          text: 'Tag ' ~ size ~ ' ' ~ variant,
+          size: size,
+          variant: variant
+        })
+      }}
 
-      {{ Tag({
-        text: 'Tag ' ~ size ~ ' link',
-        size: size,
-        variant: variant,
-        href: '#TEST',
-      }) }}
+      {{
+        Tag({
+          text: 'Tag ' ~ size ~ ' link',
+          size: size,
+          variant: variant,
+          href: '#TEST'
+        })
+      }}
 
-      {{ Tag({
-        text: 'Tag ' ~ size ~ ' ' ~ variant,
-        size: size,
-        variant: variant,
-        icon: 'clock',
-      }) }}
+      {{
+        Tag({
+          text: 'Tag ' ~ size ~ ' ' ~ variant,
+          size: size,
+          variant: variant,
+          icon: 'clock'
+        })
+      }}
     {% endfor %}
   </div>
 {% endfor %}

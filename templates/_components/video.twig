@@ -30,12 +30,14 @@
   {% set id = 'video-' ~ random() %}
 
   <div class="{{ classNames('relative', class) }}">
-    {{ Button({
-      href: '#' ~ id,
-      variant: 'text',
-      class: 'sr-only focus-visible:not-sr-only',
-      text: 'Skip past video'|t
-    }) }}
+    {{
+      Button({
+        href: '#' ~ id,
+        variant: 'text',
+        class: 'sr-only focus-visible:not-sr-only',
+        text: 'Skip past video'|t
+      })
+    }}
 
     <iframe
       src="{{ source }}"

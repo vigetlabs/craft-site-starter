@@ -28,15 +28,19 @@
       {% endif %}
 
       {% if text %}
-        <div class="max-w-[640px]">{{ text }}</div>
+        <div class="max-w-[640px]">
+          {{ text }}
+        </div>
       {% endif %}
 
       {% if href and buttonText %}
-        {{ Button({
-          href,
-          newTab,
-          text: buttonText,
-        }) }}
+        {{
+          Button({
+            href,
+            newTab,
+            text: buttonText
+          })
+        }}
       {% endif %}
     </div>
   </div>

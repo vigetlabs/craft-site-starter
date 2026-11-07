@@ -50,33 +50,44 @@
   {% set options = props.options ?? [] %}
 
   {% macro option(item) %}
-    <option {{ attr({
-      value: item.value ?? '',
-      selected: item.selected is defined ? '' : null,
-    }) }}>
+    <option
+      {{
+      attr({
+        value: item.value ?? '',
+        selected: item.selected is defined ? '' : null
+      })
+      }}
+    >
       {{ item.label }}
     </option>
   {% endmacro %}
 
   {% if useEmptyOption %}
-    {% set options = options|unshift({label: placeholder, value: '' }) %}
+    {% set options =
+      options|unshift({
+        label: placeholder,
+        value: ''
+      })
+    %}
   {% endif %}
 
-  {{ FieldGroup({
-    fieldElement: 'select',
-    fieldAttrs: {
-      ...fieldAttrs,
-      name,
-      disabled: disabled ? '' : null,
-    },
-    id,
-    class,
-    fieldChildren: options|map(item => _self.option(item)),
-    label,
-    labelHidden,
-    required,
-    subLabel,
-    instructions,
-    errorMessages,
-  }) }}
+  {{
+    FieldGroup({
+      fieldElement: 'select',
+      fieldAttrs: {
+        ...fieldAttrs,
+        name,
+        disabled: disabled ? '' : null
+      },
+      id,
+      class,
+      fieldChildren: options|map(item => _self.option(item)),
+      label,
+      labelHidden,
+      required,
+      subLabel,
+      instructions,
+      errorMessages
+    })
+  }}
 {% endmacro %}

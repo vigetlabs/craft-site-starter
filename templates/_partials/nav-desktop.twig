@@ -1,4 +1,4 @@
-{% from "_components/icon.twig" import Icon %}
+{% from '_components/icon.twig' import Icon %}
 
 {# @var \Illuminate\Support\Collection<verbb\navigation\elements\Node> nodes #}
 {% set nodes = nodes ?? collect([]) %}
@@ -9,27 +9,38 @@
   {% set node = props.node %}
   {% set textClass = props.textClass ?? null %}
   {% set verticalPaddingClass = props.verticalPaddingClass ?? 'py-16' %}
-  {% set iconTransitionClass = props.iconTransitionClass ?? 'transition-transform group-aria-expanded:rotate-180' %}
+  {% set iconTransitionClass = props.iconTransitionClass
+    ?? 'transition-transform group-aria-expanded:rotate-180'
+  %}
   {% set hasChildren = props.hasChildren ?? false %}
   {% set element = hasChildren ? 'button' : 'a' %}
 
-  {% tag element with {
-    href: hasChildren ? null : node.url,
-    class: cx(verticalPaddingClass, textClass, 'group flex w-full items-center justify-between gap-4 pl-8', {
-      'pr-16': not hasChildren,
-      'pr-8': hasChildren,
-    }),
-    ':aria-expanded': hasChildren ? "isInStack($refs.subnav)" : null,
-    ':aria-controls': hasChildren ? "$id('subnav')" : null,
-    '@click': "toggle($refs.subnav)"
-  } %}
+  {% tag element
+    with
+    {
+      href: hasChildren ? null : node.url,
+      class: cx(
+        verticalPaddingClass,
+        textClass,
+        'group flex w-full items-center justify-between gap-4 pl-8',
+        {
+          'pr-16': not hasChildren,
+          'pr-8': hasChildren
+        }
+      ),
+      ':aria-expanded': hasChildren ? 'isInStack($refs.subnav)' : null,
+      ':aria-controls': hasChildren ? "$id('subnav')" : null,
+      '@click': 'toggle($refs.subnav)'
+    }
+  %}
     {{ node.title }}
 
-    {{ hasChildren ? Icon({
-      name: 'chevron-down',
-      size: 'sm',
-      class: iconTransitionClass,
-    }) }}
+    {{ hasChildren
+      ? Icon({
+        name: 'chevron-down',
+        size: 'sm',
+        class: iconTransitionClass
+      }) }}
   {% endtag %}
 {% endmacro %}
 
@@ -44,13 +55,21 @@
     class="inline-flex py-4 text-gray-500 transition-colors hover:text-amber-600"
     href="{{ url('/') }}"
   >
-    {{ Icon({
-      name: 'logo-primary',
-      size: 'none',
-      class: 'w-[186px] h-32',
-    }) }}
+    {{
+      Icon({
+        name: 'logo-primary',
+        size: 'none',
+        class: 'w-[186px] h-32'
+      })
+    }}
 
-    <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
+    <span class="sr-only">
+      {{
+        '{name} - Home'|t({
+          name: currentSite.name
+        })
+      }}
+    </span>
   </a>
 
   <ul class="inline-flex flex-wrap gap-8" @click.outside="resetStack()">
@@ -61,17 +80,24 @@
       {% set reverseNavAnchoring = totalNodes - loop.index0 <= 2 %}
 
       <li class="relative" x-data x-id="['subnav']">
-        {{ _self.navIem({
-          node,
-          hasChildren,
-        }) }}
+        {{
+          _self.navIem({
+            node,
+            hasChildren
+          })
+        }}
 
         {% if hasChildren %}
           <ul
-            class="{{ cx('absolute top-full bg-gray-200 text-nowrap w-[200px] border border-gray-300', {
-              'left-0': not reverseNavAnchoring,
-              'right-0': reverseNavAnchoring,
-            }) }}"
+            class="{{
+            cx(
+              'absolute top-full w-[200px] border border-gray-300 bg-gray-200 text-nowrap',
+              {
+                'left-0': not reverseNavAnchoring,
+                'right-0': reverseNavAnchoring
+              }
+            )
+            }}"
             :id="$id('subnav')"
             x-cloak
             x-ref="subnav"
@@ -79,38 +105,45 @@
             x-transition
             data-level="{{ node.level }}"
           >
-
             {#
             If the root node has a url, render it as a link since the top level element is a <button>
             Use the passive node type to prevent this behavior
             #}
             {% if node.url %}
               <li>
-                {{ _self.navIem({
-                  node: node,
-                  hasChildren: false,
-                  verticalPaddingClass: 'py-8',
-                }) }}
+                {{
+                  _self.navIem({
+                    node: node,
+                    hasChildren: false,
+                    verticalPaddingClass: 'py-8'
+                  })
+                }}
               </li>
             {% endif %}
 
             {% for child in children %}
               {% set grandchildren = child.children.collect() %}
               <li class="relative" x-data x-id="['subnav']">
-
-                {{ _self.navIem({
-                  node: child,
-                  hasChildren: grandchildren.count(),
-                  iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
-                  verticalPaddingClass: 'py-8',
-                }) }}
+                {{
+                  _self.navIem({
+                    node: child,
+                    hasChildren: grandchildren.count(),
+                    iconTransitionClass: 'transition-transform -rotate-90 group-aria-expanded:translate-x-4',
+                    verticalPaddingClass: 'py-8'
+                  })
+                }}
 
                 {% if grandchildren.count() %}
                   <ul
-                    class="{{ cx('absolute -top-1 bg-gray-500 border border-gray-600 text-nowrap p-3', {
-                      'left-full': not reverseNavAnchoring,
-                      'right-full': reverseNavAnchoring,
-                    }) }}"
+                    class="{{
+                    cx(
+                      'p-3 absolute -top-1 border border-gray-600 bg-gray-500 text-nowrap',
+                      {
+                        'left-full': not reverseNavAnchoring,
+                        'right-full': reverseNavAnchoring
+                      }
+                    )
+                    }}"
                     :id="$id('subnav')"
                     x-cloak
                     x-ref="subnav"
@@ -120,11 +153,13 @@
                   >
                     {% for grandchild in grandchildren %}
                       <li>
-                        {{ _self.navIem({
-                          node: grandchild,
-                          textClass: 'text-gray-100',
-                          verticalPaddingClass: 'py-8',
-                        }) }}
+                        {{
+                          _self.navIem({
+                            node: grandchild,
+                            textClass: 'text-gray-100',
+                            verticalPaddingClass: 'py-8'
+                          })
+                        }}
                       </li>
                     {% endfor %}
                   </ul>

@@ -50,22 +50,24 @@
   {% set allowedTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
   {% set validatedType = type in allowedTypes ? type : 'text' %}
 
-  {{ FieldGroup({
-    fieldElement: 'input',
-    fieldAttrs: {
-      ...fieldAttrs,
-      name,
-      type: validatedType,
-      placeholder,
-      disabled: disabled ? '' : null,
-    },
-    id,
-    class,
-    label,
-    labelHidden,
-    required,
-    subLabel,
-    instructions,
-    errorMessages,
-  }) }}
+  {{
+    FieldGroup({
+      fieldElement: 'input',
+      fieldAttrs: {
+        ...fieldAttrs,
+        name,
+        type: validatedType,
+        placeholder,
+        disabled: disabled ? '' : null
+      },
+      id,
+      class,
+      label,
+      labelHidden,
+      required,
+      subLabel,
+      instructions,
+      errorMessages
+    })
+  }}
 {% endmacro %}

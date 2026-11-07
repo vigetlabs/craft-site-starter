@@ -48,28 +48,35 @@
   {# @var array attrs #}
   {% set attrs = props.attrs ?? {} %}
 
-  {% tag el with attrs | merge({
-    href: not disabled ? href : null,
-    target: newTab ? '_blank' : null,
-    rel: newTab ? 'noopener' : null,
-    disabled: disabled ? true : null,
-    type: el == 'button' ? type : null,
-    title: title,
-    class: cx({
-      'btn-contained': variant == 'contained',
-      'btn-outlined': variant == 'outlined',
-      'btn-subtle': variant == 'subtle',
-      'btn-text': variant == 'text',
-      'btn-icon': iconOnly,
-      'btn-sm': size == 'sm',
-      'btn-lg': size == 'lg',
-    }, class),
-  }) %}
-    {{ icon ? Icon({
-      name: icon,
-      size: size,
-      class: iconLast ? 'order-last' : null,
-    }) }}
+  {% tag el
+    with
+    attrs|merge({
+      href: not disabled ? href : null,
+      target: newTab ? '_blank' : null,
+      rel: newTab ? 'noopener' : null,
+      disabled: disabled ? true : null,
+      type: el == 'button' ? type : null,
+      title: title,
+      class: cx(
+        {
+          'btn-contained': variant == 'contained',
+          'btn-outlined': variant == 'outlined',
+          'btn-subtle': variant == 'subtle',
+          'btn-text': variant == 'text',
+          'btn-icon': iconOnly,
+          'btn-sm': size == 'sm',
+          'btn-lg': size == 'lg'
+        },
+        class
+      )
+    })
+  %}
+    {{ icon
+      ? Icon({
+        name: icon,
+        size: size,
+        class: iconLast ? 'order-last' : null
+      }) }}
 
     {{ text }}
   {% endtag %}

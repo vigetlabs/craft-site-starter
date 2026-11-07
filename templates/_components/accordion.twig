@@ -21,18 +21,30 @@
   {% set headingTag = 'h' ~ headingLevel %}
 
   <details
-    class="{{ cx('group/details flex flex-col border-t last-of-type:border-b border-gray-200', class) }}"
-    {{ attr({
-      name,
-    }) }}
+    class="{{
+    cx(
+      'group/details flex flex-col border-t border-gray-200 last-of-type:border-b',
+      class
+    )
+    }}"
+    {{
+    attr({
+      name
+    })
+    }}
   >
     <summary
       class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-hidden"
     >
-      {{ tag(headingTag, {
-        class: 'text-lg font-bold',
-        text: title,
-      }) }}
+      {{
+        tag(
+          headingTag,
+          {
+            class: 'text-lg font-bold',
+            text: title
+          }
+        )
+      }}
 
       {# Animated toggle icon #}
       <span
@@ -40,10 +52,14 @@
       >
         <span
           class="absolute inset-0 m-auto h-4 w-20 bg-gray-600 transition-transform duration-500 group-open/details:rotate-[360deg]"
-        ></span>
+        >
+
+        </span>
         <span
           class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-gray-600 transition-transform duration-500 group-open/details:rotate-[360deg]"
-        ></span>
+        >
+
+        </span>
       </span>
     </summary>
 

@@ -6,30 +6,35 @@
 {% set blocks = collect(blocks ?? []).values() %}
 
 {% if blocks.count() %}
-  <div class="{{ cx({
-    'pt-64': blocks.first().type.handle not in ['pageHero', 'callToAction'],
-    'pb-64': blocks.last().type.handle not in ['callToAction'],
-  }) }}">
-  {% for block in blocks %}
-    {% set nextBlock = blocks.get(loop.index0 + 1) %}
-    {% set previousBlocks = blocks.take(loop.index0) %}
+  <div
+    class="{{
+    cx({
+      'pt-64': blocks.first().type.handle not in ['pageHero', 'callToAction'],
+      'pb-64': blocks.last().type.handle not in ['callToAction']
+    })
+    }}"
+  >
+    {% for block in blocks %}
+      {% set nextBlock = blocks.get(loop.index0 + 1) %}
+      {% set previousBlocks = blocks.take(loop.index0) %}
 
-    {#
+      {#
     Check if there are previous blocks that have a heading level of 1. This is used
     to determine if the current block should use an h1 or h2 as its root heading level.
     #}
-    {% set hasPreviousBlocksWithH1 = previousBlocks
-      |map(block => block.type.handle)
-      |intersect(['pageHero', 'heading'])
-      |length
-    %}
+      {% set hasPreviousBlocksWithH1 =
+        previousBlocks
+          |map(block => block.type.handle)
+          |intersect(['pageHero', 'heading'])
+          |length
+      %}
 
-    {% set marginBottomConfig = {
-      default: 'mb-64',
-      'heading + richText': 'mb-32',
-    } %}
+      {% set marginBottomConfig = {
+        default: 'mb-64',
+        'heading + richText': 'mb-32'
+      } %}
 
-    {#
+      {#
     Pull margins from the config. The order of the array is important.
 
     First we check the most unique case, the current block combined with the next block.
@@ -45,25 +50,35 @@
     We use the `|filter` to remove any null values. and then `|first`
     to get the first matching config value.
     #}
-    {% set marginBottom = [
-      nextBlock ? "#{block.type.handle} + #{nextBlock.type.handle}" : null,
-      block.type.handle,
-      'default',
-    ]
-      |map(item => marginBottomConfig[item] ?? null)
-      |filter
-      |first
-    %}
+      {% set marginBottom =
+        [
+          nextBlock ? "#{block.type.handle} + #{nextBlock.type.handle}" : null,
+          block.type.handle,
+          'default'
+        ]
+          |map(item => marginBottomConfig[item] ?? null)
+          |filter
+          |first
+      %}
 
-    {# Block wrapper #}
-    <div class="{{ cx({
-      (marginBottom): not loop.last
-    }) }}">
-      {{ include("_blocks/_#{block.type.handle}.twig", {
-        block,
-        hasPreviousBlocksWithH1,
-      }) }}
-    </div>
+      {# Block wrapper #}
+      <div
+        class="{{
+        cx({
+          (marginBottom): not loop.last
+        })
+        }}"
+      >
+        {{
+          include(
+            "_blocks/_#{block.type.handle}.twig",
+            {
+              block,
+              hasPreviousBlocksWithH1
+            }
+          )
+        }}
+      </div>
     {% endfor %}
   </div>
 {% endif %}

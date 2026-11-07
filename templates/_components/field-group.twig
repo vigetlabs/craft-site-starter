@@ -48,23 +48,36 @@ The field attrs hash is used to pass additional attributes to the field element.
   {% set idErrors = id ~ '-errors' %}
   {% set idInstructions = id ~ '-instructions' %}
   {% set hasError = errorMessages|length %}
-  {% set dataRequired = required ? (required is same as('long') ? 'long' : true) : null %}
-  {% set describedByElements = [
-    instructions ? idInstructions,
-    hasError ? idErrors,
-  ]|filter|join(' ') %}
+  {% set dataRequired = required
+    ? required is same as('long') ? 'long' : true
+    : null
+  %}
+  {% set describedByElements =
+    [instructions ? idInstructions, hasError ? idErrors]|filter|join(' ')
+  %}
 
-  <div {{ attr({
-    class: cx('field-group', class),
-    'data-required': dataRequired,
-  }) }}>
+  <div
+    {{
+    attr({
+      class: cx('field-group', class),
+      'data-required': dataRequired
+    })
+    }}
+  >
     <label for="{{ id }}">
       {% if label %}
-        <span {{ attr({
-          class: cx('field-label', {
-            'sr-only': labelHidden,
-          }),
-        }) }}>
+        <span
+          {{
+          attr({
+            class: cx(
+              'field-label',
+              {
+                'sr-only': labelHidden
+              }
+            )
+          })
+          }}
+        >
           {{ label }}
         </span>
       {% endif %}
@@ -74,14 +87,17 @@ The field attrs hash is used to pass additional attributes to the field element.
       {% endif %}
     </label>
 
-    {% tag fieldElement with {
-      ...fieldAttrs,
-      id,
-      'aria-required': required ? 'true' : null,
-      'aria-describedby': describedByElements ? describedByElements : null,
-      'aria-invalid': hasError ? 'true' : null,
-      required: required is same as(false) ? null : '',
-    } -%}
+    {% tag fieldElement
+      with
+      {
+        ...fieldAttrs,
+        id,
+        'aria-required': required ? 'true' : null,
+        'aria-describedby': describedByElements ? describedByElements : null,
+        'aria-invalid': hasError ? 'true' : null,
+        required: required is same as(false) ? null : ''
+      }
+    -%}
       {% for child in fieldChildren %}
         {{ child }}
       {% endfor %}
@@ -95,11 +111,13 @@ The field attrs hash is used to pass additional attributes to the field element.
 
     {% if hasError %}
       <ul class="field-errors" id="{{ idErrors }}">
-        {{ Icon({
-          name: 'error',
-          class: 'absolute left-0 top-2 shrink-0',
-          size: 'sm',
-        }) }}
+        {{
+          Icon({
+            name: 'error',
+            class: 'absolute left-0 top-2 shrink-0',
+            size: 'sm'
+          })
+        }}
 
         {% for error in errorMessages %}
           <li>{{ error }}</li>

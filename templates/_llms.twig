@@ -4,6 +4,6 @@
   {%- exit 404 -%}
 {%- endif -%}
 
-{%- header "Content-Type: text/plain" -%}
+{%- header 'Content-Type: text/plain' -%}
 
 {{- llmsTxtContent|raw -}}

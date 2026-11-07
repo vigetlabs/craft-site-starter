@@ -18,7 +18,9 @@
   <div
     class="{{ cx('dark:text-white', class) }}"
     x-data="{
-      activeIndex: {{ activeIndex }},
+      activeIndex: {{
+    activeIndex
+    }},
       selectTab(event) {
         const tab = event.target
         this.activeIndex = parseInt(tab.dataset.index, 10)
@@ -32,7 +34,10 @@
       },
     }"
   >
-    <ul class="mb-16 flex border-b border-gray-200 dark:border-gray-700" role="tablist">
+    <ul
+      class="mb-16 flex border-b border-gray-200 dark:border-gray-700"
+      role="tablist"
+    >
       {% for tab in tabs %}
         <li>
           <button
@@ -61,23 +66,26 @@
         role="tabpanel"
         tabindex="0"
         :hidden="activeIndex !== {{ loop.index0 }}"
-        {{ attr({
-          'x-cloak': activeIndex != loop.index0 ? '' : null,
-        }) }}
+        {{
+        attr({
+          'x-cloak': activeIndex != loop.index0 ? '' : null
+        })
+        }}
       >
         {{ tab.content }}
       </div>
     {% endfor %}
 
-    {{ Button({
-      text: 'Back to tabs list'|t,
-      size: 'sm',
-      variant: 'text',
-      class: 'sr-only focus:not-sr-only focus:mt-16 focus:z-max',
-      attrs: {
-        '@click': 'activeTab.focus()',
-      },
-    }) }}
+    {{
+      Button({
+        text: 'Back to tabs list'|t,
+        size: 'sm',
+        variant: 'text',
+        class: 'sr-only focus:not-sr-only focus:mt-16 focus:z-max',
+        attrs: {
+          '@click': 'activeTab.focus()'
+        }
+      })
+    }}
   </div>
 {% endmacro %}
-

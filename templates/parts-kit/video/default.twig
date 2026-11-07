@@ -1,13 +1,15 @@
 {% from '_components/video' import Video %}
 
-<div class="max-w-prose mx-auto">
-
-  {{ Video({
-    source: 'https://www.youtube.com/embed/lJIrF4YjHfQ',
-    class: 'mb-24',
-  }) }}
+<div class="mx-auto max-w-prose">
+  {{
+    Video({
+      source: 'https://www.youtube.com/embed/lJIrF4YjHfQ',
+      class: 'mb-24'
+    })
+  }}
 
   <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. <a href="#">Focusable Content After Video</a>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. <a href="#">Focusable
+      Content After Video</a>
   </p>
 </div>

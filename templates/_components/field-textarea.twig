@@ -49,28 +49,30 @@
   {# @var bool resize #}
   {% set resize = props.resize ?? false %}
 
-  {{ FieldGroup({
-    fieldElement: 'textarea',
-    fieldAttrs: {
-      ...fieldAttrs,
-      class: cx(
-        fieldAttrs.class ?? null,
-        {
-          'resize-none': not resize,
-        },
-      ),
-      name,
-      placeholder,
-      disabled: disabled ? '' : null,
-      rows,
-    },
-    id,
-    class,
-    label,
-    labelHidden,
-    required,
-    subLabel,
-    instructions,
-    errorMessages,
-  }) }}
+  {{
+    FieldGroup({
+      fieldElement: 'textarea',
+      fieldAttrs: {
+        ...fieldAttrs,
+        class: cx(
+          fieldAttrs.class ?? null,
+          {
+            'resize-none': not resize
+          }
+        ),
+        name,
+        placeholder,
+        disabled: disabled ? '' : null,
+        rows
+      },
+      id,
+      class,
+      label,
+      labelHidden,
+      required,
+      subLabel,
+      instructions,
+      errorMessages
+    })
+  }}
 {% endmacro %}

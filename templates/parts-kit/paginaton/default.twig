@@ -41,31 +41,37 @@ Example Usage:
   visibleUrls: {
     4: '?page=4',
     5: '?page=5',
-    6: '?page=6',
-  },
+    6: '?page=6'
+  }
 } %}
 
 {% set examples %}
-  {{ Pagination({
-    ...props,
-    size: 'sm',
-  }) }}
+  {{
+    Pagination({
+      ...props,
+      size: 'sm'
+    })
+  }}
 
-  {{ Pagination({
-    ...props,
-    size: 'md',
-  }) }}
+  {{
+    Pagination({
+      ...props,
+      size: 'md'
+    })
+  }}
 
-  {{ Pagination({
-    ...props,
-    size: 'lg',
-  }) }}
+  {{
+    Pagination({
+      ...props,
+      size: 'lg'
+    })
+  }}
 {% endset %}
 
-<div class="p-64 flex flex-col gap-48">
+<div class="flex flex-col gap-48 p-64">
   {{ examples }}
 </div>
 
-<div class="dark bg-black p-64 flex flex-col gap-48">
+<div class="dark flex flex-col gap-48 bg-black p-64">
   {{ examples }}
 </div>

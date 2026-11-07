@@ -1,7 +1,12 @@
 {% extends '_layouts/base.twig' %}
 
 {% block content %}
-  {{ include("_blocks/index.twig", {
-    blocks: entry.pageBlocks,
-  }) }}
+  {{
+    include(
+      '_blocks/index.twig',
+      {
+        blocks: entry.pageBlocks
+      }
+    )
+  }}
 {% endblock %}

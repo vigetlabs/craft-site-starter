@@ -2,21 +2,30 @@
 {% from '_components/dialog' import Dialog %}
 
 {% set content %}
-  <p>Hello World</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam, quos.</a></p>
+  <p>
+    Hello World
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Quisquam,
+      quos.</a>
+  </p>
 {% endset %}
 
 {# Dialogs are triggered by dispatching a custom event dialog:open with an id that matches the dialog's id #}
-{{ Button({
+{{
+  Button({
     text: 'Open Dialog',
     attrs: {
       'x-data': '',
       '@click': "$dispatch('dialog:open', { id: 'my-dialog' })"
-    },
-  }) }}
+    }
+  })
+}}
 
-{{ Dialog({
-  content,
-  id: 'my-dialog',
-  hideClose: true,
-}) }}
+{{
+  Dialog({
+    content,
+    id: 'my-dialog',
+    hideClose: true
+  })
+}}

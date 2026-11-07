@@ -1,48 +1,79 @@
 {%- set codeBlocks = globalCode.codeBlocks.collect() -%}
 {%- set codeBlocksTemplate = '_partials/global-code-blocks.twig' -%}
 <!DOCTYPE html>
-<html dir="{{ currentSite.locale.getOrientation() }}" lang="{{ currentSite.language }}">
-<head>
-  {# -- Dangerously added raw HTML -- #}
-  {{ include(codeBlocksTemplate, {
-    codeBlocks,
-    codePosition: 'headTop'
-  }, with_context = false) }}
+<html
+  dir="{{ currentSite.locale.getOrientation() }}"
+  lang="{{ currentSite.language }}"
+>
+  <head>
+    {# -- Dangerously added raw HTML -- #}
+    {{
+      include(
+        codeBlocksTemplate,
+        {
+          codeBlocks,
+          codePosition: 'headTop'
+        },
+        with_context: false
+      )
+    }}
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  {% if seomatic is not defined -%}
-    <title>{{ siteName }}</title>
-  {%- endif %}
+    {% if seomatic is not defined -%}
+      <title>
+        {{ siteName }}
+      </title>
+    {%- endif %}
 
-  {{ include('_partials/head.twig') }}
+    {{ include('_partials/head.twig') }}
 
-  {# -- Dangerously added raw HTML -- #}
-  {{ include(codeBlocksTemplate, {
-    codeBlocks,
-    codePosition: 'headBottom'
-  }, with_context = false) }}
-</head>
-<body>
-  {# -- Dangerously added raw HTML -- #}
-  {{ include(codeBlocksTemplate, {
-    codeBlocks,
-    codePosition: 'bodyTop'
-  }, with_context = false) }}
+    {# -- Dangerously added raw HTML -- #}
+    {{
+      include(
+        codeBlocksTemplate,
+        {
+          codeBlocks,
+          codePosition: 'headBottom'
+        },
+        with_context: false
+      )
+    }}
+  </head>
+  <body>
+    {# -- Dangerously added raw HTML -- #}
+    {{
+      include(
+        codeBlocksTemplate,
+        {
+          codeBlocks,
+          codePosition: 'bodyTop'
+        },
+        with_context: false
+      )
+    }}
 
-  {{ include('_partials/header.twig') }}
+    {{ include('_partials/header.twig') }}
 
-  <main id="content" tabindex="-1">
-    {% block content %}{% endblock %}
-  </main>
+    <main id="content" tabindex="-1">
+      {% block content %}
 
-  {{ include('_partials/footer.twig') }}
+      {% endblock %}
+    </main>
 
-  {# -- Dangerously added raw HTML -- #}
-  {{ include(codeBlocksTemplate, {
-    codeBlocks,
-    codePosition: 'bodyBottom'
-  }, with_context = false) }}
-</body>
+    {{ include('_partials/footer.twig') }}
+
+    {# -- Dangerously added raw HTML -- #}
+    {{
+      include(
+        codeBlocksTemplate,
+        {
+          codeBlocks,
+          codePosition: 'bodyBottom'
+        },
+        with_context: false
+      )
+    }}
+  </body>
 </html>

@@ -1,38 +1,58 @@
-{% from "_components/icon.twig" import Icon %}
+{% from '_components/icon.twig' import Icon %}
 
-{% set footerNavigation = craft.navigation.nodes()
-    .handle('footerNavigation')
-    .level(1)
-    .with(['children'])
-    .collect() %}
+{% set footerNavigation =
+  craft.navigation.nodes().handle('footerNavigation').level(1).with(
+    ['children']
+  ).collect()
+%}
 
-<footer class="bg-gray-800 text-gray-100 py-32 md:py-64">
+<footer class="bg-gray-800 py-32 text-gray-100 md:py-64">
   <div class="container">
     {# Logo and nav lockup #}
-    <div class="grid md:grid-cols-5 gap-32">
+    <div class="grid gap-32 md:grid-cols-5">
       <div class="col-span-1 lg:col-span-2">
-        <a class="hover:text-amber-600 transition-colors duration-300 inline-block" href="{{ url('/') }}">
-          {{ Icon({
-            name: 'logo-mark',
-            size: 'lg',
-          }) }}
+        <a
+          class="inline-block transition-colors duration-300 hover:text-amber-600"
+          href="{{ url('/') }}"
+        >
+          {{
+            Icon({
+              name: 'logo-mark',
+              size: 'lg'
+            })
+          }}
 
-          <span class="sr-only">{{ '{name} - Home'|t({ name: currentSite.name }) }}</span>
+          <span class="sr-only">
+            {{
+              '{name} - Home'|t({
+                name: currentSite.name
+              })
+            }}
+          </span>
         </a>
       </div>
 
-      <nav class="md:col-span-4 lg:col-span-3" aria-label="{{ 'Footer Navigation'|t }}">
-        <ul class="grid grid-cols-2 md:grid-cols-4 gap-32">
+      <nav
+        class="md:col-span-4 lg:col-span-3"
+        aria-label="{{ 'Footer Navigation'|t }}"
+      >
+        <ul class="grid grid-cols-2 gap-32 md:grid-cols-4">
           {% for node in footerNavigation %}
             {% set children = node.children %}
             {% set element = node.url ? 'a' : 'span' %}
             <li class="grid gap-16">
-              {% tag element with {
-                href: node.url,
-                class: cx('text-gray-200 font-semibold text-sm uppercase tracking-widest', {
-                  'hover:text-white hover:underline': node.url,
-                }),
-              } %}
+              {% tag element
+                with
+                {
+                  href: node.url,
+                  class: cx(
+                    'text-sm font-semibold tracking-widest text-gray-200 uppercase',
+                    {
+                      'hover:text-white hover:underline': node.url
+                    }
+                  )
+                }
+              %}
                 {{ node.title }}
               {% endtag %}
 
@@ -41,12 +61,18 @@
                   {% for child in children %}
                     {% set childElement = child.url ? 'a' : 'span' %}
                     <li>
-                      {% tag childElement with {
-                        href: child.url,
-                        class: cx('text-gray-400 text-sm font-semibold text-lg', {
-                          'hover:text-white hover:underline': child.url,
-                        }),
-                      } %}
+                      {% tag childElement
+                        with
+                        {
+                          href: child.url,
+                          class: cx(
+                            'text-lg text-sm font-semibold text-gray-400',
+                            {
+                              'hover:text-white hover:underline': child.url
+                            }
+                          )
+                        }
+                      %}
                         {{ child.title }}
                       {% endtag %}
                     </li>
@@ -60,12 +86,21 @@
     </div>
 
     {# Copyright and privacy policy #}
-    <div class="border-t border-white/10 pt-32 mt-32 grid grid-cols-1 max-md:text-center md:grid-cols-[1fr_auto] text-sm gap-16 md:gap-0">
+    <div
+      class="mt-32 grid grid-cols-1 gap-16 border-t border-white/10 pt-32 text-sm max-md:text-center md:grid-cols-[1fr_auto] md:gap-0"
+    >
       <p class="text-gray-400">
-        &copy; {{ '{year} {name}. All rights reserved.'|t({ year: now|date('Y'), name: currentSite.name }) }}
+        &copy; {{
+          '{year} {name}. All rights reserved.'|t({
+            year: now|date('Y'),
+            name: currentSite.name
+          })
+        }}
       </p>
 
-      <a class="text-gray-400 hover:text-white hover:underline" href="#TODO">{{ 'Privacy Policy'|t }}</a>
+      <a class="text-gray-400 hover:text-white hover:underline" href="#TODO">
+        {{ 'Privacy Policy'|t }}
+      </a>
     </div>
   </div>
 </footer>

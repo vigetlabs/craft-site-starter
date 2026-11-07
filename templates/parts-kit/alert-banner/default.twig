@@ -1,15 +1,19 @@
 {% from '_components/alert-banner' import AlertBanner %}
 
-{{ AlertBanner({
-  title: 'Dismissible Alert Banner',
-  description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-  dismissible: true,
-}) }}
+{{
+  AlertBanner({
+    title: 'Dismissible Alert Banner',
+    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    dismissible: true
+  })
+}}
 
 <hr class="my-48" />
 
-{{ AlertBanner({
-  title: 'Non-Dismissible Alert Banner',
-  description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
-  dismissible: false,
-}) }}
+{{
+  AlertBanner({
+    title: 'Non-Dismissible Alert Banner',
+    description: 'Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.',
+    dismissible: false
+  })
+}}

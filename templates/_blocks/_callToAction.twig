@@ -3,10 +3,12 @@
 
 {% set block = block ?? null %}
 
-{{ CallToAction({
-  title: block.title,
-  text: block.richTextSimple,
-  href: block.button.value,
-  buttonText: block.button.label ?? null,
-  newTab: block.button.target ?? null,
-}) }}
+{{
+  CallToAction({
+    title: block.title,
+    text: block.richTextSimple,
+    href: block.button.value,
+    buttonText: block.button.label ?? null,
+    newTab: block.button.target ?? null
+  })
+}}

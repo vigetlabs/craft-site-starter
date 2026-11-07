@@ -63,21 +63,22 @@
       class="{{ classNames('dialog', class) }}"
     >
       {% if not hideClose %}
-        {{ Button({
-          icon: 'close',
-          iconOnly: true,
-          size: 'sm',
-          title: 'Close'|t,
-          variant: 'subtle',
-          class: 'absolute right-4 top-4 size-24 min-h-0! [&_svg]:size-12',
-          attrs: {
-            '@click': 'handleDialogClose()'
-          }
-        }) }}
+        {{
+          Button({
+            icon: 'close',
+            iconOnly: true,
+            size: 'sm',
+            title: 'Close'|t,
+            variant: 'subtle',
+            class: 'absolute right-4 top-4 size-24 min-h-0! [&_svg]:size-12',
+            attrs: {
+              '@click': 'handleDialogClose()'
+            }
+          })
+        }}
       {% endif %}
 
       {{ content }}
-
     </dialog>
   </div>
 {% endmacro %}

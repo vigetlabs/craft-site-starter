@@ -7,7 +7,7 @@
 {% set textContent %}
   <div>
     {% if block.heading %}
-      <h2 class="text-2xl font-bold mb-32">{{ block.heading }}</h2>
+      <h2 class="mb-32 text-2xl font-bold">{{ block.heading }}</h2>
     {% endif %}
 
     {% if block.richText %}
@@ -22,17 +22,21 @@
   <div>
     {% switch block.mediaType %}
       {% case 'image' %}
-        {{ Image({
-          image: block.image.eagerly().one(),
-          sizes: {
-            default: '100vw',
-            sm: '50vw',
-          },
-        }) }}
+        {{
+          Image({
+            image: block.image.eagerly().one(),
+            sizes: {
+              default: '100vw',
+              sm: '50vw'
+            }
+          })
+        }}
       {% case 'video' %}
-        {{ Video({
-          source: block.videoUrl,
-        }) }}
+        {{
+          Video({
+            source: block.videoUrl
+          })
+        }}
     {% endswitch %}
   </div>
 {% endset %}

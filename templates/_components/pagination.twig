@@ -39,18 +39,22 @@
   {% set size = props.size ?? 'md' %}
 
   {# @var string ariaLabel #}
-  {% set ariaLabel = props.ariaLabel ?? 'pagination navigation'|t %}
+  {% set ariaLabel = props.ariaLabel ?? ('pagination navigation'|t) %}
 
   {# Computed values #}
   {% set needEllipsis = totalPages > maxLinks %}
   {% set elipsisThreshold = floor(maxLinks / 2) %}
-  {% set hasStartEllipsis = needEllipsis and currentPage > maxLinks - elipsisThreshold %}
-  {% set hasEndEllipsis = needEllipsis and currentPage < totalPages - elipsisThreshold %}
+  {% set hasStartEllipsis = needEllipsis
+    and currentPage > maxLinks - elipsisThreshold
+  %}
+  {% set hasEndEllipsis = needEllipsis
+    and currentPage < totalPages - elipsisThreshold
+  %}
 
   {% if pageInfo %}
     {% if hasStartEllipsis %}
       {% set maxLinks = maxLinks - 1 %}
-    {% endif  %}
+    {% endif %}
 
     {% if hasEndEllipsis or currentPage < totalPages - elipsisThreshold + 1 %}
       {% set maxLinks = maxLinks - 1 %}
@@ -59,30 +63,31 @@
     {% set visibleUrls = pageInfo.getDynamicRangeUrls(maxLinks) %}
   {% endif %}
 
-  <nav
-    aria-label="{{ ariaLabel }}"
-    class="text-sky-600 dark:text-white"
-  >
+  <nav aria-label="{{ ariaLabel }}" class="text-sky-600 dark:text-white">
     <ul class="flex items-center gap-16">
       <li>
-        {{ Button({
-          href: prevUrl,
-          text: 'Previous'|t,
-          icon: 'arrow-left',
-          variant: 'outlined',
-          size,
-          currentPage,
-        }) }}
+        {{
+          Button({
+            href: prevUrl,
+            text: 'Previous'|t,
+            icon: 'arrow-left',
+            variant: 'outlined',
+            size,
+            currentPage
+          })
+        }}
       </li>
 
       {% if visibleUrls[1] is not defined %}
         <li>
-          {{ _self._PaginationItem({
-            url: firstUrl,
-            page: 1,
-            size,
-            currentPage,
-          }) }}
+          {{
+            _self._PaginationItem({
+              url: firstUrl,
+              page: 1,
+              size,
+              currentPage
+            })
+          }}
         </li>
         {# Hide elipsis if page 2 is in the visibleUrls array #}
         {% if hasStartEllipsis %}
@@ -92,12 +97,14 @@
 
       {% for page, url in visibleUrls %}
         <li>
-          {{ _self._PaginationItem({
-            url: url,
-            page: page,
-            size,
-            currentPage,
-          }) }}
+          {{
+            _self._PaginationItem({
+              url: url,
+              page: page,
+              size,
+              currentPage
+            })
+          }}
         </li>
       {% endfor %}
 
@@ -107,23 +114,27 @@
           <li aria-hidden="true">...</li>
         {% endif %}
         <li>
-          {{ _self._PaginationItem({
-            url: lastUrl,
-            page: totalPages,
-            size: size,
-          }) }}
+          {{
+            _self._PaginationItem({
+              url: lastUrl,
+              page: totalPages,
+              size: size
+            })
+          }}
         </li>
       {% endif %}
 
       <li>
-        {{ Button({
-          href: nextUrl,
-          text: 'Next'|t,
-          icon: 'arrow-right',
-          variant: 'outlined',
-          size: size,
-          iconLast: true,
-        }) }}
+        {{
+          Button({
+            href: nextUrl,
+            text: 'Next'|t,
+            icon: 'arrow-right',
+            variant: 'outlined',
+            size: size,
+            iconLast: true
+          })
+        }}
       </li>
     </ul>
   </nav>
@@ -145,14 +156,16 @@
   {# @var int|null currentPage #}
   {% set currentPage = props.currentPage ?? null %}
 
-  {{ Button({
-    href: url,
-    text: page,
-    variant: page == currentPage ? 'contained' : 'subtle',
-    size: size,
-    class: cx('!p-0 aspect-square rounded-full'),
-    attrs: {
-      'aria-current': page == currentPage ? 'page' : null,
-    },
-  }) }}
+  {{
+    Button({
+      href: url,
+      text: page,
+      variant: page == currentPage ? 'contained' : 'subtle',
+      size: size,
+      class: cx('aspect-square rounded-full !p-0'),
+      attrs: {
+        'aria-current': page == currentPage ? 'page' : null
+      }
+    })
+  }}
 {% endmacro %}

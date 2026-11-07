@@ -1,28 +1,44 @@
-{% from "_components/icon.twig" import Icon %}
+{% from '_components/icon.twig' import Icon %}
 {% from '_components/button' import Button %}
 
 {# The primary nav has a max depth of 3 levels. This simplifies our code since it doesn't have to be truly recursive #}
-{% set primaryNavigation = craft.navigation.nodes()
-    .handle('primaryNavigation')
-    .level(1)
-    .with(['children.children'])
-    .collect() %}
+{% set primaryNavigation =
+  craft.navigation.nodes().handle('primaryNavigation').level(1).with(
+    ['children.children']
+  ).collect()
+%}
 
-{{ Button({
-  text: 'Skip to main content'|t,
-  href: '#content',
-  class: 'sr-only focus:not-sr-only focus:absolute focus:top-16 focus:left-16 focus:z-50 focus:p-16 focus:z-max',
-}) }}
+{{
+  Button({
+    text: 'Skip to main content'|t,
+    href: '#content',
+    class: 'sr-only focus:not-sr-only focus:absolute focus:top-16 focus:left-16 focus:z-50 focus:p-16 focus:z-max'
+  })
+}}
 
-<header class="{{ cx(
-  'border-b border-gray-200 bg-gray-100',
-  'max-md:sticky max-md:top-0 max-md:z-50 max-md:bg-white max-md:shadow-md',
-) }}">
-  {{ include('_partials/nav-desktop.twig', {
-    nodes: primaryNavigation,
-  }) }}
+<header
+  class="{{
+  cx(
+    'border-b border-gray-200 bg-gray-100',
+    'max-md:sticky max-md:top-0 max-md:z-50 max-md:bg-white max-md:shadow-md'
+  )
+  }}"
+>
+  {{
+    include(
+      '_partials/nav-desktop.twig',
+      {
+        nodes: primaryNavigation
+      }
+    )
+  }}
 
-  {{ include('_partials/nav-mobile.twig', {
-    nodes: primaryNavigation,
-  }) }}
+  {{
+    include(
+      '_partials/nav-mobile.twig',
+      {
+        nodes: primaryNavigation
+      }
+    )
+  }}
 </header>

@@ -1,63 +1,80 @@
 {% from '_components/field-text-input' import FieldTextInput %}
 
 {% set fields %}
-  <div class="flex flex-col gap-48 p-32 max-w-lg">
-    {{ FieldTextInput({
-      id: 'custom-id',
-      label: 'Text Input',
-      subLabel: 'This is a sublabel',
-      instructions: 'This is an instruction',
-      name: 'text-input',
-    }) }}
-
-    {{ FieldTextInput({
-      label: 'Text Input',
-      placeholder: 'Placeholder (label hidden)',
-      labelHidden: true,
-      required: 'long',
-      name: 'text-input-placeholder',
-    }) }}
-
-    <form class="flex flex-col gap-16 items-start">
-      {{ FieldTextInput({
-        class: 'w-full',
-        label: 'Text Input (required)',
-        required: true,
+  <div class="flex max-w-lg flex-col gap-48 p-32">
+    {{
+      FieldTextInput({
+        id: 'custom-id',
+        label: 'Text Input',
+        subLabel: 'This is a sublabel',
         instructions: 'This is an instruction',
-        name: 'text-input-required',
-      }) }}
+        name: 'text-input'
+      })
+    }}
+
+    {{
+      FieldTextInput({
+        label: 'Text Input',
+        placeholder: 'Placeholder (label hidden)',
+        labelHidden: true,
+        required: 'long',
+        name: 'text-input-placeholder'
+      })
+    }}
+
+    <form class="flex flex-col items-start gap-16">
+      {{
+        FieldTextInput({
+          class: 'w-full',
+          label: 'Text Input (required)',
+          required: true,
+          instructions: 'This is an instruction',
+          name: 'text-input-required'
+        })
+      }}
 
       <button class="dark:text-white" type="submit">Test Validation</button>
     </form>
 
-    {{ FieldTextInput({
-      label: 'Text Input (required long)',
-      required: 'long',
-      instructions: 'This is an instruction',
-      name: 'text-input-required-long',
-    }) }}
+    {{
+      FieldTextInput({
+        label: 'Text Input (required long)',
+        required: 'long',
+        instructions: 'This is an instruction',
+        name: 'text-input-required-long'
+      })
+    }}
 
-    {{ FieldTextInput({
-      label: 'Text Input (required with error)',
-      required: true,
-      instructions: 'This is an instruction',
-      errorMessages: ['This is an error message', 'This is another error message'],
-      name: 'text-input-required-with-error',
-    }) }}
+    {{
+      FieldTextInput({
+        label: 'Text Input (required with error)',
+        required: true,
+        instructions: 'This is an instruction',
+        errorMessages: [
+          'This is an error message',
+          'This is another error message'
+        ],
+        name: 'text-input-required-with-error'
+      })
+    }}
 
-    {{ FieldTextInput({
-      label: 'Text Input (disabled)',
-      disabled: true,
-      name: 'text-input-disabled',
-    }) }}
+    {{
+      FieldTextInput({
+        label: 'Text Input (disabled)',
+        disabled: true,
+        name: 'text-input-disabled'
+      })
+    }}
 
     {% set inputTypes = ['text', 'password', 'email', 'number', 'tel', 'url'] %}
     {% for type in inputTypes %}
-      {{ FieldTextInput({
-        label: 'Text Input (' ~ type ~ ')',
-        type,
-        name: 'text-input-' ~ type,
-      }) }}
+      {{
+        FieldTextInput({
+          label: 'Text Input (' ~ type ~ ')',
+          type,
+          name: 'text-input-' ~ type
+        })
+      }}
     {% endfor %}
   </div>
 {% endset %}
@@ -66,7 +83,7 @@
 {{ fields }}
 
 {# dark background #}
-<div class="bg-black dark">
+<div class="dark bg-black">
   {% namespace 'dark' %}
     {{ fields }}
   {% endnamespace %}

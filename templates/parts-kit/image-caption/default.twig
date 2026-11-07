@@ -9,14 +9,16 @@ Use the same props that are defined in the image component.
 
 #}
 
-<div class="container flex flex-col py-64 gap-32">
+<div class="container flex flex-col gap-32 py-64">
   <h2 class="text-xl font-bold">Image Caption</h2>
 
-  {{ ImageCaption({
-    imageProps: {
-      image: craft.assets().one(),
-      ratio: 16/9,
-    },
-    caption: 'Image caption',
-  }) }}
+  {{
+    ImageCaption({
+      imageProps: {
+        image: craft.assets().one(),
+        ratio: 16 / 9
+      },
+      caption: 'Image caption'
+    })
+  }}
 </div>

@@ -48,77 +48,87 @@
       >
 #}
 
-<div class="container flex flex-col py-64 gap-32">
+<div class="container flex flex-col gap-32 py-64">
   {#
     Basic Example:
     Transforms and sizes are configured to work well with the .container class.
   #}
   <h2 class="text-xl font-bold">Basic Example</h2>
-  {{ Image({
-    image: craft.assets.one(),
-    ratio: 16/9,
-  }) }}
+  {{
+    Image({
+      image: craft.assets.one(),
+      ratio: 16 / 9
+    })
+  }}
 
   {#
     Custom Sizes:
     The keys of the sizes attribute correspond to the breakpoints in your Tailwind config.
     It uses a mobile first approach, default is the size used without a breakpoint.
   #}
-  <div class="grid gap-16 grid-cols-2 sm:grid-cols-4 md:grid-cols-3">
+  <div class="grid grid-cols-2 gap-16 sm:grid-cols-4 md:grid-cols-3">
     <div>
-      <h2 class="text-xl font-bold mb-16">Custom Sizes</h2>
-      {{ Image({
-        image: craft.assets.one(),
-        sizes: {
-          default: '50vw',
-          sm: '25vw',
-          md: '33vw',
-        },
-      }) }}
+      <h2 class="mb-16 text-xl font-bold">Custom Sizes</h2>
+      {{
+        Image({
+          image: craft.assets.one(),
+          sizes: {
+            default: '50vw',
+            sm: '25vw',
+            md: '33vw'
+          }
+        })
+      }}
     </div>
     <div>
-      <h2 class="text-xl font-bold mb-16">Custom Sizes and Aspect Ratio</h2>
-      {{ Image({
-        image: craft.assets.one(),
-        sizes: {
-          default: '50vw',
-          sm: '25vw',
-          md: '33vw',
-        },
-        ratio: 3/4,
-      }) }}
+      <h2 class="mb-16 text-xl font-bold">Custom Sizes and Aspect Ratio</h2>
+      {{
+        Image({
+          image: craft.assets.one(),
+          sizes: {
+            default: '50vw',
+            sm: '25vw',
+            md: '33vw'
+          },
+          ratio: 3 / 4
+        })
+      }}
     </div>
     <div>
       {#
         Named Transform:
         If you need to use a named transform, you can pass a string into the `transform` prop.
       #}
-      <h2 class="text-xl font-bold mb-16">Named Transform</h2>
-      {{ Image({
-        image: craft.assets.one(),
-        transform: 'exampleNamedTransform',
-        sizes: {
-          default: '50vw',
-          sm: '25vw',
-          md: '33vw',
-        },
-      }) }}
+      <h2 class="mb-16 text-xl font-bold">Named Transform</h2>
+      {{
+        Image({
+          image: craft.assets.one(),
+          transform: 'exampleNamedTransform',
+          sizes: {
+            default: '50vw',
+            sm: '25vw',
+            md: '33vw'
+          }
+        })
+      }}
     </div>
     <div>
       {#
         Scalar Sizes
         This component supports custom transforms and scalar values for the sizes prop.
       #}
-      <h2 class="text-xl font-bold mb-16">Scalar Sizes & Custom Transform</h2>
-      {{ Image({
-        image: craft.assets.one(),
-        class: 'size-40',
-        transformMinWidth: 40,
-        transformMaxWidth: 80,
-        transformAutofillCount: 0,
-        ratio: 1/1,
-        sizes: '40px',
-      }) }}
+      <h2 class="mb-16 text-xl font-bold">Scalar Sizes & Custom Transform</h2>
+      {{
+        Image({
+          image: craft.assets.one(),
+          class: 'size-40',
+          transformMinWidth: 40,
+          transformMaxWidth: 80,
+          transformAutofillCount: 0,
+          ratio: 1 / 1,
+          sizes: '40px'
+        })
+      }}
     </div>
   </div>
 </div>
@@ -149,11 +159,13 @@
 
 <div class="flex flex-col gap-32">
   <h2 class="text-xl font-bold">Full Bleed Image</h2>
-  {{ Image({
-    image: craft.assets.one(),
-    ratio: 16/9,
-    transformMinWidth: 800,
-    transformMaxWidth: 3200,
-    transformAutofillCount: 1,
-  }) }}
+  {{
+    Image({
+      image: craft.assets.one(),
+      ratio: 16 / 9,
+      transformMinWidth: 800,
+      transformMaxWidth: 3200,
+      transformAutofillCount: 1
+    })
+  }}
 </div>

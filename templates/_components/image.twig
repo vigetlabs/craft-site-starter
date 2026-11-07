@@ -30,11 +30,11 @@
       You may add any custom breakpoint names (such as `container` to apply a size when the container width is reached)
   #}
   {% set screens = {
-    'sm': '(min-width: 640px)',
-    'md': '(min-width: 768px)',
-    'lg': '(min-width: 1024px)',
-    'xl': '(min-width: 1280px)',
-    '2xl': '(min-width: 1536px)',
+    sm: '(min-width: 640px)',
+    md: '(min-width: 768px)',
+    lg: '(min-width: 1024px)',
+    xl: '(min-width: 1280px)',
+    '2xl': '(min-width: 1536px)'
   } %}
 
   {# Props #}
@@ -46,13 +46,15 @@
     @var string|null class
     Pass an empty string to have no class applied to the image.
   #}
-  {% set class = props.class ?? "w-full h-auto" %}
+  {% set class = props.class ?? 'w-full h-auto' %}
 
   {#
     @var string|null fetchpriority
     Can be 'high', 'low' or 'auto'. Use 'high' for the largest image above the fold.
   #}
-  {% set fetchpriority = props.fetchpriority ?? props.attrs.fetchpriority ?? null %}
+  {% set fetchpriority = props.fetchpriority ?? props.attrs.fetchpriority
+    ?? null
+  %}
 
   {#
     @var string|null loading
@@ -90,9 +92,11 @@
     }
     If not provided, it defaults to full viewport width at all sizes.
   #}
-  {% set sizes = props.sizes ?? {
-    default: '100vw',
-  } %}
+  {% set sizes = props.sizes
+    ?? {
+      default: '100vw'
+    }
+  %}
 
   {#
     @var float|null ratio
@@ -143,18 +147,21 @@
 
   {# Computed values #}
 
-  {# This flag disables the imagerOverrides that set fillTransform: 'auto  #}
+  {# This flag disables the imagerOverrides that set fillTransform: 'auto #}
   {% set useDefaultTransform = transform is null %}
 
   {# Use either our default transform, or the overridden version from our props #}
-  {% set transform = useDefaultTransform ? [
-    transformMinWidth,
-    transformMaxWidth,
-    {
-      ratio: ratio,
-      format: 'webp',
-    },
-  ] : transform %}
+  {% set transform = useDefaultTransform
+    ? [
+      transformMinWidth,
+      transformMaxWidth,
+      {
+        ratio: ratio,
+        format: 'webp'
+      }
+    ]
+    : transform
+  %}
 
   {% set defaultSize = sizes.default ?? '100vw' %}
 
@@ -169,11 +176,14 @@
     3. Add the default size to the end.
     4. Join the values with a comma.
   #}
-  {% set sizes = sizes is scalar ? sizes : sizes
-    |filter((value, key) => key != 'default')
-    |map((value, key) => "#{screens[key] ?? key} #{value}")
-    |merge([ defaultSize ])
-    |join(', ') %}
+  {% set sizes = sizes is scalar
+    ? sizes
+    : sizes
+      |filter((value, key) => key != 'default')
+      |map((value, key) => "#{screens[key] ?? key} #{value}")
+      |merge([defaultSize])
+      |join(', ')
+  %}
 
   {#
   Default settings applied to all transforms
@@ -185,20 +195,23 @@
   - https://www.spacecat.ninja/blog/power-pack-and-quick-transform-syntax
   - https://github.com/spacecatninja/craft-imager-x-power-pack
   #}
-  {{ image ? ppimg(
-    image: image,
-    transform: transform,
-    params: attrs|merge({
-      class,
-      loading,
-      alt,
-      fetchpriority,
-      sizes,
-      imagerOverrides: useDefaultTransform ? {
-        fillTransforms: 'auto',
-        autoFillCount: transformAutofillCount,
-        allowUpscale: false,
-      } : null,
-    }),
-  ) }}
+  {{ image
+    ? ppimg(
+      image: image,
+      transform: transform,
+      params: attrs|merge({
+        class,
+        loading,
+        alt,
+        fetchpriority,
+        sizes,
+        imagerOverrides: useDefaultTransform
+          ? {
+            fillTransforms: 'auto',
+            autoFillCount: transformAutofillCount,
+            allowUpscale: false
+          }
+          : null
+      })
+    ) }}
 {% endmacro %}
