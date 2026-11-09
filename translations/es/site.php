@@ -5,8 +5,8 @@
 
 return [
     'Back to tabs list' => 'Volver a la lista de pestañas',
-    'Close' => 'Cerrar',
     'Check the link, or start again from the homepage.' => 'Compruebe el enlace o vuelva a empezar desde la página de inicio.',
+    'Close' => 'Cerrar',
     'Down for maintenance' => 'En mantenimiento',
     'Error {code}' => 'Error {code}',
     'Footer Navigation' => 'Navegación del pie de página',
