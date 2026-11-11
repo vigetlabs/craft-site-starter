@@ -1,4 +1,4 @@
-dateModified: 1793918246
+dateModified: 1794355326
 elementSources:
   craft\elements\Entry:
     -
@@ -181,7 +181,7 @@ system:
   edition: solo
   live: true
   name: 'Viget Craft Starter'
-  schemaVersion: 5.12.0.1
+  schemaVersion: 5.12.0.2
   timeZone: America/Los_Angeles
 users:
   allowPublicRegistration: false
