@@ -10,8 +10,8 @@
  */
 
 /*
+use craft\helpers\App;
 use putyourlightson\blitz\drivers\generators\LocalGenerator;
-use putyourlightson\blitz\drivers\integrations\SeomaticIntegration;
 use putyourlightson\blitz\models\SettingsModel;
 
 return [
@@ -32,10 +32,6 @@ return [
         // In this mode includedQueryStringParams is ignored. If a template reads query params (search, filters),
         // switch to QUERY_STRINGS_CACHE_URLS_AS_UNIQUE_PAGES and narrow includedQueryStringParams to those params.
         'queryStringCaching' => SettingsModel::QUERY_STRINGS_CACHE_URLS_AS_SAME_PAGE,
-        // Setting this replaces Blitz's default list, so add any other integrations a project needs.
-        'integrations' => [
-            SeomaticIntegration::class,
-        ],
         'outputComments' => false,
     ],
     'dev' => [
@@ -43,8 +39,12 @@ return [
         'cacheGeneratorType' => LocalGenerator::class,
     ],
     'staging' => [
-        // For staging behind basic auth, which the HTTP generator can't get past
-        'cacheGeneratorType' => LocalGenerator::class,
+        // If staging is behind basic auth, set BLITZ_BASIC_AUTH_USERNAME and BLITZ_BASIC_AUTH_PASSWORD so the HTTP generator can fetch pages
+        'cacheGeneratorSettings' => [
+            'useBasicAuth' => (bool) App::env('BLITZ_BASIC_AUTH_USERNAME'),
+            'username' => '$BLITZ_BASIC_AUTH_USERNAME',
+            'password' => '$BLITZ_BASIC_AUTH_PASSWORD',
+        ],
         'outputComments' => true,
     ],
 ];
