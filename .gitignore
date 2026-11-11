@@ -6,6 +6,7 @@ node_modules
 /web/dist
 /web/assets
 /web/imager
+/web/cache/blitz
 /.vite
 php-cs-fixer.cache
 # Ignore generated visualization files
